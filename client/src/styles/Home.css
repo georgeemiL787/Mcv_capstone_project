@@ -1,0 +1,133 @@
+    body{
+      background: F5EFFF;
+      color: #333446;
+      font-family: "Josefin Sans", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .welcome {
+      background: #F5EFFF;
+      color: white;
+      padding: 48px 0 32px 0;
+      text-align: center;
+      border-bottom: 3px solid #e4defe
+    }
+    .welcome h1 {
+      margin: 0 0 12px 0;
+      font-size: 2.5rem;
+      color: #333446;
+
+    }
+    .welcome p {
+      margin: 0;
+      font-size: 1.2rem;
+      color:#333446;
+    }
+    .cta-btn {
+      margin-top: 24px;
+      background: white;
+      color: #333446;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 9px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: "Source Sans 3", sans-serif;
+      font-weight:400;
+      opacity: 0.8;
+    }
+    .cta-btn:hover {
+      background: #8f7efc;
+      color: white;
+      padding:10px 32px;
+      border:2px dashed #CDC1FF;
+    }
+
+    #header-nav img{
+      width: 75px;
+      height: auto;
+    }
+
+    .nav-buttons{
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    #header-nav{
+      border-bottom: 2px solid #e4defe;
+      height:60px;
+      display:flex;
+      align-items: center;
+      padding-left: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .nav-button{
+      color:#333446;
+      background-color: transparent;
+      border:none;
+      font-size: 17px;
+      font-family: "Source Sans 3", sans-serif;
+      font-weight:400;
+      opacity: 0.8;
+      cursor: pointer;
+      transition: background 0.2s;
+      padding: 12px 12px;
+      height:100%;
+
+    }
+
+    .signup{
+      border:2px dashed #CDC1FF;
+    }
+    .nav-button:hover {
+      background: #8f7efc;
+      color: white;
+    }
+
+    #search-bar input{
+      border:1px solid #e4defe;
+      padding: 12px 10px;
+      border-radius: 25px;
+      font-size: 1rem;
+      background-color: transparent;
+      color:#333446;
+      width:100%;
+    }
+
+    #search-bar div{
+      position:relative;
+      display:flex;
+      align-items: center;
+    } 
+    #search-bar input:focus{
+      outline: none;
+      border-color: #8f7efc;
+    }
+    #search-bar input::placeholder {
+      font-family: "Source Sans 3", sans-serif;
+      font-weight:400;
+      color: #333446;
+      opacity: 0.7;
+    }
+
+    #search-bar span{
+      color:white;
+      background-color: #8f7efc;
+      border-radius: 50%;
+      padding: 5px;
+      position:absolute;
+      right:3px;
+      font-weight: 100;
+      font-size: 1.5rem;
+    }
+
+    #search-bar{
+      width:40vw;
+    }
+    .nav-right{
+      display: flex;
+      align-items: center;
+      height:100%;
+    }
