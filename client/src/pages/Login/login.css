@@ -174,6 +174,68 @@
   box-shadow: 0 4px 12px rgba(143, 126, 252, 0.3);
 }
 
+/* Instructor Login Section */
+.instructor-login {
+  margin: 25px 0;
+}
+
+.instructor-divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.instructor-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e4defe;
+}
+
+.instructor-divider span {
+  background: white;
+  padding: 0 15px;
+  color: #333446;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.instructor-btn {
+  width: 100%;
+  background: transparent;
+  color: #333446;
+  border: 2px solid #e4defe;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.instructor-btn:hover {
+  background: #8f7efc;
+  color: white;
+  border-color: #8f7efc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(143, 126, 252, 0.2);
+}
+
+.instructor-btn .material-symbols-outlined {
+  font-size: 1.2rem;
+}
+
 .login-divider {
   text-align: center;
   margin: 25px 0;

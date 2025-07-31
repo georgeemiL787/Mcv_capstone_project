@@ -106,6 +106,74 @@
   opacity: 0.5;
 }
 
+/* User Type Selection */
+.user-type-selection {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.user-type-option {
+  flex: 1;
+  cursor: pointer;
+}
+
+.user-type-option input[type="radio"] {
+  display: none;
+}
+
+.user-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+  border: 2px solid #e4defe;
+  border-radius: 12px;
+  background: transparent;
+  transition: all 0.2s ease;
+  height: 90px;
+  gap: 8px;
+}
+
+.user-type-option input[type="radio"]:checked + .user-type-card {
+  border-color: #8f7efc;
+  background: rgba(143, 126, 252, 0.05);
+  box-shadow: 0 2px 8px rgba(143, 126, 252, 0.1);
+}
+
+.user-type-card:hover {
+  border-color: #8f7efc;
+  background: rgba(143, 126, 252, 0.02);
+}
+
+.user-type-card .material-symbols-outlined {
+  font-size: 32px;
+  color: #8f7efc;
+  transition: color 0.2s ease;
+  margin-bottom: 6px;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.user-type-option input[type="radio"]:checked + .user-type-card .material-symbols-outlined {
+  color: #8f7efc;
+  font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+}
+
+.user-type-text {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333446;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.user-type-option input[type="radio"]:checked + .user-type-card .user-type-text {
+  color: #8f7efc;
+  font-weight: 700;
+}
+
 .form-options {
   margin-bottom: 20px;
 }
@@ -318,5 +386,23 @@
   
   .checkbox-container {
     font-size: 0.85rem;
+  }
+  
+  .user-type-selection {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .user-type-card {
+    height: 80px;
+    padding: 16px 12px;
+  }
+  
+  .user-type-card .material-symbols-outlined {
+    font-size: 28px;
+  }
+  
+  .user-type-text {
+    font-size: 0.9rem;
   }
 } 
