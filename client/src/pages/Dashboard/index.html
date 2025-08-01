@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Learning Platform</title>
+    <link rel="stylesheet" href="../Home/Home.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav id="header-nav">
+        <div class="nav-right">
+            <img src="../../assets/images/luIZ_without_bg.png">
+            <div class="nav-buttons">
+                <button class="nav-btn">Home</button>
+                <button class="nav-btn">Courses</button>
+                <button class="nav-btn">About</button>
+                <button class="nav-btn">Contact</button>
+            </div>
+        </div>
+        <div class="nav-left">
+            <form class="search-form">
+                <input type="text" placeholder="Search courses...">
+                <button type="submit">
+                    <img src="../../assets/images/Search.svg" alt="Search">
+                </button>
+            </form>
+            <button class="login-btn">Login</button>
+            <button class="signup-btn">Sign Up</button>
+        </div>
+    </nav>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+        <!-- Left Sidebar -->
+        <div class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-avatar">
+                    <div class="avatar-placeholder">JD</div>
+                </div>
+                <h3>John Doe</h3>
+                <p>Software Developer</p>
+            </div>
+            
+            <div class="sidebar-nav">
+                <a href="#overview" class="nav-item active" data-section="overview">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    Overview
+                </a>
+                <a href="#roadmap" class="nav-item" data-section="roadmap">
+                    <span class="material-symbols-outlined">timeline</span>
+                    Skill Roadmap
+                </a>
+                <a href="#progress" class="nav-item" data-section="progress">
+                    <span class="material-symbols-outlined">trending_up</span>
+                    Progress Tracker
+                </a>
+                <a href="#courses" class="nav-item" data-section="courses">
+                    <span class="material-symbols-outlined">school</span>
+                    My Courses
+                </a>
+                <a href="#insights" class="nav-item" data-section="insights">
+                    <span class="material-symbols-outlined">psychology</span>
+                    Smart Insights
+                </a>
+                <a href="#achievements" class="nav-item" data-section="achievements">
+                    <span class="material-symbols-outlined">emoji_events</span>
+                    Achievements
+                </a>
+                <a href="#reminders" class="nav-item" data-section="reminders">
+                    <span class="material-symbols-outlined">notifications</span>
+                    Reminders
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Content Area -->
+        <div class="dashboard-content">
+            <!-- Overview Section -->
+            <div id="overview" class="content-section active">
+                <div class="content-header">
+                    <h1>Dashboard Overview</h1>
+                    <p>Track your learning journey and stay motivated with personalized insights.</p>
+                </div>
+
+                <!-- XP and Level Progress -->
+                <div class="xp-section">
+                    <div class="level-card">
+                        <div class="level-info">
+                            <h3>Level 12</h3>
+                            <p>Software Developer</p>
+                        </div>
+                        <div class="xp-progress">
+                            <div class="xp-bar">
+                                <div class="xp-fill" style="width: 75%"></div>
+                            </div>
+                            <p>2,450 / 3,200 XP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-symbols-outlined">school</span>
+                        </div>
+                        <div class="stat-info">
+                            <h3>8</h3>
+                            <p>Active Courses</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-symbols-outlined">schedule</span>
+                        </div>
+                        <div class="stat-info">
+                            <h3>24h</h3>
+                            <p>Study Time</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-symbols-outlined">quiz</span>
+                        </div>
+                        <div class="stat-info">
+                            <h3>15</h3>
+                            <p>Quizzes Passed</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-symbols-outlined">workspace_premium</span>
+                        </div>
+                        <div class="stat-info">
+                            <h3>5</h3>
+                            <p>Certificates</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <span class="material-symbols-outlined">play_circle</span>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Completed React Fundamentals</h4>
+                                <p>Finished module 3: State Management</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <span class="material-symbols-outlined">quiz</span>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Passed JavaScript Quiz</h4>
+                                <p>Score: 85% - Great job!</p>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <span class="material-symbols-outlined">workspace_premium</span>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Earned Certificate</h4>
+                                <p>Web Development Fundamentals</p>
+                                <span class="activity-time">3 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="actions-grid">
+                        <button class="action-btn">
+                            <span class="material-symbols-outlined">quiz</span>
+                            <span>Take AI Quiz</span>
+                        </button>
+                        <button class="action-btn">
+                            <span class="material-symbols-outlined">workspace_premium</span>
+                            <span>View Certificates</span>
+                        </button>
+                        <button class="action-btn">
+                            <span class="material-symbols-outlined">person</span>
+                            <span>Update Profile</span>
+                        </button>
+                        <button class="action-btn">
+                            <span class="material-symbols-outlined">support_agent</span>
+                            <span>Get Help</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Roadmap Section -->
+            <div id="roadmap" class="content-section">
+                <div class="content-header">
+                    <h1>Skill Roadmap</h1>
+                    <p>Visualize your learning path and track your progress through different skill levels.</p>
+                </div>
+
+                <div class="roadmap-container">
+                    <div class="roadmap-path">
+                        <div class="skill-node completed">
+                            <div class="node-icon">
+                                <span class="material-symbols-outlined">check_circle</span>
+                            </div>
+                            <div class="node-content">
+                                <h3>HTML & CSS</h3>
+                                <p>Completed</p>
+                            </div>
+                        </div>
+                        <div class="skill-node completed">
+                            <div class="node-icon">
+                                <span class="material-symbols-outlined">check_circle</span>
+                            </div>
+                            <div class="node-content">
+                                <h3>JavaScript</h3>
+                                <p>Completed</p>
+                            </div>
+                        </div>
+                        <div class="skill-node active">
+                            <div class="node-icon">
+                                <span class="material-symbols-outlined">play_circle</span>
+                            </div>
+                            <div class="node-content">
+                                <h3>React.js</h3>
+                                <p>In Progress</p>
+                            </div>
+                        </div>
+                        <div class="skill-node">
+                            <div class="node-icon">
+                                <span class="material-symbols-outlined">lock</span>
+                            </div>
+                            <div class="node-content">
+                                <h3>Node.js</h3>
+                                <p>Locked</p>
+                            </div>
+                        </div>
+                        <div class="skill-node">
+                            <div class="node-icon">
+                                <span class="material-symbols-outlined">lock</span>
+                            </div>
+                            <div class="node-content">
+                                <h3>Database Design</h3>
+                                <p>Locked</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Tracker Section -->
+            <div id="progress" class="content-section">
+                <div class="content-header">
+                    <h1>Progress Tracker</h1>
+                    <p>Monitor your learning progress across all courses and skills.</p>
+                </div>
+
+                <div class="progress-overview">
+                    <div class="progress-card">
+                        <h3>Overall Progress</h3>
+                        <div class="progress-circle">
+                            <div class="circle-progress" data-progress="68">
+                                <span class="progress-text">68%</span>
+                            </div>
+                        </div>
+                        <p>You're doing great! Keep up the momentum.</p>
+                    </div>
+                </div>
+
+                <div class="course-progress">
+                    <h2>Course Progress</h2>
+                    <div class="progress-list">
+                        <div class="progress-item">
+                            <div class="course-info">
+                                <h4>React Fundamentals</h4>
+                                <p>12 of 15 modules completed</p>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                            <span class="progress-percentage">80%</span>
+                        </div>
+                        <div class="progress-item">
+                            <div class="course-info">
+                                <h4>Advanced JavaScript</h4>
+                                <p>8 of 12 modules completed</p>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 67%"></div>
+                            </div>
+                            <span class="progress-percentage">67%</span>
+                        </div>
+                        <div class="progress-item">
+                            <div class="course-info">
+                                <h4>CSS Grid & Flexbox</h4>
+                                <p>15 of 15 modules completed</p>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="progress-percentage">100%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Courses Section -->
+            <div id="courses" class="content-section">
+                <div class="content-header">
+                    <h1>My Courses</h1>
+                    <p>Continue your learning journey with these recommended courses.</p>
+                </div>
+
+                <div class="courses-grid">
+                    <div class="course-card">
+                        <div class="course-thumbnail">
+                            <span class="material-symbols-outlined">code</span>
+                        </div>
+                        <div class="course-info">
+                            <h3>React Fundamentals</h3>
+                            <p>Learn the basics of React.js</p>
+                            <div class="course-meta">
+                                <span>80% Complete</span>
+                                <span>2 modules left</span>
+                            </div>
+                        </div>
+                        <button class="continue-btn">Continue</button>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-thumbnail">
+                            <span class="material-symbols-outlined">javascript</span>
+                        </div>
+                        <div class="course-info">
+                            <h3>Advanced JavaScript</h3>
+                            <p>Master advanced JS concepts</p>
+                            <div class="course-meta">
+                                <span>67% Complete</span>
+                                <span>4 modules left</span>
+                            </div>
+                        </div>
+                        <button class="continue-btn">Continue</button>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-thumbnail">
+                            <span class="material-symbols-outlined">web</span>
+                        </div>
+                        <div class="course-info">
+                            <h3>CSS Grid & Flexbox</h3>
+                            <p>Modern CSS layouts</p>
+                            <div class="course-meta">
+                                <span>100% Complete</span>
+                                <span>Certificate earned</span>
+                            </div>
+                        </div>
+                        <button class="certificate-btn">View Certificate</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smart Insights Section -->
+            <div id="insights" class="content-section">
+                <div class="content-header">
+                    <h1>Smart Insights</h1>
+                    <p>AI-powered analysis of your learning patterns and recommendations.</p>
+                </div>
+
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <div class="insight-header">
+                            <span class="material-symbols-outlined">trending_up</span>
+                            <h3>Strengths</h3>
+                        </div>
+                        <div class="insight-content">
+                            <ul>
+                                <li>Excellent problem-solving skills</li>
+                                <li>Strong grasp of JavaScript fundamentals</li>
+                                <li>Consistent study habits</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-header">
+                            <span class="material-symbols-outlined">trending_down</span>
+                            <h3>Areas to Improve</h3>
+                        </div>
+                        <div class="insight-content">
+                            <ul>
+                                <li>Need more practice with React Hooks</li>
+                                <li>Database concepts need review</li>
+                                <li>Consider more advanced algorithms</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-header">
+                            <span class="material-symbols-outlined">lightbulb</span>
+                            <h3>Recommendations</h3>
+                        </div>
+                        <div class="insight-content">
+                            <ul>
+                                <li>Focus on React State Management</li>
+                                <li>Practice with real-world projects</li>
+                                <li>Join coding challenges</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Section -->
+            <div id="achievements" class="content-section">
+                <div class="content-header">
+                    <h1>Achievements</h1>
+                    <p>Celebrate your learning milestones and accomplishments.</p>
+                </div>
+
+                <div class="achievements-grid">
+                    <div class="achievement-card earned">
+                        <div class="achievement-icon">
+                            <span class="material-symbols-outlined">emoji_events</span>
+                        </div>
+                        <h3>First Steps</h3>
+                        <p>Complete your first course</p>
+                        <span class="achievement-date">Earned 2 weeks ago</span>
+                    </div>
+                    <div class="achievement-card earned">
+                        <div class="achievement-icon">
+                            <span class="material-symbols-outlined">local_fire_department</span>
+                        </div>
+                        <h3>Streak Master</h3>
+                        <p>Study for 7 consecutive days</p>
+                        <span class="achievement-date">Earned 1 week ago</span>
+                    </div>
+                    <div class="achievement-card earned">
+                        <div class="achievement-icon">
+                            <span class="material-symbols-outlined">workspace_premium</span>
+                        </div>
+                        <h3>Certificate Collector</h3>
+                        <p>Earn 5 certificates</p>
+                        <span class="achievement-date">Earned 3 days ago</span>
+                    </div>
+                    <div class="achievement-card locked">
+                        <div class="achievement-icon">
+                            <span class="material-symbols-outlined">lock</span>
+                        </div>
+                        <h3>Speed Learner</h3>
+                        <p>Complete 3 courses in 30 days</p>
+                        <span class="achievement-progress">2/3 courses completed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reminders Section -->
+            <div id="reminders" class="content-section">
+                <div class="content-header">
+                    <h1>Reminders & Deadlines</h1>
+                    <p>Stay on track with your learning goals and upcoming deadlines.</p>
+                </div>
+
+                <div class="reminders-list">
+                    <div class="reminder-item urgent">
+                        <div class="reminder-icon">
+                            <span class="material-symbols-outlined">warning</span>
+                        </div>
+                        <div class="reminder-content">
+                            <h4>React Quiz Due</h4>
+                            <p>Complete the React Fundamentals quiz</p>
+                            <span class="reminder-time">Due in 2 hours</span>
+                        </div>
+                        <button class="reminder-action">Take Quiz</button>
+                    </div>
+                    <div class="reminder-item">
+                        <div class="reminder-icon">
+                            <span class="material-symbols-outlined">schedule</span>
+                        </div>
+                        <div class="reminder-content">
+                            <h4>Study Session</h4>
+                            <p>Daily JavaScript practice</p>
+                            <span class="reminder-time">Due in 6 hours</span>
+                        </div>
+                        <button class="reminder-action">Start</button>
+                    </div>
+                    <div class="reminder-item">
+                        <div class="reminder-icon">
+                            <span class="material-symbols-outlined">assignment</span>
+                        </div>
+                        <div class="reminder-content">
+                            <h4>Project Submission</h4>
+                            <p>Submit your portfolio project</p>
+                            <span class="reminder-time">Due in 3 days</span>
+                        </div>
+                        <button class="reminder-action">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html> 
