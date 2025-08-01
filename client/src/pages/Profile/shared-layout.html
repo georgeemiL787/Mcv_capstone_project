@@ -170,28 +170,30 @@
               <p>Add a nice photo of yourself for your profile.</p>
             </div>
 
-            <div class="photo-section">
-              <div class="image-preview">
-                <h3>Image preview</h3>
-                <div class="preview-container">
-                  <div class="preview-placeholder">
-                    <img src="../../assets/images/profile_assets/photo-camera.png" alt="Photo placeholder" class="placeholder-icon">
+            <form class="profile-form">
+              <div class="photo-section">
+                <div class="image-preview">
+                  <h3>Image preview</h3>
+                  <div class="preview-container">
+                    <div class="preview-placeholder">
+                      <img src="../../assets/images/profile_assets/photo-camera.png" alt="Photo placeholder" class="placeholder-icon">
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="upload-section">
-                <h3>Add / Change Image</h3>
-                <div class="upload-container">
-                  <input type="file" id="photo-upload" name="photo" accept="image/*" class="file-input">
-                  <label for="photo-upload" class="upload-btn">Upload image</label>
+                <div class="upload-section">
+                  <h3>Add / Change Image</h3>
+                  <div class="upload-container">
+                    <input type="file" id="photo-upload" name="photo" accept="image/*" class="file-input">
+                    <label for="photo-upload" class="upload-btn">Upload image</label>
+                  </div>
                 </div>
               </div>
 
               <div class="form-actions">
                 <button type="submit" class="save-btn">Save</button>
               </div>
-            </div>
+            </form>
           `;
           break;
           
@@ -202,47 +204,51 @@
               <p>Edit your account settings and change your password here.</p>
             </div>
 
-            <div class="security-section">
-              <div class="email-section">
-                <h3>Email</h3>
-                <div class="email-display">
-                  <p>Your email address is george.emil72@gmail.com</p>
-                  <button class="edit-email-btn">
-                    <span class="material-symbols-outlined">edit</span>
-                  </button>
+            <form class="profile-form">
+              <div class="security-section">
+                <div class="email-section">
+                  <h3>Email</h3>
+                  <div class="email-display">
+                    <p>Your email address is george.emil72@gmail.com</p>
+                    <button class="edit-email-btn">
+                      <span class="material-symbols-outlined">edit</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="password-section">
+                  <h3>Password Change</h3>
+                  <div class="password-form">
+                    <div class="form-group">
+                      <label for="currentPassword">Current password</label>
+                      <input type="password" id="currentPassword" name="currentPassword" value="••••••••••••" class="current-password" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="newPassword">New password</label>
+                      <input type="password" id="newPassword" name="newPassword" placeholder="Enter new password">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="confirmPassword">Confirm new password</label>
+                      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-type new password">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mfa-section">
+                  <h3>Multi-factor Authentication</h3>
+                  <div class="mfa-content">
+                    <p>Increase your account security by requiring that a code emailed to you be entered when you log in. For more information on how multi-factor authentication works, refer to our <a href="#" class="help-link">Help Center article</a>.</p>
+                    <button type="button" class="enable-mfa-btn">Enable</button>
+                  </div>
                 </div>
               </div>
 
-              <div class="password-section">
-                <h3>Password Change</h3>
-                <form class="password-form">
-                  <div class="form-group">
-                    <label for="currentPassword">Current password</label>
-                    <input type="password" id="currentPassword" name="currentPassword" value="••••••••••••" class="current-password" readonly>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="newPassword">New password</label>
-                    <input type="password" id="newPassword" name="newPassword" placeholder="Enter new password">
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="confirmPassword">Confirm new password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-type new password">
-                  </div>
-                  
-                  <button type="submit" class="change-password-btn">Change password</button>
-                </form>
+              <div class="form-actions">
+                <button type="submit" class="save-btn">Save</button>
               </div>
-
-              <div class="mfa-section">
-                <h3>Multi-factor Authentication</h3>
-                <div class="mfa-content">
-                  <p>Increase your account security by requiring that a code emailed to you be entered when you log in. For more information on how multi-factor authentication works, refer to our <a href="#" class="help-link">Help Center article</a>.</p>
-                  <button type="button" class="enable-mfa-btn">Enable</button>
-                </div>
-              </div>
-            </div>
+            </form>
           `;
           break;
           
@@ -253,65 +259,71 @@
               <p>Manage your subscription and billing information.</p>
             </div>
 
-            <div class="subscriptions-section">
-              <div class="current-plan">
-                <h3>Current Plan</h3>
-                <div class="plan-card">
-                  <div class="plan-info">
-                    <h4>Free Plan</h4>
-                    <p>Basic access to courses and features</p>
-                    <span class="plan-status">Active</span>
+            <form class="profile-form">
+              <div class="subscriptions-section">
+                <div class="current-plan">
+                  <h3>Current Plan</h3>
+                  <div class="plan-card">
+                    <div class="plan-info">
+                      <h4>Free Plan</h4>
+                      <p>Basic access to courses and features</p>
+                      <span class="plan-status">Active</span>
+                    </div>
+                    <div class="plan-actions">
+                      <button class="upgrade-btn">Upgrade Plan</button>
+                    </div>
                   </div>
-                  <div class="plan-actions">
-                    <button class="upgrade-btn">Upgrade Plan</button>
+                </div>
+
+                <div class="billing-history">
+                  <h3>Billing History</h3>
+                  <div class="billing-table">
+                    <div class="billing-header">
+                      <span>Date</span>
+                      <span>Description</span>
+                      <span>Amount</span>
+                      <span>Status</span>
+                    </div>
+                    <div class="billing-row">
+                      <span>No billing history</span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="subscription-settings">
+                  <h3>Subscription Settings</h3>
+                  <div class="settings-card">
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Auto-renewal</h4>
+                        <p>Automatically renew your subscription when it expires</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Email notifications</h4>
+                        <p>Receive email notifications about your subscription</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="billing-history">
-                <h3>Billing History</h3>
-                <div class="billing-table">
-                  <div class="billing-header">
-                    <span>Date</span>
-                    <span>Description</span>
-                    <span>Amount</span>
-                    <span>Status</span>
-                  </div>
-                  <div class="billing-row">
-                    <span>No billing history</span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                </div>
+              <div class="form-actions">
+                <button type="submit" class="save-btn">Save</button>
               </div>
-
-              <div class="subscription-settings">
-                <h3>Subscription Settings</h3>
-                <div class="settings-card">
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Auto-renewal</h4>
-                      <p>Automatically renew your subscription when it expires</p>
-                    </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked>
-                      <span class="slider"></span>
-                    </label>
-                  </div>
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Email notifications</h4>
-                      <p>Receive email notifications about your subscription</p>
-                    </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked>
-                      <span class="slider"></span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </form>
           `;
           break;
           
@@ -322,74 +334,76 @@
               <p>Manage your payment methods and billing information.</p>
             </div>
 
-            <div class="payment-methods-section">
-              <div class="saved-methods">
-                <h3>Saved payment methods</h3>
-                <div class="methods-list">
-                  <div class="no-methods">
-                    <img src="../../assets/images/profile_assets/wallet.png" alt="No payment methods" class="no-methods-icon">
-                    <p>No payment methods saved</p>
-                    <span>Add a payment method to get started</span>
+            <form class="profile-form">
+              <div class="payment-methods-section">
+                <div class="saved-methods">
+                  <h3>Saved payment methods</h3>
+                  <div class="methods-list">
+                    <div class="no-methods">
+                      <img src="../../assets/images/profile_assets/wallet.png" alt="No payment methods" class="no-methods-icon">
+                      <p>No payment methods saved</p>
+                      <span>Add a payment method to get started</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="add-payment-method">
-                <h3>Add payment method</h3>
-                <div class="payment-form">
-                  <div class="form-group">
-                    <label for="cardNumber">Card number</label>
-                    <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
-                  </div>
-                  
-                  <div class="form-row">
+                <div class="add-payment-method">
+                  <h3>Add payment method</h3>
+                  <div class="payment-form">
                     <div class="form-group">
-                      <label for="expiryDate">Expiry date</label>
-                      <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5">
+                      <label for="cardNumber">Card number</label>
+                      <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+                    
+                    <div class="form-row">
+                      <div class="form-group">
+                        <label for="expiryDate">Expiry date</label>
+                        <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5">
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4">
+                      </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="cvv">CVV</label>
-                      <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4">
+                      <label for="cardholderName">Cardholder name</label>
+                      <input type="text" id="cardholderName" name="cardholderName" placeholder="John Doe">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="billingAddress">Billing address</label>
+                      <textarea id="billingAddress" name="billingAddress" rows="3" placeholder="Enter your billing address"></textarea>
                     </div>
                   </div>
-                  
-                  <div class="form-group">
-                    <label for="cardholderName">Cardholder name</label>
-                    <input type="text" id="cardholderName" name="cardholderName" placeholder="John Doe">
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="billingAddress">Billing address</label>
-                    <textarea id="billingAddress" name="billingAddress" rows="3" placeholder="Enter your billing address"></textarea>
-                  </div>
-                  
-                  <div class="form-actions">
-                    <button type="submit" class="add-card-btn">Add payment method</button>
+                </div>
+
+                <div class="payment-security">
+                  <h3>Payment security</h3>
+                  <div class="security-info">
+                    <div class="security-item">
+                      <span class="material-symbols-outlined security-icon">security</span>
+                      <div class="security-text">
+                        <h4>Secure payments</h4>
+                        <p>All payments are encrypted and secure</p>
+                      </div>
+                    </div>
+                    <div class="security-item">
+                      <span class="material-symbols-outlined security-icon">verified</span>
+                      <div class="security-text">
+                        <h4>PCI compliant</h4>
+                        <p>We follow industry security standards</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="payment-security">
-                <h3>Payment security</h3>
-                <div class="security-info">
-                  <div class="security-item">
-                    <span class="material-symbols-outlined security-icon">security</span>
-                    <div class="security-text">
-                      <h4>Secure payments</h4>
-                      <p>All payments are encrypted and secure</p>
-                    </div>
-                  </div>
-                  <div class="security-item">
-                    <span class="material-symbols-outlined security-icon">verified</span>
-                    <div class="security-text">
-                      <h4>PCI compliant</h4>
-                      <p>We follow industry security standards</p>
-                    </div>
-                  </div>
-                </div>
+              <div class="form-actions">
+                <button type="submit" class="save-btn">Save</button>
               </div>
-            </div>
+            </form>
           `;
           break;
           
@@ -400,85 +414,91 @@
               <p>Control your privacy settings and data preferences.</p>
             </div>
 
-            <div class="privacy-section">
-              <div class="data-usage">
-                <h3>Data usage</h3>
-                <div class="data-settings">
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Analytics and performance</h4>
-                      <p>Help us improve our platform by sharing usage data</p>
+            <form class="profile-form">
+              <div class="privacy-section">
+                <div class="data-usage">
+                  <h3>Data usage</h3>
+                  <div class="data-settings">
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Analytics and performance</h4>
+                        <p>Help us improve our platform by sharing usage data</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                      </label>
                     </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked>
-                      <span class="slider"></span>
-                    </label>
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Personalized recommendations</h4>
+                        <p>Receive course recommendations based on your activity</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Marketing communications</h4>
+                        <p>Receive promotional emails and updates</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
                   </div>
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Personalized recommendations</h4>
-                      <p>Receive course recommendations based on your activity</p>
+                </div>
+
+                <div class="profile-visibility">
+                  <h3>Profile visibility</h3>
+                  <div class="visibility-settings">
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Public profile</h4>
+                        <p>Allow others to view your profile information</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                      </label>
                     </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked>
-                      <span class="slider"></span>
-                    </label>
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Show email address</h4>
+                        <p>Display your email address on your public profile</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
                   </div>
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Marketing communications</h4>
-                      <p>Receive promotional emails and updates</p>
-                    </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox">
-                      <span class="slider"></span>
-                    </label>
+                </div>
+
+                <div class="data-export">
+                  <h3>Data export</h3>
+                  <div class="export-section">
+                    <p>Download a copy of your personal data including your profile information, course progress, and activity history.</p>
+                    <button class="export-data-btn">Export my data</button>
+                  </div>
+                </div>
+
+                <div class="account-deletion">
+                  <h3>Account deletion</h3>
+                  <div class="deletion-section">
+                    <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+                    <button class="delete-account-btn">Delete my account</button>
                   </div>
                 </div>
               </div>
 
-              <div class="profile-visibility">
-                <h3>Profile visibility</h3>
-                <div class="visibility-settings">
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Public profile</h4>
-                      <p>Allow others to view your profile information</p>
-                    </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked>
-                      <span class="slider"></span>
-                    </label>
-                  </div>
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Show email address</h4>
-                      <p>Display your email address on your public profile</p>
-                    </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox">
-                      <span class="slider"></span>
-                    </label>
-                  </div>
-                </div>
+              <div class="form-actions">
+                <button type="submit" class="save-btn">Save</button>
               </div>
-
-              <div class="data-export">
-                <h3>Data export</h3>
-                <div class="export-section">
-                  <p>Download a copy of your personal data including your profile information, course progress, and activity history.</p>
-                  <button class="export-data-btn">Export my data</button>
-                </div>
-              </div>
-
-              <div class="account-deletion">
-                <h3>Account deletion</h3>
-                <div class="deletion-section">
-                  <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
-                  <button class="delete-account-btn">Delete my account</button>
-                </div>
-              </div>
-            </div>
+            </form>
           `;
           break;
           
@@ -489,101 +509,103 @@
               <p>Choose how and when you want to be notified.</p>
             </div>
 
-            <div class="notification-section">
-              <div class="email-notifications">
-                <h3>Email notifications</h3>
-                <div class="notification-settings">
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Course updates</h4>
-                      <p>Get notified when courses you're enrolled in are updated</p>
+            <form class="profile-form">
+              <div class="notification-section">
+                <div class="email-notifications">
+                  <h3>Email notifications</h3>
+                  <div class="notification-settings">
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Course updates</h4>
+                        <p>Get notified when courses you're enrolled in are updated</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                      </label>
                     </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked>
-                      <span class="slider"></span>
-                    </label>
-                  </div>
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>New courses</h4>
-                      <p>Receive notifications about new courses in your areas of interest</p>
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>New courses</h4>
+                        <p>Receive notifications about new courses in your areas of interest</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                      </label>
                     </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked>
-                      <span class="slider"></span>
-                    </label>
-                  </div>
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Course completion</h4>
-                      <p>Get notified when you complete a course or earn a certificate</p>
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Course completion</h4>
+                        <p>Get notified when you complete a course or earn a certificate</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                      </label>
                     </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked>
-                      <span class="slider"></span>
-                    </label>
-                  </div>
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Promotional emails</h4>
-                      <p>Receive special offers and promotional content</p>
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Promotional emails</h4>
+                        <p>Receive special offers and promotional content</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                      </label>
                     </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox">
-                      <span class="slider"></span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="push-notifications">
-                <h3>Push notifications</h3>
-                <div class="notification-settings">
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Browser notifications</h4>
-                      <p>Receive notifications in your browser when you're on the site</p>
-                    </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked>
-                      <span class="slider"></span>
-                    </label>
-                  </div>
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Mobile notifications</h4>
-                      <p>Get push notifications on your mobile device</p>
-                    </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox">
-                      <span class="slider"></span>
-                    </label>
                   </div>
                 </div>
-              </div>
 
-              <div class="notification-frequency">
-                <h3>Notification frequency</h3>
-                <div class="frequency-settings">
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>Email frequency</h4>
-                      <p>Choose how often you want to receive email notifications</p>
+                <div class="push-notifications">
+                  <h3>Push notifications</h3>
+                  <div class="notification-settings">
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Browser notifications</h4>
+                        <p>Receive notifications in your browser when you're on the site</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                      </label>
                     </div>
-                    <select class="frequency-select">
-                      <option value="immediate">Immediate</option>
-                      <option value="daily" selected>Daily digest</option>
-                      <option value="weekly">Weekly digest</option>
-                      <option value="never">Never</option>
-                    </select>
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Mobile notifications</h4>
+                        <p>Get push notifications on your mobile device</p>
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="notification-frequency">
+                  <h3>Notification frequency</h3>
+                  <div class="frequency-settings">
+                    <div class="setting-item">
+                      <div class="setting-info">
+                        <h4>Email frequency</h4>
+                        <p>Choose how often you want to receive email notifications</p>
+                      </div>
+                      <select class="frequency-select">
+                        <option value="immediate">Immediate</option>
+                        <option value="daily" selected>Daily digest</option>
+                        <option value="weekly">Weekly digest</option>
+                        <option value="never">Never</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div class="form-actions">
-                <button type="submit" class="save-btn">Save preferences</button>
+                <button type="submit" class="save-btn">Save</button>
               </div>
-            </div>
+            </form>
           `;
           break;
       }

@@ -245,6 +245,15 @@
   box-shadow: 0 4px 12px rgba(143, 126, 252, 0.4);
 }
 
+/* Consistent Page Width and Structure */
+.profile-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 /* Photo Page Specific Styles */
 .photo-section {
   max-width: 600px;
