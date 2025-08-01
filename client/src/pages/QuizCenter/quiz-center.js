@@ -20,12 +20,25 @@ function loadPageContent(pageName) {
   switch(pageName) {
     case 'quiz-center':
       contentArea.innerHTML = getQuizCenterContent();
+      // Load quiz data after content is set
+      setTimeout(() => {
+        loadUpcomingQuizzes();
+        loadRecentHistory();
+      }, 100);
       break;
     case 'upcoming-quizzes':
       contentArea.innerHTML = getUpcomingQuizzesContent();
+      // Load upcoming quizzes data after content is set
+      setTimeout(() => {
+        loadUpcomingQuizzes();
+      }, 100);
       break;
     case 'quiz-history':
       contentArea.innerHTML = getQuizHistoryContent();
+      // Load quiz history data after content is set
+      setTimeout(() => {
+        loadRecentHistory();
+      }, 100);
       break;
     case 'performance':
       contentArea.innerHTML = getPerformanceContent();
@@ -38,6 +51,11 @@ function loadPageContent(pageName) {
       break;
     default:
       contentArea.innerHTML = getQuizCenterContent();
+      // Load quiz data after content is set
+      setTimeout(() => {
+        loadUpcomingQuizzes();
+        loadRecentHistory();
+      }, 100);
   }
 }
 
@@ -85,7 +103,7 @@ function getQuizCenterContent() {
       <div class="section-card">
         <div class="section-header">
           <h2>Upcoming Quizzes</h2>
-          <button class="view-all-btn" onclick="loadPageContent('upcoming-quizzes')">View All</button>
+          <button class="view-all-btn">View All</button>
         </div>
         <div class="quiz-list" id="upcoming-quizzes-list">
           <!-- Upcoming quizzes will be loaded here -->
@@ -95,7 +113,7 @@ function getQuizCenterContent() {
       <div class="section-card">
         <div class="section-header">
           <h2>Recent Quiz History</h2>
-          <button class="view-all-btn" onclick="loadPageContent('quiz-history')">View All</button>
+          <button class="view-all-btn">View All</button>
         </div>
         <div class="quiz-list" id="recent-history-list">
           <!-- Recent quiz history will be loaded here -->
@@ -431,11 +449,28 @@ document.addEventListener('DOMContentLoaded', function() {
   loadQuizData();
 });
 
-// Add click event listeners to navigation
+// Add click event listeners to navigation and buttons
 document.addEventListener('click', function(e) {
   if (e.target.classList.contains('nav-item')) {
     e.preventDefault();
     const pageName = e.target.getAttribute('data-page');
     loadPageContent(pageName);
+  }
+  
+  // Handle "View All" buttons
+  if (e.target.classList.contains('view-all-btn')) {
+    e.preventDefault();
+    const buttonText = e.target.textContent.trim();
+    if (buttonText === 'View All') {
+      // Determine which section the button belongs to
+      const sectionHeader = e.target.closest('.section-header');
+      const sectionTitle = sectionHeader.querySelector('h2').textContent;
+      
+      if (sectionTitle.includes('Upcoming')) {
+        loadPageContent('upcoming-quizzes');
+      } else if (sectionTitle.includes('History')) {
+        loadPageContent('quiz-history');
+      }
+    }
   }
 }); 
