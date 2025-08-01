@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel - Full Courses Platform</title>
-  <link rel="stylesheet" href="../../styles/Home.css">
+  <link rel="stylesheet" href="../Home/Home.css">
   <link rel="stylesheet" href="./admin.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
 </head>
 <body>
   <nav id="header-nav">
@@ -40,35 +40,35 @@
 
       <nav class="sidebar-nav">
         <a href="#dashboard" class="nav-item active" data-section="dashboard">
-          <span class="material-symbols-outlined nav-icon">dashboard</span>
+          <img src="../../assets/images/AdminPanel_assets/dashboard.png" alt="Dashboard" class="nav-icon">
           Dashboard
         </a>
         <a href="#users" class="nav-item" data-section="users">
-          <span class="material-symbols-outlined nav-icon">group</span>
+          <img src="../../assets/images/AdminPanel_assets/management.png" alt="Manage Users" class="nav-icon">
           Manage Users
         </a>
         <a href="#courses" class="nav-item" data-section="courses">
-          <span class="material-symbols-outlined nav-icon">school</span>
+          <img src="../../assets/images/AdminPanel_assets/Course Management.png" alt="Course Management" class="nav-icon">
           Course Management
         </a>
         <a href="#content" class="nav-item" data-section="content">
-          <span class="material-symbols-outlined nav-icon">flag</span>
+          <img src="../../assets/images/AdminPanel_assets/moderator.png" alt="Content Moderation" class="nav-icon">
           Content Moderation
         </a>
         <a href="#analytics" class="nav-item" data-section="analytics">
-          <span class="material-symbols-outlined nav-icon">analytics</span>
+          <img src="../../assets/images/AdminPanel_assets/analytics.png" alt="Analytics" class="nav-icon">
           Analytics
         </a>
         <a href="#ai-tools" class="nav-item" data-section="ai-tools">
-          <span class="material-symbols-outlined nav-icon">smart_toy</span>
+          <img src="../../assets/images/AdminPanel_assets/management(1).png" alt="AI Tools" class="nav-icon">
           AI Tools
         </a>
         <a href="#revenue" class="nav-item" data-section="revenue">
-          <span class="material-symbols-outlined nav-icon">trending_up</span>
+          <img src="../../assets/images/AdminPanel_assets/revenue.png" alt="Revenue Reports" class="nav-icon">
           Revenue Reports
         </a>
         <a href="#settings" class="nav-item" data-section="settings">
-          <span class="material-symbols-outlined nav-icon">settings</span>
+          <img src="../../assets/images/AdminPanel_assets/user.png" alt="Admin Settings" class="nav-icon">
           Settings
         </a>
       </nav>
@@ -79,14 +79,19 @@
       <!-- Dashboard Section -->
       <div id="dashboard" class="content-section active">
         <div class="content-header">
-          <h1>Dashboard</h1>
-          <p>Overview of platform performance and key metrics.</p>
+          <div class="header-with-image">
+            <img src="../../assets/images/AdminPanel_assets/dashboard.png" alt="Dashboard" class="header-image">
+            <div>
+              <h1>Dashboard</h1>
+              <p>Overview of platform performance and key metrics.</p>
+            </div>
+          </div>
         </div>
 
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-icon">
-              <span class="material-symbols-outlined">group</span>
+              <img src="../../assets/images/AdminPanel_assets/management.png" alt="Users" class="stat-image">
             </div>
             <div class="stat-info">
               <h3>Total Users</h3>
@@ -97,7 +102,7 @@
 
           <div class="stat-card">
             <div class="stat-icon">
-              <span class="material-symbols-outlined">school</span>
+              <img src="../../assets/images/AdminPanel_assets/computer.png" alt="Courses" class="stat-image">
             </div>
             <div class="stat-info">
               <h3>Active Courses</h3>
@@ -108,7 +113,7 @@
 
           <div class="stat-card">
             <div class="stat-icon">
-              <span class="material-symbols-outlined">trending_up</span>
+              <img src="../../assets/images/AdminPanel_assets/revenue.png" alt="Revenue" class="stat-image">
             </div>
             <div class="stat-info">
               <h3>Revenue</h3>
@@ -119,7 +124,7 @@
 
           <div class="stat-card">
             <div class="stat-icon">
-              <span class="material-symbols-outlined">flag</span>
+              <img src="../../assets/images/AdminPanel_assets/moderator.png" alt="Reviews" class="stat-image">
             </div>
             <div class="stat-info">
               <h3>Pending Reviews</h3>
@@ -134,7 +139,7 @@
           <div class="activity-list">
             <div class="activity-item">
               <div class="activity-icon">
-                <span class="material-symbols-outlined">person_add</span>
+                <img src="../../assets/images/AdminPanel_assets/management.png" alt="User Registration" class="activity-image">
               </div>
               <div class="activity-content">
                 <h4>New user registered</h4>
@@ -145,7 +150,7 @@
 
             <div class="activity-item">
               <div class="activity-icon">
-                <span class="material-symbols-outlined">school</span>
+                <img src="../../assets/images/AdminPanel_assets/computer.png" alt="Course Published" class="activity-image">
               </div>
               <div class="activity-content">
                 <h4>Course published</h4>
@@ -156,7 +161,7 @@
 
             <div class="activity-item">
               <div class="activity-icon">
-                <span class="material-symbols-outlined">flag</span>
+                <img src="../../assets/images/AdminPanel_assets/moderator.png" alt="Content Flagged" class="activity-image">
               </div>
               <div class="activity-content">
                 <h4>Content flagged</h4>
@@ -168,12 +173,17 @@
         </div>
       </div>
 
-      <!-- Users Section -->
-      <div id="users" class="content-section">
-        <div class="content-header">
-          <h1>Manage Users</h1>
-          <p>View and manage user accounts, permissions, and status.</p>
-        </div>
+             <!-- Users Section -->
+       <div id="users" class="content-section">
+         <div class="content-header">
+           <div class="header-with-image">
+             <img src="../../assets/images/AdminPanel_assets/management.png" alt="Manage Users" class="header-image">
+             <div>
+               <h1>Manage Users</h1>
+               <p>View and manage user accounts, permissions, and status.</p>
+             </div>
+           </div>
+         </div>
 
         <div class="section-actions">
           <div class="search-box">
@@ -229,12 +239,17 @@
         </div>
       </div>
 
-      <!-- Courses Section -->
-      <div id="courses" class="content-section">
-        <div class="content-header">
-          <h1>Course Management</h1>
-          <p>Approve, reject, and manage course submissions.</p>
-        </div>
+             <!-- Courses Section -->
+       <div id="courses" class="content-section">
+         <div class="content-header">
+           <div class="header-with-image">
+             <img src="../../assets/images/AdminPanel_assets/Course Management.png" alt="Course Management" class="header-image">
+             <div>
+               <h1>Course Management</h1>
+               <p>Approve, reject, and manage course submissions.</p>
+             </div>
+           </div>
+         </div>
 
         <div class="section-actions">
           <div class="filter-tabs">
@@ -281,12 +296,17 @@
         </div>
       </div>
 
-      <!-- Content Moderation Section -->
-      <div id="content" class="content-section">
-        <div class="content-header">
-          <h1>Content Moderation</h1>
-          <p>Review flagged content and comments for inappropriate material.</p>
-        </div>
+             <!-- Content Moderation Section -->
+       <div id="content" class="content-section">
+         <div class="content-header">
+           <div class="header-with-image">
+             <img src="../../assets/images/AdminPanel_assets/moderator.png" alt="Content Moderation" class="header-image">
+             <div>
+               <h1>Content Moderation</h1>
+               <p>Review flagged content and comments for inappropriate material.</p>
+             </div>
+           </div>
+         </div>
 
         <div class="flagged-content">
           <div class="flagged-item">
@@ -311,18 +331,23 @@
         </div>
       </div>
 
-      <!-- Analytics Section -->
-      <div id="analytics" class="content-section">
-        <div class="content-header">
-          <h1>Analytics</h1>
-          <p>Platform performance metrics and user behavior insights.</p>
-        </div>
+             <!-- Analytics Section -->
+       <div id="analytics" class="content-section">
+         <div class="content-header">
+           <div class="header-with-image">
+             <img src="../../assets/images/AdminPanel_assets/analytics.png" alt="Analytics" class="header-image">
+             <div>
+               <h1>Analytics</h1>
+               <p>Platform performance metrics and user behavior insights.</p>
+             </div>
+           </div>
+         </div>
 
         <div class="analytics-grid">
           <div class="chart-card">
             <h3>User Growth</h3>
             <div class="chart-placeholder">
-              <span class="material-symbols-outlined">show_chart</span>
+              <img src="../../assets/images/AdminPanel_assets/analytics.png" alt="User Growth Analytics" class="chart-image">
               <p>Chart visualization would go here</p>
             </div>
           </div>
@@ -330,7 +355,7 @@
           <div class="chart-card">
             <h3>Course Completion Rates</h3>
             <div class="chart-placeholder">
-              <span class="material-symbols-outlined">pie_chart</span>
+              <img src="../../assets/images/AdminPanel_assets/analytics.png" alt="Course Completion Analytics" class="chart-image">
               <p>Chart visualization would go here</p>
             </div>
           </div>
@@ -338,19 +363,24 @@
           <div class="chart-card">
             <h3>Revenue Trends</h3>
             <div class="chart-placeholder">
-              <span class="material-symbols-outlined">trending_up</span>
+              <img src="../../assets/images/AdminPanel_assets/revenue.png" alt="Revenue Analytics" class="chart-image">
               <p>Chart visualization would go here</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- AI Tools Section -->
-      <div id="ai-tools" class="content-section">
-        <div class="content-header">
-          <h1>AI Tools Management</h1>
-          <p>Monitor and configure AI-powered features and recommendations.</p>
-        </div>
+             <!-- AI Tools Section -->
+       <div id="ai-tools" class="content-section">
+         <div class="content-header">
+           <div class="header-with-image">
+             <img src="../../assets/images/AdminPanel_assets/management(1).png" alt="AI Tools Management" class="header-image">
+             <div>
+               <h1>AI Tools Management</h1>
+               <p>Monitor and configure AI-powered features and recommendations.</p>
+             </div>
+           </div>
+         </div>
 
         <div class="ai-tools-grid">
           <div class="ai-tool-card">
@@ -385,12 +415,17 @@
         </div>
       </div>
 
-      <!-- Revenue Section -->
-      <div id="revenue" class="content-section">
-        <div class="content-header">
-          <h1>Revenue Reports</h1>
-          <p>Financial performance and revenue analytics.</p>
-        </div>
+             <!-- Revenue Section -->
+       <div id="revenue" class="content-section">
+         <div class="content-header">
+           <div class="header-with-image">
+             <img src="../../assets/images/AdminPanel_assets/revenue.png" alt="Revenue Reports" class="header-image">
+             <div>
+               <h1>Revenue Reports</h1>
+               <p>Financial performance and revenue analytics.</p>
+             </div>
+           </div>
+         </div>
 
         <div class="revenue-stats">
           <div class="revenue-card">
@@ -416,8 +451,13 @@
       <!-- Settings Section -->
       <div id="settings" class="content-section">
         <div class="content-header">
-          <h1>Admin Settings</h1>
-          <p>Configure platform settings and preferences.</p>
+          <div class="header-with-image">
+            <img src="../../assets/images/AdminPanel_assets/user.png" alt="Admin Settings" class="header-image">
+            <div>
+              <h1>Admin Settings</h1>
+              <p>Configure platform settings and preferences.</p>
+            </div>
+          </div>
         </div>
 
         <div class="settings-form">
