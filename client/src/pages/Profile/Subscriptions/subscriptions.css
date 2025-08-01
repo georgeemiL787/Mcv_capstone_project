@@ -1,0 +1,263 @@
+/* Subscriptions Page Specific Styles */
+
+.subscriptions-section {
+  max-width: 800px;
+}
+
+.current-plan {
+  margin-bottom: 40px;
+}
+
+.current-plan h3 {
+  color: #333446;
+  font-size: 1.1rem;
+  margin: 0 0 20px 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+}
+
+.plan-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px;
+  background: white;
+  border: 1px solid #e4defe;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(139, 126, 252, 0.1);
+}
+
+.plan-info h4 {
+  color: #333446;
+  font-size: 1.2rem;
+  margin: 0 0 8px 0;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+}
+
+.plan-info p {
+  color: #333446;
+  opacity: 0.7;
+  margin: 0 0 12px 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+}
+
+.plan-status {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #d4edda;
+  color: #155724;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 500;
+}
+
+.upgrade-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #8f7efc, #7a6bfc);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(143, 126, 252, 0.3);
+}
+
+.upgrade-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(143, 126, 252, 0.4);
+}
+
+.billing-history {
+  margin-bottom: 40px;
+}
+
+.billing-history h3 {
+  color: #333446;
+  font-size: 1.1rem;
+  margin: 0 0 20px 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+}
+
+.billing-table {
+  background: white;
+  border: 1px solid #e4defe;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.billing-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
+  gap: 20px;
+  padding: 15px 20px;
+  background: #f8f7ff;
+  border-bottom: 1px solid #e4defe;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333446;
+}
+
+.billing-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
+  gap: 20px;
+  padding: 15px 20px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  color: #333446;
+  opacity: 0.7;
+  text-align: center;
+}
+
+.subscription-settings {
+  margin-bottom: 40px;
+}
+
+.subscription-settings h3 {
+  color: #333446;
+  font-size: 1.1rem;
+  margin: 0 0 20px 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+}
+
+.settings-card {
+  background: white;
+  border: 1px solid #e4defe;
+  border-radius: 8px;
+  padding: 25px;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid #e4defe;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.setting-info h4 {
+  color: #333446;
+  font-size: 1rem;
+  margin: 0 0 8px 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+}
+
+.setting-info p {
+  color: #333446;
+  opacity: 0.7;
+  margin: 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #8f7efc;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #8f7efc;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .plan-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .billing-header,
+  .billing-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: left;
+  }
+  
+  .billing-header {
+    display: none;
+  }
+  
+  .billing-row {
+    border-bottom: 1px solid #e4defe;
+    padding: 15px;
+  }
+  
+  .billing-row:last-child {
+    border-bottom: none;
+  }
+  
+  .setting-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .plan-card,
+  .settings-card {
+    padding: 20px;
+  }
+  
+  .billing-row {
+    padding: 12px 15px;
+  }
+} 

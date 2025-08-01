@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Security - Full Courses Platform</title>
+  <link rel="stylesheet" href="../../../styles/Home.css">
+  <link rel="stylesheet" href="../profile.css">
+  <link rel="stylesheet" href="./account-security.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+</head>
+<body>
+  <nav id="header-nav">
+    <div class="nav-right">
+      <img src="../../../assets/images/luIZ_without_bg.png">
+      <button class="nav-button">Explore</button>
+      <form id="search-bar">
+        <div>
+          <input type="text" placeholder="Search for courses..." class="search-input">
+          <span class="material-symbols-outlined">search</span>
+        </div>
+      </form>
+    </div>
+    <div class="nav-buttons">
+      <button class="nav-button">Log In</button>
+      <button class="signup nav-button">Sign Up</button>
+    </div>
+  </nav>
+
+  <div class="profile-layout">
+    <!-- Left Sidebar -->
+    <div class="profile-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-avatar">
+          <div class="avatar-placeholder">GE</div>
+        </div>
+        <h3>George Emil</h3>
+        <a href="#" class="view-profile-link">View public profile</a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="../index.html" class="nav-item">
+          <img src="../../../assets/images/profile_assets/user.png" alt="Profile" class="nav-icon">
+          Profile
+        </a>
+        <a href="../Photo/index.html" class="nav-item">
+          <img src="../../../assets/images/profile_assets/photo-camera.png" alt="Photo" class="nav-icon">
+          Photo
+        </a>
+        <a href="./index.html" class="nav-item active">
+          <img src="../../../assets/images/profile_assets/cyber-security.png" alt="Account Security" class="nav-icon">
+          Account Security
+        </a>
+        <a href="../Subscriptions/index.html" class="nav-item">
+          <img src="../../../assets/images/profile_assets/subscription.png" alt="Subscriptions" class="nav-icon">
+          Subscriptions
+        </a>
+        <a href="../PaymentMethods/index.html" class="nav-item">
+          <img src="../../../assets/images/profile_assets/wallet.png" alt="Payment methods" class="nav-icon">
+          Payment methods
+        </a>
+        <a href="../Privacy/index.html" class="nav-item">
+          <img src="../../../assets/images/profile_assets/privacy.png" alt="Privacy" class="nav-icon">
+          Privacy
+        </a>
+        <a href="../NotificationPreferences/index.html" class="nav-item">
+          <img src="../../../assets/images/profile_assets/notification.png" alt="Notification Preferences" class="nav-icon">
+          Notification Preferences
+        </a>
+      </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="profile-content">
+      <div class="content-header">
+        <h1>Account</h1>
+        <p>Edit your account settings and change your password here.</p>
+      </div>
+
+      <div class="security-section">
+        <div class="email-section">
+          <h3>Email</h3>
+          <div class="email-display">
+            <p>Your email address is george.emil72@gmail.com</p>
+            <button class="edit-email-btn">
+              <span class="material-symbols-outlined">edit</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="password-section">
+          <h3>Password Change</h3>
+          <form class="password-form">
+            <div class="form-group">
+              <label for="currentPassword">Current password</label>
+              <input type="password" id="currentPassword" name="currentPassword" value="••••••••••••" class="current-password" readonly>
+            </div>
+            
+            <div class="form-group">
+              <label for="newPassword">New password</label>
+              <input type="password" id="newPassword" name="newPassword" placeholder="Enter new password">
+            </div>
+            
+            <div class="form-group">
+              <label for="confirmPassword">Confirm new password</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-type new password">
+            </div>
+            
+            <button type="submit" class="change-password-btn">Change password</button>
+          </form>
+        </div>
+
+        <div class="mfa-section">
+          <h3>Multi-factor Authentication</h3>
+          <div class="mfa-content">
+            <p>Increase your account security by requiring that a code emailed to you be entered when you log in. For more information on how multi-factor authentication works, refer to our <a href="#" class="help-link">Help Center article</a>.</p>
+            <button type="button" class="enable-mfa-btn">Enable</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 

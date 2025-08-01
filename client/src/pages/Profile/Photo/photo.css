@@ -1,0 +1,149 @@
+/* Photo Page Specific Styles */
+
+.photo-section {
+  max-width: 600px;
+}
+
+.image-preview {
+  margin-bottom: 40px;
+}
+
+.image-preview h3 {
+  color: #333446;
+  font-size: 1.1rem;
+  margin: 0 0 20px 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+}
+
+.preview-container {
+  border: 2px dashed #e4defe;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  background: rgba(143, 126, 252, 0.02);
+  transition: all 0.2s ease;
+}
+
+.preview-container:hover {
+  border-color: #8f7efc;
+  background: rgba(143, 126, 252, 0.05);
+}
+
+.preview-placeholder {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #f8f7ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #e4defe;
+}
+
+.placeholder-icon {
+  width: 60px;
+  height: 60px;
+  opacity: 0.6;
+}
+
+.upload-section {
+  margin-bottom: 40px;
+}
+
+.upload-section h3 {
+  color: #333446;
+  font-size: 1.1rem;
+  margin: 0 0 20px 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+}
+
+.upload-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border: 1px solid #e4defe;
+  border-radius: 8px;
+  background: white;
+}
+
+.file-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #e4defe;
+  border-radius: 4px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  color: #333446;
+}
+
+.file-input:focus {
+  outline: none;
+  border-color: #8f7efc;
+  box-shadow: 0 0 0 3px rgba(143, 126, 252, 0.1);
+}
+
+.upload-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #8f7efc, #7a6bfc);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(143, 126, 252, 0.3);
+}
+
+.upload-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(143, 126, 252, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .preview-container {
+    padding: 30px 20px;
+  }
+  
+  .preview-placeholder {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .placeholder-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .upload-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  
+  .upload-btn {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .preview-container {
+    padding: 20px 15px;
+  }
+  
+  .preview-placeholder {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .placeholder-icon {
+    width: 40px;
+    height: 40px;
+  }
+} 

@@ -1,0 +1,188 @@
+/* Account Security Page Specific Styles */
+
+.security-section {
+  max-width: 600px;
+}
+
+.email-section {
+  margin-bottom: 40px;
+}
+
+.email-section h3 {
+  color: #333446;
+  font-size: 1.1rem;
+  margin: 0 0 15px 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+}
+
+.email-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: #f8f7ff;
+  border: 1px solid #e4defe;
+  border-radius: 8px;
+}
+
+.email-display p {
+  margin: 0;
+  color: #333446;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+}
+
+.edit-email-btn {
+  width: 36px;
+  height: 36px;
+  background: #8f7efc;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.edit-email-btn:hover {
+  background: #7a6bfc;
+  transform: scale(1.05);
+}
+
+.edit-email-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.password-section {
+  margin-bottom: 40px;
+}
+
+.password-section h3 {
+  color: #333446;
+  font-size: 1.1rem;
+  margin: 0 0 20px 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+}
+
+.password-form {
+  background: white;
+  padding: 25px;
+  border: 1px solid #e4defe;
+  border-radius: 8px;
+}
+
+.current-password {
+  background: #fff3cd !important;
+  border-color: #ffeaa7 !important;
+  color: #856404 !important;
+}
+
+.change-password-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #8f7efc, #7a6bfc);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(143, 126, 252, 0.3);
+  margin-top: 10px;
+}
+
+.change-password-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(143, 126, 252, 0.4);
+}
+
+.mfa-section {
+  border: 1px solid #e4defe;
+  border-radius: 8px;
+  padding: 25px;
+  background: white;
+}
+
+.mfa-section h3 {
+  color: #333446;
+  font-size: 1.1rem;
+  margin: 0 0 15px 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+}
+
+.mfa-content p {
+  color: #333446;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+}
+
+.help-link {
+  color: #8f7efc;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.help-link:hover {
+  text-decoration: underline;
+}
+
+.enable-mfa-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #8f7efc, #7a6bfc);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(143, 126, 252, 0.3);
+}
+
+.enable-mfa-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(143, 126, 252, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .email-display {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .password-form,
+  .mfa-section {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .email-display {
+    padding: 12px 15px;
+  }
+  
+  .password-form,
+  .mfa-section {
+    padding: 15px;
+  }
+  
+  .edit-email-btn {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .edit-email-btn .material-symbols-outlined {
+    font-size: 16px;
+  }
+} 
