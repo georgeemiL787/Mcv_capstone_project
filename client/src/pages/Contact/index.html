@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Full Courses Platform</title>
+  <link rel="stylesheet" href="../../styles/Home.css">
+  <link rel="stylesheet" href="./contact.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+</head>
+<body>
+  <nav id="header-nav">
+    <div class="nav-right">
+      <img src="../../assets/images/luIZ_without_bg.png">
+      <button class="nav-button">Explore</button>
+      <form id="search-bar">
+        <div>
+          <input type="text" placeholder="Search for courses..." class="search-input">
+          <span class="material-symbols-outlined">search</span>
+        </div>
+      </form>
+    </div>
+    <div class="nav-buttons">
+      <button class="nav-button">Log In</button>
+      <button class="signup nav-button">Sign Up</button>
+    </div>
+  </nav>
+
+  <div class="contact-container">
+    <div class="contact-header">
+      <h1>Contact Us</h1>
+      <p>Get in touch with our development team for support, feedback, or collaboration opportunities.</p>
+    </div>
+
+    <div class="contact-content">
+      <!-- Team Section -->
+      <div class="team-section">
+        <h2>Meet Our Development Team</h2>
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="member-avatar">
+              <span class="material-symbols-outlined">person</span>
+            </div>
+            <div class="member-info">
+              <h3>George Emil</h3>
+              <p class="member-role">Full Stack Developer</p>
+              <p class="member-description">Experienced developer specializing in modern web technologies and full-stack development solutions.</p>
+              <div class="member-skills">
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Full Stack</span>
+              </div>
+              <div class="member-contact">
+                <a href="mailto:george.emil@fullcourses.com" class="contact-link">
+                  <span class="material-symbols-outlined">email</span>
+                  george.emil@fullcourses.com
+                </a>
+                <a href="https://linkedin.com/in/george-emil" class="contact-link" target="_blank">
+                  <span class="material-symbols-outlined">link</span>
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="team-member">
+            <div class="member-avatar">
+              <span class="material-symbols-outlined">person</span>
+            </div>
+            <div class="member-info">
+              <h3>Karim Metry</h3>
+              <p class="member-role">Backend Developer</p>
+              <p class="member-description">Skilled backend developer with expertise in server-side technologies and database management.</p>
+              <div class="member-skills">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Django</span>
+                <span class="skill-tag">Database</span>
+                <span class="skill-tag">API</span>
+              </div>
+              <div class="member-contact">
+                <a href="mailto:karim.metry@fullcourses.com" class="contact-link">
+                  <span class="material-symbols-outlined">email</span>
+                  karim.metry@fullcourses.com
+                </a>
+                <a href="https://linkedin.com/in/karim-metry" class="contact-link" target="_blank">
+                  <span class="material-symbols-outlined">link</span>
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form Section -->
+      <div class="contact-form-section">
+        <h2>Get In Touch</h2>
+        <div class="contact-form-card">
+          <form class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <select id="subject" name="subject" required>
+                <option value="">Select a subject</option>
+                <option value="general">General Inquiry</option>
+                <option value="technical">Technical Support</option>
+                <option value="feedback">Feedback & Suggestions</option>
+                <option value="partnership">Partnership Opportunities</option>
+                <option value="bug-report">Bug Report</option>
+                <option value="feature-request">Feature Request</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" placeholder="Tell us how we can help you..." required></textarea>
+            </div>
+            
+                         <div class="form-actions">
+               <button type="submit" class="submit-btn">Send Message</button>
+             </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Additional Contact Information -->
+      <div class="contact-info-section">
+        <h2>Other Ways to Reach Us</h2>
+        <div class="contact-info-grid">
+          <div class="contact-info-card">
+            <div class="info-icon">
+              <span class="material-symbols-outlined">support_agent</span>
+            </div>
+            <h3>Live Support</h3>
+            <p>Available Monday - Friday, 9:00 AM - 6:00 PM EST</p>
+            <a href="#" class="info-link">Start Live Chat</a>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="info-icon">
+              <span class="material-symbols-outlined">help</span>
+            </div>
+            <h3>Help Center</h3>
+            <p>Find answers to common questions and troubleshooting guides</p>
+            <a href="#" class="info-link">Visit Help Center</a>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="info-icon">
+              <span class="material-symbols-outlined">forum</span>
+            </div>
+            <h3>Community Forum</h3>
+            <p>Connect with other learners and share experiences</p>
+            <a href="#" class="info-link">Join Discussion</a>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="info-icon">
+              <span class="material-symbols-outlined">smart_toy</span>
+            </div>
+            <h3>AI Assistant</h3>
+            <p>Get instant help from our AI-powered chatbot</p>
+            <a href="#" class="info-link">Chat with AI</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 
