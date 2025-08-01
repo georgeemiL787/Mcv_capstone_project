@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Simulator - Full Courses Platform</title>
+  <link rel="stylesheet" href="../Home/Home.css">
+  <link rel="stylesheet" href="./career-simulator.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+</head>
+<body>
+  <nav id="header-nav">
+    <div class="nav-right">
+      <img src="../../assets/images/luIZ_without_bg.png">
+      <button class="nav-button">Explore</button>
+      <form id="search-bar">
+        <div>
+          <input type="text" placeholder="Search for courses..." class="search-input">
+          <span class="material-symbols-outlined">search</span>
+        </div>
+      </form>
+    </div>
+    <div class="nav-buttons">
+      <button class="nav-button">Log In</button>
+      <button class="signup nav-button">Sign Up</button>
+    </div>
+  </nav>
+
+  <div class="career-layout">
+    <!-- Left Sidebar -->
+    <div class="career-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-avatar">
+          <div class="avatar-placeholder">CS</div>
+        </div>
+        <h3>Career Simulator</h3>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="#overview" class="nav-item active" data-section="overview">
+          <span class="material-symbols-outlined nav-icon">dashboard</span>
+          Overview
+        </a>
+        <a href="#scenarios" class="nav-item" data-section="scenarios">
+          <span class="material-symbols-outlined nav-icon">psychology</span>
+          Scenarios
+        </a>
+        <a href="#skills" class="nav-item" data-section="skills">
+          <span class="material-symbols-outlined nav-icon">school</span>
+          Skills Practice
+        </a>
+        <a href="#challenges" class="nav-item" data-section="challenges">
+          <span class="material-symbols-outlined nav-icon">emoji_events</span>
+          Challenges
+        </a>
+        <a href="#progress" class="nav-item" data-section="progress">
+          <span class="material-symbols-outlined nav-icon">trending_up</span>
+          Progress
+        </a>
+        <a href="#leaderboard" class="nav-item" data-section="leaderboard">
+          <span class="material-symbols-outlined nav-icon">leaderboard</span>
+          Leaderboard
+        </a>
+      </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="career-content">
+      <!-- Overview Section -->
+      <div id="overview" class="content-section active">
+        <div class="content-header">
+          <h1>Career Simulator</h1>
+          <p>Practice real-world scenarios and apply your skills in a safe environment.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <span class="material-symbols-outlined">psychology</span>
+            </div>
+            <div class="stat-info">
+              <h3>Scenarios Completed</h3>
+              <p class="stat-number">12</p>
+              <span class="stat-change positive">+3 this week</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <span class="material-symbols-outlined">school</span>
+            </div>
+            <div class="stat-info">
+              <h3>Skills Mastered</h3>
+              <p class="stat-number">8</p>
+              <span class="stat-change positive">+2 this month</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <span class="material-symbols-outlined">emoji_events</span>
+            </div>
+            <div class="stat-info">
+              <h3>Challenges Won</h3>
+              <p class="stat-number">15</p>
+              <span class="stat-change positive">+5 this month</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <span class="material-symbols-outlined">trending_up</span>
+            </div>
+            <div class="stat-info">
+              <h3>Overall Score</h3>
+              <p class="stat-number">87%</p>
+              <span class="stat-change positive">+5% this week</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="recent-activity">
+          <h2>Recent Activity</h2>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-icon">
+                <span class="material-symbols-outlined">psychology</span>
+              </div>
+              <div class="activity-content">
+                <h4>Completed "Team Leadership" scenario</h4>
+                <p>Successfully managed a virtual team conflict</p>
+                <span class="activity-time">2 hours ago</span>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon">
+                <span class="material-symbols-outlined">school</span>
+              </div>
+              <div class="activity-content">
+                <h4>Mastered "Problem Solving" skill</h4>
+                <p>Completed all related challenges with 90%+ accuracy</p>
+                <span class="activity-time">1 day ago</span>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon">
+                <span class="material-symbols-outlined">emoji_events</span>
+              </div>
+              <div class="activity-content">
+                <h4>Won "Communication Challenge"</h4>
+                <p>Ranked #3 out of 50 participants</p>
+                <span class="activity-time">3 days ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenarios Section -->
+      <div id="scenarios" class="content-section">
+        <div class="content-header">
+          <h1>Career Scenarios</h1>
+          <p>Practice real-world situations in a safe, controlled environment.</p>
+        </div>
+
+        <div class="scenarios-grid">
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <h3>Team Leadership</h3>
+              <span class="difficulty-badge intermediate">Intermediate</span>
+            </div>
+            <p>Lead a diverse team through a challenging project with tight deadlines and conflicting priorities.</p>
+            <div class="scenario-meta">
+              <span>Duration: 15-20 min</span>
+              <span>Skills: Leadership, Communication</span>
+            </div>
+            <div class="scenario-actions">
+              <button class="btn-primary">Start Scenario</button>
+              <button class="btn-secondary">Preview</button>
+            </div>
+          </div>
+
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <h3>Client Negotiation</h3>
+              <span class="difficulty-badge advanced">Advanced</span>
+            </div>
+            <p>Negotiate a complex contract with a difficult client while maintaining professional relationships.</p>
+            <div class="scenario-meta">
+              <span>Duration: 20-25 min</span>
+              <span>Skills: Negotiation, Communication</span>
+            </div>
+            <div class="scenario-actions">
+              <button class="btn-primary">Start Scenario</button>
+              <button class="btn-secondary">Preview</button>
+            </div>
+          </div>
+
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <h3>Crisis Management</h3>
+              <span class="difficulty-badge expert">Expert</span>
+            </div>
+            <p>Handle a major crisis situation with multiple stakeholders and high-pressure decision making.</p>
+            <div class="scenario-meta">
+              <span>Duration: 25-30 min</span>
+              <span>Skills: Crisis Management, Decision Making</span>
+            </div>
+            <div class="scenario-actions">
+              <button class="btn-primary">Start Scenario</button>
+              <button class="btn-secondary">Preview</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills Practice Section -->
+      <div id="skills" class="content-section">
+        <div class="content-header">
+          <h1>Skills Practice</h1>
+          <p>Focus on specific skills through targeted exercises and assessments.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-header">
+              <h3>Communication</h3>
+              <div class="skill-progress">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 85%"></div>
+                </div>
+                <span>85%</span>
+              </div>
+            </div>
+            <p>Master verbal and written communication skills for professional success.</p>
+            <div class="skill-exercises">
+              <span>5 exercises available</span>
+              <span>3 completed</span>
+            </div>
+            <button class="btn-primary">Practice Now</button>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-header">
+              <h3>Problem Solving</h3>
+              <div class="skill-progress">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 92%"></div>
+                </div>
+                <span>92%</span>
+              </div>
+            </div>
+            <p>Develop analytical thinking and creative problem-solving abilities.</p>
+            <div class="skill-exercises">
+              <span>7 exercises available</span>
+              <span>6 completed</span>
+            </div>
+            <button class="btn-primary">Practice Now</button>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-header">
+              <h3>Leadership</h3>
+              <div class="skill-progress">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 78%"></div>
+                </div>
+                <span>78%</span>
+              </div>
+            </div>
+            <p>Build leadership skills including team management and decision making.</p>
+            <div class="skill-exercises">
+              <span>6 exercises available</span>
+              <span>4 completed</span>
+            </div>
+            <button class="btn-primary">Practice Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Challenges Section -->
+      <div id="challenges" class="content-section">
+        <div class="content-header">
+          <h1>Career Challenges</h1>
+          <p>Compete with others and test your skills in timed challenges.</p>
+        </div>
+
+        <div class="challenges-grid">
+          <div class="challenge-card">
+            <div class="challenge-header">
+              <h3>Speed Interview</h3>
+              <span class="challenge-status active">Active</span>
+            </div>
+            <p>Complete a series of rapid-fire interview questions in 10 minutes.</p>
+            <div class="challenge-meta">
+              <span>Time: 10 min</span>
+              <span>Participants: 1,234</span>
+            </div>
+            <div class="challenge-actions">
+              <button class="btn-primary">Join Challenge</button>
+              <button class="btn-secondary">View Leaderboard</button>
+            </div>
+          </div>
+
+          <div class="challenge-card">
+            <div class="challenge-header">
+              <h3>Case Study Analysis</h3>
+              <span class="challenge-status upcoming">Upcoming</span>
+            </div>
+            <p>Analyze a complex business case and present your solution.</p>
+            <div class="challenge-meta">
+              <span>Time: 45 min</span>
+              <span>Starts: Tomorrow 2 PM</span>
+            </div>
+            <div class="challenge-actions">
+              <button class="btn-secondary">Set Reminder</button>
+              <button class="btn-secondary">Learn More</button>
+            </div>
+          </div>
+
+          <div class="challenge-card">
+            <div class="challenge-header">
+              <h3>Team Collaboration</h3>
+              <span class="challenge-status completed">Completed</span>
+            </div>
+            <p>Work with a team to solve a complex problem in real-time.</p>
+            <div class="challenge-meta">
+              <span>Time: 30 min</span>
+              <span>Your Rank: #5</span>
+            </div>
+            <div class="challenge-actions">
+              <button class="btn-secondary">View Results</button>
+              <button class="btn-secondary">Replay</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Section -->
+      <div id="progress" class="content-section">
+        <div class="content-header">
+          <h1>Your Progress</h1>
+          <p>Track your learning journey and skill development over time.</p>
+        </div>
+
+        <div class="progress-overview">
+          <div class="progress-card">
+            <h3>Overall Progress</h3>
+            <div class="progress-circle">
+              <div class="circle-progress" data-progress="87">
+                <span class="progress-text">87%</span>
+              </div>
+            </div>
+            <p>You're making excellent progress! Keep up the great work.</p>
+          </div>
+
+          <div class="progress-stats">
+            <div class="stat-item">
+              <h4>Scenarios Completed</h4>
+              <p>12 / 20</p>
+            </div>
+            <div class="stat-item">
+              <h4>Skills Mastered</h4>
+              <p>8 / 12</p>
+            </div>
+            <div class="stat-item">
+              <h4>Challenges Won</h4>
+              <p>15 / 25</p>
+            </div>
+            <div class="stat-item">
+              <h4>Average Score</h4>
+              <p>87%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-chart">
+          <h3>Progress Over Time</h3>
+          <div class="chart-placeholder">
+            <span class="material-symbols-outlined">show_chart</span>
+            <p>Your progress chart will appear here</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leaderboard Section -->
+      <div id="leaderboard" class="content-section">
+        <div class="content-header">
+          <h1>Leaderboard</h1>
+          <p>See how you rank against other learners in various challenges.</p>
+        </div>
+
+        <div class="leaderboard-tabs">
+          <button class="tab-btn active" data-tab="overall">Overall</button>
+          <button class="tab-btn" data-tab="scenarios">Scenarios</button>
+          <button class="tab-btn" data-tab="challenges">Challenges</button>
+          <button class="tab-btn" data-tab="skills">Skills</button>
+        </div>
+
+        <div class="leaderboard-content">
+          <div class="leaderboard-table">
+            <div class="table-header">
+              <span>Rank</span>
+              <span>User</span>
+              <span>Score</span>
+              <span>Scenarios</span>
+              <span>Challenges</span>
+            </div>
+            <div class="table-row">
+              <span class="rank">1</span>
+              <div class="user-info">
+                <div class="user-avatar">JD</div>
+                <div>
+                  <h4>John Doe</h4>
+                  <span>Professional</span>
+                </div>
+              </div>
+              <span class="score">95%</span>
+              <span>18/20</span>
+              <span>22/25</span>
+            </div>
+            <div class="table-row">
+              <span class="rank">2</span>
+              <div class="user-info">
+                <div class="user-avatar">SS</div>
+                <div>
+                  <h4>Sarah Smith</h4>
+                  <span>Professional</span>
+                </div>
+              </div>
+              <span class="score">92%</span>
+              <span>17/20</span>
+              <span>21/25</span>
+            </div>
+            <div class="table-row current-user">
+              <span class="rank">3</span>
+              <div class="user-info">
+                <div class="user-avatar">GE</div>
+                <div>
+                  <h4>George Emil</h4>
+                  <span>You</span>
+                </div>
+              </div>
+              <span class="score">87%</span>
+              <span>12/20</span>
+              <span>15/25</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./career-simulator.js"></script>
+</body>
+</html> 
