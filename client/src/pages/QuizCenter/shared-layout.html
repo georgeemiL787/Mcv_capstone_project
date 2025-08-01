@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Center - Full Courses Platform</title>
+  <link rel="stylesheet" href="../Home/Home.css">
+  <link rel="stylesheet" href="./shared-styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+</head>
+<body>
+  <nav id="header-nav">
+    <div class="nav-right">
+      <img src="../../assets/images/luIZ_without_bg.png">
+      <button class="nav-button">Explore</button>
+      <form id="search-bar">
+        <div>
+          <input type="text" placeholder="Search for courses..." class="search-input">
+          <span class="material-symbols-outlined">search</span>
+        </div>
+      </form>
+    </div>
+    <div class="nav-buttons">
+      <button class="nav-button">Log In</button>
+      <button class="signup nav-button">Sign Up</button>
+    </div>
+  </nav>
+
+  <div class="profile-layout">
+    <!-- Left Sidebar -->
+    <div class="profile-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-avatar">
+          <div class="avatar-placeholder">GE</div>
+        </div>
+        <h3>George Emil</h3>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="./index.html" class="nav-item active" data-page="quiz-center">
+          <span class="material-symbols-outlined nav-icon">quiz</span>
+          Quiz Center
+        </a>
+        <a href="./index.html" class="nav-item" data-page="upcoming-quizzes">
+          <span class="material-symbols-outlined nav-icon">schedule</span>
+          Upcoming Quizzes
+        </a>
+        <a href="./index.html" class="nav-item" data-page="quiz-history">
+          <span class="material-symbols-outlined nav-icon">history</span>
+          Quiz History
+        </a>
+        <a href="./index.html" class="nav-item" data-page="performance">
+          <span class="material-symbols-outlined nav-icon">analytics</span>
+          Performance
+        </a>
+        <a href="./index.html" class="nav-item" data-page="practice">
+          <span class="material-symbols-outlined nav-icon">school</span>
+          Practice Mode
+        </a>
+        <a href="./index.html" class="nav-item" data-page="settings">
+          <span class="material-symbols-outlined nav-icon">settings</span>
+          Quiz Settings
+        </a>
+      </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="profile-content" id="main-content">
+      <!-- Content will be loaded here -->
+    </div>
+  </div>
+
+  <script src="./quiz-center.js"></script>
+</body>
+</html> 
