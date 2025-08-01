@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q&A/Discussions - Instructor Dashboard</title>
+  <link rel="stylesheet" href="../shared-styles.css">
+  <link rel="stylesheet" href="./discussions.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+</head>
+<body>
+  <nav id="header-nav">
+    <div class="nav-right">
+      <img src="../../../assets/images/luIZ_without_bg.png">
+      <button class="nav-button">Explore</button>
+      <form id="search-bar">
+        <div>
+          <input type="text" placeholder="Search for courses..." class="search-input">
+          <span class="material-symbols-outlined">search</span>
+        </div>
+      </form>
+    </div>
+    <div class="nav-buttons">
+      <button class="nav-button">Log In</button>
+      <button class="signup nav-button">Sign Up</button>
+    </div>
+  </nav>
+
+  <div class="instructor-layout">
+    <!-- Left Sidebar -->
+    <div class="instructor-sidebar">
+      <div class="sidebar-header">
+        <div class="instructor-avatar">
+          <div class="avatar-placeholder">JD</div>
+        </div>
+        <h3>John Doe</h3>
+        <p>Instructor</p>
+        <a href="#" class="view-profile-link">View Profile</a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="../index.html" class="nav-item" data-page="dashboard">
+          <span class="material-symbols-outlined nav-icon">dashboard</span>
+          Dashboard
+        </a>
+        <a href="../Courses/index.html" class="nav-item" data-page="courses">
+          <span class="material-symbols-outlined nav-icon">school</span>
+          My Courses
+        </a>
+        <a href="../Enrollments/index.html" class="nav-item" data-page="enrollments">
+          <span class="material-symbols-outlined nav-icon">people</span>
+          Enrollments
+        </a>
+        <a href="../Revenue/index.html" class="nav-item" data-page="revenue">
+          <span class="material-symbols-outlined nav-icon">trending_up</span>
+          Revenue
+        </a>
+        <a href="./index.html" class="nav-item active" data-page="discussions">
+          <span class="material-symbols-outlined nav-icon">forum</span>
+          Q&A/Discussions
+        </a>
+        <a href="../Analytics/index.html" class="nav-item" data-page="analytics">
+          <span class="material-symbols-outlined nav-icon">analytics</span>
+          Analytics
+        </a>
+        <a href="../Quizzes/index.html" class="nav-item" data-page="quizzes">
+          <span class="material-symbols-outlined nav-icon">quiz</span>
+          Quizzes
+        </a>
+        <a href="../Settings/index.html" class="nav-item" data-page="settings">
+          <span class="material-symbols-outlined nav-icon">settings</span>
+          Settings
+        </a>
+      </nav>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="instructor-content">
+      <div class="content-header">
+        <h1>Q&A & Discussions</h1>
+        <p>Engage with your students and answer their questions across all courses.</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-section">
+        <div class="filter-group">
+          <label for="courseFilter">Filter by Course:</label>
+          <select id="courseFilter">
+            <option value="">All Courses</option>
+            <option value="react">React Fundamentals</option>
+            <option value="python">Python for Beginners</option>
+            <option value="javascript">Advanced JavaScript</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="statusFilter">Filter by Status:</label>
+          <select id="statusFilter">
+            <option value="">All Questions</option>
+            <option value="unanswered">Unanswered</option>
+            <option value="answered">Answered</option>
+            <option value="resolved">Resolved</option>
+          </select>
+        </div>
+        <div class="search-group">
+          <input type="text" id="questionSearch" placeholder="Search questions...">
+          <span class="material-symbols-outlined">search</span>
+        </div>
+      </div>
+
+      <!-- Discussion Threads -->
+      <div class="discussions-list">
+        <div class="discussion-item unanswered">
+          <div class="discussion-header">
+            <div class="discussion-meta">
+              <span class="status-badge unanswered">Unanswered</span>
+              <span class="course-tag">React Fundamentals</span>
+              <span class="time-ago">2 hours ago</span>
+            </div>
+            <div class="discussion-actions">
+              <button class="action-btn" title="Mark as Answered">
+                <span class="material-symbols-outlined">check_circle</span>
+              </button>
+              <button class="action-btn" title="Reply">
+                <span class="material-symbols-outlined">reply</span>
+              </button>
+            </div>
+          </div>
+          <div class="discussion-content">
+            <div class="student-info">
+              <div class="student-avatar">SM</div>
+              <div>
+                <h4>Sarah Miller</h4>
+                <p>Student</p>
+              </div>
+            </div>
+            <div class="question-content">
+              <h3>How do I handle state in functional components?</h3>
+              <p>I'm working on the React Fundamentals course and I'm confused about how to manage state in functional components. Can you explain the difference between useState and useEffect hooks?</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="discussion-item answered">
+          <div class="discussion-header">
+            <div class="discussion-meta">
+              <span class="status-badge answered">Answered</span>
+              <span class="course-tag">Python for Beginners</span>
+              <span class="time-ago">1 day ago</span>
+            </div>
+            <div class="discussion-actions">
+              <button class="action-btn" title="View Reply">
+                <span class="material-symbols-outlined">visibility</span>
+              </button>
+              <button class="action-btn" title="Reply">
+                <span class="material-symbols-outlined">reply</span>
+              </button>
+            </div>
+          </div>
+          <div class="discussion-content">
+            <div class="student-info">
+              <div class="student-avatar">MJ</div>
+              <div>
+                <h4>Mike Johnson</h4>
+                <p>Student</p>
+              </div>
+            </div>
+            <div class="question-content">
+              <h3>Understanding Python loops and iterations</h3>
+              <p>I'm having trouble understanding the difference between for loops and while loops in Python. Could you provide some practical examples?</p>
+            </div>
+            <div class="instructor-reply">
+              <div class="reply-header">
+                <div class="instructor-avatar">JD</div>
+                <div>
+                  <h4>John Doe (Instructor)</h4>
+                  <span class="reply-time">1 day ago</span>
+                </div>
+              </div>
+              <div class="reply-content">
+                <p>Great question! Let me explain the key differences:</p>
+                <ul>
+                  <li><strong>For loops:</strong> Used when you know the number of iterations in advance</li>
+                  <li><strong>While loops:</strong> Used when you don't know the number of iterations</li>
+                </ul>
+                <p>Here's a practical example...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="discussion-item resolved">
+          <div class="discussion-header">
+            <div class="discussion-meta">
+              <span class="status-badge resolved">Resolved</span>
+              <span class="course-tag">Advanced JavaScript</span>
+              <span class="time-ago">3 days ago</span>
+            </div>
+            <div class="discussion-actions">
+              <button class="action-btn" title="View Thread">
+                <span class="material-symbols-outlined">visibility</span>
+              </button>
+            </div>
+          </div>
+          <div class="discussion-content">
+            <div class="student-info">
+              <div class="student-avatar">AL</div>
+              <div>
+                <h4>Anna Lee</h4>
+                <p>Student</p>
+              </div>
+            </div>
+            <div class="question-content">
+              <h3>Closure concepts in JavaScript</h3>
+              <p>I'm struggling to understand closures in JavaScript. Can you explain with a simple example?</p>
+            </div>
+            <div class="instructor-reply">
+              <div class="reply-header">
+                <div class="instructor-avatar">JD</div>
+                <div>
+                  <h4>John Doe (Instructor)</h4>
+                  <span class="reply-time">3 days ago</span>
+                </div>
+              </div>
+              <div class="reply-content">
+                <p>A closure is a function that has access to variables in its outer scope. Here's a simple example...</p>
+              </div>
+            </div>
+            <div class="student-feedback">
+              <span class="feedback-text">"Thank you! This explanation really helped me understand closures better."</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./discussions.js"></script>
+</body>
+</html> 
