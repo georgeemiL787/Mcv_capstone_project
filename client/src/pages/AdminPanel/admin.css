@@ -367,6 +367,13 @@
   box-shadow: 0 4px 12px rgba(143, 126, 252, 0.3);
 }
 
+.action-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
 /* Filter Tabs */
 .filter-tabs {
   display: flex;
