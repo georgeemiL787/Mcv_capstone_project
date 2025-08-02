@@ -250,51 +250,31 @@ document.addEventListener('DOMContentLoaded', function() {
     item.title = `${item.textContent.trim()} (Ctrl+${shortcut})`;
   });
 
-  // Handle responsive sidebar toggle (for mobile)
-  const sidebarToggle = document.createElement('button');
-  sidebarToggle.className = 'sidebar-toggle';
-  sidebarToggle.innerHTML = '<span class="material-symbols-outlined">menu</span>';
-  sidebarToggle.style.cssText = `
-    position: fixed;
-    top: 70px;
-    left: 20px;
-    z-index: 1000;
-    background: linear-gradient(45deg, #8f7efc, #CDC1FF);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 10px;
-    cursor: pointer;
-    display: none;
-    box-shadow: 0 2px 8px rgba(143, 126, 252, 0.3);
-  `;
+  // Handle mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const sidebarNav = document.querySelector('.sidebar-nav');
 
-  document.body.appendChild(sidebarToggle);
+  if (mobileMenuBtn && sidebarNav) {
+    mobileMenuBtn.addEventListener('click', function() {
+      sidebarNav.classList.toggle('show');
+    });
 
-  // Show/hide sidebar toggle based on screen size
-  function handleResponsiveSidebar() {
-    if (window.innerWidth <= 768) {
-      sidebarToggle.style.display = 'block';
-      document.querySelector('.admin-sidebar').style.display = 'none';
-    } else {
-      sidebarToggle.style.display = 'none';
-      document.querySelector('.admin-sidebar').style.display = 'block';
-    }
+    // Close mobile menu when clicking on a nav item
+    navItems.forEach(item => {
+      item.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+          sidebarNav.classList.remove('show');
+        }
+      });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!mobileMenuBtn.contains(e.target) && !sidebarNav.contains(e.target)) {
+        sidebarNav.classList.remove('show');
+      }
+    });
   }
-
-  // Toggle sidebar on mobile
-  sidebarToggle.addEventListener('click', function() {
-    const sidebar = document.querySelector('.admin-sidebar');
-    if (sidebar.style.display === 'none' || sidebar.style.display === '') {
-      sidebar.style.display = 'block';
-    } else {
-      sidebar.style.display = 'none';
-    }
-  });
-
-  // Handle window resize
-  window.addEventListener('resize', handleResponsiveSidebar);
-  handleResponsiveSidebar();
 
   // Add smooth scrolling for better UX
   const smoothScrollElements = document.querySelectorAll('a[href^="#"]');
