@@ -1,0 +1,271 @@
+@{
+    ViewData["Title"] = "Career Simulator - Full Courses Platform";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/career-simulator.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+}
+
+<nav id="header-nav">
+    <div class="nav-right">
+        <img src="~/assets/images/luIZ_without_bg.png">
+        <button class="nav-button">Explore</button>
+        <form id="search-bar">
+            <div>
+                <input type="text" placeholder="Search for courses..." class="search-input">
+                <span class="material-symbols-outlined">search</span>
+            </div>
+        </form>
+    </div>
+    <div class="nav-buttons">
+        <a href="@Url.Action("Login", "Account")" class="nav-button">Log In</a>
+        <a href="@Url.Action("Signup", "Account")" class="signup nav-button">Sign Up</a>
+    </div>
+</nav>
+
+<div class="career-layout">
+    <!-- Left Sidebar -->
+    <div class="career-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-avatar">
+                <div class="avatar-placeholder">CS</div>
+            </div>
+            <h3>Career Simulator</h3>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "CareerSimulator")" class="nav-item active" data-section="overview">
+                <span class="material-symbols-outlined nav-icon">dashboard</span>
+                Overview
+            </a>
+            <a href="@Url.Action("Scenarios", "CareerSimulator")" class="nav-item" data-section="scenarios">
+                <span class="material-symbols-outlined nav-icon">psychology</span>
+                Scenarios
+            </a>
+            <a href="@Url.Action("Skills", "CareerSimulator")" class="nav-item" data-section="skills">
+                <span class="material-symbols-outlined nav-icon">school</span>
+                Skills Practice
+            </a>
+            <a href="@Url.Action("Challenges", "CareerSimulator")" class="nav-item" data-section="challenges">
+                <span class="material-symbols-outlined nav-icon">emoji_events</span>
+                Challenges
+            </a>
+            <a href="@Url.Action("Progress", "CareerSimulator")" class="nav-item" data-section="progress">
+                <span class="material-symbols-outlined nav-icon">trending_up</span>
+                Progress
+            </a>
+            <a href="@Url.Action("Leaderboard", "CareerSimulator")" class="nav-item" data-section="leaderboard">
+                <span class="material-symbols-outlined nav-icon">leaderboard</span>
+                Leaderboard
+            </a>
+        </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="career-content">
+        <!-- Overview Section -->
+        <div id="overview" class="content-section active">
+            <div class="content-header">
+                <h1>Career Simulator</h1>
+                <p>Practice real-world scenarios and apply your skills in a safe environment.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">psychology</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Scenarios Completed</h3>
+                        <p class="stat-number">12</p>
+                        <span class="stat-change positive">+3 this week</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">school</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Skills Mastered</h3>
+                        <p class="stat-number">8</p>
+                        <span class="stat-change positive">+2 this month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">emoji_events</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Challenges Won</h3>
+                        <p class="stat-number">5</p>
+                        <span class="stat-change positive">+1 this week</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">trending_up</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Performance Score</h3>
+                        <p class="stat-number">85%</p>
+                        <span class="stat-change positive">+5% this month</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Scenarios -->
+            <div class="recent-scenarios">
+                <h2>Recent Scenarios</h2>
+                <div class="scenarios-grid">
+                    <div class="scenario-card">
+                        <div class="scenario-header">
+                            <h3>Code Review Challenge</h3>
+                            <span class="scenario-difficulty easy">Easy</span>
+                        </div>
+                        <p>Review and improve a React component with performance issues.</p>
+                        <div class="scenario-meta">
+                            <span class="material-symbols-outlined">schedule</span>
+                            <span>15 minutes</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span>4.2/5</span>
+                        </div>
+                        <button class="scenario-btn">Retry Scenario</button>
+                    </div>
+
+                    <div class="scenario-card">
+                        <div class="scenario-header">
+                            <h3>API Integration</h3>
+                            <span class="scenario-difficulty medium">Medium</span>
+                        </div>
+                        <p>Integrate a REST API with proper error handling and loading states.</p>
+                        <div class="scenario-meta">
+                            <span class="material-symbols-outlined">schedule</span>
+                            <span>25 minutes</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span>4.5/5</span>
+                        </div>
+                        <button class="scenario-btn">Retry Scenario</button>
+                    </div>
+
+                    <div class="scenario-card">
+                        <div class="scenario-header">
+                            <h3>State Management</h3>
+                            <span class="scenario-difficulty hard">Hard</span>
+                        </div>
+                        <p>Implement complex state management using Redux Toolkit.</p>
+                        <div class="scenario-meta">
+                            <span class="material-symbols-outlined">schedule</span>
+                            <span>40 minutes</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span>4.8/5</span>
+                        </div>
+                        <button class="scenario-btn">Retry Scenario</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended Skills -->
+            <div class="recommended-skills">
+                <h2>Recommended Skills to Practice</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined">code</span>
+                        </div>
+                        <h3>JavaScript ES6+</h3>
+                        <p>Master modern JavaScript features and syntax.</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                            <span>75% Complete</span>
+                        </div>
+                        <button class="skill-btn">Practice Now</button>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined">web</span>
+                        </div>
+                        <h3>React Hooks</h3>
+                        <p>Learn to use React hooks effectively.</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                            <span>60% Complete</span>
+                        </div>
+                        <button class="skill-btn">Practice Now</button>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined">storage</span>
+                        </div>
+                        <h3>Database Design</h3>
+                        <p>Design efficient database schemas and queries.</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%"></div>
+                            </div>
+                            <span>45% Complete</span>
+                        </div>
+                        <button class="skill-btn">Practice Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other sections would be loaded dynamically -->
+        <div id="scenarios" class="content-section">
+            <div class="content-header">
+                <h1>Scenarios</h1>
+                <p>Practice real-world development scenarios.</p>
+            </div>
+            <!-- Scenarios content would go here -->
+        </div>
+
+        <div id="skills" class="content-section">
+            <div class="content-header">
+                <h1>Skills Practice</h1>
+                <p>Improve your technical skills through targeted practice.</p>
+            </div>
+            <!-- Skills content would go here -->
+        </div>
+
+        <div id="challenges" class="content-section">
+            <div class="content-header">
+                <h1>Challenges</h1>
+                <p>Compete in coding challenges and win rewards.</p>
+            </div>
+            <!-- Challenges content would go here -->
+        </div>
+
+        <div id="progress" class="content-section">
+            <div class="content-header">
+                <h1>Progress Tracking</h1>
+                <p>Monitor your learning progress and achievements.</p>
+            </div>
+            <!-- Progress content would go here -->
+        </div>
+
+        <div id="leaderboard" class="content-section">
+            <div class="content-header">
+                <h1>Leaderboard</h1>
+                <p>See how you rank against other learners.</p>
+            </div>
+            <!-- Leaderboard content would go here -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/career-simulator.js"></script>
+} 

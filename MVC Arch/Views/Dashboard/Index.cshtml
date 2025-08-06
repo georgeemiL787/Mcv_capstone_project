@@ -1,0 +1,233 @@
+@{
+    ViewData["Title"] = "Dashboard - Learning Platform";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" />
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+}
+
+<!-- Navigation Bar -->
+<nav id="header-nav">
+    <div class="nav-right">
+        <img src="~/assets/images/luIZ_without_bg.png" alt="Logo">
+        <div class="nav-buttons">
+            <a href="@Url.Action("Index", "Home")" class="nav-btn">Home</a>
+            <a href="@Url.Action("Index", "Courses")" class="nav-btn">Courses</a>
+            <a href="@Url.Action("Index", "About")" class="nav-btn">About</a>
+            <a href="@Url.Action("Index", "Contact")" class="nav-btn">Contact</a>
+        </div>
+    </div>
+    <div class="nav-left">
+        <form class="search-form">
+            <input type="text" placeholder="Search courses...">
+            <button type="submit">
+                <img src="~/assets/images/Search.svg" alt="Search">
+            </button>
+        </form>
+        <a href="@Url.Action("Login", "Account")" class="login-btn">Login</a>
+        <a href="@Url.Action("Signup", "Account")" class="signup-btn">Sign Up</a>
+    </div>
+</nav>
+
+<!-- Dashboard Layout -->
+<div class="dashboard-layout">
+    <!-- Left Sidebar -->
+    <div class="dashboard-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-avatar">
+                <div class="avatar-placeholder">JD</div>
+            </div>
+            <h3>John Doe</h3>
+            <p>Software Developer</p>
+        </div>
+        
+        <div class="sidebar-nav">
+            <a href="#overview" class="nav-item active" data-section="overview">
+                <span class="material-symbols-outlined">dashboard</span>
+                Overview
+            </a>
+            <a href="#roadmap" class="nav-item" data-section="roadmap">
+                <span class="material-symbols-outlined">timeline</span>
+                Skill Roadmap
+            </a>
+            <a href="#progress" class="nav-item" data-section="progress">
+                <span class="material-symbols-outlined">trending_up</span>
+                Progress Tracker
+            </a>
+            <a href="#courses" class="nav-item" data-section="courses">
+                <span class="material-symbols-outlined">school</span>
+                My Courses
+            </a>
+            <a href="#insights" class="nav-item" data-section="insights">
+                <span class="material-symbols-outlined">psychology</span>
+                Smart Insights
+            </a>
+            <a href="#achievements" class="nav-item" data-section="achievements">
+                <span class="material-symbols-outlined">emoji_events</span>
+                Achievements
+            </a>
+            <a href="#reminders" class="nav-item" data-section="reminders">
+                <span class="material-symbols-outlined">notifications</span>
+                Reminders
+            </a>
+        </div>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="dashboard-content">
+        <!-- Overview Section -->
+        <div id="overview" class="content-section active">
+            <div class="content-header">
+                <h1>Dashboard Overview</h1>
+                <p>Track your learning journey and stay motivated with personalized insights.</p>
+            </div>
+
+            <!-- XP and Level Progress -->
+            <div class="xp-section">
+                <div class="level-card">
+                    <div class="level-info">
+                        <h3>Level 12</h3>
+                        <p>Software Developer</p>
+                    </div>
+                    <div class="xp-progress">
+                        <div class="xp-bar">
+                            <div class="xp-fill" style="width: 75%"></div>
+                        </div>
+                        <p>2,450 / 3,200 XP</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">school</span>
+                    </div>
+                    <div class="stat-content">
+                        <h3>8</h3>
+                        <p>Active Courses</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="stat-content">
+                        <h3>24h</h3>
+                        <p>Study Time</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">emoji_events</span>
+                    </div>
+                    <div class="stat-content">
+                        <h3>15</h3>
+                        <p>Achievements</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">trending_up</span>
+                    </div>
+                    <div class="stat-content">
+                        <h3>85%</h3>
+                        <p>Completion Rate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="activity-section">
+                <h2>Recent Activity</h2>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <span class="material-symbols-outlined">play_circle</span>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Completed JavaScript Basics</h4>
+                            <p>Finished module 3 of Web Development course</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <span class="material-symbols-outlined">quiz</span>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Quiz Completed</h4>
+                            <p>Scored 90% on React Fundamentals quiz</p>
+                            <span class="activity-time">1 day ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <span class="material-symbols-outlined">emoji_events</span>
+                        </div>
+                        <div class="activity-content">
+                            <h4>New Achievement Unlocked</h4>
+                            <p>Earned "Quick Learner" badge</p>
+                            <span class="activity-time">2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other sections would be added here -->
+        <div id="roadmap" class="content-section">
+            <div class="content-header">
+                <h1>Skill Roadmap</h1>
+                <p>Your personalized learning path to success.</p>
+            </div>
+            <!-- Roadmap content would go here -->
+        </div>
+
+        <div id="progress" class="content-section">
+            <div class="content-header">
+                <h1>Progress Tracker</h1>
+                <p>Monitor your learning progress across all courses.</p>
+            </div>
+            <!-- Progress content would go here -->
+        </div>
+
+        <div id="courses" class="content-section">
+            <div class="content-header">
+                <h1>My Courses</h1>
+                <p>Manage and track your enrolled courses.</p>
+            </div>
+            <!-- Courses content would go here -->
+        </div>
+
+        <div id="insights" class="content-section">
+            <div class="content-header">
+                <h1>Smart Insights</h1>
+                <p>AI-powered recommendations and analytics.</p>
+            </div>
+            <!-- Insights content would go here -->
+        </div>
+
+        <div id="achievements" class="content-section">
+            <div class="content-header">
+                <h1>Achievements</h1>
+                <p>Celebrate your learning milestones.</p>
+            </div>
+            <!-- Achievements content would go here -->
+        </div>
+
+        <div id="reminders" class="content-section">
+            <div class="content-header">
+                <h1>Reminders</h1>
+                <p>Stay on track with your learning goals.</p>
+            </div>
+            <!-- Reminders content would go here -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/dashboard.js"></script>
+} 

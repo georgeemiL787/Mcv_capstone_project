@@ -1,0 +1,230 @@
+@{
+    ViewData["Title"] = "User Dashboard - Full Courses Platform";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/user-dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+}
+
+<nav id="header-nav">
+    <div class="nav-right">
+        <img src="~/assets/images/luIZ_without_bg.png">
+        <button class="nav-button">Explore</button>
+        <form id="search-bar">
+            <div>
+                <input type="text" placeholder="Search for courses..." class="search-input">
+                <span class="material-symbols-outlined">search</span>
+            </div>
+        </form>
+    </div>
+    <div class="nav-buttons">
+        <a href="@Url.Action("Login", "Account")" class="nav-button">Log In</a>
+        <a href="@Url.Action("Signup", "Account")" class="signup nav-button">Sign Up</a>
+    </div>
+</nav>
+
+<div class="user-dashboard-layout">
+    <!-- Left Sidebar -->
+    <div class="user-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-avatar">
+                <div class="avatar-placeholder">JD</div>
+            </div>
+            <h3>John Doe</h3>
+            <p>Student</p>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "UserDashboard")" class="nav-item active" data-section="roadmap">
+                <span class="material-symbols-outlined nav-icon">timeline</span>
+                Skill Roadmap
+            </a>
+            <a href="@Url.Action("Progress", "UserDashboard")" class="nav-item" data-section="progress">
+                <span class="material-symbols-outlined nav-icon">trending_up</span>
+                Progress Tracker
+            </a>
+            <a href="@Url.Action("Courses", "UserDashboard")" class="nav-item" data-section="courses">
+                <span class="material-symbols-outlined nav-icon">school</span>
+                My Courses
+            </a>
+            <a href="@Url.Action("Insights", "UserDashboard")" class="nav-item" data-section="insights">
+                <span class="material-symbols-outlined nav-icon">psychology</span>
+                Smart Insights
+            </a>
+            <a href="@Url.Action("Certificates", "UserDashboard")" class="nav-item" data-section="certificates">
+                <span class="material-symbols-outlined nav-icon">verified</span>
+                Certificates
+            </a>
+            <a href="@Url.Action("Reminders", "UserDashboard")" class="nav-item" data-section="reminders">
+                <span class="material-symbols-outlined nav-icon">notifications</span>
+                Reminders
+            </a>
+        </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="user-content">
+        <!-- Roadmap Section -->
+        <div id="roadmap" class="content-section active">
+            <div class="content-header">
+                <h1>Skill Roadmap</h1>
+                <p>Your personalized learning path to success.</p>
+            </div>
+
+            <!-- XP and Level Progress -->
+            <div class="xp-section">
+                <div class="level-card">
+                    <div class="level-info">
+                        <h3>Level 8</h3>
+                        <p>Intermediate Developer</p>
+                    </div>
+                    <div class="xp-progress">
+                        <div class="xp-bar">
+                            <div class="xp-fill" style="width: 65%"></div>
+                        </div>
+                        <p>1,950 / 3,000 XP</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Roadmap -->
+            <div class="roadmap-section">
+                <h2>Your Learning Path</h2>
+                <div class="roadmap-nodes">
+                    <div class="roadmap-node completed">
+                        <div class="node-icon">
+                            <span class="material-symbols-outlined">check_circle</span>
+                        </div>
+                        <div class="node-content">
+                            <h3>HTML & CSS Basics</h3>
+                            <p>Completed</p>
+                            <span class="completion-date">2 weeks ago</span>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-node completed">
+                        <div class="node-icon">
+                            <span class="material-symbols-outlined">check_circle</span>
+                        </div>
+                        <div class="node-content">
+                            <h3>JavaScript Fundamentals</h3>
+                            <p>Completed</p>
+                            <span class="completion-date">1 week ago</span>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-node current">
+                        <div class="node-icon">
+                            <span class="material-symbols-outlined">play_circle</span>
+                        </div>
+                        <div class="node-content">
+                            <h3>React Fundamentals</h3>
+                            <p>In Progress - 75%</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-node upcoming">
+                        <div class="node-icon">
+                            <span class="material-symbols-outlined">schedule</span>
+                        </div>
+                        <div class="node-content">
+                            <h3>Advanced React</h3>
+                            <p>Next up</p>
+                            <span class="estimated-time">~3 weeks</span>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-node locked">
+                        <div class="node-icon">
+                            <span class="material-symbols-outlined">lock</span>
+                        </div>
+                        <div class="node-content">
+                            <h3>Node.js Backend</h3>
+                            <p>Locked</p>
+                            <span class="unlock-requirement">Complete React Fundamentals</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="actions-grid">
+                    <a href="@Url.Action("Index", "QuizCenter")" class="action-card">
+                        <span class="material-symbols-outlined">quiz</span>
+                        <h3>Take AI Quiz</h3>
+                        <p>Test your knowledge</p>
+                    </a>
+                    <a href="@Url.Action("Index", "CareerSimulator")" class="action-card">
+                        <span class="material-symbols-outlined">psychology</span>
+                        <h3>Practice Scenarios</h3>
+                        <p>Real-world challenges</p>
+                    </a>
+                    <a href="@Url.Action("Index", "Profile")" class="action-card">
+                        <span class="material-symbols-outlined">person</span>
+                        <h3>Update Profile</h3>
+                        <p>Manage your account</p>
+                    </a>
+                    <a href="@Url.Action("Index", "Leaderboard")" class="action-card">
+                        <span class="material-symbols-outlined">leaderboard</span>
+                        <h3>View Leaderboard</h3>
+                        <p>See your ranking</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other sections would be loaded dynamically -->
+        <div id="progress" class="content-section">
+            <div class="content-header">
+                <h1>Progress Tracker</h1>
+                <p>Monitor your learning progress across all courses.</p>
+            </div>
+            <!-- Progress content would go here -->
+        </div>
+
+        <div id="courses" class="content-section">
+            <div class="content-header">
+                <h1>My Courses</h1>
+                <p>Manage and track your enrolled courses.</p>
+            </div>
+            <!-- Courses content would go here -->
+        </div>
+
+        <div id="insights" class="content-section">
+            <div class="content-header">
+                <h1>Smart Insights</h1>
+                <p>AI-powered recommendations and analytics.</p>
+            </div>
+            <!-- Insights content would go here -->
+        </div>
+
+        <div id="certificates" class="content-section">
+            <div class="content-header">
+                <h1>Certificates</h1>
+                <p>View and download your earned certificates.</p>
+            </div>
+            <!-- Certificates content would go here -->
+        </div>
+
+        <div id="reminders" class="content-section">
+            <div class="content-header">
+                <h1>Reminders</h1>
+                <p>Stay on track with your learning goals.</p>
+            </div>
+            <!-- Reminders content would go here -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/user-dashboard.js"></script>
+} 

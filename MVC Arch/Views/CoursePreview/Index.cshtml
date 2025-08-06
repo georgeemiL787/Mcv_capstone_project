@@ -1,0 +1,231 @@
+@{
+    ViewData["Title"] = "Advanced React Development - Course Preview";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/course-preview.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+}
+
+<nav id="header-nav">
+    <div class="nav-right">
+        <img src="~/assets/images/luIZ_without_bg.png">
+        <button class="nav-button">Explore</button>
+        <form id="search-bar">
+            <div>
+                <input type="text" placeholder="Search for courses..." class="search-input">
+                <span class="material-symbols-outlined">search</span>
+            </div>
+        </form>
+    </div>
+    <div class="nav-buttons">
+        <a href="@Url.Action("Login", "Account")" class="nav-button">Log In</a>
+        <a href="@Url.Action("Signup", "Account")" class="signup nav-button">Sign Up</a>
+    </div>
+</nav>
+
+<div class="course-preview-layout">
+    <!-- Main Content Area -->
+    <div class="course-content">
+        <!-- Course Header -->
+        <div class="course-header">
+            <div class="breadcrumb">
+                <a href="@Url.Action("Index", "Home")" class="breadcrumb-link">Development</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="@Url.Action("Index", "Home")" class="breadcrumb-link">Web Development</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Advanced React Development</span>
+            </div>
+            
+            <div class="course-title-section">
+                <h1>Advanced React Development</h1>
+                <p class="course-subtitle">Master React hooks, context, performance optimization, and advanced patterns for building scalable applications.</p>
+                
+                <div class="course-meta">
+                    <div class="meta-item">
+                        <span class="material-symbols-outlined">school</span>
+                        <span>Created by Sarah Smith</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="material-symbols-outlined">schedule</span>
+                        <span>Last updated 2 weeks ago</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="material-symbols-outlined">language</span>
+                        <span>English</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Video Preview -->
+        <div class="video-section">
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <span class="material-symbols-outlined play-icon">play_circle</span>
+                    <p>Course Introduction Video</p>
+                </div>
+                <div class="video-overlay">
+                    <button class="play-btn">
+                        <span class="material-symbols-outlined">play_arrow</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Stats -->
+        <div class="course-stats">
+            <div class="stat-item">
+                <span class="stat-number">4.8</span>
+                <span class="stat-label">Course Rating</span>
+                <div class="stars">
+                    <span class="material-symbols-outlined star">star</span>
+                    <span class="material-symbols-outlined star">star</span>
+                    <span class="material-symbols-outlined star">star</span>
+                    <span class="material-symbols-outlined star">star</span>
+                    <span class="material-symbols-outlined star">star</span>
+                    <span class="rating-count">(2,847 ratings)</span>
+                </div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">12,456</span>
+                <span class="stat-label">Students Enrolled</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">15.5</span>
+                <span class="stat-label">Hours of Content</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">48</span>
+                <span class="stat-label">Lessons</span>
+            </div>
+        </div>
+
+        <!-- Course Description -->
+        <div class="course-description">
+            <h2>What you'll learn</h2>
+            <div class="learning-objectives">
+                <div class="objective-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Master React hooks and custom hooks</span>
+                </div>
+                <div class="objective-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Implement advanced state management patterns</span>
+                </div>
+                <div class="objective-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Optimize React performance</span>
+                </div>
+                <div class="objective-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Build scalable component architecture</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Curriculum -->
+        <div class="course-curriculum">
+            <h2>Course Curriculum</h2>
+            <div class="curriculum-sections">
+                <div class="curriculum-section">
+                    <div class="section-header">
+                        <h3>Section 1: React Fundamentals Review</h3>
+                        <span class="section-info">4 lessons • 2.5 hours</span>
+                    </div>
+                    <div class="section-lessons">
+                        <div class="lesson-item">
+                            <span class="material-symbols-outlined">play_circle</span>
+                            <span>Introduction to the Course</span>
+                            <span class="lesson-duration">15:30</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="material-symbols-outlined">play_circle</span>
+                            <span>React Components Deep Dive</span>
+                            <span class="lesson-duration">45:20</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructor Information -->
+        <div class="instructor-section">
+            <h2>Your Instructor</h2>
+            <div class="instructor-info">
+                <div class="instructor-avatar">
+                    <img src="~/assets/images/profile_assets/instructor-avatar.png" alt="Sarah Smith">
+                </div>
+                <div class="instructor-details">
+                    <h3>Sarah Smith</h3>
+                    <p class="instructor-title">Senior React Developer & Instructor</p>
+                    <p class="instructor-bio">Sarah is a passionate React developer with over 8 years of experience building scalable web applications. She has taught thousands of students and worked with major tech companies.</p>
+                    <div class="instructor-stats">
+                        <div class="instructor-stat">
+                            <span class="stat-number">4.9</span>
+                            <span class="stat-label">Instructor Rating</span>
+                        </div>
+                        <div class="instructor-stat">
+                            <span class="stat-number">125,000</span>
+                            <span class="stat-label">Students</span>
+                        </div>
+                        <div class="instructor-stat">
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Courses</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="course-sidebar">
+        <div class="course-card">
+            <div class="course-image">
+                <img src="~/assets/images/luIZ.png" alt="Course Image">
+            </div>
+            <div class="course-price">
+                <span class="price">$99.99</span>
+                <span class="original-price">$199.99</span>
+                <span class="discount">50% off</span>
+            </div>
+            <div class="course-features">
+                <div class="feature-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Full lifetime access</span>
+                </div>
+                <div class="feature-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Access on mobile and TV</span>
+                </div>
+                <div class="feature-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Certificate of completion</span>
+                </div>
+                <div class="feature-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>30-Day Money-Back Guarantee</span>
+                </div>
+            </div>
+            <div class="course-actions">
+                <a href="@Url.Action("Index", "Enroll")" class="enroll-btn">Enroll Now</a>
+                <button class="wishlist-btn">
+                    <span class="material-symbols-outlined">favorite_border</span>
+                    Add to Wishlist
+                </button>
+            </div>
+            <div class="course-guarantee">
+                <span class="material-symbols-outlined">verified</span>
+                <p>30-Day Money-Back Guarantee</p>
+            </div>
+        </div>
+    </aside>
+</div>
+
+@section Scripts {
+    <script src="~/js/course-preview.js"></script>
+} 

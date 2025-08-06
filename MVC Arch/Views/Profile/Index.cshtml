@@ -1,0 +1,202 @@
+@{
+    ViewData["Title"] = "Profile - Full Courses Platform";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/profile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+}
+
+<nav id="header-nav">
+    <div class="nav-right">
+        <img src="~/assets/images/luIZ_without_bg.png">
+        <button class="nav-button">Explore</button>
+        <form id="search-bar">
+            <div>
+                <input type="text" placeholder="Search for courses..." class="search-input">
+                <span class="material-symbols-outlined">search</span>
+            </div>
+        </form>
+    </div>
+    <div class="nav-buttons">
+        <a href="@Url.Action("Login", "Account")" class="nav-button">Log In</a>
+        <a href="@Url.Action("Signup", "Account")" class="signup nav-button">Sign Up</a>
+    </div>
+</nav>
+
+<div class="profile-layout">
+    <!-- Left Sidebar -->
+    <div class="profile-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-avatar">
+                <div class="avatar-placeholder">GE</div>
+            </div>
+            <h3>George Emil</h3>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "Profile")" class="nav-item active" data-page="profile">
+                <img src="~/assets/images/profile_assets/user.png" alt="Profile" class="nav-icon">
+                Profile
+            </a>
+            <a href="@Url.Action("Photo", "Profile")" class="nav-item" data-page="photo">
+                <img src="~/assets/images/profile_assets/photo-camera.png" alt="Photo" class="nav-icon">
+                Photo
+            </a>
+            <a href="@Url.Action("AccountSecurity", "Profile")" class="nav-item" data-page="account-security">
+                <img src="~/assets/images/profile_assets/cyber-security.png" alt="Account Security" class="nav-icon">
+                Account Security
+            </a>
+            <a href="@Url.Action("Subscriptions", "Profile")" class="nav-item" data-page="subscriptions">
+                <img src="~/assets/images/profile_assets/subscription.png" alt="Subscriptions" class="nav-icon">
+                Subscriptions
+            </a>
+            <a href="@Url.Action("PaymentMethods", "Profile")" class="nav-item" data-page="payment-methods">
+                <img src="~/assets/images/profile_assets/wallet.png" alt="Payment methods" class="nav-icon">
+                Payment methods
+            </a>
+            <a href="@Url.Action("Privacy", "Profile")" class="nav-item" data-page="privacy">
+                <img src="~/assets/images/profile_assets/privacy.png" alt="Privacy" class="nav-icon">
+                Privacy
+            </a>
+            <a href="@Url.Action("NotificationPreferences", "Profile")" class="nav-item" data-page="notification-preferences">
+                <img src="~/assets/images/profile_assets/notification.png" alt="Notification Preferences" class="nav-icon">
+                Notification Preferences
+            </a>
+        </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="profile-content" id="main-content">
+        <!-- Profile Section -->
+        <div id="profile" class="content-section active">
+            <div class="content-header">
+                <h1>Profile Settings</h1>
+                <p>Manage your personal information and account settings.</p>
+            </div>
+
+            <div class="profile-form">
+                <div class="form-section">
+                    <h2>Personal Information</h2>
+                    <form method="post" action="@Url.Action("Index", "Profile")">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" value="George" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" value="Emil" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" value="george.emil@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" value="+1 (555) 123-4567">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself...">Passionate software developer with expertise in React, Node.js, and modern web technologies. Always eager to learn and share knowledge with the community.</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" value="New York, NY">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="website">Website</label>
+                            <input type="url" id="website" name="website" value="https://georgeemil.dev">
+                        </div>
+
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </form>
+                </div>
+
+                <div class="form-section">
+                    <h2>Account Information</h2>
+                    <div class="account-info">
+                        <div class="info-item">
+                            <label>Account Type</label>
+                            <span>Premium Student</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Member Since</label>
+                            <span>January 2023</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Last Login</label>
+                            <span>Today at 2:30 PM</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Courses Completed</label>
+                            <span>12</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other sections would be loaded dynamically -->
+        <div id="photo" class="content-section">
+            <div class="content-header">
+                <h1>Profile Photo</h1>
+                <p>Update your profile picture and avatar settings.</p>
+            </div>
+            <!-- Photo content would go here -->
+        </div>
+
+        <div id="account-security" class="content-section">
+            <div class="content-header">
+                <h1>Account Security</h1>
+                <p>Manage your password and security settings.</p>
+            </div>
+            <!-- Account security content would go here -->
+        </div>
+
+        <div id="subscriptions" class="content-section">
+            <div class="content-header">
+                <h1>Subscriptions</h1>
+                <p>Manage your course subscriptions and billing.</p>
+            </div>
+            <!-- Subscriptions content would go here -->
+        </div>
+
+        <div id="payment-methods" class="content-section">
+            <div class="content-header">
+                <h1>Payment Methods</h1>
+                <p>Manage your payment methods and billing information.</p>
+            </div>
+            <!-- Payment methods content would go here -->
+        </div>
+
+        <div id="privacy" class="content-section">
+            <div class="content-header">
+                <h1>Privacy Settings</h1>
+                <p>Control your privacy and data sharing preferences.</p>
+            </div>
+            <!-- Privacy content would go here -->
+        </div>
+
+        <div id="notification-preferences" class="content-section">
+            <div class="content-header">
+                <h1>Notification Preferences</h1>
+                <p>Customize your notification settings.</p>
+            </div>
+            <!-- Notification preferences content would go here -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/profile.js"></script>
+} 
