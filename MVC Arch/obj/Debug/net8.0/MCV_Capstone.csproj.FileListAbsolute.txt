@@ -30,3 +30,36 @@ E:\FCI\MCV\MCV_Capstone\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 E:\FCI\MCV\MCV_Capstone\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
 E:\FCI\MCV\MCV_Capstone\obj\Debug\net8.0\staticwebassets.build.json.cache
 E:\FCI\MCV\MCV_Capstone\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.dll
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\refint\MCV_Capstone.dll
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.pdb
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\appsettings.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\MCV_Capstone.staticwebassets.runtime.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\MCV_Capstone.staticwebassets.endpoints.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\MCV_Capstone.exe
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\MCV_Capstone.deps.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\MCV_Capstone.runtimeconfig.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\MCV_Capstone.dll
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\MCV_Capstone.pdb
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.AssemblyInfoInputs.cache
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.AssemblyInfo.cs
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.csproj.CoreCompileInputs.cache
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.RazorAssemblyInfo.cache
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.RazorAssemblyInfo.cs
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.sourcelink.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\scopedcss\bundle\MCV_Capstone.styles.css
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\scopedcss\projectbundle\MCV_Capstone.bundle.scp.css
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.genruntimeconfig.cache
+C:\Users\George\OneDrive\Documents\GitHub\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\ref\MCV_Capstone.dll
