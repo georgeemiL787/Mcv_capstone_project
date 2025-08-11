@@ -1,0 +1,198 @@
+@{
+    ViewData["Title"] = "Profile Photo - Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString()?.ToLower();
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/profile.css">
+    <link rel="stylesheet" href="~/css/profile-shared.css">
+    <link rel="stylesheet" href="~/css/photo.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+}
+
+<div class="profile-layout">
+    <!-- Left Sidebar -->
+    <div class="profile-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-avatar">
+                <div class="avatar-placeholder">GE</div>
+            </div>
+            <h3>George Emil</h3>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "Profile")" class="nav-item @(currentAction == "index" ? "active" : "")" data-page="profile">
+                <span class="material-symbols-outlined nav-icon">person</span>
+                Profile
+            </a>
+            <a href="@Url.Action("Photo", "Profile")" class="nav-item @(currentAction == "photo" ? "active" : "")" data-page="photo">
+                <span class="material-symbols-outlined nav-icon">photo_camera</span>
+                Photo
+            </a>
+            <a href="@Url.Action("AccountSecurity", "Profile")" class="nav-item @(currentAction == "accountsecurity" ? "active" : "")" data-page="account-security">
+                <span class="material-symbols-outlined nav-icon">security</span>
+                Account Security
+            </a>
+            <a href="@Url.Action("Subscriptions", "Profile")" class="nav-item @(currentAction == "subscriptions" ? "active" : "")" data-page="subscriptions">
+                <span class="material-symbols-outlined nav-icon">subscriptions</span>
+                Subscriptions
+            </a>
+            <a href="@Url.Action("PaymentMethods", "Profile")" class="nav-item @(currentAction == "paymentmethods" ? "active" : "")" data-page="payment-methods">
+                <span class="material-symbols-outlined nav-icon">account_balance_wallet</span>
+                Payment Methods
+            </a>
+            <a href="@Url.Action("Privacy", "Profile")" class="nav-item @(currentAction == "privacy" ? "active" : "")" data-page="privacy">
+                <span class="material-symbols-outlined nav-icon">lock</span>
+                Privacy
+            </a>
+            <a href="@Url.Action("NotificationPreferences", "Profile")" class="nav-item @(currentAction == "notificationpreferences" ? "active" : "")" data-page="notification-preferences">
+                <span class="material-symbols-outlined nav-icon">notifications</span>
+                Notification Preferences
+            </a>
+        </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="profile-content">
+        <div class="photo-container">
+            <div class="photo-header">
+                <h1>Profile Photo</h1>
+                <p>Update your profile picture to personalize your learning experience</p>
+            </div>
+            
+            <div class="photo-upload-section">
+                <div class="current-photo">
+                    <div class="photo-preview">
+                        <img src="~/assets/images/default-avatar.jpg" alt="Current Profile Photo" id="currentPhoto">
+                        <div class="photo-overlay">
+                            <span class="material-symbols-outlined">photo_camera</span>
+                            <p>Click to change</p>
+                        </div>
+                    </div>
+                    <div class="photo-info">
+                        <h3>Current Photo</h3>
+                        <p>Your profile picture is visible to other users based on your privacy settings</p>
+                        <button class="btn-secondary" id="removePhoto">Remove Photo</button>
+                    </div>
+                </div>
+                
+                <div class="upload-area">
+                    <div class="upload-box" id="uploadBox">
+                        <div class="upload-icon">
+                            <span class="material-symbols-outlined">cloud_upload</span>
+                        </div>
+                        <h3>Upload New Photo</h3>
+                        <p>Drag and drop an image here, or click to browse</p>
+                        <p class="upload-hint">Supported formats: JPG, PNG, GIF (Max size: 5MB)</p>
+                        <input type="file" id="photoInput" accept="image/*" style="display: none;">
+                        <button class="btn-primary" id="browseButton">Browse Files</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="photo-requirements">
+                <h3>Photo Requirements</h3>
+                <div class="requirements-list">
+                    <div class="requirement-item">
+                        <span class="material-symbols-outlined check">check_circle</span>
+                        <span>Square format recommended (1:1 aspect ratio)</span>
+                    </div>
+                    <div class="requirement-item">
+                        <span class="material-symbols-outlined check">check_circle</span>
+                        <span>Minimum resolution: 200x200 pixels</span>
+                    </div>
+                    <div class="requirement-item">
+                        <span class="material-symbols-outlined check">check_circle</span>
+                        <span>Maximum file size: 5MB</span>
+                    </div>
+                    <div class="requirement-item">
+                        <span class="material-symbols-outlined check">check_circle</span>
+                        <span>Supported formats: JPG, PNG, GIF</span>
+                    </div>
+                    <div class="requirement-item">
+                        <span class="material-symbols-outlined warning">warning</span>
+                        <span>Keep it professional and appropriate</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="photo-editor" id="photoEditor" style="display: none;">
+                <h3>Edit Photo</h3>
+                <div class="editor-container">
+                    <div class="editor-preview">
+                        <canvas id="photoCanvas" width="400" height="400"></canvas>
+                    </div>
+                    <div class="editor-controls">
+                        <div class="control-group">
+                            <label for="zoomSlider">Zoom:</label>
+                            <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1">
+                            <span id="zoomValue">100%</span>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="rotationSlider">Rotation:</label>
+                            <input type="range" id="rotationSlider" min="-180" max="180" step="1" value="0">
+                            <span id="rotationValue">0°</span>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="brightnessSlider">Brightness:</label>
+                            <input type="range" id="brightnessSlider" min="0.5" max="1.5" step="0.1" value="1">
+                            <span id="brightnessValue">100%</span>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="contrastSlider">Contrast:</label>
+                            <input type="range" id="contrastSlider" min="0.5" max="1.5" step="0.1" value="1">
+                            <span id="contrastValue">100%</span>
+                        </div>
+                        
+                        <div class="editor-actions">
+                            <button class="btn-secondary" id="resetEditor">Reset</button>
+                            <button class="btn-primary" id="applyChanges">Apply Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="photo-actions">
+                <button class="btn-primary" id="savePhoto" style="display: none;">Save Photo</button>
+                <button class="btn-secondary" id="cancelChanges" style="display: none;">Cancel</button>
+            </div>
+            
+            <div class="photo-tips">
+                <h4>Tips for a Great Profile Photo</h4>
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <span class="material-symbols-outlined">lightbulb</span>
+                        <h5>Good Lighting</h5>
+                        <p>Use natural light or well-lit environments for better quality</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="material-symbols-outlined">face</span>
+                        <h5>Clear Face</h5>
+                        <p>Make sure your face is clearly visible and well-lit</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="material-symbols-outlined">style</span>
+                        <h5>Professional Look</h5>
+                        <p>Choose attire and background that reflect your professional image</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="material-symbols-outlined">crop</span>
+                        <h5>Proper Framing</h5>
+                        <p>Center your face and avoid cutting off important features</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/photo.js"></script>
+}

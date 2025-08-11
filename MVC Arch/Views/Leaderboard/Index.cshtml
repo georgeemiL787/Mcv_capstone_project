@@ -1,0 +1,384 @@
+@{
+    ViewData["Title"] = "Leaderboard - Full Courses Platform";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/leaderboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+}
+
+<div class="leaderboard-container">
+    <!-- Header Section -->
+    <div class="leaderboard-header">
+        <div class="header-content">
+            <h1>Course Leaderboard</h1>
+            <p>See how you rank among your peers in Advanced Web Development with React</p>
+            <div class="course-info">
+                <span class="course-badge">
+                    <span class="material-symbols-outlined">school</span>
+                    React Development
+                </span>
+                <span class="course-stats">
+                    <span class="stat-item">
+                        <span class="material-symbols-outlined">group</span>
+                        247 Students
+                    </span>
+                    <span class="stat-item">
+                        <span class="material-symbols-outlined">schedule</span>
+                        Week 8 of 12
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters and Search -->
+    <div class="leaderboard-controls">
+        <div class="filter-section">
+            <button class="filter-btn active" data-filter="all">All Students</button>
+            <button class="filter-btn" data-filter="top">Top 10</button>
+            <button class="filter-btn" data-filter="recent">Recent Activity</button>
+        </div>
+        <div class="search-section">
+            <div class="search-input-wrapper">
+                <span class="material-symbols-outlined">search</span>
+                <input type="text" placeholder="Search students..." class="student-search">
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaderboard Table -->
+    <div class="leaderboard-card">
+        <div class="table-header">
+            <div class="rank-col">Rank</div>
+            <div class="student-col">Student</div>
+            <div class="progress-col">Progress</div>
+            <div class="score-col">Score</div>
+            <div class="activity-col">Last Activity</div>
+        </div>
+
+        <div class="leaderboard-list">
+            <!-- Top 3 with special styling -->
+            <div class="leaderboard-item top-3" data-rank="1">
+                <div class="rank-info">
+                    <div class="rank-number">1</div>
+                    <div class="rank-medal">
+                        <span class="material-symbols-outlined">emoji_events</span>
+                    </div>
+                </div>
+                <div class="student-info">
+                    <div class="student-avatar">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Student">
+                    </div>
+                    <div class="student-details">
+                        <h3>Alex Johnson</h3>
+                        <span class="student-email">alex.johnson@email.com</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 95%"></div>
+                    </div>
+                    <span class="progress-text">95%</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-value">98.5</div>
+                    <div class="score-label">points</div>
+                </div>
+                <div class="activity-section">
+                    <span class="activity-time">2 hours ago</span>
+                    <span class="activity-status online">Online</span>
+                </div>
+            </div>
+
+            <div class="leaderboard-item top-3" data-rank="2">
+                <div class="rank-info">
+                    <div class="rank-number">2</div>
+                    <div class="rank-medal">
+                        <span class="material-symbols-outlined">military_tech</span>
+                    </div>
+                </div>
+                <div class="student-info">
+                    <div class="student-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" alt="Student">
+                    </div>
+                    <div class="student-details">
+                        <h3>Sarah Chen</h3>
+                        <span class="student-email">sarah.chen@email.com</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 92%"></div>
+                    </div>
+                    <span class="progress-text">92%</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-value">96.2</div>
+                    <div class="score-label">points</div>
+                </div>
+                <div class="activity-section">
+                    <span class="activity-time">1 hour ago</span>
+                    <span class="activity-status online">Online</span>
+                </div>
+            </div>
+
+            <div class="leaderboard-item top-3" data-rank="3">
+                <div class="rank-info">
+                    <div class="rank-number">3</div>
+                    <div class="rank-medal">
+                        <span class="material-symbols-outlined">workspace_premium</span>
+                    </div>
+                </div>
+                <div class="student-info">
+                    <div class="student-avatar">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face" alt="Student">
+                    </div>
+                    <div class="student-details">
+                        <h3>Michael Rodriguez</h3>
+                        <span class="student-email">michael.r@email.com</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 89%"></div>
+                    </div>
+                    <span class="progress-text">89%</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-value">94.8</div>
+                    <div class="score-label">points</div>
+                </div>
+                <div class="activity-section">
+                    <span class="activity-time">30 min ago</span>
+                    <span class="activity-status online">Online</span>
+                </div>
+            </div>
+
+            <!-- Regular rankings -->
+            <div class="leaderboard-item" data-rank="4">
+                <div class="rank-info">
+                    <div class="rank-number">4</div>
+                </div>
+                <div class="student-info">
+                    <div class="student-avatar">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face" alt="Student">
+                    </div>
+                    <div class="student-details">
+                        <h3>Emma Wilson</h3>
+                        <span class="student-email">emma.wilson@email.com</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 87%"></div>
+                    </div>
+                    <span class="progress-text">87%</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-value">92.1</div>
+                    <div class="score-label">points</div>
+                </div>
+                <div class="activity-section">
+                    <span class="activity-time">2 hours ago</span>
+                    <span class="activity-status offline">Offline</span>
+                </div>
+            </div>
+
+            <div class="leaderboard-item" data-rank="5">
+                <div class="rank-info">
+                    <div class="rank-number">5</div>
+                </div>
+                <div class="student-info">
+                    <div class="student-avatar">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=50&h=50&fit=crop&crop=face" alt="Student">
+                    </div>
+                    <div class="student-details">
+                        <h3>David Kim</h3>
+                        <span class="student-email">david.kim@email.com</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%"></div>
+                    </div>
+                    <span class="progress-text">85%</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-value">90.5</div>
+                    <div class="score-label">points</div>
+                </div>
+                <div class="activity-section">
+                    <span class="activity-time">1 day ago</span>
+                    <span class="activity-status offline">Offline</span>
+                </div>
+            </div>
+
+            <div class="leaderboard-item" data-rank="6">
+                <div class="rank-info">
+                    <div class="rank-number">6</div>
+                </div>
+                <div class="student-info">
+                    <div class="student-avatar">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=50&h=50&fit=crop&crop=face" alt="Student">
+                    </div>
+                    <div class="student-details">
+                        <h3>Lisa Thompson</h3>
+                        <span class="student-email">lisa.t@email.com</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 82%"></div>
+                    </div>
+                    <span class="progress-text">82%</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-value">88.9</div>
+                    <div class="score-label">points</div>
+                </div>
+                <div class="activity-section">
+                    <span class="activity-time">3 hours ago</span>
+                    <span class="activity-status online">Online</span>
+                </div>
+            </div>
+
+            <div class="leaderboard-item" data-rank="7">
+                <div class="rank-info">
+                    <div class="rank-number">7</div>
+                </div>
+                <div class="student-info">
+                    <div class="student-avatar">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Student">
+                    </div>
+                    <div class="student-details">
+                        <h3>James Anderson</h3>
+                        <span class="student-email">james.a@email.com</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%"></div>
+                    </div>
+                    <span class="progress-text">80%</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-value">87.2</div>
+                    <div class="score-label">points</div>
+                </div>
+                <div class="activity-section">
+                    <span class="activity-time">5 hours ago</span>
+                    <span class="activity-status offline">Offline</span>
+                </div>
+            </div>
+
+            <div class="leaderboard-item" data-rank="8">
+                <div class="rank-info">
+                    <div class="rank-number">8</div>
+                </div>
+                <div class="student-info">
+                    <div class="student-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" alt="Student">
+                    </div>
+                    <div class="student-details">
+                        <h3>Rachel Green</h3>
+                        <span class="student-email">rachel.g@email.com</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                    <span class="progress-text">78%</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-value">85.6</div>
+                    <div class="score-label">points</div>
+                </div>
+                <div class="activity-section">
+                    <span class="activity-time">1 day ago</span>
+                    <span class="activity-status offline">Offline</span>
+                </div>
+            </div>
+
+            <div class="leaderboard-item" data-rank="9">
+                <div class="rank-info">
+                    <div class="rank-number">9</div>
+                </div>
+                <div class="student-info">
+                    <div class="student-avatar">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face" alt="Student">
+                    </div>
+                    <div class="student-details">
+                        <h3>Tom Brown</h3>
+                        <span class="student-email">tom.brown@email.com</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <span class="progress-text">75%</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-value">83.1</div>
+                    <div class="score-label">points</div>
+                </div>
+                <div class="activity-section">
+                    <span class="activity-time">2 days ago</span>
+                    <span class="activity-status offline">Offline</span>
+                </div>
+            </div>
+
+            <div class="leaderboard-item" data-rank="10">
+                <div class="rank-info">
+                    <div class="rank-number">10</div>
+                </div>
+                <div class="student-info">
+                    <div class="student-avatar">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face" alt="Student">
+                    </div>
+                    <div class="student-details">
+                        <h3>Sophie Davis</h3>
+                        <span class="student-email">sophie.d@email.com</span>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 72%"></div>
+                    </div>
+                    <span class="progress-text">72%</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-value">80.8</div>
+                    <div class="score-label">points</div>
+                </div>
+                <div class="activity-section">
+                    <span class="activity-time">4 hours ago</span>
+                    <span class="activity-status online">Online</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button class="pagination-btn" disabled>Previous</button>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <span class="pagination-dots">...</span>
+        <button class="pagination-btn">12</button>
+        <button class="pagination-btn">Next</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/leaderboard.js"></script>
+} 
+} 

@@ -1,0 +1,212 @@
+@{
+    ViewData["Title"] = "Enrollments - Instructor Dashboard";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/instructor-dashboard.css" />
+    <link rel="stylesheet" href="~/css/enrollments.css" />
+}
+
+<div class="enrollments-container">
+    <div class="enrollments-header">
+        <h1>Student Enrollments</h1>
+        <p>Manage and track student enrollments across your courses</p>
+    </div>
+    
+    <div class="enrollments-stats">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">group</span>
+            </div>
+            <div class="stat-content">
+                <h3>Total Enrollments</h3>
+                <p class="stat-value">1,247</p>
+                <span class="stat-change positive">+15.3%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">trending_up</span>
+            </div>
+            <div class="stat-content">
+                <h3>This Month</h3>
+                <p class="stat-value">89</p>
+                <span class="stat-change positive">+22.1%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">school</span>
+            </div>
+            <div class="stat-content">
+                <h3>Active Students</h3>
+                <p class="stat-value">1,156</p>
+                <span class="stat-change positive">+8.7%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">course</span>
+            </div>
+            <div class="stat-content">
+                <h3>Courses</h3>
+                <p class="stat-value">12</p>
+                <span class="stat-change neutral">0%</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="enrollments-filters">
+        <div class="filter-group">
+            <label for="courseFilter">Course:</label>
+            <select id="courseFilter">
+                <option value="">All Courses</option>
+                <option value="web-dev">Web Development</option>
+                <option value="data-science">Data Science</option>
+                <option value="marketing">Digital Marketing</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label for="statusFilter">Status:</label>
+            <select id="statusFilter">
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="completed">Completed</option>
+                <option value="paused">Paused</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label for="dateFilter">Date Range:</label>
+            <select id="dateFilter">
+                <option value="7">Last 7 days</option>
+                <option value="30">Last 30 days</option>
+                <option value="90">Last 3 months</option>
+                <option value="365">Last year</option>
+            </select>
+        </div>
+        
+        <button class="btn-primary">Apply Filters</button>
+    </div>
+    
+    <div class="enrollments-table">
+        <div class="table-header">
+            <h3>Recent Enrollments</h3>
+            <button class="btn-secondary">
+                <span class="material-symbols-outlined">download</span>
+                Export
+            </button>
+        </div>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Course</th>
+                        <th>Enrollment Date</th>
+                        <th>Progress</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="student-info">
+                                <div class="student-avatar">JD</div>
+                                <div>
+                                    <h4>John Doe</h4>
+                                    <p>john.doe@email.com</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>Web Development Masterclass</td>
+                        <td>Mar 15, 2024</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                            <span>75%</span>
+                        </td>
+                        <td><span class="status active">Active</span></td>
+                        <td>
+                            <button class="btn-icon" title="View Details">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </button>
+                            <button class="btn-icon" title="Send Message">
+                                <span class="material-symbols-outlined">message</span>
+                            </button>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <div class="student-info">
+                                <div class="student-avatar">JS</div>
+                                <div>
+                                    <h4>Jane Smith</h4>
+                                    <p>jane.smith@email.com</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>Data Science Fundamentals</td>
+                        <td>Mar 12, 2024</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%"></div>
+                            </div>
+                            <span>45%</span>
+                        </td>
+                        <td><span class="status active">Active</span></td>
+                        <td>
+                            <button class="btn-icon" title="View Details">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </button>
+                            <button class="btn-icon" title="Send Message">
+                                <span class="material-symbols-outlined">message</span>
+                            </button>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <div class="student-info">
+                                <div class="student-avatar">MJ</div>
+                                <div>
+                                    <h4>Mike Johnson</h4>
+                                    <p>mike.j@email.com</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>Digital Marketing Strategy</td>
+                        <td>Mar 10, 2024</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                            <span>100%</span>
+                        </td>
+                        <td><span class="status completed">Completed</span></td>
+                        <td>
+                            <button class="btn-icon" title="View Details">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </button>
+                            <button class="btn-icon" title="Send Certificate">
+                                <span class="material-symbols-outlined">card_membership</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/enrollments.js"></script>
+}

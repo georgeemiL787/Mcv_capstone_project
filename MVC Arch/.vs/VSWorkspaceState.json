@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Controllers",
+    "\\Models",
+    "\\Views\\Account",
+    "\\Views\\QuizCenter",
+    "\\Views\\Shared",
+    "\\wwwroot",
+    "\\wwwroot\\css",
+    "\\wwwroot\\lib"
+  ],
+  "SelectedNode": "\\wwwroot\\css\\navbar.css",
+  "PreviewInSolutionExplorer": false
+}

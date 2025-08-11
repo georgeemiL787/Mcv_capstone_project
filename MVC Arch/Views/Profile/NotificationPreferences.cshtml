@@ -1,0 +1,390 @@
+@{
+    ViewData["Title"] = "Notification Preferences - Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString()?.ToLower();
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/profile.css">
+    <link rel="stylesheet" href="~/css/profile-shared.css">
+    <link rel="stylesheet" href="~/css/notification-preferences.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+}
+
+<div class="profile-layout">
+    <!-- Left Sidebar -->
+    <div class="profile-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-avatar">
+                <div class="avatar-placeholder">GE</div>
+            </div>
+            <h3>George Emil</h3>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "Profile")" class="nav-item @(currentAction == "index" ? "active" : "")" data-page="profile">
+                <span class="material-symbols-outlined nav-icon">person</span>
+                Profile
+            </a>
+            <a href="@Url.Action("Photo", "Profile")" class="nav-item @(currentAction == "photo" ? "active" : "")" data-page="photo">
+                <span class="material-symbols-outlined nav-icon">photo_camera</span>
+                Photo
+            </a>
+            <a href="@Url.Action("AccountSecurity", "Profile")" class="nav-item @(currentAction == "accountsecurity" ? "active" : "")" data-page="account-security">
+                <span class="material-symbols-outlined nav-icon">security</span>
+                Account Security
+            </a>
+            <a href="@Url.Action("Subscriptions", "Profile")" class="nav-item @(currentAction == "subscriptions" ? "active" : "")" data-page="subscriptions">
+                <span class="material-symbols-outlined nav-icon">subscriptions</span>
+                Subscriptions
+            </a>
+            <a href="@Url.Action("PaymentMethods", "Profile")" class="nav-item @(currentAction == "paymentmethods" ? "active" : "")" data-page="payment-methods">
+                <span class="material-symbols-outlined nav-icon">account_balance_wallet</span>
+                Payment Methods
+            </a>
+            <a href="@Url.Action("Privacy", "Profile")" class="nav-item @(currentAction == "privacy" ? "active" : "")" data-page="privacy">
+                <span class="material-symbols-outlined nav-icon">lock</span>
+                Privacy
+            </a>
+            <a href="@Url.Action("NotificationPreferences", "Profile")" class="nav-item @(currentAction == "notificationpreferences" ? "active" : "")" data-page="notification-preferences">
+                <span class="material-symbols-outlined nav-icon">notifications</span>
+                Notification Preferences
+            </a>
+        </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="profile-content">
+        <div class="notification-preferences-container">
+            <div class="notification-preferences-header">
+                <h1>Notification Preferences</h1>
+                <p>Customize how and when you receive notifications</p>
+            </div>
+            
+            <div class="notification-sections">
+                <div class="notification-section">
+                    <div class="section-header">
+                        <h3>Course Notifications</h3>
+                        <p>Stay updated on your learning progress and course activities</p>
+                    </div>
+                    <div class="notification-options">
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Course Reminders</h4>
+                                <p>Get reminded about upcoming lessons and assignments</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate">Immediate</option>
+                                    <option value="daily" selected>Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Progress Updates</h4>
+                                <p>Receive notifications about your course completion milestones</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate">Immediate</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly" selected>Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>New Course Content</h4>
+                                <p>Get notified when new lessons or materials are added</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate" selected>Immediate</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Assignment Deadlines</h4>
+                                <p>Receive reminders about upcoming assignment due dates</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate">Immediate</option>
+                                    <option value="daily" selected>Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="notification-section">
+                    <div class="section-header">
+                        <h3>Social & Community</h3>
+                        <p>Stay connected with other learners and instructors</p>
+                    </div>
+                    <div class="notification-options">
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Discussion Replies</h4>
+                                <p>Get notified when someone replies to your forum posts</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate" selected>Immediate</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Study Group Invitations</h4>
+                                <p>Receive invitations to join study groups</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate" selected>Immediate</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Peer Reviews</h4>
+                                <p>Get notified about peer review requests and feedback</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate" selected>Immediate</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="notification-section">
+                    <div class="section-header">
+                        <h3>Platform Updates</h3>
+                        <p>Stay informed about new features and platform improvements</p>
+                    </div>
+                    <div class="notification-options">
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>New Features</h4>
+                                <p>Learn about new platform features and capabilities</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate">Immediate</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly" selected>Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Maintenance Updates</h4>
+                                <p>Get notified about scheduled maintenance and updates</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate" selected>Immediate</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Security Alerts</h4>
+                                <p>Receive important security notifications</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate" selected>Immediate</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="notification-section">
+                    <div class="section-header">
+                        <h3>Marketing & Promotions</h3>
+                        <p>Stay updated on special offers and learning opportunities</p>
+                    </div>
+                    <div class="notification-options">
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Course Discounts</h4>
+                                <p>Receive notifications about special pricing and offers</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate">Immediate</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly" selected>Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>New Course Releases</h4>
+                                <p>Get notified about new courses in your areas of interest</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate">Immediate</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly" selected>Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-option">
+                            <div class="option-info">
+                                <h4>Learning Tips & Resources</h4>
+                                <p>Receive helpful learning tips and resource recommendations</p>
+                            </div>
+                            <div class="notification-controls">
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                <select class="frequency-select">
+                                    <option value="immediate">Immediate</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly" selected>Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="delivery-preferences">
+                <h3>Delivery Preferences</h3>
+                <div class="delivery-options">
+                    <div class="delivery-option">
+                        <div class="option-info">
+                            <h4>Email Notifications</h4>
+                            <p>Receive notifications via email</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="delivery-option">
+                        <div class="option-info">
+                            <h4>Push Notifications</h4>
+                            <p>Receive notifications on your device</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="delivery-option">
+                        <div class="option-info">
+                            <h4>SMS Notifications</h4>
+                            <p>Receive important notifications via text message</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="notification-actions">
+                <button class="btn-primary">Save Preferences</button>
+                <button class="btn-secondary">Reset to Defaults</button>
+                <button class="btn-secondary">Test Notifications</button>
+            </div>
+            
+            <div class="notification-help">
+                <h4>Need Help?</h4>
+                <p>If you're not receiving notifications or have questions about your preferences, please <a href="#">contact our support team</a>. You can also check your device settings to ensure notifications are enabled.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/notification-preferences.js"></script>
+}
+

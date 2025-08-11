@@ -1,0 +1,123 @@
+@{
+    ViewData["Title"] = "Revenue - Instructor Dashboard";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/instructor-dashboard.css" />
+    <link rel="stylesheet" href="~/css/revenue.css" />
+}
+
+<div class="revenue-container">
+    <div class="revenue-header">
+        <h1>Revenue Analytics</h1>
+        <p>Track your earnings and financial performance</p>
+    </div>
+    
+    <div class="revenue-stats">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">trending_up</span>
+            </div>
+            <div class="stat-content">
+                <h3>Total Revenue</h3>
+                <p class="stat-value">$24,580</p>
+                <span class="stat-change positive">+12.5%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">school</span>
+            </div>
+            <div class="stat-content">
+                <h3>Active Students</h3>
+                <p class="stat-value">1,247</p>
+                <span class="stat-change positive">+8.2%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">course</span>
+            </div>
+            <div class="stat-content">
+                <h3>Courses Sold</h3>
+                <p class="stat-value">89</p>
+                <span class="stat-change positive">+15.3%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">calendar_today</span>
+            </div>
+            <div class="stat-content">
+                <h3>This Month</h3>
+                <p class="stat-value">$3,420</p>
+                <span class="stat-change positive">+22.1%</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="revenue-charts">
+        <div class="chart-container">
+            <h3>Revenue Trend</h3>
+            <div class="chart-placeholder">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h3>Top Performing Courses</h3>
+            <div class="course-performance">
+                <div class="course-item">
+                    <div class="course-info">
+                        <h4>Web Development Masterclass</h4>
+                        <p>Advanced programming course</p>
+                    </div>
+                    <div class="course-revenue">
+                        <span class="revenue-amount">$8,450</span>
+                        <span class="student-count">156 students</span>
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-info">
+                        <h4>Data Science Fundamentals</h4>
+                        <p>Introduction to data analysis</p>
+                    </div>
+                    <div class="course-revenue">
+                        <span class="revenue-amount">$6,230</span>
+                        <span class="student-count">124 students</span>
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-info">
+                        <h4>Digital Marketing Strategy</h4>
+                        <p>Complete marketing guide</p>
+                    </div>
+                    <div class="course-revenue">
+                        <span class="revenue-amount">$5,890</span>
+                        <span class="student-count">98 students</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="revenue-actions">
+        <button class="btn-primary">
+            <span class="material-symbols-outlined">download</span>
+            Export Report
+        </button>
+        <button class="btn-secondary">
+            <span class="material-symbols-outlined">settings</span>
+            Revenue Settings
+        </button>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/revenue.js"></script>
+}

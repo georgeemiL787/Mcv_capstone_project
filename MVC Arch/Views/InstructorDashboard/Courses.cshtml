@@ -1,0 +1,222 @@
+@{
+    ViewData["Title"] = "Courses - Instructor Dashboard";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/instructor-dashboard.css" />
+    <link rel="stylesheet" href="~/css/courses.css" />
+}
+
+<div class="courses-container">
+    <div class="courses-header">
+        <h1>My Courses</h1>
+        <p>Manage and monitor your course offerings</p>
+        <button class="btn-primary">
+            <span class="material-symbols-outlined">add</span>
+            Create New Course
+        </button>
+    </div>
+    
+    <div class="courses-stats">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">course</span>
+            </div>
+            <div class="stat-content">
+                <h3>Total Courses</h3>
+                <p class="stat-value">12</p>
+                <span class="stat-change positive">+2 this month</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">school</span>
+            </div>
+            <div class="stat-content">
+                <h3>Total Students</h3>
+                <p class="stat-value">1,247</p>
+                <span class="stat-change positive">+89 this month</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">star</span>
+            </div>
+            <div class="stat-content">
+                <h3>Avg Rating</h3>
+                <p class="stat-value">4.8</p>
+                <span class="stat-change positive">+0.2</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">trending_up</span>
+            </div>
+            <div class="stat-content">
+                <h3>Revenue</h3>
+                <p class="stat-value">$24,580</p>
+                <span class="stat-change positive">+12.5%</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="courses-filters">
+        <div class="filter-group">
+            <label for="statusFilter">Status:</label>
+            <select id="statusFilter">
+                <option value="">All Status</option>
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+                <option value="archived">Archived</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label for="categoryFilter">Category:</label>
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="programming">Programming</option>
+                <option value="data-science">Data Science</option>
+                <option value="marketing">Marketing</option>
+                <option value="design">Design</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label for="sortFilter">Sort By:</label>
+            <select id="sortFilter">
+                <option value="recent">Most Recent</option>
+                <option value="popular">Most Popular</option>
+                <option value="rating">Highest Rated</option>
+                <option value="revenue">Highest Revenue</option>
+            </select>
+        </div>
+        
+        <button class="btn-secondary">Apply Filters</button>
+    </div>
+    
+    <div class="courses-grid">
+        <div class="course-card">
+            <div class="course-image">
+                <img src="~/assets/images/course-web-dev.jpg" alt="Web Development">
+                <div class="course-status published">Published</div>
+            </div>
+            <div class="course-content">
+                <h3>Web Development Masterclass</h3>
+                <p>Complete guide to modern web development with HTML, CSS, and JavaScript</p>
+                <div class="course-meta">
+                    <span class="students">156 students</span>
+                    <span class="rating">4.9 ⭐</span>
+                    <span class="duration">24 hours</span>
+                </div>
+                <div class="course-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%"></div>
+                    </div>
+                    <span>85% Complete</span>
+                </div>
+            </div>
+            <div class="course-actions">
+                <button class="btn-primary">Edit Course</button>
+                <button class="btn-secondary">View Analytics</button>
+                <button class="btn-icon" title="More Options">
+                    <span class="material-symbols-outlined">more_vert</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="course-card">
+            <div class="course-image">
+                <img src="~/assets/images/course-data-science.jpg" alt="Data Science">
+                <div class="course-status published">Published</div>
+            </div>
+            <div class="course-content">
+                <h3>Data Science Fundamentals</h3>
+                <p>Introduction to data analysis, visualization, and machine learning</p>
+                <div class="course-meta">
+                    <span class="students">124 students</span>
+                    <span class="rating">4.7 ⭐</span>
+                    <span class="duration">18 hours</span>
+                </div>
+                <div class="course-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 72%"></div>
+                    </div>
+                    <span>72% Complete</span>
+                </div>
+            </div>
+            <div class="course-actions">
+                <button class="btn-primary">Edit Course</button>
+                <button class="btn-secondary">View Analytics</button>
+                <button class="btn-icon" title="More Options">
+                    <span class="material-symbols-outlined">more_vert</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="course-card">
+            <div class="course-image">
+                <img src="~/assets/images/course-marketing.jpg" alt="Digital Marketing">
+                <div class="course-status draft">Draft</div>
+            </div>
+            <div class="course-content">
+                <h3>Digital Marketing Strategy</h3>
+                <p>Comprehensive digital marketing course covering SEO, social media, and PPC</p>
+                <div class="course-meta">
+                    <span class="students">0 students</span>
+                    <span class="rating">--</span>
+                    <span class="duration">20 hours</span>
+                </div>
+                <div class="course-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%"></div>
+                    </div>
+                    <span>45% Complete</span>
+                </div>
+            </div>
+            <div class="course-actions">
+                <button class="btn-primary">Continue Editing</button>
+                <button class="btn-secondary">Preview</button>
+                <button class="btn-icon" title="More Options">
+                    <span class="material-symbols-outlined">more_vert</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="course-card">
+            <div class="course-image">
+                <img src="~/assets/images/course-design.jpg" alt="UI/UX Design">
+                <div class="course-status published">Published</div>
+            </div>
+            <div class="course-content">
+                <h3>UI/UX Design Principles</h3>
+                <p>Learn modern design principles and create user-friendly interfaces</p>
+                <div class="course-meta">
+                    <span class="students">98 students</span>
+                    <span class="rating">4.8 ⭐</span>
+                    <span class="duration">16 hours</span>
+                </div>
+                <div class="course-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <span>100% Complete</span>
+                </div>
+            </div>
+            <div class="course-actions">
+                <button class="btn-primary">Edit Course</button>
+                <button class="btn-secondary">View Analytics</button>
+                <button class="btn-icon" title="More Options">
+                    <span class="material-symbols-outlined">more_vert</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/courses.js"></script>
+}

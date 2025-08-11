@@ -1,0 +1,231 @@
+@{
+    ViewData["Title"] = "Discussions - Instructor Dashboard";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/instructor-dashboard.css" />
+    <link rel="stylesheet" href="~/css/discussions.css" />
+}
+
+<div class="discussions-container">
+    <div class="discussions-header">
+        <h1>Course Discussions</h1>
+        <p>Monitor and participate in student discussions across your courses</p>
+    </div>
+    
+    <div class="discussions-stats">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">forum</span>
+            </div>
+            <div class="stat-content">
+                <h3>Total Discussions</h3>
+                <p class="stat-value">156</p>
+                <span class="stat-change positive">+23.4%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">chat</span>
+            </div>
+            <div class="stat-content">
+                <h3>Active Threads</h3>
+                <p class="stat-value">89</p>
+                <span class="stat-change positive">+15.7%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">group</span>
+            </div>
+            <div class="stat-content">
+                <h3>Participants</h3>
+                <p class="stat-value">1,247</p>
+                <span class="stat-change positive">+12.3%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">schedule</span>
+            </div>
+            <div class="stat-content">
+                <h3>Avg Response Time</h3>
+                <p class="stat-value">2.4h</p>
+                <span class="stat-change negative">+0.3h</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="discussions-filters">
+        <div class="filter-group">
+            <label for="courseFilter">Course:</label>
+            <select id="courseFilter">
+                <option value="">All Courses</option>
+                <option value="web-dev">Web Development</option>
+                <option value="data-science">Data Science</option>
+                <option value="marketing">Digital Marketing</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label for="statusFilter">Status:</label>
+            <select id="statusFilter">
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="resolved">Resolved</option>
+                <option value="needs-attention">Needs Attention</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label for="typeFilter">Type:</label>
+            <select id="typeFilter">
+                <option value="">All Types</option>
+                <option value="question">Question</option>
+                <option value="discussion">Discussion</option>
+                <option value="help">Help Request</option>
+            </select>
+        </div>
+        
+        <button class="btn-primary">Apply Filters</button>
+    </div>
+    
+    <div class="discussions-list">
+        <div class="list-header">
+            <h3>Recent Discussions</h3>
+            <div class="header-actions">
+                <button class="btn-secondary">
+                    <span class="material-symbols-outlined">add</span>
+                    New Discussion
+                </button>
+                <button class="btn-secondary">
+                    <span class="material-symbols-outlined">notifications</span>
+                    Notifications
+                </button>
+            </div>
+        </div>
+        
+        <div class="discussion-items">
+            <div class="discussion-item">
+                <div class="discussion-status urgent">
+                    <span class="material-symbols-outlined">priority_high</span>
+                </div>
+                <div class="discussion-content">
+                    <div class="discussion-header">
+                        <h4>JavaScript Error in Module 3</h4>
+                        <span class="discussion-meta">
+                            <span class="course-tag">Web Development</span>
+                            <span class="time-ago">2 hours ago</span>
+                        </span>
+                    </div>
+                    <p class="discussion-excerpt">
+                        I'm getting a "Cannot read property 'map' of undefined" error when trying to complete the array exercises...
+                    </p>
+                    <div class="discussion-footer">
+                        <div class="participants">
+                            <span class="material-symbols-outlined">person</span>
+                            <span>John Doe</span>
+                        </div>
+                        <div class="replies">
+                            <span class="material-symbols-outlined">chat_bubble</span>
+                            <span>3 replies</span>
+                        </div>
+                        <div class="views">
+                            <span class="material-symbols-outlined">visibility</span>
+                            <span>24 views</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="discussion-actions">
+                    <button class="btn-primary">Respond</button>
+                    <button class="btn-icon" title="Mark as Resolved">
+                        <span class="material-symbols-outlined">check_circle</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="discussion-item">
+                <div class="discussion-status active">
+                    <span class="material-symbols-outlined">forum</span>
+                </div>
+                <div class="discussion-content">
+                    <div class="discussion-header">
+                        <h4>Best Practices for Data Visualization</h4>
+                        <span class="discussion-meta">
+                            <span class="course-tag">Data Science</span>
+                            <span class="time-ago">5 hours ago</span>
+                        </span>
+                    </div>
+                    <p class="discussion-excerpt">
+                        What are some recommended tools and libraries for creating interactive charts and graphs? Looking for...
+                    </p>
+                    <div class="discussion-footer">
+                        <div class="participants">
+                            <span class="material-symbols-outlined">person</span>
+                            <span>Jane Smith</span>
+                        </div>
+                        <div class="replies">
+                            <span class="material-symbols-outlined">chat_bubble</span>
+                            <span>7 replies</span>
+                        </div>
+                        <div class="views">
+                            <span class="material-symbols-outlined">visibility</span>
+                            <span>67 views</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="discussion-actions">
+                    <button class="btn-primary">Respond</button>
+                    <button class="btn-icon" title="Pin Discussion">
+                        <span class="material-symbols-outlined">push_pin</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="discussion-item">
+                <div class="discussion-status resolved">
+                    <span class="material-symbols-outlined">check_circle</span>
+                </div>
+                <div class="discussion-content">
+                    <div class="discussion-header">
+                        <h4>SEO Strategy Implementation</h4>
+                        <span class="discussion-meta">
+                            <span class="course-tag">Digital Marketing</span>
+                            <span class="time-ago">1 day ago</span>
+                        </span>
+                    </div>
+                    <p class="discussion-excerpt">
+                        Successfully implemented the keyword research strategy from the course. My website traffic increased by...
+                    </p>
+                    <div class="discussion-footer">
+                        <div class="participants">
+                            <span class="material-symbols-outlined">person</span>
+                            <span>Mike Johnson</span>
+                        </div>
+                        <div class="replies">
+                            <span class="material-symbols-outlined">chat_bubble</span>
+                            <span>12 replies</span>
+                        </div>
+                        <div class="views">
+                            <span class="material-symbols-outlined">visibility</span>
+                            <span>156 views</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="discussion-actions">
+                    <button class="btn-secondary">View</button>
+                    <button class="btn-icon" title="Archive">
+                        <span class="material-symbols-outlined">archive</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/discussions.js"></script>
+}

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced React Development - Course Preview</title>
+  <link rel="stylesheet" href="../Home/Home.css">
+  <link rel="stylesheet" href="./course-preview.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+</head>
+<body>
+  <nav id="header-nav">
+    <div class="nav-right">
+      <img src="../../assets/images/luIZ_without_bg.png">
+      <button class="nav-button">Explore</button>
+      <form id="search-bar">
+        <div>
+          <input type="text" placeholder="Search for courses..." class="search-input">
+          <span class="material-symbols-outlined">search</span>
+        </div>
+      </form>
+    </div>
+    <div class="nav-buttons">
+      <button class="nav-button">Log In</button>
+      <button class="signup nav-button">Sign Up</button>
+    </div>
+  </nav>
+
+  <div class="course-preview-layout">
+    <!-- Main Content Area -->
+    <div class="course-content">
+      <!-- Course Header -->
+      <div class="course-header">
+        <div class="breadcrumb">
+          <a href="#" class="breadcrumb-link">Development</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="#" class="breadcrumb-link">Web Development</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Advanced React Development</span>
+        </div>
+        
+        <div class="course-title-section">
+          <h1>Advanced React Development</h1>
+          <p class="course-subtitle">Master React hooks, context, performance optimization, and advanced patterns for building scalable applications.</p>
+          
+          <div class="course-meta">
+            <div class="meta-item">
+              <span class="material-symbols-outlined">school</span>
+              <span>Created by Sarah Smith</span>
+            </div>
+            <div class="meta-item">
+              <span class="material-symbols-outlined">schedule</span>
+              <span>Last updated 2 weeks ago</span>
+            </div>
+            <div class="meta-item">
+              <span class="material-symbols-outlined">language</span>
+              <span>English</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Video Preview -->
+      <div class="video-section">
+        <div class="video-container">
+          <div class="video-placeholder">
+            <span class="material-symbols-outlined play-icon">play_circle</span>
+            <p>Course Introduction Video</p>
+          </div>
+          <div class="video-overlay">
+            <button class="play-btn">
+              <span class="material-symbols-outlined">play_arrow</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Stats -->
+      <div class="course-stats">
+        <div class="stat-item">
+          <span class="stat-number">4.8</span>
+          <span class="stat-label">Course Rating</span>
+          <div class="stars">
+            <span class="material-symbols-outlined star">star</span>
+            <span class="material-symbols-outlined star">star</span>
+            <span class="material-symbols-outlined star">star</span>
+            <span class="material-symbols-outlined star">star</span>
+            <span class="material-symbols-outlined star">star</span>
+            <span class="rating-count">(2,847 ratings)</span>
+          </div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">12,456</span>
+          <span class="stat-label">Students Enrolled</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">15.5</span>
+          <span class="stat-label">Hours of Content</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">156</span>
+          <span class="stat-label">Lectures</span>
+        </div>
+      </div>
+
+      <!-- Course Tabs -->
+      <div class="course-tabs">
+        <button class="tab-btn active" data-tab="overview">Overview</button>
+        <button class="tab-btn" data-tab="curriculum">Curriculum</button>
+        <button class="tab-btn" data-tab="instructor">Instructor</button>
+        <button class="tab-btn" data-tab="reviews">Reviews</button>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="tab-content">
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-panel active">
+          <div class="overview-content">
+            <div class="main-content">
+              <h2>What you'll learn</h2>
+              <div class="learning-objectives">
+                <div class="objective-item">
+                  <span class="material-symbols-outlined check">check</span>
+                  <span>Master React Hooks (useState, useEffect, useContext, useReducer, useMemo, useCallback)</span>
+                </div>
+                <div class="objective-item">
+                  <span class="material-symbols-outlined check">check</span>
+                  <span>Implement advanced state management patterns and Context API</span>
+                </div>
+                <div class="objective-item">
+                  <span class="material-symbols-outlined check">check</span>
+                  <span>Optimize React performance with memoization and code splitting</span>
+                </div>
+                <div class="objective-item">
+                  <span class="material-symbols-outlined check">check</span>
+                  <span>Build scalable component architectures and design systems</span>
+                </div>
+                <div class="objective-item">
+                  <span class="material-symbols-outlined check">check</span>
+                  <span>Integrate with external APIs and handle complex data flows</span>
+                </div>
+                <div class="objective-item">
+                  <span class="material-symbols-outlined check">check</span>
+                  <span>Deploy React applications to production environments</span>
+                </div>
+              </div>
+
+              <h2>Requirements</h2>
+              <div class="requirements">
+                <div class="requirement-item">
+                  <span class="material-symbols-outlined">info</span>
+                  <span>Basic knowledge of JavaScript and ES6+ features</span>
+                </div>
+                <div class="requirement-item">
+                  <span class="material-symbols-outlined">info</span>
+                  <span>Familiarity with React fundamentals (components, props, state)</span>
+                </div>
+                <div class="requirement-item">
+                  <span class="material-symbols-outlined">info</span>
+                  <span>A computer with Node.js installed (version 14 or higher)</span>
+                </div>
+                <div class="requirement-item">
+                  <span class="material-symbols-outlined">info</span>
+                  <span>Basic understanding of HTML and CSS</span>
+                </div>
+              </div>
+
+              <h2>Description</h2>
+              <div class="course-description">
+                <p>Take your React skills to the next level with this comprehensive course on advanced React development. Whether you're a React developer looking to deepen your knowledge or a frontend developer wanting to master modern React patterns, this course will provide you with the skills and confidence to build complex, scalable applications.</p>
+                
+                <p>In this course, you'll dive deep into React's most powerful features and learn how to use them effectively in real-world scenarios. We'll cover everything from advanced hooks and state management to performance optimization and deployment strategies.</p>
+                
+                <p>By the end of this course, you'll have built several real-world projects that demonstrate your mastery of advanced React concepts, and you'll be ready to tackle complex frontend challenges in your professional career.</p>
+              </div>
+
+              <h2>Who this course is for</h2>
+              <div class="target-audience">
+                <div class="audience-item">
+                  <span class="material-symbols-outlined">person</span>
+                  <span>React developers who want to master advanced concepts</span>
+                </div>
+                <div class="audience-item">
+                  <span class="material-symbols-outlined">person</span>
+                  <span>Frontend developers looking to specialize in React</span>
+                </div>
+                <div class="audience-item">
+                  <span class="material-symbols-outlined">person</span>
+                  <span>Software engineers wanting to build scalable React applications</span>
+                </div>
+                <div class="audience-item">
+                  <span class="material-symbols-outlined">person</span>
+                  <span>Anyone interested in modern React development patterns</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Curriculum Tab -->
+        <div id="curriculum" class="tab-panel">
+          <div class="curriculum-content">
+            <div class="curriculum-header">
+              <h2>Course Content</h2>
+              <div class="curriculum-stats">
+                <span>156 lectures • 15.5 total hours</span>
+              </div>
+            </div>
+
+            <div class="curriculum-sections">
+              <div class="section-item">
+                <div class="section-header">
+                  <span class="material-symbols-outlined">expand_more</span>
+                  <h3>Section 1: Introduction to Advanced React (3 lectures • 45 min)</h3>
+                </div>
+                <div class="section-content">
+                  <div class="lecture-item">
+                    <span class="material-symbols-outlined">play_circle</span>
+                    <span>Welcome to Advanced React Development</span>
+                    <span class="lecture-duration">15:30</span>
+                  </div>
+                  <div class="lecture-item">
+                    <span class="material-symbols-outlined">play_circle</span>
+                    <span>Course Overview and Learning Objectives</span>
+                    <span class="lecture-duration">18:45</span>
+                  </div>
+                  <div class="lecture-item">
+                    <span class="material-symbols-outlined">description</span>
+                    <span>Setting Up Your Development Environment</span>
+                    <span class="lecture-duration">10:25</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-item">
+                <div class="section-header">
+                  <span class="material-symbols-outlined">expand_more</span>
+                  <h3>Section 2: Mastering React Hooks (12 lectures • 2.5 hours)</h3>
+                </div>
+                <div class="section-content">
+                  <div class="lecture-item">
+                    <span class="material-symbols-outlined">play_circle</span>
+                    <span>Understanding the Rules of Hooks</span>
+                    <span class="lecture-duration">22:15</span>
+                  </div>
+                  <div class="lecture-item">
+                    <span class="material-symbols-outlined">play_circle</span>
+                    <span>Advanced useState Patterns</span>
+                    <span class="lecture-duration">28:30</span>
+                  </div>
+                  <div class="lecture-item">
+                    <span class="material-symbols-outlined">play_circle</span>
+                    <span>useEffect Deep Dive</span>
+                    <span class="lecture-duration">35:20</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-item">
+                <div class="section-header">
+                  <span class="material-symbols-outlined">expand_more</span>
+                  <h3>Section 3: State Management with Context API (8 lectures • 1.8 hours)</h3>
+                </div>
+                <div class="section-content">
+                  <div class="lecture-item">
+                    <span class="material-symbols-outlined">play_circle</span>
+                    <span>Introduction to Context API</span>
+                    <span class="lecture-duration">25:10</span>
+                  </div>
+                  <div class="lecture-item">
+                    <span class="material-symbols-outlined">play_circle</span>
+                    <span>Creating and Using Context</span>
+                    <span class="lecture-duration">32:45</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructor Tab -->
+        <div id="instructor" class="tab-panel">
+          <div class="instructor-content">
+            <div class="instructor-header">
+              <div class="instructor-avatar">
+                <div class="avatar-placeholder">SS</div>
+              </div>
+              <div class="instructor-info">
+                <h2>Sarah Smith</h2>
+                <p class="instructor-title">Senior React Developer & Instructor</p>
+                <div class="instructor-stats">
+                  <div class="instructor-stat">
+                    <span class="material-symbols-outlined">star</span>
+                    <span>4.9 Instructor Rating</span>
+                  </div>
+                  <div class="instructor-stat">
+                    <span class="material-symbols-outlined">emoji_events</span>
+                    <span>12,456 Reviews</span>
+                  </div>
+                  <div class="instructor-stat">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>89,234 Students</span>
+                  </div>
+                  <div class="instructor-stat">
+                    <span class="material-symbols-outlined">video_library</span>
+                    <span>15 Courses</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="instructor-bio">
+              <h3>About the Instructor</h3>
+              <p>Sarah Smith is a senior React developer with over 8 years of experience building scalable web applications. She has worked with major tech companies and startups, helping them build robust frontend architectures using React and modern JavaScript.</p>
+              
+              <p>Sarah is passionate about teaching and has helped thousands of developers master React through her comprehensive courses. She believes in practical, hands-on learning and focuses on real-world applications rather than just theory.</p>
+              
+              <p>When she's not coding or teaching, Sarah enjoys contributing to open-source projects, speaking at developer conferences, and mentoring junior developers in her local tech community.</p>
+            </div>
+
+            <div class="instructor-courses">
+              <h3>Other Courses by Sarah Smith</h3>
+              <div class="courses-grid">
+                <div class="course-card">
+                  <div class="course-thumbnail">
+                    <span class="material-symbols-outlined">school</span>
+                  </div>
+                  <div class="course-info">
+                    <h4>React Fundamentals</h4>
+                    <p>Learn the basics of React development</p>
+                    <div class="course-meta">
+                      <span>4.8 ★ (8,234 ratings)</span>
+                      <span>12 hours</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="course-card">
+                  <div class="course-thumbnail">
+                    <span class="material-symbols-outlined">school</span>
+                  </div>
+                  <div class="course-info">
+                    <h4>React Native Mastery</h4>
+                    <p>Build mobile apps with React Native</p>
+                    <div class="course-meta">
+                      <span>4.7 ★ (5,678 ratings)</span>
+                      <span>18 hours</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews Tab -->
+        <div id="reviews" class="tab-panel">
+          <div class="reviews-content">
+            <div class="reviews-header">
+              <h2>Student Reviews</h2>
+              <div class="reviews-summary">
+                <div class="rating-overview">
+                  <div class="overall-rating">
+                    <span class="rating-number">4.8</span>
+                    <div class="stars">
+                      <span class="material-symbols-outlined star">star</span>
+                      <span class="material-symbols-outlined star">star</span>
+                      <span class="material-symbols-outlined star">star</span>
+                      <span class="material-symbols-outlined star">star</span>
+                      <span class="material-symbols-outlined star">star</span>
+                    </div>
+                    <span class="total-reviews">2,847 total ratings</span>
+                  </div>
+                </div>
+                <div class="rating-breakdown">
+                  <div class="rating-bar">
+                    <span>5 stars</span>
+                    <div class="bar">
+                      <div class="bar-fill" style="width: 75%"></div>
+                    </div>
+                    <span>75%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span>4 stars</span>
+                    <div class="bar">
+                      <div class="bar-fill" style="width: 18%"></div>
+                    </div>
+                    <span>18%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span>3 stars</span>
+                    <div class="bar">
+                      <div class="bar-fill" style="width: 5%"></div>
+                    </div>
+                    <span>5%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span>2 stars</span>
+                    <div class="bar">
+                      <div class="bar-fill" style="width: 1%"></div>
+                    </div>
+                    <span>1%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span>1 star</span>
+                    <div class="bar">
+                      <div class="bar-fill" style="width: 1%"></div>
+                    </div>
+                    <span>1%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="reviews-list">
+              <div class="review-item">
+                <div class="review-header">
+                  <div class="reviewer-info">
+                    <div class="reviewer-avatar">JD</div>
+                    <div>
+                      <h4>John Doe</h4>
+                      <div class="review-rating">
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined star">star</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="review-date">2 weeks ago</span>
+                </div>
+                <p class="review-text">Excellent course! Sarah explains complex React concepts in a very clear and practical way. The projects are challenging but rewarding. I've learned so much about advanced React patterns and performance optimization.</p>
+              </div>
+
+              <div class="review-item">
+                <div class="review-header">
+                  <div class="reviewer-info">
+                    <div class="reviewer-avatar">MJ</div>
+                    <div>
+                      <h4>Maria Johnson</h4>
+                      <div class="review-rating">
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined star">star</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="review-date">1 month ago</span>
+                </div>
+                <p class="review-text">This course took my React skills to the next level. The instructor covers everything from hooks to performance optimization. The real-world projects helped me understand how to apply these concepts in practice.</p>
+              </div>
+
+              <div class="review-item">
+                <div class="review-header">
+                  <div class="reviewer-info">
+                    <div class="reviewer-avatar">AS</div>
+                    <div>
+                      <h4>Alex Smith</h4>
+                      <div class="review-rating">
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined star">star</span>
+                        <span class="material-symbols-outlined">star_outline</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="review-date">3 weeks ago</span>
+                </div>
+                <p class="review-text">Great content and well-structured course. The instructor is knowledgeable and explains concepts clearly. Some sections could be a bit more detailed, but overall very good value for money.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="course-sidebar">
+      <div class="purchase-card">
+        <div class="course-price">
+          <span class="current-price">$89.99</span>
+          <span class="original-price">$199.99</span>
+          <span class="discount-badge">55% off</span>
+        </div>
+        
+        <div class="purchase-features">
+          <div class="feature-item">
+            <span class="material-symbols-outlined">check</span>
+            <span>Full lifetime access</span>
+          </div>
+          <div class="feature-item">
+            <span class="material-symbols-outlined">check</span>
+            <span>Access on mobile and TV</span>
+          </div>
+          <div class="feature-item">
+            <span class="material-symbols-outlined">check</span>
+            <span>Certificate of completion</span>
+          </div>
+          <div class="feature-item">
+            <span class="material-symbols-outlined">check</span>
+            <span>30-Day Money-back guarantee</span>
+          </div>
+        </div>
+
+        <div class="purchase-actions">
+          <button class="enroll-btn">Enroll Now</button>
+          <button class="wishlist-btn">
+            <span class="material-symbols-outlined">favorite_border</span>
+            Add to Wishlist
+          </button>
+        </div>
+
+        <div class="guarantee">
+          <span class="material-symbols-outlined">verified</span>
+          <span>30-Day Money-back Guarantee</span>
+        </div>
+      </div>
+
+      <div class="course-includes">
+        <h3>This course includes:</h3>
+        <div class="includes-list">
+          <div class="include-item">
+            <span class="material-symbols-outlined">schedule</span>
+            <span>15.5 hours on-demand video</span>
+          </div>
+          <div class="include-item">
+            <span class="material-symbols-outlined">description</span>
+            <span>156 downloadable resources</span>
+          </div>
+          <div class="include-item">
+            <span class="material-symbols-outlined">all_inclusive</span>
+            <span>Full lifetime access</span>
+          </div>
+          <div class="include-item">
+            <span class="material-symbols-outlined">devices</span>
+            <span>Access on mobile and TV</span>
+          </div>
+          <div class="include-item">
+            <span class="material-symbols-outlined">assignment</span>
+            <span>Assignments</span>
+          </div>
+          <div class="include-item">
+            <span class="material-symbols-outlined">card_membership</span>
+            <span>Certificate of completion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="related-courses">
+        <h3>Students also bought</h3>
+        <div class="related-course">
+          <div class="course-thumbnail">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div class="course-info">
+            <h4>React Native Mastery</h4>
+            <p>Build mobile apps with React Native</p>
+            <div class="course-meta">
+              <span>4.7 ★ (5,678 ratings)</span>
+              <span class="price">$79.99</span>
+            </div>
+          </div>
+        </div>
+        <div class="related-course">
+          <div class="course-thumbnail">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <div class="course-info">
+            <h4>JavaScript ES6+ Mastery</h4>
+            <p>Modern JavaScript for React developers</p>
+            <div class="course-meta">
+              <span>4.8 ★ (3,456 ratings)</span>
+              <span class="price">$69.99</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./course-preview.js"></script>
+</body>
+</html> 

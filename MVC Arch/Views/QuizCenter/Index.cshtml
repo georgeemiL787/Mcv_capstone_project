@@ -1,0 +1,61 @@
+@{
+    ViewData["Title"] = "Quiz Center - Full Courses Platform";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/quiz-center.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+}
+
+
+
+<div class="profile-layout">
+    <!-- Left Sidebar -->
+    <div class="profile-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-avatar">
+                <div class="avatar-placeholder">GE</div>
+            </div>
+            <h3>George Emil</h3>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "QuizCenter")" class="nav-item active" data-page="quiz-center">
+                <span class="material-symbols-outlined nav-icon">quiz</span>
+                Quiz Center
+            </a>
+            <a href="@Url.Action("UpcomingQuizzes", "QuizCenter")" class="nav-item" data-page="upcoming-quizzes">
+                <span class="material-symbols-outlined nav-icon">schedule</span>
+                Upcoming Quizzes
+            </a>
+            <a href="@Url.Action("QuizHistory", "QuizCenter")" class="nav-item" data-page="quiz-history">
+                <span class="material-symbols-outlined nav-icon">history</span>
+                Quiz History
+            </a>
+            <a href="@Url.Action("Performance", "QuizCenter")" class="nav-item" data-page="performance">
+                <span class="material-symbols-outlined nav-icon">analytics</span>
+                Performance
+            </a>
+            <a href="@Url.Action("Practice", "QuizCenter")" class="nav-item" data-page="practice">
+                <span class="material-symbols-outlined nav-icon">school</span>
+                Practice Mode
+            </a>
+            <a href="@Url.Action("Settings", "QuizCenter")" class="nav-item" data-page="settings">
+                <span class="material-symbols-outlined nav-icon">settings</span>
+                Quiz Settings
+            </a>
+        </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="profile-content" id="main-content">
+        <!-- Content will be loaded here -->
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/quiz-center.js"></script>
+} 

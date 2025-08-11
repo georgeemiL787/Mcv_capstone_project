@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuIZ Learning Platform - Master Skills with AI-Powered Education</title>
+  <link rel="stylesheet" href="./Home.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+</head>
+<body>
+  <!-- Header Navigation -->
+  <nav id="header-nav">
+    <div class="nav-right">
+      <img src="../../assets/images/luIZ_without_bg.png" alt="LuIZ Learning" onclick="window.location.href='./index.html'" style="cursor: pointer;">
+      <button class="nav-button">Explore</button>
+      <form id="search-bar">
+        <div>
+          <input type="text" placeholder="Search for courses..." class="search-input">
+          <span class="material-symbols-outlined">search</span>
+        </div>
+      </form>
+    </div>
+    <div class="nav-buttons">
+      <button class="nav-button" onclick="window.location.href='../Login/index.html'">Log In</button>
+      <button class="signup nav-button" onclick="window.location.href='../Signup/index.html'">Sign Up</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Master Skills with 
+          <span class="gradient-text">AI-Powered</span> 
+          Education
+        </h1>
+        <p class="hero-subtitle">
+          Join thousands of learners mastering in-demand skills with personalized AI recommendations, 
+          interactive quizzes, and real-world career simulations.
+        </p>
+        <div class="hero-actions">
+          <button class="cta-btn primary" onclick="window.location.href='../Signup/index.html'">
+            <span class="material-symbols-outlined">rocket_launch</span>
+            Start Learning Free
+          </button>
+          <button class="cta-btn secondary" onclick="window.location.href='../CoursePreview/index.html'">
+            <span class="material-symbols-outlined">play_circle</span>
+            Explore Courses
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">50K+</span>
+            <span class="stat-label">Active Learners</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Expert Courses</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">95%</span>
+            <span class="stat-label">Success Rate</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-cards">
+          <div class="card card-1">
+            <span class="material-symbols-outlined">psychology</span>
+            <span>AI Quiz</span>
+          </div>
+          <div class="card card-2">
+            <span class="material-symbols-outlined">trending_up</span>
+            <span>Progress</span>
+          </div>
+          <div class="card card-3">
+            <span class="material-symbols-outlined">emoji_events</span>
+            <span>Achievements</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Choose LuIZ Learning?</h2>
+        <p>Experience the future of education with cutting-edge AI technology</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <span class="material-symbols-outlined">psychology</span>
+          </div>
+          <h3>AI-Powered Learning</h3>
+          <p>Personalized recommendations and adaptive learning paths tailored to your goals and progress.</p>
+          <a href="../UserDashboard/index.html" class="feature-link">Explore Dashboard</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <span class="material-symbols-outlined">quiz</span>
+          </div>
+          <h3>Smart Quiz Generator</h3>
+          <p>AI-generated quizzes that adapt to your learning style and help reinforce key concepts.</p>
+          <a href="../QuizCenter/index.html" class="feature-link">Try AI Quiz</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <span class="material-symbols-outlined">timeline</span>
+          </div>
+          <h3>Skill Roadmaps</h3>
+          <p>Visual learning paths that guide you from beginner to expert with clear milestones.</p>
+          <a href="../UserDashboard/index.html" class="feature-link">View Roadmap</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <span class="material-symbols-outlined">groups</span>
+          </div>
+          <h3>Community Learning</h3>
+          <p>Connect with peers, join discussions, and compete on leaderboards for motivation.</p>
+          <a href="../Leaderboard/index.html" class="feature-link">See Leaderboard</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <span class="material-symbols-outlined">work</span>
+          </div>
+          <h3>Career Simulator</h3>
+          <p>Practice real-world scenarios and apply your skills in a safe, simulated environment.</p>
+          <a href="../CareerSimulator/index.html" class="feature-link">Start Simulation</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <span class="material-symbols-outlined">card_membership</span>
+          </div>
+          <h3>Certificates & Achievements</h3>
+          <p>Earn recognized certificates and unlock achievements as you progress through courses.</p>
+          <a href="../MyCourses/index.html" class="feature-link">View Certificates</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Courses Section -->
+  <section class="courses-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Trending Courses</h2>
+        <p>Most popular courses chosen by our community</p>
+      </div>
+      <div class="courses-grid">
+        <div class="course-card">
+          <div class="course-image">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop" alt="React Development">
+            <div class="course-overlay">
+              <span class="course-level">Intermediate</span>
+            </div>
+          </div>
+          <div class="course-content">
+            <h3>Advanced React Development</h3>
+            <p>Master React hooks, context, and advanced patterns for building scalable applications.</p>
+            <div class="course-meta">
+              <span class="meta-item">
+                <span class="material-symbols-outlined">schedule</span>
+                12 weeks
+              </span>
+              <span class="meta-item">
+                <span class="material-symbols-outlined">star</span>
+                4.8 (2.8k)
+              </span>
+            </div>
+            <button class="course-btn" onclick="window.location.href='../Enroll/index.html'">Enroll Now</button>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-image">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop" alt="Python Programming">
+            <div class="course-overlay">
+              <span class="course-level">Beginner</span>
+            </div>
+          </div>
+          <div class="course-content">
+            <h3>Python for Data Science</h3>
+            <p>Learn Python fundamentals and data analysis with pandas, numpy, and matplotlib.</p>
+            <div class="course-meta">
+              <span class="meta-item">
+                <span class="material-symbols-outlined">schedule</span>
+                8 weeks
+              </span>
+              <span class="meta-item">
+                <span class="material-symbols-outlined">star</span>
+                4.9 (1.5k)
+              </span>
+            </div>
+            <button class="course-btn" onclick="window.location.href='../Enroll/index.html'">Enroll Now</button>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-image">
+            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=250&fit=crop" alt="Mobile Development">
+            <div class="course-overlay">
+              <span class="course-level">Advanced</span>
+            </div>
+          </div>
+          <div class="course-content">
+            <h3>Mobile App Development</h3>
+            <p>Build native and cross-platform mobile apps with React Native and Flutter.</p>
+            <div class="course-meta">
+              <span class="meta-item">
+                <span class="material-symbols-outlined">schedule</span>
+                16 weeks
+              </span>
+              <span class="meta-item">
+                <span class="material-symbols-outlined">star</span>
+                4.7 (1.2k)
+              </span>
+            </div>
+            <button class="course-btn" onclick="window.location.href='../Enroll/index.html'">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="courses-cta">
+        <button class="view-all-btn" onclick="window.location.href='../CoursePreview/index.html'">
+          View All Courses
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Our Learners Say</h2>
+        <p>Success stories from our community</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <p>"The AI-powered quizzes helped me understand React concepts much faster. The personalized learning path was exactly what I needed!"</p>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face" alt="Alex Johnson">
+            <div class="author-info">
+              <h4>Alex Johnson</h4>
+              <span>Frontend Developer</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <p>"The career simulator gave me real-world experience before I even started my first job. Highly recommended!"</p>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=60&h=60&fit=crop&crop=face" alt="Sarah Chen">
+            <div class="author-info">
+              <h4>Sarah Chen</h4>
+              <span>Data Scientist</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <p>"The skill roadmap helped me stay focused and motivated. I can see my progress clearly and know exactly what to learn next."</p>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" alt="Mike Rodriguez">
+            <div class="author-info">
+              <h4>Mike Rodriguez</h4>
+              <span>Full Stack Developer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Transform Your Career?</h2>
+        <p>Join thousands of learners who are already mastering new skills with AI-powered education.</p>
+        <div class="cta-actions">
+          <button class="cta-btn primary" onclick="window.location.href='../Signup/index.html'">
+            <span class="material-symbols-outlined">rocket_launch</span>
+            Start Your Journey
+          </button>
+          <button class="cta-btn secondary" onclick="window.location.href='../Contact/index.html'">
+            <span class="material-symbols-outlined">support_agent</span>
+            Get Support
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="../../assets/images/luIZ_without_bg.png" alt="LuIZ Learning" class="footer-logo">
+          <p>Empowering learners worldwide with AI-powered education and personalized learning experiences.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="../CoursePreview/index.html">Browse Courses</a></li>
+            <li><a href="../Leaderboard/index.html">Leaderboards</a></li>
+            <li><a href="../CareerSimulator/index.html">Career Simulator</a></li>
+            <li><a href="../QuizCenter/index.html">AI Quiz</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="../Contact/index.html">Contact Us</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <span class="material-symbols-outlined">facebook</span>
+            </a>
+            <a href="#" class="social-link">
+              <span class="material-symbols-outlined">twitter</span>
+            </a>
+            <a href="#" class="social-link">
+              <span class="material-symbols-outlined">linkedin</span>
+            </a>
+            <a href="#" class="social-link">
+              <span class="material-symbols-outlined">youtube_activity</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 LuIZ Learning Platform. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./home.js"></script>
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Courses - LuIZ Learning Platform</title>
+    <link rel="stylesheet" href="../Home/Home.css">
+    <link rel="stylesheet" href="./mycourses.css">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <nav id="header-nav">
+        <div class="nav-right">
+            <img src="../../assets/images/luIZ_without_bg.png" alt="LuIZ Learning">
+            <button class="nav-button">Explore</button>
+            <form id="search-bar">
+                <div>
+                    <input type="text" placeholder="Search for courses..." class="search-input">
+                    <span class="material-symbols-outlined">search</span>
+                </div>
+            </form>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-button">Log In</button>
+            <button class="signup nav-button">Sign Up</button>
+        </div>
+    </nav>
+
+    <div class="mycourses-container">
+        <!-- Header Section -->
+        <div class="mycourses-header">
+            <div class="header-content">
+                <h1>My Learning Journey</h1>
+                <p>Track your progress and continue your education</p>
+                <div class="stats-overview">
+                    <div class="stat-card">
+                        <span class="material-symbols-outlined">school</span>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>Enrolled Courses</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="material-symbols-outlined">trending_up</span>
+                        <div class="stat-info">
+                            <h3>8</h3>
+                            <p>In Progress</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="material-symbols-outlined">emoji_events</span>
+                        <div class="stat-info">
+                            <h3>4</h3>
+                            <p>Completed</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="material-symbols-outlined">schedule</span>
+                        <div class="stat-info">
+                            <h3>156</h3>
+                            <p>Hours Learned</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="courses-controls">
+            <div class="filter-section">
+                <button class="filter-btn active" data-filter="all">All Courses</button>
+                <button class="filter-btn" data-filter="in-progress">In Progress</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+                <button class="filter-btn" data-filter="favorites">Favorites</button>
+            </div>
+            <div class="search-section">
+                <div class="search-input-wrapper">
+                    <span class="material-symbols-outlined">search</span>
+                    <input type="text" placeholder="Search my courses..." class="course-search">
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Grid -->
+        <div class="courses-grid">
+            <!-- In Progress Course -->
+            <div class="course-card in-progress" data-category="in-progress">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop" alt="React Development">
+                    <div class="course-overlay">
+                        <span class="course-status">In Progress</span>
+                        <div class="course-actions">
+                            <button class="action-btn continue-btn">
+                                <span class="material-symbols-outlined">play_arrow</span>
+                                Continue
+                            </button>
+                            <button class="action-btn favorite-btn">
+                                <span class="material-symbols-outlined">favorite_border</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-content">
+                    <div class="course-header">
+                        <h3>Advanced Web Development with React</h3>
+                        <div class="course-meta">
+                            <span class="instructor">by Sarah Johnson</span>
+                            <span class="level">Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-info">
+                            <span class="progress-text">75% Complete</span>
+                            <span class="time-remaining">2 weeks left</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="course-stats">
+                        <span class="stat">
+                            <span class="material-symbols-outlined">schedule</span>
+                            8 of 12 weeks
+                        </span>
+                        <span class="stat">
+                            <span class="material-symbols-outlined">video_library</span>
+                            32 of 48 lessons
+                        </span>
+                    </div>
+                    <div class="course-actions-bottom">
+                        <button class="btn-primary">Continue Learning</button>
+                        <button class="btn-secondary">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- In Progress Course 2 -->
+            <div class="course-card in-progress" data-category="in-progress">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop" alt="Python Programming">
+                    <div class="course-overlay">
+                        <span class="course-status">In Progress</span>
+                        <div class="course-actions">
+                            <button class="action-btn continue-btn">
+                                <span class="material-symbols-outlined">play_arrow</span>
+                                Continue
+                            </button>
+                            <button class="action-btn favorite-btn">
+                                <span class="material-symbols-outlined">favorite</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-content">
+                    <div class="course-header">
+                        <h3>Python for Data Science</h3>
+                        <div class="course-meta">
+                            <span class="instructor">by Michael Chen</span>
+                            <span class="level">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-info">
+                            <span class="progress-text">45% Complete</span>
+                            <span class="time-remaining">4 weeks left</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div class="course-stats">
+                        <span class="stat">
+                            <span class="material-symbols-outlined">schedule</span>
+                            6 of 12 weeks
+                        </span>
+                        <span class="stat">
+                            <span class="material-symbols-outlined">video_library</span>
+                            18 of 40 lessons
+                        </span>
+                    </div>
+                    <div class="course-actions-bottom">
+                        <button class="btn-primary">Continue Learning</button>
+                        <button class="btn-secondary">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completed Course -->
+            <div class="course-card completed" data-category="completed">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=400&h=250&fit=crop" alt="JavaScript Fundamentals">
+                    <div class="course-overlay">
+                        <span class="course-status completed">Completed</span>
+                        <div class="course-actions">
+                            <button class="action-btn certificate-btn">
+                                <span class="material-symbols-outlined">card_membership</span>
+                                Certificate
+                            </button>
+                            <button class="action-btn favorite-btn">
+                                <span class="material-symbols-outlined">favorite</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-content">
+                    <div class="course-header">
+                        <h3>JavaScript Fundamentals</h3>
+                        <div class="course-meta">
+                            <span class="instructor">by David Wilson</span>
+                            <span class="level">Beginner</span>
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-info">
+                            <span class="progress-text">100% Complete</span>
+                            <span class="completion-date">Completed 2 weeks ago</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="course-stats">
+                        <span class="stat">
+                            <span class="material-symbols-outlined">schedule</span>
+                            8 weeks total
+                        </span>
+                        <span class="stat">
+                            <span class="material-symbols-outlined">grade</span>
+                            4.8/5 rating
+                        </span>
+                    </div>
+                    <div class="course-actions-bottom">
+                        <button class="btn-primary">View Certificate</button>
+                        <button class="btn-secondary">Rate Course</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completed Course 2 -->
+            <div class="course-card completed" data-category="completed">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=250&fit=crop" alt="UI/UX Design">
+                    <div class="course-overlay">
+                        <span class="course-status completed">Completed</span>
+                        <div class="course-actions">
+                            <button class="action-btn certificate-btn">
+                                <span class="material-symbols-outlined">card_membership</span>
+                                Certificate
+                            </button>
+                            <button class="action-btn favorite-btn">
+                                <span class="material-symbols-outlined">favorite_border</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-content">
+                    <div class="course-header">
+                        <h3>UI/UX Design Principles</h3>
+                        <div class="course-meta">
+                            <span class="instructor">by Emma Rodriguez</span>
+                            <span class="level">Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-info">
+                            <span class="progress-text">100% Complete</span>
+                            <span class="completion-date">Completed 1 month ago</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="course-stats">
+                        <span class="stat">
+                            <span class="material-symbols-outlined">schedule</span>
+                            10 weeks total
+                        </span>
+                        <span class="stat">
+                            <span class="material-symbols-outlined">grade</span>
+                            4.9/5 rating
+                        </span>
+                    </div>
+                    <div class="course-actions-bottom">
+                        <button class="btn-primary">View Certificate</button>
+                        <button class="btn-secondary">Rate Course</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- In Progress Course 3 -->
+            <div class="course-card in-progress" data-category="in-progress">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=250&fit=crop" alt="Mobile Development">
+                    <div class="course-overlay">
+                        <span class="course-status">In Progress</span>
+                        <div class="course-actions">
+                            <button class="action-btn continue-btn">
+                                <span class="material-symbols-outlined">play_arrow</span>
+                                Continue
+                            </button>
+                            <button class="action-btn favorite-btn">
+                                <span class="material-symbols-outlined">favorite_border</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-content">
+                    <div class="course-header">
+                        <h3>Mobile App Development</h3>
+                        <div class="course-meta">
+                            <span class="instructor">by Lisa Thompson</span>
+                            <span class="level">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-info">
+                            <span class="progress-text">30% Complete</span>
+                            <span class="time-remaining">6 weeks left</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="course-stats">
+                        <span class="stat">
+                            <span class="material-symbols-outlined">schedule</span>
+                            4 of 12 weeks
+                        </span>
+                        <span class="stat">
+                            <span class="material-symbols-outlined">video_library</span>
+                            12 of 40 lessons
+                        </span>
+                    </div>
+                    <div class="course-actions-bottom">
+                        <button class="btn-primary">Continue Learning</button>
+                        <button class="btn-secondary">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completed Course 3 -->
+            <div class="course-card completed" data-category="completed">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop" alt="Data Analysis">
+                    <div class="course-overlay">
+                        <span class="course-status completed">Completed</span>
+                        <div class="course-actions">
+                            <button class="action-btn certificate-btn">
+                                <span class="material-symbols-outlined">card_membership</span>
+                                Certificate
+                            </button>
+                            <button class="action-btn favorite-btn">
+                                <span class="material-symbols-outlined">favorite</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-content">
+                    <div class="course-header">
+                        <h3>Data Analysis with Excel</h3>
+                        <div class="course-meta">
+                            <span class="instructor">by James Anderson</span>
+                            <span class="level">Beginner</span>
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-info">
+                            <span class="progress-text">100% Complete</span>
+                            <span class="completion-date">Completed 3 weeks ago</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="course-stats">
+                        <span class="stat">
+                            <span class="material-symbols-outlined">schedule</span>
+                            6 weeks total
+                        </span>
+                        <span class="stat">
+                            <span class="material-symbols-outlined">grade</span>
+                            4.7/5 rating
+                        </span>
+                    </div>
+                    <div class="course-actions-bottom">
+                        <button class="btn-primary">View Certificate</button>
+                        <button class="btn-secondary">Rate Course</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="load-more-section">
+            <button class="load-more-btn">
+                <span class="material-symbols-outlined">expand_more</span>
+                Load More Courses
+            </button>
+        </div>
+    </div>
+
+    <script src="./mycourses.js"></script>
+</body>
+</html> 

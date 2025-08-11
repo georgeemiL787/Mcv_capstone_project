@@ -1,0 +1,242 @@
+@{
+    ViewData["Title"] = "Privacy - Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString()?.ToLower();
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/profile.css">
+    <link rel="stylesheet" href="~/css/profile-shared.css">
+    <link rel="stylesheet" href="~/css/privacy.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+}
+
+<div class="profile-layout">
+    <!-- Left Sidebar -->
+    <div class="profile-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-avatar">
+                <div class="avatar-placeholder">GE</div>
+            </div>
+            <h3>George Emil</h3>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "Profile")" class="nav-item @(currentAction == "index" ? "active" : "")" data-page="profile">
+                <span class="material-symbols-outlined nav-icon">person</span>
+                Profile
+            </a>
+            <a href="@Url.Action("Photo", "Profile")" class="nav-item @(currentAction == "photo" ? "active" : "")" data-page="photo">
+                <span class="material-symbols-outlined nav-icon">photo_camera</span>
+                Photo
+            </a>
+            <a href="@Url.Action("AccountSecurity", "Profile")" class="nav-item @(currentAction == "accountsecurity" ? "active" : "")" data-page="account-security">
+                <span class="material-symbols-outlined nav-icon">security</span>
+                Account Security
+            </a>
+            <a href="@Url.Action("Subscriptions", "Profile")" class="nav-item @(currentAction == "subscriptions" ? "active" : "")" data-page="subscriptions">
+                <span class="material-symbols-outlined nav-icon">subscriptions</span>
+                Subscriptions
+            </a>
+            <a href="@Url.Action("PaymentMethods", "Profile")" class="nav-item @(currentAction == "paymentmethods" ? "active" : "")" data-page="payment-methods">
+                <span class="material-symbols-outlined nav-icon">account_balance_wallet</span>
+                Payment Methods
+            </a>
+            <a href="@Url.Action("Privacy", "Profile")" class="nav-item @(currentAction == "privacy" ? "active" : "")" data-page="privacy">
+                <span class="material-symbols-outlined nav-icon">lock</span>
+                Privacy
+            </a>
+            <a href="@Url.Action("NotificationPreferences", "Profile")" class="nav-item @(currentAction == "notificationpreferences" ? "active" : "")" data-page="notification-preferences">
+                <span class="material-symbols-outlined nav-icon">notifications</span>
+                Notification Preferences
+            </a>
+        </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="profile-content">
+        <div class="privacy-container">
+    <div class="privacy-header">
+        <h1>Privacy Settings</h1>
+        <p>Control your privacy and data sharing preferences</p>
+    </div>
+    
+    <div class="privacy-sections">
+        <div class="privacy-section">
+            <div class="section-header">
+                <h3>Profile Visibility</h3>
+                <p>Control who can see your profile information</p>
+            </div>
+            <div class="privacy-options">
+                <div class="privacy-option">
+                    <div class="option-info">
+                        <h4>Profile Picture</h4>
+                        <p>Allow other users to see your profile picture</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="privacy-option">
+                    <div class="option-info">
+                        <h4>Course Progress</h4>
+                        <p>Show your course completion status to other users</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="privacy-option">
+                    <div class="option-info">
+                        <h4>Achievements</h4>
+                        <p>Display your earned certificates and badges</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="privacy-option">
+                    <div class="option-info">
+                        <h4>Learning Activity</h4>
+                        <p>Show when you're actively learning</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="privacy-section">
+            <div class="section-header">
+                <h3>Data Sharing</h3>
+                <p>Manage how your data is used and shared</p>
+            </div>
+            <div class="privacy-options">
+                <div class="privacy-option">
+                    <div class="option-info">
+                        <h4>Analytics Participation</h4>
+                        <p>Help improve the platform by sharing anonymous usage data</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="privacy-option">
+                    <div class="option-info">
+                        <h4>Marketing Communications</h4>
+                        <p>Receive emails about new courses and promotions</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="privacy-option">
+                    <div class="option-info">
+                        <h4>Third-party Services</h4>
+                        <p>Allow integration with external learning tools</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="privacy-section">
+            <div class="section-header">
+                <h3>Social Features</h3>
+                <p>Control your social learning experience</p>
+            </div>
+            <div class="privacy-options">
+                <div class="privacy-option">
+                    <div class="option-info">
+                        <h4>Discussion Participation</h4>
+                        <p>Allow other users to see your forum posts</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="privacy-option">
+                    <div class="option-info">
+                        <h4>Study Groups</h4>
+                        <p>Show your participation in study groups</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="privacy-option">
+                    <div class="option-info">
+                        <h4>Peer Reviews</h4>
+                        <p>Allow others to review your assignments</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="privacy-section">
+            <div class="section-header">
+                <h3>Data Export & Deletion</h3>
+                <p>Manage your personal data</p>
+            </div>
+            <div class="data-actions">
+                <div class="data-action">
+                    <div class="action-info">
+                        <h4>Export My Data</h4>
+                        <p>Download a copy of all your personal data</p>
+                    </div>
+                    <button class="btn-secondary">Export Data</button>
+                </div>
+                
+                <div class="data-action">
+                    <div class="action-info">
+                        <h4>Delete My Account</h4>
+                        <p>Permanently remove your account and all data</p>
+                    </div>
+                    <button class="btn-danger">Delete Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="privacy-actions">
+        <button class="btn-primary">Save Changes</button>
+        <button class="btn-secondary">Reset to Defaults</button>
+    </div>
+    
+    <div class="privacy-notice">
+        <h4>Privacy Notice</h4>
+        <p>Your privacy is important to us. We collect and use your data to provide and improve our learning services. You can control your privacy settings at any time. For more information, please read our <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>.</p>
+    </div>
+</div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/privacy.js"></script>
+}
