@@ -1,6 +1,7 @@
+@model IEnumerable<object>
 @{
     ViewData["Title"] = "My Courses - Instructor Dashboard";
-    Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section Styles {
@@ -8,125 +9,141 @@
     <link rel="stylesheet" href="~/css/courses.css">
 }
 
-<div class="instructor-dashboard-container">
-    <!-- Page Header -->
-    <div class="dashboard-header">
-        <h1>My Courses</h1>
-        <p>Manage your courses, upload content, and track performance.</p>
-        <button class="primary-btn">
-            <span class="material-symbols-outlined">add</span>
-            Create New Course
-        </button>
+<div class="instructor-layout">
+    <!-- Left Sidebar -->
+    <div class="instructor-sidebar">
+        <div class="sidebar-header">
+            <div class="instructor-avatar">
+                <div class="avatar-placeholder">JD</div>
+            </div>
+            <h3>John Doe</h3>
+            <p>Instructor</p>
+            <a href="#" class="view-profile-link">View Profile</a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">dashboard</span>
+                Dashboard
+            </a>
+            <a href="@Url.Action("Courses", "InstructorDashboard")" class="nav-item active">
+                <span class="material-symbols-outlined nav-icon">school</span>
+                My Courses
+            </a>
+            <a href="@Url.Action("Enrollments", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">people</span>
+                Enrollments
+            </a>
+            <a href="@Url.Action("Revenue", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">trending_up</span>
+                Revenue
+            </a>
+            <a href="@Url.Action("Discussions", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">forum</span>
+                Q&A/Discussions
+            </a>
+            <a href="@Url.Action("Analytics", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">analytics</span>
+                Analytics
+            </a>
+            <a href="@Url.Action("Quizzes", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">quiz</span>
+                Quizzes
+            </a>
+            <a href="@Url.Action("Settings", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">settings</span>
+                Settings
+            </a>
+        </nav>
     </div>
 
-    <!-- Courses Grid -->
-    <div class="courses-grid">
-        <div class="course-card">
-            <div class="course-image">
-                <img src="~/assets/images/AdminPanel_assets/Course Management.png" alt="React Fundamentals">
-                <div class="course-overlay">
-                    <button class="edit-btn">
-                        <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="delete-btn">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
-                </div>
-            </div>
-            <div class="course-content">
-                <h3>React Fundamentals</h3>
-                <p>Learn the basics of React.js and build your first application</p>
-                <div class="course-stats">
-                    <span><span class="material-symbols-outlined">people</span> 342 students</span>
-                    <span><span class="material-symbols-outlined">star</span> 4.9</span>
-                    <span><span class="material-symbols-outlined">attach_money</span> $49</span>
-                </div>
-                <div class="course-actions">
-                    <button class="secondary-btn">Edit Course</button>
-                    <button class="secondary-btn">View Analytics</button>
-                </div>
-            </div>
+    <!-- Main Content Area -->
+    <div class="instructor-content">
+        <div class="content-header">
+            <h1>My Courses</h1>
+            <p>Manage your courses, upload content, and track performance.</p>
+            <a href="@Url.Action("Create", "CourseManagement")" class="primary-btn">
+                <span class="material-symbols-outlined">add</span>
+                Create New Course
+            </a>
         </div>
 
-        <div class="course-card">
-            <div class="course-image">
-                <img src="~/assets/images/AdminPanel_assets/Course Management.png" alt="Python for Beginners">
-                <div class="course-overlay">
-                    <button class="edit-btn">
-                        <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="delete-btn">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
+        <!-- Courses Grid -->
+        <div class="courses-grid">
+            @if (Model != null && Model.Any())
+            {
+                @foreach (dynamic course in Model)
+                {
+                    <div class="course-card" data-course-id="@course.Id">
+                        <div class="course-image">
+                            @if (!string.IsNullOrEmpty(course.ThumbnailUrl))
+                            {
+                                <img src="@course.ThumbnailUrl" alt="@course.Title">
+                            }
+                            else
+                            {
+                                <img src="~/assets/images/AdminPanel_assets/Course Management.png" alt="@course.Title">
+                            }
+                            <div class="course-overlay">
+                                <button class="edit-btn" onclick="editCourse(@course.Id)" title="Edit Course">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                                <button class="delete-btn" onclick="deleteCourse(@course.Id)" title="Delete Course">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="course-content">
+                            <h3>@course.Title</h3>
+                            <p>@course.Description</p>
+                            <div class="course-stats">
+                                <span><span class="material-symbols-outlined">people</span> @course.StudentCount students</span>
+                                <span><span class="material-symbols-outlined">star</span> @course.AverageRating.ToString("F1")</span>
+                                <span><span class="material-symbols-outlined">attach_money</span> $@course.Price</span>
+                            </div>
+                            <div class="course-actions">
+                                <button class="secondary-btn" onclick="editCourse(@course.Id)">Edit Course</button>
+                                <button class="secondary-btn" onclick="viewAnalytics(@course.Id)">View Analytics</button>
+                            </div>
+                            @if (!course.IsPublished)
+                            {
+                                <div class="course-status unpublished">
+                                    <span class="material-symbols-outlined">pending</span>
+                                    Draft
+                                </div>
+                            }
+                            else if (!course.IsApproved)
+                            {
+                                <div class="course-status pending">
+                                    <span class="material-symbols-outlined">schedule</span>
+                                    Pending Approval
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="course-status published">
+                                    <span class="material-symbols-outlined">check_circle</span>
+                                    Published
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="no-courses-message">
+                    <div class="empty-state">
+                        <span class="material-symbols-outlined">school</span>
+                        <h3>No Courses Yet</h3>
+                        <p>You haven't created any courses yet. Start building your first course to begin your teaching journey!</p>
+                        <a href="@Url.Action("Create", "CourseManagement")" class="primary-btn">
+                            <span class="material-symbols-outlined">add</span>
+                            Create Your First Course
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="course-content">
-                <h3>Python for Beginners</h3>
-                <p>Start your programming journey with Python fundamentals</p>
-                <div class="course-stats">
-                    <span><span class="material-symbols-outlined">people</span> 567 students</span>
-                    <span><span class="material-symbols-outlined">star</span> 4.8</span>
-                    <span><span class="material-symbols-outlined">attach_money</span> $39</span>
-                </div>
-                <div class="course-actions">
-                    <button class="secondary-btn">Edit Course</button>
-                    <button class="secondary-btn">View Analytics</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="course-card">
-            <div class="course-image">
-                <img src="~/assets/images/AdminPanel_assets/Course Management.png" alt="Advanced JavaScript">
-                <div class="course-overlay">
-                    <button class="edit-btn">
-                        <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="delete-btn">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
-                </div>
-            </div>
-            <div class="course-content">
-                <h3>Advanced JavaScript</h3>
-                <p>Master advanced JavaScript concepts and modern ES6+ features</p>
-                <div class="course-stats">
-                    <span><span class="material-symbols-outlined">people</span> 289 students</span>
-                    <span><span class="material-symbols-outlined">star</span> 4.7</span>
-                    <span><span class="material-symbols-outlined">attach_money</span> $59</span>
-                </div>
-                <div class="course-actions">
-                    <button class="secondary-btn">Edit Course</button>
-                    <button class="secondary-btn">View Analytics</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="course-card">
-            <div class="course-image">
-                <img src="~/assets/images/AdminPanel_assets/Course Management.png" alt="Data Science Fundamentals">
-                <div class="course-overlay">
-                    <button class="edit-btn">
-                        <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="delete-btn">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
-                </div>
-            </div>
-            <div class="course-content">
-                <h3>Data Science Fundamentals</h3>
-                <p>Introduction to data analysis, visualization, and machine learning</p>
-                <div class="course-stats">
-                    <span><span class="material-symbols-outlined">people</span> 423 students</span>
-                    <span><span class="material-symbols-outlined">star</span> 4.9</span>
-                    <span><span class="material-symbols-outlined">attach_money</span> $79</span>
-                </div>
-                <div class="course-actions">
-                    <button class="secondary-btn">Edit Course</button>
-                    <button class="secondary-btn">View Analytics</button>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>

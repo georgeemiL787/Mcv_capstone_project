@@ -23,7 +23,7 @@
         
         <div class="nav-center">
             <ul class="nav-menu">
-                <li><a href="@Url.Action("Index", "CoursePreview")" class="nav-link">Courses</a></li>
+                <li><a href="@Url.Action("Index", "OurCourses")" class="nav-link">Our Courses</a></li>
                 <li><a href="@Url.Action("Index", "CareerSimulator")" class="nav-link">Career Simulator</a></li>
                 <li><a href="@Url.Action("Index", "QuizCenter")" class="nav-link">Quiz Center</a></li>
                 <li><a href="@Url.Action("Index", "Leaderboard")" class="nav-link">Leaderboard</a></li>
@@ -32,10 +32,12 @@
         </div>
         
         <div class="nav-right">
-            <form id="search-bar">
+            <form id="search-bar" action="@Url.Action("Index", "OurCourses")" method="get">
                 <div>
-                    <input type="text" placeholder="Search for courses..." class="search-input">
-                    <span class="material-symbols-outlined">search</span>
+                    <input type="text" name="searchTerm" placeholder="Search for courses..." class="search-input" id="global-search-input">
+                    <button type="submit" class="search-submit-btn">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
                 </div>
             </form>
             
@@ -111,12 +113,24 @@
             </button>
         </div>
         <ul class="mobile-nav-links">
-            <li><a href="@Url.Action("Index", "CoursePreview")" class="mobile-nav-link">Courses</a></li>
+            <li><a href="@Url.Action("Index", "OurCourses")" class="mobile-nav-link">Our Courses</a></li>
             <li><a href="@Url.Action("Index", "CareerSimulator")" class="mobile-nav-link">Career Simulator</a></li>
             <li><a href="@Url.Action("Index", "QuizCenter")" class="mobile-nav-link">Quiz Center</a></li>
             <li><a href="@Url.Action("Index", "Leaderboard")" class="mobile-nav-link">Leaderboard</a></li>
             <li><a href="@Url.Action("Index", "Contact")" class="mobile-nav-link">Contact</a></li>
         </ul>
+        
+        <!-- Mobile Search Bar -->
+        <div class="mobile-search-bar">
+            <form action="@Url.Action("Index", "OurCourses")" method="get">
+                <div>
+                    <input type="text" name="searchTerm" placeholder="Search for courses..." class="mobile-search-input">
+                    <button type="submit" class="mobile-search-submit-btn">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </div>
+            </form>
+        </div>
         @if (User.Identity?.IsAuthenticated == true)
         {
             <div class="mobile-nav-actions">

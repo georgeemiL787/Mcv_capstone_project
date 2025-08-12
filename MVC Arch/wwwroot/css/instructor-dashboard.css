@@ -208,17 +208,47 @@
     border-bottom: 1px solid #e4defe;
     margin-bottom: 30px;
     text-align: center;
+    position: relative;
+}
+
+.sidebar-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #8f7efc, transparent);
+    border-radius: 1px;
 }
 
 .instructor-avatar {
-    margin-bottom: 15px;
-}
-
-.avatar-placeholder {
+    margin-bottom: 20px;
+    position: relative;
     width: 80px;
     height: 80px;
+    margin: 0 auto 20px auto;
+}
+
+/*.instructor-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #8f7efc, #CDC1FF, #8f7efc);
+    border-radius: 2px;
+    opacity: 0.6;
+}*/
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    background: linear-gradient(135deg, #8f7efc, #7a6bfc);
+    background: linear-gradient(135deg, #8f7efc, #7a6bfc, #CDC1FF);
     color: white;
     display: flex;
     align-items: center;
@@ -226,22 +256,55 @@
     font-size: 24px;
     font-weight: 600;
     font-family: 'Josefin Sans', sans-serif;
-    margin: 0 auto;
+    margin: 0;
+    box-shadow: 0 8px 25px rgba(143, 126, 252, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.avatar-placeholder::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+.avatar-placeholder:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(143, 126, 252, 0.4);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes shimmer {
+    0% { transform: rotate(45deg) translateX(-100%); }
+    50% { transform: rotate(45deg) translateX(100%); }
+    100% { transform: rotate(45deg) translateX(-100%); }
 }
 
 .sidebar-header h3 {
     color: #333446;
-    font-size: 1.3rem;
-    margin: 0 0 8px 0;
+    font-size: 1.4rem;
+    margin: 0 0 10px 0;
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .sidebar-header p {
-    color: #666;
-    font-size: 0.9rem;
-    margin: 0 0 15px 0;
+    color: #8f7efc;
+    font-size: 0.95rem;
+    margin: 0 0 18px 0;
     font-family: 'Source Sans 3', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .view-profile-link {
@@ -249,12 +312,21 @@
     text-decoration: none;
     font-size: 0.9rem;
     font-family: 'Source Sans 3', sans-serif;
-    transition: color 0.2s ease;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    border: 1px solid #8f7efc;
+    border-radius: 20px;
+    background: rgba(143, 126, 252, 0.05);
+    display: inline-block;
 }
 
 .view-profile-link:hover {
-    color: #7a6bfc;
-    text-decoration: underline;
+    color: white;
+    background: #8f7efc;
+    border-color: #8f7efc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(143, 126, 252, 0.3);
 }
 
 /* Sidebar Navigation */
@@ -418,7 +490,7 @@
 .enrollment-avatar {
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, #8f7efc, #7a6bfc);
+    background: linear-gradient(135deg, #8f7efc, #7a6bfc, #CDC1FF);
     border-radius: 50%;
     color: white;
     display: flex;
@@ -427,6 +499,14 @@
     font-size: 14px;
     font-weight: 600;
     font-family: 'Josefin Sans', sans-serif;
+    box-shadow: 0 4px 15px rgba(143, 126, 252, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.enrollment-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(143, 126, 252, 0.35);
 }
 
 .enrollment-info h4 {
@@ -1125,7 +1205,7 @@
 .student-avatar {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #8f7efc, #7a6bfc);
+    background: linear-gradient(135deg, #8f7efc, #7a6bfc, #CDC1FF);
     border-radius: 50%;
     color: white;
     display: flex;
@@ -1134,6 +1214,14 @@
     font-size: 18px;
     font-weight: 600;
     font-family: 'Josefin Sans', sans-serif;
+    box-shadow: 0 5px 18px rgba(143, 126, 252, 0.28);
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    transition: all 0.3s ease;
+}
+
+.student-avatar:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 25px rgba(143, 126, 252, 0.4);
 }
 
 .student-info h4 {
@@ -1187,9 +1275,9 @@
 }
 
 .instructor-avatar {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #8f7efc, #7a6bfc);
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #8f7efc, #7a6bfc, #CDC1FF);
     border-radius: 50%;
     color: white;
     display: flex;
@@ -1198,6 +1286,14 @@
     font-size: 16px;
     font-weight: 600;
     font-family: 'Josefin Sans', sans-serif;
+    box-shadow: 0 4px 15px rgba(143, 126, 252, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.instructor-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(143, 126, 252, 0.35);
 }
 
 .reply-header h4 {
@@ -1314,7 +1410,7 @@
 .enrollments-table .student-avatar {
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, #8f7efc, #7a6bfc);
+    background: linear-gradient(135deg, #8f7efc, #7a6bfc, #CDC1FF);
     border-radius: 50%;
     color: white;
     display: flex;
@@ -1323,6 +1419,14 @@
     font-size: 14px;
     font-weight: 600;
     font-family: 'Josefin Sans', sans-serif;
+    box-shadow: 0 4px 15px rgba(143, 126, 252, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.enrollments-table .student-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(143, 126, 252, 0.35);
 }
 
 .enrollments-table .student-info h4 {

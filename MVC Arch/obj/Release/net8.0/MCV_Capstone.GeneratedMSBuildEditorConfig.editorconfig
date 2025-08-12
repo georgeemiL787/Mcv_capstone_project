@@ -20,8 +20,20 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/Account/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/Account/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/Account/Signup.cshtml]
@@ -38,6 +50,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/Contact/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/CourseApproval/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlQXBwcm92YWxcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/CourseManagement/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlTWFuYWdlbWVudFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/CourseManagement/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlTWFuYWdlbWVudFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/CourseManagement/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlTWFuYWdlbWVudFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/CourseManagement/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlTWFuYWdlbWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/CoursePreview/Index.cshtml]
@@ -98,6 +130,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/MyCourses/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXlDb3Vyc2VzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/OurCourses/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3VyQ291cnNlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/OurCourses/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3VyQ291cnNlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/George/OneDrive/Documents/GitHub/MVC Arch/Views/Profile/AccountSecurity.cshtml]

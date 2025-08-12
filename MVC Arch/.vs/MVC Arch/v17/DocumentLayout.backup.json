@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Controllers\\CourseManagementController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\CourseManagementController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Views\\Account\\Signup.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Account\\Signup.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -13,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Controllers\\AccountController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\AccountController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Models\\User.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,7 +54,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "CourseManagementController.cs",
+              "DocumentMoniker": "C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Controllers\\CourseManagementController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CourseManagementController.cs",
+              "ToolTip": "C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Controllers\\CourseManagementController.cs",
+              "RelativeToolTip": "Controllers\\CourseManagementController.cs",
+              "ViewState": "AgIAAKkBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T13:03:27.075Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
@@ -62,7 +79,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
@@ -74,7 +91,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -86,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "luiz_trialContext.cs",
               "DocumentMoniker": "C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Data\\luiz_trialContext.cs",
               "RelativeDocumentMoniker": "Data\\luiz_trialContext.cs",
@@ -98,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -111,7 +128,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "SignupViewModel.cs",
               "DocumentMoniker": "C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\ViewModels\\SignupViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\SignupViewModel.cs",
@@ -119,12 +136,11 @@
               "RelativeToolTip": "ViewModels\\SignupViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T06:05:52.616Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-12T06:05:52.616Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Signup.cshtml",
               "DocumentMoniker": "C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Views\\Account\\Signup.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\Signup.cshtml",
@@ -132,12 +148,11 @@
               "RelativeToolTip": "Views\\Account\\Signup.cshtml",
               "ViewState": "AgIAADwAAAAAAAAAAAAAAFIAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-12T05:51:08.129Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-12T05:51:08.129Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\George\\OneDrive\\Documents\\GitHub\\MVC Arch\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
@@ -145,8 +160,7 @@
               "RelativeToolTip": "Controllers\\AccountController.cs",
               "ViewState": "AgIAANMAAAAAAAAAAAAjwOkAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T05:50:49.856Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-12T05:50:49.856Z"
             }
           ]
         }

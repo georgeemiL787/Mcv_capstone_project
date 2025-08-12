@@ -147,34 +147,90 @@ function highlightActiveNavLink() {
 
 // Search functionality
 function initializeSearch() {
-    const searchInput = document.querySelector('.search-input');
-    if (searchInput) {
-        searchInput.addEventListener('input', function(e) {
-            const query = e.target.value.trim();
-            if (query.length > 2) {
-                // Implement search functionality here
-                console.log('Searching for:', query);
+    // Desktop search
+    const searchForm = document.getElementById('search-bar');
+    const searchInput = document.getElementById('global-search-input');
+    
+    if (searchForm && searchInput) {
+        // Handle form submission
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (query) {
+                performSearch(query);
             }
         });
         
+        // Handle Enter key press
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
+                e.preventDefault();
                 const query = e.target.value.trim();
                 if (query) {
-                    // Perform search
                     performSearch(query);
                 }
             }
         });
+        
+        // Handle search button click
+        const searchButton = searchForm.querySelector('.search-submit-btn');
+        if (searchButton) {
+            searchButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                const query = searchInput.value.trim();
+                if (query) {
+                    performSearch(query);
+                }
+            });
+        }
+    }
+    
+    // Mobile search
+    const mobileSearchForm = document.querySelector('.mobile-search-bar form');
+    const mobileSearchInput = document.querySelector('.mobile-search-input');
+    
+    if (mobileSearchForm && mobileSearchInput) {
+        // Handle form submission
+        mobileSearchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = mobileSearchInput.value.trim();
+            if (query) {
+                performSearch(query);
+                closeMobileMenu(); // Close mobile menu after search
+            }
+        });
+        
+        // Handle Enter key press
+        mobileSearchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const query = e.target.value.trim();
+                if (query) {
+                    performSearch(query);
+                    closeMobileMenu(); // Close mobile menu after search
+                }
+            }
+        });
+        
+        // Handle search button click
+        const mobileSearchButton = mobileSearchForm.querySelector('.mobile-search-submit-btn');
+        if (mobileSearchButton) {
+            mobileSearchButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                const query = mobileSearchInput.value.trim();
+                if (query) {
+                    performSearch(query);
+                    closeMobileMenu(); // Close mobile menu after search
+                }
+            });
+        }
     }
 }
 
 function performSearch(query) {
-    // Implement your search logic here
-    console.log('Performing search for:', query);
-    
-    // Example: redirect to search results page
-    // window.location.href = `/Search?q=${encodeURIComponent(query)}`;
+    // Redirect to OurCourses with search term
+    const searchUrl = `/OurCourses?searchTerm=${encodeURIComponent(query)}`;
+    window.location.href = searchUrl;
 }
 
 // User authentication functions (to be integrated with your auth system)
@@ -230,3 +286,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+

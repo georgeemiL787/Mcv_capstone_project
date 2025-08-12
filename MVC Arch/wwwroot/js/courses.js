@@ -12,8 +12,8 @@ function setupCourseActions() {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const courseCard = this.closest('.course-card');
-            const courseTitle = courseCard.querySelector('h3').textContent;
-            showNotification(`Editing course: ${courseTitle}`, 'info');
+            const courseId = courseCard.dataset.courseId;
+            editCourse(courseId);
         });
     });
     
@@ -23,15 +23,8 @@ function setupCourseActions() {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const courseCard = this.closest('.course-card');
-            const courseTitle = courseCard.querySelector('h3').textContent;
-            
-            if (confirm(`Are you sure you want to delete "${courseTitle}"?`)) {
-                courseCard.style.animation = 'fadeOut 0.3s ease';
-                setTimeout(() => {
-                    courseCard.remove();
-                    showNotification(`Course "${courseTitle}" deleted successfully`, 'success');
-                }, 300);
-            }
+            const courseId = courseCard.dataset.courseId;
+            deleteCourse(courseId);
         });
     });
     
@@ -41,14 +34,12 @@ function setupCourseActions() {
         btn.addEventListener('click', function() {
             const action = this.textContent.trim();
             const courseCard = this.closest('.course-card');
-            const courseTitle = courseCard.querySelector('h3').textContent;
+            const courseId = courseCard.dataset.courseId;
             
             if (action === 'Edit Course') {
-                showNotification(`Opening editor for: ${courseTitle}`, 'info');
+                editCourse(courseId);
             } else if (action === 'View Analytics') {
-                showNotification(`Loading analytics for: ${courseTitle}`, 'info');
-                // Navigate to analytics section
-                window.location.href = '/InstructorDashboard/Analytics';
+                viewAnalytics(courseId);
             }
         });
     });
@@ -58,14 +49,66 @@ function setupCourseActions() {
 function setupCreateCourseButton() {
     const createButton = document.querySelector('.primary-btn');
     if (createButton) {
-        createButton.addEventListener('click', function() {
-            showNotification('Opening course creation form...', 'info');
-            // Here you would typically open a modal or navigate to a course creation page
-            setTimeout(() => {
-                showNotification('Course creation form opened successfully!', 'success');
-            }, 1000);
+        createButton.addEventListener('click', function(e) {
+            // The button now properly navigates to the Create page via href
+            // This handler is kept for any additional functionality if needed
+            showNotification('Navigating to course creation form...', 'info');
         });
     }
+}
+
+// Edit Course Function
+function editCourse(courseId) {
+    showNotification(`Opening editor for course ID: ${courseId}`, 'info');
+    // Navigate to course edit page
+    window.location.href = `/CourseManagement/Edit/${courseId}`;
+}
+
+// Delete Course Function
+function deleteCourse(courseId) {
+    if (confirm('Are you sure you want to delete this course? This action cannot be undone.')) {
+        // Show loading state
+        showNotification('Deleting course...', 'info');
+        
+        // Make API call to delete course
+        fetch(`/CourseManagement/Delete/${courseId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                showNotification('Course deleted successfully', 'success');
+                // Remove the course card from the UI
+                const courseCard = document.querySelector(`[data-course-id="${courseId}"]`);
+                if (courseCard) {
+                    courseCard.style.animation = 'fadeOut 0.3s ease';
+                    setTimeout(() => {
+                        courseCard.remove();
+                        // Check if no courses left
+                        if (document.querySelectorAll('.course-card').length === 0) {
+                            location.reload(); // Reload to show empty state
+                        }
+                    }, 300);
+                }
+            } else {
+                throw new Error('Failed to delete course');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting course:', error);
+            showNotification('Failed to delete course. Please try again.', 'error');
+        });
+    }
+}
+
+// View Analytics Function
+function viewAnalytics(courseId) {
+    showNotification(`Loading analytics for course ID: ${courseId}`, 'info');
+    // Navigate to analytics section
+    window.location.href = `/InstructorDashboard/Analytics?courseId=${courseId}`;
 }
 
 // Notification System

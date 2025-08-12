@@ -13,6 +13,8 @@ builder.Services.AddControllersWithViews();
 // Add HttpContextAccessor for session management
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<MCV_Capstone.Services.ISessionHelper, MCV_Capstone.Services.SessionHelper>();
+builder.Services.AddScoped<MCV_Capstone.Services.IAdminService, MCV_Capstone.Services.AdminService>();
+builder.Services.AddScoped<MCV_Capstone.Services.ICourseImportService, MCV_Capstone.Services.CourseImportService>();
 
 // Register CORS services (required before using CORS middleware)
 builder.Services.AddCors();

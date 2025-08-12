@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Styles Test</title>
+    
+    <!-- Test the change-password.css -->
+    <link rel="stylesheet" href="wwwroot/css/change-password.css" />
+    
+    <!-- Test the profile.css -->
+    <link rel="stylesheet" href="wwwroot/css/profile.css" />
+    
+    <!-- Test the navbar.css -->
+    <link rel="stylesheet" href="wwwroot/css/navbar.css" />
+    
+    <!-- Test the site.css -->
+    <link rel="stylesheet" href="wwwroot/css/site.css" />
+</head>
+<body style="background: #F5EFFF; font-family: 'Source Sans 3', sans-serif;">
+    <h1 style="text-align: center; color: #333446; margin: 40px 0;">CSS Styles Test Page</h1>
+    
+    <!-- Test Change Password Styles -->
+    <div class="change-password-container">
+        <h1>Change Password</h1>
+        
+        <form>
+            <div class="form-group">
+                <label>Current Password</label>
+                <input type="password" placeholder="Enter your current password" />
+                <span class="text-danger">This field is required</span>
+            </div>
+            
+            <div class="form-group">
+                <label>New Password</label>
+                <input type="password" placeholder="Enter your new password" />
+                <span class="text-danger">Password must be at least 8 characters</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Confirm New Password</label>
+                <input type="password" placeholder="Confirm your new password" />
+                <span class="text-danger">Passwords do not match</span>
+            </div>
+            
+            <div class="btn-container">
+                <button type="submit" class="btn btn-primary">Change Password</button>
+                <a href="#" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Test Profile Styles -->
+    <div class="profile-container" style="margin-top: 60px;">
+        <div class="profile-header">
+            <h1>Profile</h1>
+            <div class="profile-avatar">
+                <div class="avatar-placeholder">J</div>
+            </div>
+        </div>
+        
+        <div class="profile-info">
+            <div class="info-group">
+                <label>Full Name</label>
+                <p>John Doe</p>
+            </div>
+            
+            <div class="info-group">
+                <label>Email</label>
+                <p>john.doe@example.com</p>
+            </div>
+            
+            <div class="info-group">
+                <label>Account Status</label>
+                <p class="status-badge active">Active</p>
+            </div>
+        </div>
+        
+        <div class="profile-actions">
+            <a href="#" class="btn btn-primary">Change Password</a>
+            <a href="#" class="btn btn-secondary">Go to Home</a>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin: 40px 0; color: #666;">
+        <p>If you can see styled forms above, the CSS is working correctly!</p>
+        <p>Check the browser's developer tools (F12) to see if there are any CSS loading errors.</p>
+    </div>
+</body>
+</html>

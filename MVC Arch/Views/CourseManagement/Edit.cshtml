@@ -1,0 +1,182 @@
+@model MCV_Capstone.Models.Course
+
+@{
+    ViewData["Title"] = "Edit Course";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h3 class="mb-0">
+                        <i class="fas fa-edit me-2"></i>Edit Course: @Model.Title
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label asp-for="Title" class="form-label fw-bold">Course Title *</label>
+                                    <input asp-for="Title" class="form-control" placeholder="Enter course title" />
+                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Category" class="form-label fw-bold">Category *</label>
+                                    <select asp-for="Category" class="form-select">
+                                        <option value="">Select Category</option>
+                                        <option value="Programming">Programming</option>
+                                        <option value="Design">Design</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Marketing">Marketing</option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="Health">Health & Fitness</option>
+                                        <option value="Language">Language Learning</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Photography">Photography</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <span asp-validation-for="Category" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ShortDescription" class="form-label fw-bold">Short Description</label>
+                            <textarea asp-for="ShortDescription" class="form-control" rows="2" placeholder="Brief description (max 1000 characters)"></textarea>
+                            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label fw-bold">Full Description *</label>
+                            <textarea asp-for="Description" class="form-control" rows="5" placeholder="Detailed course description"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Price" class="form-label fw-bold">Price ($) *</label>
+                                    <input asp-for="Price" class="form-control" type="number" step="0.01" min="0" placeholder="0.00" />
+                                    <span asp-validation-for="Price" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="DiscountedPrice" class="form-label fw-bold">Discounted Price ($)</label>
+                                    <input asp-for="DiscountedPrice" class="form-control" type="number" step="0.01" min="0" placeholder="0.00" />
+                                    <span asp-validation-for="DiscountedPrice" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Duration" class="form-label fw-bold">Duration (minutes) *</label>
+                                    <input asp-for="Duration" class="form-control" type="number" min="1" placeholder="120" />
+                                    <span asp-validation-for="Duration" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Difficulty" class="form-label fw-bold">Difficulty Level *</label>
+                                    <select asp-for="Difficulty" class="form-select">
+                                        <option value="Beginner">Beginner</option>
+                                        <option value="Intermediate">Intermediate</option>
+                                        <option value="Advanced">Advanced</option>
+                                    </select>
+                                    <span asp-validation-for="Difficulty" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Tags" class="form-label fw-bold">Tags</label>
+                                    <input asp-for="Tags" class="form-control" placeholder="e.g., JavaScript, Web Development, Frontend" />
+                                    <small class="form-text text-muted">Separate tags with commas</small>
+                                    <span asp-validation-for="Tags" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="ThumbnailUrl" class="form-label fw-bold">Thumbnail URL</label>
+                                    <input asp-for="ThumbnailUrl" class="form-control" placeholder="https://example.com/image.jpg" />
+                                    <small class="form-text text-muted">URL to course thumbnail image</small>
+                                    <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="VideoUrl" class="form-label fw-bold">Preview Video URL</label>
+                                    <input asp-for="VideoUrl" class="form-control" placeholder="https://youtube.com/watch?v=..." />
+                                    <small class="form-text text-muted">URL to course preview video</small>
+                                    <span asp-validation-for="VideoUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsPublished" class="form-check-input" type="checkbox" />
+                                <label asp-for="IsPublished" class="form-check-label fw-bold">
+                                    Publish this course
+                                </label>
+                                <small class="form-text text-muted d-block">
+                                    Published courses are visible to students. Unpublished courses are only visible to you.
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Courses
+                            </a>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-save me-2"></i>Update Course
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Auto-calculate discounted price validation
+        document.getElementById('Price').addEventListener('input', function() {
+            const price = parseFloat(this.value) || 0;
+            const discountedPriceInput = document.getElementById('DiscountedPrice');
+            const discountedPrice = parseFloat(discountedPriceInput.value) || 0;
+            
+            if (discountedPrice > price) {
+                discountedPriceInput.setCustomValidity('Discounted price cannot be higher than regular price');
+            } else {
+                discountedPriceInput.setCustomValidity('');
+            }
+        });
+
+        document.getElementById('DiscountedPrice').addEventListener('input', function() {
+            const price = parseFloat(document.getElementById('Price').value) || 0;
+            const discountedPrice = parseFloat(this.value) || 0;
+            
+            if (discountedPrice > price) {
+                this.setCustomValidity('Discounted price cannot be higher than regular price');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+    </script>
+}

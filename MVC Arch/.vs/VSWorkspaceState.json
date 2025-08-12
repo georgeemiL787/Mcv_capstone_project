@@ -1,12 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers",
-    "\\Data",
-    "\\ViewModels",
-    "\\Views",
+    "\\Models\\ViewModels",
     "\\Views\\Account"
   ],
-  "SelectedNode": "\\Views\\Account\\Signup.cshtml",
+  "SelectedNode": "\\wwwroot",
   "PreviewInSolutionExplorer": false
 }

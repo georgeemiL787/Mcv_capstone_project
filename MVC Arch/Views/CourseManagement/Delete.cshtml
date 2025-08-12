@@ -1,0 +1,481 @@
+@model MCV_Capstone.Models.Course
+
+@{
+    ViewData["Title"] = "Delete Course";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <style>
+        /* Delete Course Page - Matching Home Page Design */
+        .delete-course-container {
+            background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 50%, #e8e4ff 100%);
+            min-height: 100vh;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .delete-course-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(143, 126, 252, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(205, 193, 255, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .delete-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header Section */
+        .delete-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .delete-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            color: #333446;
+            line-height: 1.2;
+            font-family: "Josefin Sans", sans-serif;
+        }
+
+        .delete-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin: 0;
+            font-family: "Source Sans 3", sans-serif;
+            font-weight: 400;
+        }
+
+        /* Main Card */
+        .delete-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 60px rgba(239, 68, 68, 0.15),
+                0 10px 40px rgba(143, 126, 252, 0.1);
+            position: relative;
+        }
+
+        .delete-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ef4444, #dc2626, #ef4444);
+        }
+
+        .delete-card-header {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .delete-card-header h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0;
+            font-family: "Josefin Sans", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .delete-card-body {
+            padding: 40px;
+        }
+
+        /* Warning Alert */
+        .warning-alert {
+            background: rgba(245, 158, 11, 0.1);
+            border: 2px solid rgba(245, 158, 11, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            color: #92400e;
+            font-family: "Source Sans 3", sans-serif;
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .warning-alert .material-symbols-outlined {
+            font-size: 1.5rem;
+            color: #f59e0b;
+            margin-top: 2px;
+        }
+
+        .warning-alert strong {
+            color: #d97706;
+        }
+
+        /* Course Details */
+        .course-details {
+            background: rgba(248, 247, 255, 0.5);
+            border: 1px solid rgba(143, 126, 252, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .course-details h5 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333446;
+            margin: 0 0 20px 0;
+            font-family: "Josefin Sans", sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #333446;
+            font-size: 0.9rem;
+            font-family: "Source Sans 3", sans-serif;
+        }
+
+        .detail-value {
+            color: #666;
+            font-size: 1rem;
+            font-family: "Source Sans 3", sans-serif;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: "Source Sans 3", sans-serif;
+        }
+
+        .status-badge.published {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-badge.draft {
+            background: rgba(245, 158, 11, 0.1);
+            color: #d97706;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        /* Deletion Scope */
+        .deletion-scope {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .deletion-scope h6 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #dc2626;
+            margin: 0 0 15px 0;
+            font-family: "Josefin Sans", sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .deletion-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .deletion-list li {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-family: "Source Sans 3", sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .deletion-list li::before {
+            content: '•';
+            color: #ef4444;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Action Buttons */
+        .delete-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-cancel {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: "Source Sans 3", sans-serif;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333446;
+            border: 2px solid rgba(143, 126, 252, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 1);
+            border-color: #8f7efc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(143, 126, 252, 0.2);
+            text-decoration: none;
+            color: #333446;
+        }
+
+        .btn-delete {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: "Source Sans 3", sans-serif;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 25%;
+            animation-delay: 4s;
+        }
+
+        @@keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
+        /* Responsive Design */
+        @@media (max-width: 768px) {
+            .delete-wrapper {
+                padding: 0 15px;
+            }
+            
+            .delete-title {
+                font-size: 2.5rem;
+            }
+            
+            .delete-card-body {
+                padding: 30px 20px;
+            }
+            
+            .delete-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn-cancel,
+            .btn-delete {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        .delete-card {
+            animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @@keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+}
+
+<div class="delete-course-container">
+    <!-- Floating background elements -->
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    
+    <div class="delete-wrapper">
+        <!-- Header Section -->
+        <div class="delete-header">
+            <h1 class="delete-title">Delete Course</h1>
+            <p class="delete-subtitle">Permanently remove this course and all associated data</p>
+        </div>
+
+        <!-- Main Delete Card -->
+        <div class="delete-card">
+            <div class="delete-card-header">
+                <h3>
+                    <span class="material-symbols-outlined">delete_forever</span>
+                    Delete Course
+                    </h3>
+                </div>
+            
+            <div class="delete-card-body">
+                <!-- Warning Alert -->
+                <div class="warning-alert">
+                    <span class="material-symbols-outlined">warning</span>
+                    <div>
+                        <strong>Warning:</strong> This action cannot be undone. All course data, modules, and content will be permanently deleted.
+                    </div>
+                    </div>
+
+                <!-- Course Details -->
+                <div class="course-details">
+                    <h5>
+                        <span class="material-symbols-outlined">info</span>
+                        Course Details
+                    </h5>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Title</span>
+                            <span class="detail-value">@Model.Title</span>
+                            </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Category</span>
+                            <span class="detail-value">@Model.Category</span>
+                            </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Price</span>
+                            <span class="detail-value">$@Model.Price</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Status</span>
+                            <span class="status-badge @(Model.IsPublished ? "published" : "draft")">
+                                    @(Model.IsPublished ? "Published" : "Draft")
+                                </span>
+                            </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Created</span>
+                            <span class="detail-value">@Model.CreatedAt.ToString("MMM dd, yyyy")</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Duration</span>
+                            <span class="detail-value">@Model.Duration minutes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- Deletion Scope -->
+                <div class="deletion-scope">
+                    <h6>
+                        <span class="material-symbols-outlined">delete_sweep</span>
+                        What will be deleted
+                    </h6>
+                    <ul class="deletion-list">
+                            <li>Course information and metadata</li>
+                            <li>All course modules and content</li>
+                            <li>Student enrollments and progress</li>
+                            <li>Course reviews and ratings</li>
+                            <li>All associated files and media</li>
+                        </ul>
+                    </div>
+
+                <!-- Action Buttons -->
+                    <form asp-action="Delete" method="post">
+                    <div class="delete-actions">
+                        <a asp-action="Index" class="btn-cancel">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn-delete" onclick="return confirm('Are you absolutely sure you want to delete this course? This action cannot be undone.')">
+                            <span class="material-symbols-outlined">delete_forever</span>
+                            Delete Course Permanently
+                            </button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>

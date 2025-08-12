@@ -3,17 +3,47 @@
     ViewData["Title"] = "Profile - Full Courses Platform";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
+}
+
 <div class="profile-container">
-    <h1>Profile</h1>
-    <p>Welcome, @Model.FirstName @Model.LastName!</p>
-    <p>Email: @Model.Email</p>
-    <p>Account Status: @Model.AccountStatus</p>
-    <p>Registration Date: @Model.RegistrationDate.ToString("MMMM dd, yyyy")</p>
+    <div class="profile-header">
+        <h1>Profile</h1>
+        <div class="profile-avatar">
+            <div class="avatar-placeholder">@(Model.FirstName?.Length > 0 ? Model.FirstName.Substring(0, 1).ToUpper() : "U")</div>
+        </div>
+    </div>
     
-    @if (Model.LastLogin.HasValue)
-    {
-        <p>Last Login: @Model.LastLogin.Value.ToString("MMMM dd, yyyy 'at' h:mm tt")</p>
-    }
+    <div class="profile-info">
+        <div class="info-group">
+            <label>Full Name</label>
+            <p>@Model.FirstName @Model.LastName</p>
+        </div>
+        
+        <div class="info-group">
+            <label>Email</label>
+            <p>@Model.Email</p>
+        </div>
+        
+        <div class="info-group">
+            <label>Account Status</label>
+            <p class="status-badge @(Model.AccountStatus?.ToLower())">@Model.AccountStatus</p>
+        </div>
+        
+        <div class="info-group">
+            <label>Registration Date</label>
+            <p>@Model.RegistrationDate.ToString("MMMM dd, yyyy")</p>
+        </div>
+        
+        @if (Model.LastLogin.HasValue)
+        {
+            <div class="info-group">
+                <label>Last Login</label>
+                <p>@Model.LastLogin.Value.ToString("MMMM dd, yyyy 'at' h:mm tt")</p>
+            </div>
+        }
+    </div>
     
     <div class="profile-actions">
         <a href="@Url.Action("ChangePassword", "Account")" class="btn btn-primary">Change Password</a>

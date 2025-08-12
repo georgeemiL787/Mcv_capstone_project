@@ -1,0 +1,357 @@
+@model MCV_Capstone.Models.Course
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-4">
+    <!-- Course Header -->
+    <div class="row">
+        <div class="col-lg-8">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="OurCourses">Our Courses</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="OurCourses" asp-route-category="@Model.Category">@Model.Category</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+                </ol>
+            </nav>
+
+            <h1 class="display-5 fw-bold mb-3">@Model.Title</h1>
+            <p class="lead text-muted mb-4">@Model.Description</p>
+
+            <div class="d-flex flex-wrap gap-3 mb-4">
+                <span class="badge bg-primary fs-6">@Model.Category</span>
+                <span class="badge bg-info fs-6">@Model.Difficulty</span>
+                @if (Model.IsFeatured)
+                {
+                    <span class="badge bg-warning fs-6">
+                        <i class="fas fa-star me-1"></i>Featured
+                    </span>
+                }
+                <span class="badge bg-success fs-6">
+                    <i class="fas fa-check-circle me-1"></i>Approved
+                </span>
+            </div>
+
+            <!-- Course Stats -->
+            <div class="row mb-4">
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="text-center p-3 bg-light rounded">
+                        <i class="fas fa-clock fa-2x text-primary mb-2"></i>
+                        <h5 class="mb-1">@Model.Duration</h5>
+                        <small class="text-muted">Minutes</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="text-center p-3 bg-light rounded">
+                        <i class="fas fa-users fa-2x text-success mb-2"></i>
+                        <h5 class="mb-1">@Model.StudentCount</h5>
+                        <small class="text-muted">Students</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="text-center p-3 bg-light rounded">
+                        <i class="fas fa-star fa-2x text-warning mb-2"></i>
+                        <h5 class="mb-1">@Model.AverageRating.ToString("F1")</h5>
+                        <small class="text-muted">Rating</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="text-center p-3 bg-light rounded">
+                        <i class="fas fa-calendar fa-2x text-info mb-2"></i>
+                        <h5 class="mb-1">@Model.CreatedAt.ToString("MMM yyyy")</h5>
+                        <small class="text-muted">Created</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Content -->
+            @if (Model.Modules != null && Model.Modules.Any())
+            {
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="mb-0">
+                            <i class="fas fa-list me-2"></i>Course Content
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="accordion" id="courseModules">
+                            @foreach (var module in Model.Modules.OrderBy(m => m.Order))
+                            {
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="module@(module.Id)">
+                                        <button class="accordion-button @(module.Order > 1 ? "collapsed" : "")" type="button" 
+                                                data-bs-toggle="collapse" data-bs-target="#collapse@(module.Id)">
+                                            <div class="d-flex justify-content-between align-items-center w-100 me-3">
+                                                <span>
+                                                    <strong>Module @module.Order:</strong> @module.Title
+                                                </span>
+                                                <span class="badge bg-secondary">@(module.Contents?.Count ?? 0) lessons</span>
+                                            </div>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse@(module.Id)" class="accordion-collapse collapse @(module.Order == 1 ? "show" : "")" 
+                                         data-bs-parent="#courseModules">
+                                        <div class="accordion-body">
+                                            <p class="text-muted mb-3">@module.Description</p>
+                                            @if (module.Contents != null && module.Contents.Any())
+                                            {
+                                                <ul class="list-unstyled">
+                                                    @foreach (var content in module.Contents.OrderBy(c => c.Order))
+                                                    {
+                                                        <li class="d-flex align-items-center mb-2">
+                                                            <i class="fas fa-play-circle text-primary me-2"></i>
+                                                            <span>@content.Title</span>
+                                                            @if (content.Duration > 0)
+                                                            {
+                                                                <span class="badge bg-light text-dark ms-auto">@content.Duration min</span>
+                                                            }
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Course Reviews -->
+            @if (Model.Reviews != null && Model.Reviews.Any())
+            {
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">
+                            <i class="fas fa-star me-2"></i>Student Reviews
+                        </h4>
+                        <div class="d-flex align-items-center">
+                            <div class="text-warning me-2">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= Model.AverageRating)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    else if (i - Model.AverageRating < 1)
+                                    {
+                                        <i class="fas fa-star-half-alt"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="far fa-star"></i>
+                                    }
+                                }
+                            </div>
+                            <span class="fw-bold">@Model.AverageRating.ToString("F1")</span>
+                            <span class="text-muted ms-1">(@Model.Reviews.Count reviews)</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (var review in Model.Reviews.Take(6))
+                            {
+                                <div class="col-md-6 mb-3">
+                                    <div class="border rounded p-3">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <div class="text-warning">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= review.Rating)
+                                                    {
+                                                        <i class="fas fa-star"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="far fa-star"></i>
+                                                    }
+                                                }
+                                            </div>
+                                            <small class="text-muted">@review.CreatedAt.ToString("MMM dd, yyyy")</small>
+                                        </div>
+                                        @if (!string.IsNullOrEmpty(review.Comment))
+                                        {
+                                            <p class="mb-2">@review.Comment</p>
+                                        }
+                                        <small class="text-muted">- @review.Student.FirstName @review.Student.LastName</small>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        @if (Model.Reviews.Count > 6)
+                        {
+                            <div class="text-center mt-3">
+                                <a href="#" class="btn btn-outline-primary">View All Reviews</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Course Sidebar -->
+        <div class="col-lg-4">
+            <div class="sticky-top" style="top: 2rem;">
+                <!-- Course Card -->
+                <div class="card shadow-lg mb-4">
+                    @if (!string.IsNullOrEmpty(Model.ThumbnailUrl))
+                    {
+                        <img src="@Model.ThumbnailUrl" class="card-img-top" alt="@Model.Title" style="height: 200px; object-fit: cover;">
+                    }
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            @if (Model.DiscountedPrice.HasValue && Model.DiscountedPrice < Model.Price)
+                            {
+                                <div class="mb-2">
+                                    <span class="text-decoration-line-through text-muted fs-5">$@Model.Price</span>
+                                    <span class="fs-1 fw-bold text-success">$@Model.DiscountedPrice</span>
+                                </div>
+                                <span class="badge bg-danger fs-6">@(((Model.Price - Model.DiscountedPrice.Value) / Model.Price * 100).ToString("F0"))% OFF</span>
+                            }
+                            else
+                            {
+                                <span class="fs-1 fw-bold text-primary">$@Model.Price</span>
+                            }
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-lg">
+                                <i class="fas fa-shopping-cart me-2"></i>Enroll Now
+                            </button>
+                            <button class="btn btn-outline-primary">
+                                <i class="fas fa-heart me-2"></i>Add to Wishlist
+                            </button>
+                        </div>
+
+                        <hr>
+
+                        <div class="row text-center">
+                            <div class="col-6">
+                                <div class="border-end">
+                                    <h6 class="mb-1">@Model.Duration</h6>
+                                    <small class="text-muted">Total Hours</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="mb-1">@Model.Modules?.Count</h6>
+                                <small class="text-muted">Modules</small>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="avatar-placeholder me-3">@Model.Instructor.FirstName.Substring(0, 1)</div>
+                            <div>
+                                <h6 class="mb-1">@Model.Instructor.FirstName @Model.Instructor.LastName</h6>
+                                <small class="text-muted">@Model.Instructor.Headline</small>
+                            </div>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(Model.Instructor.Biography))
+                        {
+                            <p class="text-muted small">@Model.Instructor.Biography</p>
+                        }
+
+                        <div class="d-grid">
+                            <a href="#" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-user me-2"></i>View Instructor Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Features -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="mb-0">
+                            <i class="fas fa-check-circle me-2 text-success"></i>What's Included
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">
+                                <i class="fas fa-video text-primary me-2"></i>Video lectures
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-file-text text-primary me-2"></i>Downloadable resources
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-certificate text-primary me-2"></i>Certificate of completion
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-clock text-primary me-2"></i>Lifetime access
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-mobile-alt text-primary me-2"></i>Mobile and desktop access
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Related Courses -->
+                @if (ViewBag.RelatedCourses != null && ViewBag.RelatedCourses.Any())
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">
+                                <i class="fas fa-thumbs-up me-2 text-info"></i>Related Courses
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            @foreach (var relatedCourse in ViewBag.RelatedCourses.Take(3))
+                            {
+                                <div class="d-flex mb-3">
+                                    @if (!string.IsNullOrEmpty(relatedCourse.ThumbnailUrl))
+                                    {
+                                        <img src="@relatedCourse.ThumbnailUrl" alt="@relatedCourse.Title" 
+                                             class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                    }
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">
+                                            <a href="@Url.Action("Details", "OurCourses", new { id = relatedCourse.Id })" 
+                                               class="text-decoration-none">@relatedCourse.Title</a>
+                                        </h6>
+                                        <small class="text-muted">@relatedCourse.Difficulty • $@(relatedCourse.DiscountedPrice ?? relatedCourse.Price)</small>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .avatar-placeholder {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .sticky-top {
+            z-index: 1020;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: #f8f9fa;
+            color: #0d6efd;
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0, 0, 0, 0.125);
+        }
+    </style>
+}

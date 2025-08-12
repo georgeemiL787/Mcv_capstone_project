@@ -1,6 +1,6 @@
 @{
     ViewData["Title"] = "Analytics - Instructor Dashboard";
-    Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var currentAction = ViewContext.RouteData.Values["action"]?.ToString()?.ToLower();
 }
 
@@ -42,7 +42,7 @@
                 <span class="material-symbols-outlined nav-icon">forum</span>
                 Q&A/Discussions
             </a>
-            <a href="@Url.Action("Analytics", "InstructorDashboard")" class="nav-item @(currentAction == "analytics" ? "active" : "")" data-page="analytics">
+            <a href="@Url.Action("Analytics", "InstructorDashboard")" class="nav-item active" data-page="analytics">
                 <span class="material-symbols-outlined nav-icon">analytics</span>
                 Analytics
             </a>

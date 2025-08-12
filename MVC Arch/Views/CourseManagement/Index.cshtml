@@ -1,0 +1,916 @@
+@model IEnumerable<MCV_Capstone.Models.Course>
+
+@{
+    ViewData["Title"] = "My Courses";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <style>
+        /* Course Management Dashboard - Matching Home Page Design */
+        .course-dashboard-container {
+            background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 50%, #e8e4ff 100%);
+            min-height: 100vh;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-dashboard-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(143, 126, 252, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(205, 193, 255, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header Section */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .dashboard-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            color: #333446;
+            line-height: 1.2;
+        }
+
+        .dashboard-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin: 0 0 40px 0;
+            font-family: "Source Sans 3", sans-serif;
+            font-weight: 400;
+        }
+
+        .dashboard-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: "Source Sans 3", sans-serif;
+            border: none;
+            text-decoration: none;
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, #8f7efc 0%, #7a6af8 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(143, 126, 252, 0.3);
+        }
+
+        .action-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(143, 126, 252, 0.4);
+        }
+
+        /* Messages */
+        .message-container {
+            margin-bottom: 40px;
+        }
+
+        .success-message {
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            color: #166534;
+            font-family: "Source Sans 3", sans-serif;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            animation: slideInDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            color: #dc2626;
+            font-family: "Source Sans 3", sans-serif;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            animation: slideInDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Stats Grid */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .status-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(143, 126, 252, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 
+                0 10px 40px rgba(143, 126, 252, 0.1),
+                0 4px 16px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8f7efc, #7a6bf8, #8f7efc);
+        }
+
+        .status-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 20px 60px rgba(143, 126, 252, 0.15),
+                0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-card.pending::before {
+            background: linear-gradient(90deg, #f59e0b, #d97706, #f59e0b);
+        }
+
+        .status-card.published::before {
+            background: linear-gradient(90deg, #10b981, #059669, #10b981);
+        }
+
+        .status-card.approved::before {
+            background: linear-gradient(90deg, #3b82f6, #2563eb, #3b82f6);
+        }
+
+        .status-card.rejected::before {
+            background: linear-gradient(90deg, #ef4444, #dc2626, #ef4444);
+        }
+
+        .status-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .status-card.pending .status-icon {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .status-card.published .status-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .status-card.approved .status-icon {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .status-card.rejected .status-icon {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .status-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #333446;
+            margin: 0 0 10px 0;
+            font-family: "Josefin Sans", sans-serif;
+        }
+
+        .status-label {
+            font-size: 1.1rem;
+            color: #666;
+            margin: 0;
+            font-family: "Source Sans 3", sans-serif;
+            font-weight: 500;
+        }
+
+        /* Courses Section */
+        .courses-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(143, 126, 252, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 
+                0 10px 40px rgba(143, 126, 252, 0.1),
+                0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333446;
+            margin: 0 0 30px 0;
+            font-family: "Josefin Sans", sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(143, 126, 252, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 40px rgba(143, 126, 252, 0.1),
+                0 4px 16px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 20px 60px rgba(143, 126, 252, 0.15),
+                0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-image {
+            height: 200px;
+            background: linear-gradient(135deg, #f8f7ff, #e8e4ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .course-image .placeholder-icon {
+            font-size: 3rem;
+            color: #8f7efc;
+            opacity: 0.6;
+        }
+
+        .course-content {
+            padding: 25px;
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: "Source Sans 3", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: #d97706;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .status-badge.published {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-badge.approved {
+            background: rgba(59, 130, 246, 0.1);
+            color: #2563eb;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .status-badge.rejected {
+            background: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .difficulty-badge {
+            background: rgba(143, 126, 252, 0.1);
+            color: #7a6bfc;
+            border: 1px solid rgba(143, 126, 252, 0.3);
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333446;
+            margin: 0 0 15px 0;
+            font-family: "Josefin Sans", sans-serif;
+            line-height: 1.3;
+        }
+
+        .course-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-family: "Source Sans 3", sans-serif;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            font-family: "Source Sans 3", sans-serif;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .meta-item .material-symbols-outlined {
+            font-size: 1rem;
+            color: #8f7efc;
+        }
+
+        .course-price {
+            margin-bottom: 20px;
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .price-discounted {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .price-regular {
+            color: #333446;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .course-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            font-family: "Source Sans 3", sans-serif;
+            border: none;
+            cursor: pointer;
+        }
+
+        .course-btn.primary {
+            background: linear-gradient(135deg, #8f7efc, #7a6bf8);
+            color: white;
+        }
+
+        .course-btn.primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(143, 126, 252, 0.3);
+        }
+
+        .course-btn.secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333446;
+            border: 1px solid rgba(143, 126, 252, 0.3);
+        }
+
+        .course-btn.secondary:hover {
+            background: rgba(143, 126, 252, 0.1);
+            border-color: #8f7efc;
+        }
+
+        .course-btn.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .course-btn.success:hover {
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .course-btn.warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: #d97706;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .course-btn.warning:hover {
+            background: rgba(245, 158, 11, 0.2);
+        }
+
+        .course-btn.info {
+            background: rgba(59, 130, 246, 0.1);
+            color: #2563eb;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .course-btn.info:hover {
+            background: rgba(59, 130, 246, 0.2);
+        }
+
+        .course-btn.danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .course-btn.danger:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .course-footer {
+            padding: 20px 25px;
+            border-top: 1px solid rgba(143, 126, 252, 0.1);
+            background: rgba(248, 247, 255, 0.5);
+        }
+
+        .course-footer .meta-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #666;
+            font-family: "Source Sans 3", sans-serif;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(143, 126, 252, 0.2);
+            border-radius: 24px;
+            box-shadow: 
+                0 10px 40px rgba(143, 126, 252, 0.1),
+                0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .empty-state .material-symbols-outlined {
+            font-size: 4rem;
+            color: #8f7efc;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 2rem;
+            color: #333446;
+            margin: 0 0 15px 0;
+            font-family: "Josefin Sans", sans-serif;
+        }
+
+        .empty-state p {
+            color: #666;
+            font-size: 1.1rem;
+            margin: 0 0 30px 0;
+            font-family: "Source Sans 3", sans-serif;
+        }
+
+        /* Responsive Design */
+        @@media (max-width: 768px) {
+            .dashboard-container {
+                padding: 0 15px;
+            }
+            
+            .dashboard-title {
+                font-size: 2.5rem;
+            }
+            
+            .dashboard-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .status-card {
+            animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            animation-fill-mode: both;
+        }
+
+        .status-card:nth-child(1) { animation-delay: 0.1s; }
+        .status-card:nth-child(2) { animation-delay: 0.2s; }
+        .status-card:nth-child(3) { animation-delay: 0.3s; }
+        .status-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .course-card {
+            animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            animation-fill-mode: both;
+        }
+
+        .course-card:nth-child(1) { animation-delay: 0.5s; }
+        .course-card:nth-child(2) { animation-delay: 0.6s; }
+        .course-card:nth-child(3) { animation-delay: 0.7s; }
+
+        @@keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @@keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating elements for visual appeal */
+        .floating-element {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(143, 126, 252, 0.1), rgba(122, 107, 248, 0.1));
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 15%;
+            left: 8%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 70%;
+            right: 12%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 25%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @@keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(180deg); }
+        }
+    </style>
+}
+
+<div class="course-dashboard-container">
+    <!-- Floating background elements -->
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    
+    <div class="dashboard-container">
+        <!-- Header Section -->
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">My Courses</h1>
+            <p class="dashboard-subtitle">Manage your courses, track approval status, and control visibility to students</p>
+            
+            <div class="dashboard-actions">
+                <a asp-action="Create" class="action-btn primary">
+                    <span class="material-symbols-outlined">add_circle</span>
+                    Create New Course
+                </a>
+            </div>
+    </div>
+
+        <!-- Messages -->
+        <div class="message-container">
+    @if (TempData["SuccessMessage"] != null)
+    {
+                <div class="success-message">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+                <div class="error-message">
+                    <span class="material-symbols-outlined">error</span>
+                    @TempData["ErrorMessage"]
+        </div>
+    }
+        </div>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+                <span class="material-symbols-outlined">school</span>
+                <h3>No courses yet</h3>
+                <p>Start building your first course to share your knowledge with students and begin your teaching journey.</p>
+                <a asp-action="Create" class="action-btn primary">
+                    <span class="material-symbols-outlined">add_circle</span>
+                    Create Your First Course
+            </a>
+        </div>
+    }
+    else
+    {
+        <!-- Course Status Summary -->
+            <div class="status-grid">
+                <div class="status-card pending">
+                    <div class="status-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="status-number">@Model.Count(c => !c.IsApproved && !c.IsRejected)</div>
+                    <div class="status-label">Pending Review</div>
+                    </div>
+                
+                <div class="status-card published">
+                    <div class="status-icon">
+                        <span class="material-symbols-outlined">check_circle</span>
+                    </div>
+                    <div class="status-number">@Model.Count(c => c.IsApproved && c.IsPublished)</div>
+                    <div class="status-label">Published</div>
+                    </div>
+                
+                <div class="status-card approved">
+                    <div class="status-icon">
+                        <span class="material-symbols-outlined">edit</span>
+                    </div>
+                    <div class="status-number">@Model.Count(c => c.IsApproved && !c.IsPublished)</div>
+                    <div class="status-label">Approved (Draft)</div>
+                    </div>
+                
+                <div class="status-card rejected">
+                    <div class="status-icon">
+                        <span class="material-symbols-outlined">cancel</span>
+                    </div>
+                    <div class="status-number">@Model.Count(c => c.IsRejected)</div>
+                    <div class="status-label">Rejected</div>
+            </div>
+        </div>
+
+            <!-- Courses Section -->
+            <div class="courses-section">
+                <h2 class="section-title">
+                    <span class="material-symbols-outlined">library_books</span>
+                    Course Library
+                </h2>
+                
+                <div class="courses-grid">
+            @foreach (var course in Model)
+            {
+                        <div class="course-card">
+                            <div class="course-image">
+                        @if (!string.IsNullOrEmpty(course.ThumbnailUrl))
+                        {
+                                    <img src="@course.ThumbnailUrl" alt="@course.Title" />
+                        }
+                        else
+                        {
+                                    <span class="material-symbols-outlined placeholder-icon">school</span>
+                                }
+                            </div>
+                        
+                            <div class="course-content">
+                                <div class="course-header">
+                                @if (course.IsRejected)
+                                {
+                                        <span class="status-badge rejected">Rejected</span>
+                                }
+                                else if (!course.IsApproved)
+                                {
+                                        <span class="status-badge pending">Pending Review</span>
+                                }
+                                else if (course.IsPublished)
+                                {
+                                        <span class="status-badge published">Published</span>
+                                }
+                                else
+                                {
+                                        <span class="status-badge approved">Approved (Draft)</span>
+                                }
+                                    <span class="difficulty-badge">@course.Difficulty</span>
+                            </div>
+                            
+                                <h3 class="course-title">@course.Title</h3>
+                                
+                            @{
+                                var previewText = string.IsNullOrEmpty(course.ShortDescription)
+                                    ? (course.Description?.Substring(0, Math.Min(100, course.Description?.Length ?? 0)) + "...")
+                                    : course.ShortDescription;
+                                previewText ??= "No description available.";
+                            }
+                                <p class="course-description">@previewText</p>
+                            
+                            <!-- Approval Status Info -->
+                            @if (course.IsRejected && !string.IsNullOrEmpty(course.RejectionReason))
+                            {
+                                <div class="alert alert-danger alert-sm mb-3">
+                                        <span class="material-symbols-outlined">warning</span>
+                                    <strong>Rejection Reason:</strong> @course.RejectionReason
+                                </div>
+                            }
+                            else if (!course.IsApproved)
+                            {
+                                <div class="alert alert-warning alert-sm mb-3">
+                                        <span class="material-symbols-outlined">info</span>
+                                    <strong>Status:</strong> Waiting for admin review
+                                </div>
+                            }
+                            
+                                <div class="course-meta">
+                                    <div class="meta-item">
+                                        <span class="material-symbols-outlined">schedule</span>
+                                        @course.Duration min
+                                    </div>
+                                    <div class="meta-item">
+                                        <span class="material-symbols-outlined">category</span>
+                                        @course.Category
+                                    </div>
+                                </div>
+                                
+                                <div class="course-price">
+                                        @if (course.DiscountedPrice.HasValue && course.DiscountedPrice < course.Price)
+                                        {
+                                        <span class="price-original">$@course.Price</span>
+                                        <span class="price-discounted ms-2">$@course.DiscountedPrice</span>
+                                        }
+                                        else
+                                        {
+                                        <span class="price-regular">$@course.Price</span>
+                                        }
+                                    </div>
+                                    
+                                <div class="course-actions">
+                                    <a asp-action="Edit" asp-route-id="@course.Id" class="course-btn primary">
+                                        <span class="material-symbols-outlined">edit</span>
+                                        Edit
+                                        </a>
+                                        
+                                        @if (course.IsApproved && !course.IsPublished)
+                                        {
+                                            <form asp-action="TogglePublish" asp-route-id="@course.Id" method="post" style="display: inline;">
+                                            <button type="submit" class="course-btn success" title="Publish">
+                                                <span class="material-symbols-outlined">visibility</span>
+                                                Publish
+                                                </button>
+                                            </form>
+                                        }
+                                        else if (course.IsApproved && course.IsPublished)
+                                        {
+                                            <form asp-action="TogglePublish" asp-route-id="@course.Id" method="post" style="display: inline;">
+                                            <button type="submit" class="course-btn warning" title="Unpublish">
+                                                <span class="material-symbols-outlined">visibility_off</span>
+                                                Unpublish
+                                                </button>
+                                            </form>
+                                        }
+                                        else if (course.IsRejected)
+                                        {
+                                            <form asp-action="ResubmitForReview" asp-route-id="@course.Id" method="post" style="display: inline;">
+                                            <button type="submit" class="course-btn info" title="Resubmit for Review">
+                                                <span class="material-symbols-outlined">refresh</span>
+                                                Resubmit
+                                                </button>
+                                            </form>
+                                        }
+                                        
+                                    <a asp-action="Delete" asp-route-id="@course.Id" class="course-btn danger">
+                                        <span class="material-symbols-outlined">delete</span>
+                                        Delete
+                                        </a>
+                            </div>
+                        </div>
+                        
+                            <div class="course-footer">
+                                <div class="meta-info">
+                                    <span>
+                                        <span class="material-symbols-outlined">calendar_today</span>
+                                        Created: @course.CreatedAt.ToString("MMM dd, yyyy")
+                                    </span>
+                                @if (course.IsApproved && course.ApprovedAt.HasValue)
+                                {
+                                        <span>
+                                            <span class="material-symbols-outlined">check</span>
+                                            Approved: @course.ApprovedAt.Value.ToString("MMM dd, yyyy")
+                                        </span>
+                                }
+                                @if (course.IsRejected && course.RejectedAt.HasValue)
+                                {
+                                        <span>
+                                            <span class="material-symbols-outlined">cancel</span>
+                                            Rejected: @course.RejectedAt.Value.ToString("MMM dd, yyyy")
+                                        </span>
+                                }
+                            </div>
+                        </div>
+                        </div>
+                    }
+                    </div>
+                </div>
+            }
+        </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-hide success/error messages after 5 seconds
+        setTimeout(function() {
+            const messages = document.querySelectorAll('.success-message, .error-message');
+            messages.forEach(message => {
+                message.style.opacity = '0';
+                message.style.transform = 'translateY(-20px)';
+                setTimeout(() => message.remove(), 300);
+            });
+        }, 5000);
+
+        console.log('Beautiful Course Management Dashboard loaded successfully!');
+    </script>
+}

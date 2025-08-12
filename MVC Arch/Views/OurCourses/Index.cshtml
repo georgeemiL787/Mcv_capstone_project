@@ -1,0 +1,450 @@
+@model IEnumerable<MCV_Capstone.Models.Course>
+
+@{
+    ViewData["Title"] = "Our Courses - Learn & Grow";
+}
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+</div>
+
+<!-- Hero Section with Featured Courses -->
+@if (ViewBag.FeaturedCourses != null && ViewBag.FeaturedCourses.Count > 0)
+{
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    Discover Amazing 
+                    <span class="gradient-text">Courses</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Learn from expert instructors and advance your skills with our carefully curated selection of courses.
+                </p>
+                <div class="hero-actions">
+                    <a href="#courses" class="cta-btn primary">
+                        <span class="material-symbols-outlined">search</span>
+                        Browse Courses
+                    </a>
+                    <a href="#featured" class="cta-btn secondary">
+                        <span class="material-symbols-outlined">star</span>
+                        Featured
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="featured-courses-carousel">
+                    @if (ViewBag.FeaturedCourses != null)
+                    {
+                        @foreach (var course in ViewBag.FeaturedCourses)
+                        {
+                        <div class="featured-course-card">
+                            <div class="card">
+                                @if (!string.IsNullOrEmpty(course.ThumbnailUrl))
+                                {
+                                    <img src="@course.ThumbnailUrl" class="card-img-top" alt="@course.Title">
+                                }
+                                <div class="card-body text-center">
+                                    <span class="badge bg-warning mb-2">Featured</span>
+                                    <h5 class="card-title">@course.Title</h5>
+                                    <p class="card-text">@course.ShortDescription</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-primary fw-bold">$@(course.DiscountedPrice ?? course.Price)</span>
+                                        <a asp-action="Details" asp-route-id="@course.Id" class="btn btn-primary btn-sm">
+                                            Learn More
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Page Header Section -->
+<div class="page-header-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="page-title">Explore Our Course Collection</h2>
+                <p class="page-subtitle">Find the perfect course to advance your career and skills</p>
+            </div>
+            <div class="col-lg-6 text-end">
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Courses Available</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Expert Instructors</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="courses">
+    <!-- Search and Filters Section -->
+    <div class="search-container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="d-flex gap-2">
+                    <select class="form-select filter-select" onchange="this.form.submit()" name="category">
+                        <option value="">All Categories</option>
+                        @if (ViewBag.Categories != null)
+                        {
+                            @foreach (var category in ViewBag.Categories)
+                            {
+                                if (ViewBag.CurrentCategory != null && ViewBag.CurrentCategory.ToString() == category)
+                                {
+                                    <option value="@category" selected>@category</option>
+                                }
+                                else
+                                {
+                                    <option value="@category">@category</option>
+                                }
+                            }
+                        }
+                    </select>
+                    <select class="form-select filter-select" onchange="this.form.submit()" name="difficulty">
+                        <option value="">All Levels</option>
+                        @if (ViewBag.Difficulties != null)
+                        {
+                            @foreach (var difficulty in ViewBag.Difficulties)
+                            {
+                                if (ViewBag.CurrentDifficulty != null && ViewBag.CurrentDifficulty.ToString() == difficulty)
+                                {
+                                    <option value="@difficulty" selected>@difficulty</option>
+                                }
+                                else
+                                {
+                                    <option value="@difficulty">@difficulty</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <form method="get" class="d-flex gap-2 justify-content-end">
+                    <div class="input-group" style="max-width: 800px;">
+                        <input type="text" class="form-control search-input" name="searchTerm" value="@(ViewBag.SearchTerm ?? "")" 
+                               placeholder="Search for courses, topics, or instructors..." style="min-width: 500px;">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Summary and Sorting -->
+    <div class="results-summary-section">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <p class="text-muted mb-0">
+                    Showing @Model.Count() of @(ViewBag.TotalCourses ?? 0) courses
+                    @if (!string.IsNullOrEmpty(ViewBag.SearchTerm?.ToString()))
+                    {
+                        <span>for "<strong>@ViewBag.SearchTerm</strong>"</span>
+                    }
+                    @if (!string.IsNullOrEmpty(ViewBag.CurrentCategory?.ToString()))
+                    {
+                        <span>in <strong>@ViewBag.CurrentCategory</strong></span>
+                    }
+                </p>
+            </div>
+            <div class="col-md-6 text-end">
+                <div class="d-flex justify-content-end align-items-center gap-2">
+                    <label class="form-label mb-0">Sort by:</label>
+                    <select class="form-select form-select-sm" style="width: auto;" onchange="this.form.submit()" name="sortBy">
+                        @if (ViewBag.SortBy != null && ViewBag.SortBy.ToString() == "featured")
+                        {
+                            <option value="featured" selected>Featured</option>
+                        }
+                        else
+                        {
+                            <option value="featured">Featured</option>
+                        }
+                        @if (ViewBag.SortBy != null && ViewBag.SortBy.ToString() == "newest")
+                        {
+                            <option value="newest" selected>Newest</option>
+                        }
+                        else
+                        {
+                            <option value="newest">Newest</option>
+                        }
+                        @if (ViewBag.SortBy != null && ViewBag.SortBy.ToString() == "popular")
+                        {
+                            <option value="popular" selected>Most Popular</option>
+                        }
+                        else
+                        {
+                            <option value="popular">Most Popular</option>
+                        }
+                        @if (ViewBag.SortBy != null && ViewBag.SortBy.ToString() == "rating")
+                        {
+                            <option value="rating" selected>Highest Rated</option>
+                        }
+                        else
+                        {
+                            <option value="rating">Highest Rated</option>
+                        }
+                        @if (ViewBag.SortBy != null && ViewBag.SortBy.ToString() == "price_low")
+                        {
+                            <option value="price_low" selected>Price: Low to High</option>
+                        }
+                        else
+                        {
+                            <option value="price_low">Price: Low to High</option>
+                        }
+                        @if (ViewBag.SortBy != null && ViewBag.SortBy.ToString() == "price_high")
+                        {
+                            <option value="price_high" selected>Price: High to Low</option>
+                        }
+                        else
+                        {
+                            <option value="price_high">Price: High to Low</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Filter Tags -->
+    <div class="quick-filters-section">
+        <div class="row">
+            <div class="col-12">
+                <h6 class="quick-filters-title">Popular Categories:</h6>
+                <div class="quick-filter-tags">
+                    <a href="@Url.Action("Index", "OurCourses", new { category = "Programming" })" class="filter-tag">Programming</a>
+                    <a href="@Url.Action("Index", "OurCourses", new { category = "Design" })" class="filter-tag">Design</a>
+                    <a href="@Url.Action("Index", "OurCourses", new { category = "Business" })" class="filter-tag">Business</a>
+                    <a href="@Url.Action("Index", "OurCourses", new { category = "Marketing" })" class="filter-tag">Marketing</a>
+                    <a href="@Url.Action("Index", "OurCourses", new { category = "Data Science" })" class="filter-tag">Data Science</a>
+                    <a href="@Url.Action("Index", "OurCourses", new { category = "AI & ML" })" class="filter-tag">AI & ML</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Courses Grid -->
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5 no-results">
+            <span class="material-symbols-outlined" style="font-size: 4rem;">search</span>
+            <h4>No courses found</h4>
+            <p>
+                @if (!string.IsNullOrEmpty(ViewBag.SearchTerm?.ToString()))
+                {
+                    <span>No courses match your search for "<strong>@ViewBag.SearchTerm</strong>"</span>
+                }
+                else
+                {
+                    <span>Try adjusting your filters or search terms</span>
+                }
+            </p>
+            <a href="@Url.Action("Index", "OurCourses")" class="btn">
+                <span class="material-symbols-outlined me-2">refresh</span>Clear Filters
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var (course, index) in Model.Select((course, index) => (course, index)))
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm course-card" data-aos="fade-up" data-aos-delay="@(index * 100)">
+                        @if (!string.IsNullOrEmpty(course.ThumbnailUrl))
+                        {
+                            <img src="@course.ThumbnailUrl" class="card-img-top" alt="@course.Title" style="height: 200px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                <span class="material-symbols-outlined" style="font-size: 3rem; color: #ccc;">image</span>
+                            </div>
+                        }
+                        
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                @if (course.IsFeatured)
+                                {
+                                    <span class="badge bg-warning">
+                                        <span class="material-symbols-outlined me-1" style="font-size: 0.8rem;">star</span>Featured
+                                    </span>
+                                }
+                                <span class="badge bg-info">@course.Difficulty</span>
+                            </div>
+                            
+                            <h5 class="card-title">@course.Title</h5>
+                            <p class="card-text">
+                                @(string.IsNullOrEmpty(course.ShortDescription) ? course.Description.Substring(0, Math.Min(100, course.Description.Length)) + "..." : course.ShortDescription)
+                            </p>
+                            
+                            <div class="mt-auto">
+                                <div class="row text-muted small mb-3">
+                                    <div class="col-6">
+                                        <span class="material-symbols-outlined me-1" style="font-size: 0.8rem;">schedule</span>@course.Duration min
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="material-symbols-outlined me-1" style="font-size: 0.8rem;">label</span>@course.Category
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        @if (course.DiscountedPrice.HasValue && course.DiscountedPrice < course.Price)
+                                        {
+                                            <span class="text-decoration-line-through text-muted">$@course.Price</span>
+                                            <span class="fw-bold text-success ms-2">$@course.DiscountedPrice</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fw-bold">$@course.Price</span>
+                                        }
+                                    </div>
+                                    <small class="text-muted">
+                                        <span class="material-symbols-outlined me-1" style="font-size: 0.8rem;">person</span>@course.Instructor.FirstName @course.Instructor.LastName
+                                    </small>
+                                </div>
+                                
+                                <div class="d-flex gap-2">
+                                    <a asp-action="Details" asp-route-id="@course.Id" class="btn btn-outline-primary flex-fill">
+                                        <span class="material-symbols-outlined me-1" style="font-size: 0.8rem;">info</span>Details
+                                    </a>
+                                    <a href="#" class="btn btn-primary flex-fill">
+                                        <span class="material-symbols-outlined me-1" style="font-size: 0.8rem;">shopping_cart</span>Enroll
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <span class="material-symbols-outlined me-1" style="font-size: 0.8rem;">calendar_today</span>@course.CreatedAt.ToString("MMM dd, yyyy")
+                                </small>
+                                @if (course.AverageRating > 0)
+                                {
+                                    <div class="text-warning">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= course.AverageRating)
+                                            {
+                                                <span class="material-symbols-outlined" style="font-size: 0.8rem;">star</span>
+                                            }
+                                            else if (i - course.AverageRating < 1)
+                                            {
+                                                <span class="material-symbols-outlined" style="font-size: 0.8rem;">star_half</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="material-symbols-outlined" style="font-size: 0.8rem; color: #ccc;">star</span>
+                                            }
+                                        }
+                                        <small class="text-muted ms-1">(@course.AverageRating.ToString("F1"))</small>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination -->
+        @if (ViewBag.TotalPages != null && ViewBag.TotalPages > 1)
+        {
+            <nav aria-label="Course pagination" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    @if (ViewBag.CurrentPage != null && ViewBag.CurrentPage > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("Index", "OurCourses", new { 
+                                category = ViewBag.CurrentCategory ?? "", 
+                                difficulty = ViewBag.CurrentDifficulty ?? "", 
+                                searchTerm = ViewBag.SearchTerm ?? "", 
+                                sortBy = ViewBag.SortBy ?? "", 
+                                page = (ViewBag.CurrentPage ?? 1) - 1 
+                            })">
+                                <span class="material-symbols-outlined me-1" style="font-size: 0.8rem;">chevron_left</span> Previous
+                            </a>
+                        </li>
+                    }
+
+                    @for (int i = Math.Max(1, (ViewBag.CurrentPage ?? 1) - 2); i <= Math.Min(ViewBag.TotalPages ?? 1, (ViewBag.CurrentPage ?? 1) + 2); i++)
+                    {
+                        <li class="page-item @(i == (ViewBag.CurrentPage ?? 1) ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("Index", "OurCourses", new { 
+                                category = ViewBag.CurrentCategory ?? "", 
+                                difficulty = ViewBag.CurrentDifficulty ?? "", 
+                                searchTerm = ViewBag.SearchTerm ?? "", 
+                                sortBy = ViewBag.SortBy ?? "", 
+                                page = i 
+                            })">@i</a>
+                        </li>
+                    }
+
+                    @if (ViewBag.CurrentPage != null && ViewBag.TotalPages != null && ViewBag.CurrentPage < ViewBag.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("Index", "OurCourses", new { 
+                                category = ViewBag.CurrentCategory ?? "", 
+                                difficulty = ViewBag.CurrentDifficulty ?? "", 
+                                searchTerm = ViewBag.SearchTerm ?? "", 
+                                sortBy = ViewBag.SortBy ?? "", 
+                                page = (ViewBag.CurrentPage ?? 1) + 1 
+                            })">
+                                Next <span class="material-symbols-outlined ms-1" style="font-size: 0.8rem;">chevron_right</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    }
+</div>
+
+<!-- Call to Action Section -->
+<div class="cta-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h3>Ready to Start Learning?</h3>
+                <p class="lead">Join thousands of learners who are already advancing their careers with our courses.</p>
+                <div class="cta-buttons">
+                    <a href="@Url.Action("Signup", "Account")" class="btn btn-primary btn-lg me-3">
+                        <span class="material-symbols-outlined me-2">rocket_launch</span>
+                        Get Started Free
+                    </a>
+                    <a href="@Url.Action("Index", "Contact")" class="btn btn-outline-primary btn-lg">
+                        <span class="material-symbols-outlined me-2">support_agent</span>
+                        Contact Support
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Spacing -->
+<div class="footer-spacing"></div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/ourcourses.css" asp-append-version="true" />
+}
+
+

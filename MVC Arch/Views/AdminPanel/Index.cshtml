@@ -1,3 +1,4 @@
+@model MCV_Capstone.Services.AdminDashboardStats
 @{
     ViewData["Title"] = "Admin Panel - Full Courses Platform";
 }
@@ -80,7 +81,7 @@
                     </div>
                     <div class="stat-info">
                         <h3>Total Users</h3>
-                        <p class="stat-number">12,847</p>
+                        <p class="stat-number" id="total-users">@Model.TotalUsers.ToString("N0")</p>
                         <span class="stat-change positive">+12% this month</span>
                     </div>
                 </div>
@@ -91,7 +92,7 @@
                     </div>
                     <div class="stat-info">
                         <h3>Active Courses</h3>
-                        <p class="stat-number">1,234</p>
+                        <p class="stat-number" id="total-courses">@Model.TotalCourses.ToString("N0")</p>
                         <span class="stat-change positive">+8% this month</span>
                     </div>
                 </div>
@@ -102,7 +103,7 @@
                     </div>
                     <div class="stat-info">
                         <h3>Revenue</h3>
-                        <p class="stat-number">$45,678</p>
+                        <p class="stat-number" id="total-revenue">$@Model.TotalRevenue.ToString("N0")</p>
                         <span class="stat-change positive">+15% this month</span>
                     </div>
                 </div>
@@ -113,7 +114,7 @@
                     </div>
                     <div class="stat-info">
                         <h3>Pending Reviews</h3>
-                        <p class="stat-number">23</p>
+                        <p class="stat-number" id="pending-courses">@Model.PendingCourses.ToString("N0")</p>
                         <span class="stat-change negative">+5 today</span>
                     </div>
                 </div>
@@ -122,39 +123,20 @@
             <!-- Recent Activity -->
             <div class="recent-activity">
                 <h2>Recent Activity</h2>
-                <div class="activity-list">
-                    <div class="activity-item">
-                        <div class="activity-icon">
-                            <img src="~/assets/images/AdminPanel_assets/management.png" alt="User Registration" class="activity-image">
+                <div class="activity-list" id="recent-activity-list">
+                    @foreach (var activity in Model.RecentActivity.Take(5))
+                    {
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <img src="~/assets/images/AdminPanel_assets/@(activity.Icon == "user" ? "management.png" : "computer.png")" alt="@activity.Type" class="activity-image">
+                            </div>
+                            <div class="activity-content">
+                                <h4>@activity.Type</h4>
+                                <p>@activity.Description</p>
+                                <span class="activity-time">@GetTimeAgo(activity.Timestamp)</span>
+                            </div>
                         </div>
-                        <div class="activity-content">
-                            <h4>New user registered</h4>
-                            <p>John Doe joined the platform</p>
-                            <span class="activity-time">2 minutes ago</span>
-                        </div>
-                    </div>
-
-                    <div class="activity-item">
-                        <div class="activity-icon">
-                            <img src="~/assets/images/AdminPanel_assets/computer.png" alt="Course Published" class="activity-image">
-                        </div>
-                        <div class="activity-content">
-                            <h4>Course published</h4>
-                            <p>"Advanced React Development" by Sarah Smith</p>
-                            <span class="activity-time">15 minutes ago</span>
-                        </div>
-                    </div>
-
-                    <div class="activity-item">
-                        <div class="activity-icon">
-                            <img src="~/assets/images/AdminPanel_assets/moderator.png" alt="Content Flagged" class="activity-image">
-                        </div>
-                        <div class="activity-content">
-                            <h4>Content flagged</h4>
-                            <p>Comment flagged for inappropriate content</p>
-                            <span class="activity-time">1 hour ago</span>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
@@ -174,15 +156,30 @@
             <div class="section-actions">
                 <div class="search-box">
                     <span class="material-symbols-outlined">search</span>
-                    <input type="text" placeholder="Search users...">
+                    <input type="text" id="user-search" placeholder="Search users...">
                 </div>
-                <button class="action-btn">
-                    <img src="~/assets/images/AdminPanel_assets/add-user.png" alt="Add User" class="action-icon">
-                    Add User
+                <div class="filter-controls">
+                    <select id="role-filter">
+                        <option value="">All Roles</option>
+                        <option value="Student">Student</option>
+                        <option value="Instructor">Instructor</option>
+                        <option value="Company">Company</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    <select id="status-filter">
+                        <option value="">All Status</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Banned">Banned</option>
+                    </select>
+                </div>
+                <button class="action-btn" id="refresh-users">
+                    <img src="~/assets/images/AdminPanel_assets/refresh.png" alt="Refresh" class="action-icon">
+                    Refresh
                 </button>
             </div>
 
-            <div class="users-table">
+            <div class="users-table" id="users-table">
                 <div class="table-header">
                     <span>User</span>
                     <span>Email</span>
@@ -190,37 +187,8 @@
                     <span>Status</span>
                     <span>Actions</span>
                 </div>
-                <div class="table-row">
-                    <div class="user-info">
-                        <div class="user-avatar">JD</div>
-                        <div>
-                            <h4>John Doe</h4>
-                            <span>Joined 2 days ago</span>
-                        </div>
-                    </div>
-                    <span>john.doe@email.com</span>
-                    <span class="role-badge student">Student</span>
-                    <span class="status-badge active">Active</span>
-                    <div class="action-buttons">
-                        <button class="btn-small">View</button>
-                        <button class="btn-small warning">Ban</button>
-                    </div>
-                </div>
-                <div class="table-row">
-                    <div class="user-info">
-                        <div class="user-avatar">SS</div>
-                        <div>
-                            <h4>Sarah Smith</h4>
-                            <span>Joined 1 week ago</span>
-                        </div>
-                    </div>
-                    <span>sarah.smith@email.com</span>
-                    <span class="role-badge instructor">Instructor</span>
-                    <span class="status-badge active">Active</span>
-                    <div class="action-buttons">
-                        <button class="btn-small">View</button>
-                        <button class="btn-small warning">Ban</button>
-                    </div>
+                <div id="users-table-body">
+                    <!-- Users will be loaded here dynamically -->
                 </div>
             </div>
         </div>
@@ -239,46 +207,19 @@
 
             <div class="section-actions">
                 <div class="filter-tabs">
-                    <button class="filter-tab active">All Courses</button>
-                    <button class="filter-tab">Pending Review</button>
-                    <button class="filter-tab">Approved</button>
-                    <button class="filter-tab">Rejected</button>
+                    <button class="filter-tab active" data-filter="all">All Courses</button>
+                    <button class="filter-tab" data-filter="pending">Pending Review</button>
+                    <button class="filter-tab" data-filter="approved">Approved</button>
+                    <button class="filter-tab" data-filter="rejected">Rejected</button>
                 </div>
+                <button class="action-btn" id="refresh-courses">
+                    <img src="~/assets/images/AdminPanel_assets/refresh.png" alt="Refresh" class="action-icon">
+                    Refresh
+                </button>
             </div>
 
-            <div class="courses-grid">
-                <div class="course-card">
-                    <div class="course-header">
-                        <h3>Advanced React Development</h3>
-                        <span class="status-badge pending">Pending</span>
-                    </div>
-                    <p>Learn advanced React concepts including hooks, context, and performance optimization.</p>
-                    <div class="course-meta">
-                        <span>By: Sarah Smith</span>
-                        <span>Duration: 12 hours</span>
-                    </div>
-                    <div class="course-actions">
-                        <button class="btn-success">Approve</button>
-                        <button class="btn-danger">Reject</button>
-                        <button class="btn-secondary">Preview</button>
-                    </div>
-                </div>
-
-                <div class="course-card">
-                    <div class="course-header">
-                        <h3>Python for Data Science</h3>
-                        <span class="status-badge approved">Approved</span>
-                    </div>
-                    <p>Comprehensive guide to using Python for data analysis and machine learning.</p>
-                    <div class="course-meta">
-                        <span>By: Mike Johnson</span>
-                        <span>Duration: 18 hours</span>
-                    </div>
-                    <div class="course-actions">
-                        <button class="btn-secondary">View</button>
-                        <button class="btn-warning">Unpublish</button>
-                    </div>
-                </div>
+            <div class="courses-grid" id="courses-grid">
+                <!-- Courses will be loaded here dynamically -->
             </div>
         </div>
 
@@ -301,21 +242,14 @@
                     <button class="filter-tab">Under Review</button>
                     <button class="filter-tab">Approved</button>
                 </div>
+                <button class="action-btn" id="refresh-content">
+                    <img src="~/assets/images/AdminPanel_assets/refresh.png" alt="Refresh" class="action-icon">
+                    Refresh
+                </button>
             </div>
 
-            <div class="content-list">
-                <div class="content-item">
-                    <div class="content-info">
-                        <h4>Comment on "React Basics"</h4>
-                        <p>This course helped me understand React so much better!</p>
-                        <span class="content-meta">By: User123 • 1 hour ago</span>
-                    </div>
-                    <div class="content-actions">
-                        <button class="btn-success">Approve</button>
-                        <button class="btn-danger">Remove</button>
-                        <button class="btn-warning">Flag</button>
-                    </div>
-                </div>
+            <div class="content-list" id="content-list">
+                <!-- Content will be loaded here dynamically -->
             </div>
         </div>
 
@@ -331,19 +265,8 @@
                 </div>
             </div>
 
-            <div class="analytics-grid">
-                <div class="analytics-card">
-                    <h3>User Growth</h3>
-                    <div class="chart-placeholder">
-                        <span>Chart visualization would go here</span>
-                    </div>
-                </div>
-                <div class="analytics-card">
-                    <h3>Course Performance</h3>
-                    <div class="chart-placeholder">
-                        <span>Chart visualization would go here</span>
-                    </div>
-                </div>
+            <div class="analytics-grid" id="analytics-grid">
+                <!-- Analytics will be loaded here dynamically -->
             </div>
         </div>
 
@@ -391,17 +314,8 @@
                 </div>
             </div>
 
-            <div class="revenue-summary">
-                <div class="revenue-card">
-                    <h3>Monthly Revenue</h3>
-                    <p class="revenue-amount">$45,678</p>
-                    <span class="revenue-change positive">+15% from last month</span>
-                </div>
-                <div class="revenue-card">
-                    <h3>Total Subscriptions</h3>
-                    <p class="revenue-amount">2,847</p>
-                    <span class="revenue-change positive">+8% from last month</span>
-                </div>
+            <div class="revenue-summary" id="revenue-summary">
+                <!-- Revenue data will be loaded here dynamically -->
             </div>
         </div>
 
@@ -420,7 +334,7 @@
             <div class="settings-form">
                 <div class="setting-group">
                     <label>Platform Name</label>
-                    <input type="text" value="LuIZ Learning Platform" class="setting-input">
+                    <input type="text" value="LuIZ Learning Platform" class="setting-input" id="platform-name">
                 </div>
                 <div class="setting-group">
                     <label>Maintenance Mode</label>
@@ -436,12 +350,43 @@
                         <label for="email-notifications"></label>
                     </div>
                 </div>
-                <button class="btn-primary">Save Settings</button>
+                <button class="btn-primary" id="save-settings">Save Settings</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<div id="reject-course-modal" class="modal">
+    <div class="modal-content">
+        <h3>Reject Course</h3>
+        <p>Please provide a reason for rejecting this course:</p>
+        <textarea id="rejection-reason" placeholder="Enter rejection reason..."></textarea>
+        <div class="modal-actions">
+            <button class="btn-secondary" onclick="closeModal('reject-course-modal')">Cancel</button>
+            <button class="btn-danger" id="confirm-reject">Reject Course</button>
         </div>
     </div>
 </div>
 
 @section Scripts {
     <script src="~/js/admin.js"></script>
+}
+
+@functions {
+    public string GetTimeAgo(DateTime timestamp)
+    {
+        var timeSpan = DateTime.UtcNow - timestamp;
+        
+        if (timeSpan.TotalMinutes < 1)
+            return "Just now";
+        if (timeSpan.TotalMinutes < 60)
+            return $"{(int)timeSpan.TotalMinutes} minutes ago";
+        if (timeSpan.TotalHours < 24)
+            return $"{(int)timeSpan.TotalHours} hours ago";
+        if (timeSpan.TotalDays < 7)
+            return $"{(int)timeSpan.TotalDays} days ago";
+        
+        return timestamp.ToString("MMM dd, yyyy");
+    }
 } 

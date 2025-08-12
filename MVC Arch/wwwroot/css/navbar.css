@@ -181,6 +181,33 @@
     opacity: 0.6;
 }
 
+#search-bar .search-submit-btn {
+    color: #8f7efc;
+    background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 100%);
+    border-radius: 50%;
+    padding: 8px;
+    position: absolute;
+    right: 6px;
+    font-weight: 400;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(143, 126, 252, 0.2);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+#search-bar .search-submit-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(143, 126, 252, 0.3);
+    color: #7a6af8;
+    background: linear-gradient(135deg, #e8e4ff 0%, #e0dcff 100%);
+}
+
 #search-bar span {
     color: #8f7efc;
     background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 100%);
@@ -839,4 +866,83 @@ html body .mobile-nav-links li a {
 
 .logout-btn:hover {
     background-color: rgba(143, 126, 252, 0.1);
+}
+
+/* Mobile Search Bar Styles */
+.mobile-search-bar {
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+.mobile-search-bar form {
+    width: 100%;
+}
+
+.mobile-search-bar div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(228, 222, 254, 0.6);
+    border-radius: 28px;
+    padding: 12px 18px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 3px 12px rgba(143, 126, 252, 0.1);
+}
+
+.mobile-search-bar div:focus-within {
+    border-color: #8f7efc;
+    box-shadow: 0 6px 25px rgba(143, 126, 252, 0.2);
+    transform: translateY(-2px);
+}
+
+.mobile-search-input {
+    border: none;
+    background: transparent;
+    padding: 8px 45px 8px 12px;
+    border-radius: 25px;
+    font-size: 16px;
+    color: #333446;
+    width: 100%;
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 400;
+}
+
+.mobile-search-input:focus {
+    outline: none;
+}
+
+.mobile-search-input::placeholder {
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 400;
+    color: #333446;
+    opacity: 0.6;
+}
+
+.mobile-search-submit-btn {
+    color: #8f7efc;
+    background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 100%);
+    border-radius: 50%;
+    padding: 8px;
+    position: absolute;
+    right: 6px;
+    font-weight: 400;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(143, 126, 252, 0.2);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+.mobile-search-submit-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(143, 126, 252, 0.3);
+    color: #7a6af8;
+    background: linear-gradient(135deg, #e8e4ff 0%, #e0dcff 100%);
 }
