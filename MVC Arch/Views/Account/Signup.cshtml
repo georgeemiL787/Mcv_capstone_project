@@ -1,3 +1,5 @@
+@model MCV_Capstone.ViewModels.SignupViewModel
+
 @{
     ViewData["Title"] = "Sign Up - Full Courses Platform";
 }
@@ -8,6 +10,20 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search,school,person,business" />
     <link rel="stylesheet" href="~/css/home.css" />
     <link rel="stylesheet" href="~/css/signup.css" />
+    
+    <style>
+        .text-danger {
+            color: #dc3545 !important;
+            font-size: 11px !important;
+            margin-top: 4px !important;
+            display: block !important;
+        }
+        
+        .user-type-card.selected {
+            background-color: #f8f9fa !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
 }
 
 
@@ -19,70 +35,81 @@
             <p>Join our learning community and start your journey</p>
         </div>
         
-        <form class="signup-form" method="post" action="@Url.Action("Signup", "Account")">
+
+
+        @* Bind to Register action in Account controller *@
+        <form asp-action="Register" asp-controller="Account" method="post" class="signup-form">
+            @Html.AntiForgeryToken()
             <div class="form-row">
                 <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+                    <label asp-for="FirstName" class="form-label">First Name</label>
+                    <input asp-for="FirstName" class="form-control" placeholder="Enter your first name" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
                 
                 <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+                    <label asp-for="LastName" class="form-label">Last Name</label>
+                    <input asp-for="LastName" class="form-control" placeholder="Enter your last name" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
             </div>
             
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" type="email" placeholder="Enter your email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             
             <div class="form-group">
-                <label for="userType">Select Account Type</label>
+                <label asp-for="RoleId" class="form-label">Select Account Type</label>
                 <div class="user-type-selection">
                     <label class="user-type-option">
-                        <input type="radio" name="userType" value="student" required>
+                        <input asp-for="RoleId" type="radio" value="1" class="role-radio" />
                         <span class="user-type-card">
                             <span class="material-symbols-outlined">school</span>
                             <span class="user-type-text">Student</span>
                         </span>
                     </label>
                     <label class="user-type-option">
-                        <input type="radio" name="userType" value="instructor" required>
+                        <input asp-for="RoleId" type="radio" value="2" class="role-radio" />
                         <span class="user-type-card">
                             <span class="material-symbols-outlined">person</span>
                             <span class="user-type-text">Instructor</span>
                         </span>
                     </label>
                     <label class="user-type-option">
-                        <input type="radio" name="userType" value="company" required>
+                        <input asp-for="RoleId" type="radio" value="3" class="role-radio" />
                         <span class="user-type-card">
                             <span class="material-symbols-outlined">business</span>
                             <span class="user-type-text">Company</span>
                         </span>
                     </label>
                 </div>
+                <span asp-validation-for="RoleId" class="text-danger"></span>
             </div>
             
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Create a password" required>
+                <label asp-for="Password" class="form-label">Password</label>
+                <input asp-for="Password" class="form-control" type="password" placeholder="Create a password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             
             <div class="form-group">    
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Confirm your password" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             
             <div class="form-options">
                 <label class="checkbox-container">
-                    <input type="checkbox" name="terms" required>
+                    <input asp-for="AcceptTerms" type="checkbox" class="terms-checkbox" />
                     <span class="checkmark"></span>
                     I agree to the&nbsp;<a href="#" class="terms-link">Terms of Service</a>&nbsp;and&nbsp;<a href="#" class="terms-link">Privacy Policy</a>
                 </label>
+                <span asp-validation-for="AcceptTerms" class="text-danger"></span>
             </div>
             
-            <button type="submit" class="signup-btn">Create Account</button>
+            <button type="submit" class="signup-btn" id="submitBtn">Create Account</button>
         </form>
         
         <div class="signup-divider">
@@ -107,5 +134,33 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/signup.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission handling - disable button to prevent double submission
+            const form = document.querySelector('.signup-form');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (form && submitBtn) {
+                form.addEventListener('submit', function(e) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Creating Account...';
+                });
+            }
+
+            // Role selection styling
+            const roleRadios = document.querySelectorAll('.role-radio');
+            roleRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // Remove selected class from all cards
+                    document.querySelectorAll('.user-type-card').forEach(card => {
+                        card.classList.remove('selected');
+                    });
+                    // Add selected class to current card
+                    this.closest('.user-type-option').querySelector('.user-type-card').classList.add('selected');
+                });
+            });
+        });
+    </script>
 }
