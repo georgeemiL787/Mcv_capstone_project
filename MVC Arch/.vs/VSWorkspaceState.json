@@ -2,14 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\Controllers",
-    "\\Models",
-    "\\Views\\Account",
-    "\\Views\\QuizCenter",
-    "\\Views\\Shared",
-    "\\wwwroot",
-    "\\wwwroot\\css",
-    "\\wwwroot\\lib"
+    "\\Data",
+    "\\ViewModels",
+    "\\Views",
+    "\\Views\\Account"
   ],
-  "SelectedNode": "\\wwwroot\\css\\navbar.css",
+  "SelectedNode": "\\Views\\Account\\Signup.cshtml",
   "PreviewInSolutionExplorer": false
 }

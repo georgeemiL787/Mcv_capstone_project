@@ -1,203 +1,271 @@
 @{
     ViewData["Title"] = "Analytics - Instructor Dashboard";
+    Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString()?.ToLower();
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/instructor-dashboard.css" />
-    <link rel="stylesheet" href="~/css/analytics.css" />
+    <link rel="stylesheet" href="~/css/instructor-dashboard.css">
+    <link rel="stylesheet" href="~/css/analytics.css">
 }
 
-<div class="analytics-container">
-    <div class="analytics-header">
-        <h1>Analytics Dashboard</h1>
-        <p>Comprehensive insights into your course performance and student engagement</p>
-        <div class="date-range-picker">
-            <label for="dateRange">Date Range:</label>
-            <select id="dateRange">
-                <option value="7">Last 7 days</option>
-                <option value="30" selected>Last 30 days</option>
-                <option value="90">Last 3 months</option>
-                <option value="365">Last year</option>
-            </select>
+<div class="instructor-layout">
+    <!-- Left Sidebar -->
+    <div class="instructor-sidebar">
+        <div class="sidebar-header">
+            <div class="instructor-avatar">
+                <div class="avatar-placeholder">JD</div>
+            </div>
+            <h3>John Doe</h3>
+            <p>Instructor</p>
+            <a href="#" class="view-profile-link">View Profile</a>
         </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "InstructorDashboard")" class="nav-item @(currentAction == "index" ? "active" : "")" data-page="dashboard">
+                <span class="material-symbols-outlined nav-icon">dashboard</span>
+                Dashboard
+            </a>
+            <a href="@Url.Action("Courses", "InstructorDashboard")" class="nav-item @(currentAction == "courses" ? "active" : "")" data-page="courses">
+                <span class="material-symbols-outlined nav-icon">school</span>
+                My Courses
+            </a>
+            <a href="@Url.Action("Enrollments", "InstructorDashboard")" class="nav-item @(currentAction == "enrollments" ? "active" : "")" data-page="enrollments">
+                <span class="material-symbols-outlined nav-icon">people</span>
+                Enrollments
+            </a>
+            <a href="@Url.Action("Revenue", "InstructorDashboard")" class="nav-item @(currentAction == "revenue" ? "active" : "")" data-page="revenue">
+                <span class="material-symbols-outlined nav-icon">trending_up</span>
+                Revenue
+            </a>
+            <a href="@Url.Action("Discussions", "InstructorDashboard")" class="nav-item @(currentAction == "discussions" ? "active" : "")" data-page="discussions">
+                <span class="material-symbols-outlined nav-icon">forum</span>
+                Q&A/Discussions
+            </a>
+            <a href="@Url.Action("Analytics", "InstructorDashboard")" class="nav-item @(currentAction == "analytics" ? "active" : "")" data-page="analytics">
+                <span class="material-symbols-outlined nav-icon">analytics</span>
+                Analytics
+            </a>
+            <a href="#" class="nav-item" data-page="quizzes">
+                <span class="material-symbols-outlined nav-icon">quiz</span>
+                Quizzes
+            </a>
+            <a href="#" class="nav-item" data-page="settings">
+                <span class="material-symbols-outlined nav-icon">settings</span>
+                Settings
+            </a>
+        </nav>
     </div>
-    
-    <div class="analytics-overview">
-        <div class="overview-card">
-            <div class="overview-icon">
-                <span class="material-symbols-outlined">trending_up</span>
-            </div>
-            <div class="overview-content">
-                <h3>Total Revenue</h3>
-                <p class="overview-value">$24,580</p>
-                <span class="overview-change positive">+12.5% vs last period</span>
-            </div>
+
+    <!-- Main Content Area -->
+    <div class="instructor-content">
+        <div class="content-header">
+            <h1>Analytics & Insights</h1>
+            <p>Deep dive into your course performance and student engagement metrics.</p>
         </div>
-        
-        <div class="overview-card">
-            <div class="overview-icon">
-                <span class="material-symbols-outlined">school</span>
-            </div>
-            <div class="overview-content">
-                <h3>Total Students</h3>
-                <p class="overview-value">1,247</p>
-                <span class="overview-change positive">+8.7% vs last period</span>
-            </div>
-        </div>
-        
-        <div class="overview-card">
-            <div class="overview-icon">
-                <span class="material-symbols-outlined">course</span>
-            </div>
-            <div class="overview-content">
-                <h3>Active Courses</h3>
-                <p class="overview-value">12</p>
-                <span class="overview-change neutral">No change</span>
-            </div>
-        </div>
-        
-        <div class="overview-card">
-            <div class="overview-icon">
-                <span class="material-symbols-outlined">star</span>
-            </div>
-            <div class="overview-content">
-                <h3>Avg Rating</h3>
-                <p class="overview-value">4.8</p>
-                <span class="overview-change positive">+0.2 vs last period</span>
-            </div>
-        </div>
-    </div>
-    
-    <div class="analytics-charts">
-        <div class="chart-section">
-            <div class="chart-header">
-                <h3>Revenue Trends</h3>
-                <div class="chart-controls">
-                    <button class="chart-btn active" data-period="daily">Daily</button>
-                    <button class="chart-btn" data-period="weekly">Weekly</button>
-                    <button class="chart-btn" data-period="monthly">Monthly</button>
+
+        <!-- Analytics Overview -->
+        <div class="analytics-overview">
+            <div class="overview-card">
+                <div class="overview-icon">
+                    <span class="material-symbols-outlined">visibility</span>
+                </div>
+                <div class="overview-content">
+                    <h3>1,247</h3>
+                    <p>Total Views</p>
+                    <span class="trend positive">+15.3%</span>
                 </div>
             </div>
-            <div class="chart-container">
-                <canvas id="revenueChart" width="400" height="200"></canvas>
+            <div class="overview-card">
+                <div class="overview-icon">
+                    <span class="material-symbols-outlined">play_circle</span>
+                </div>
+                <div class="overview-content">
+                    <h3>892</h3>
+                    <p>Video Plays</p>
+                    <span class="trend positive">+8.7%</span>
+                </div>
+            </div>
+            <div class="overview-card">
+                <div class="overview-icon">
+                    <span class="material-symbols-outlined">timer</span>
+                </div>
+                <div class="overview-content">
+                    <h3>24.5h</h3>
+                    <p>Avg. Watch Time</p>
+                    <span class="trend positive">+12.1%</span>
+                </div>
+            </div>
+            <div class="overview-card">
+                <div class="overview-icon">
+                    <span class="material-symbols-outlined">completion_rate</span>
+                </div>
+                <div class="overview-content">
+                    <h3>78.3%</h3>
+                    <p>Completion Rate</p>
+                    <span class="trend negative">-2.4%</span>
+                </div>
             </div>
         </div>
-        
-        <div class="chart-section">
-            <div class="chart-header">
-                <h3>Student Engagement</h3>
-                <p>Course completion rates and student activity</p>
-            </div>
-            <div class="chart-container">
-                <canvas id="engagementChart" width="400" height="200"></canvas>
-            </div>
-        </div>
-    </div>
-    
-    <div class="analytics-details">
-        <div class="details-section">
-            <h3>Top Performing Courses</h3>
-            <div class="course-performance-list">
-                <div class="course-item">
-                    <div class="course-rank">1</div>
-                    <div class="course-info">
-                        <h4>Web Development Masterclass</h4>
-                        <p>156 students • $8,450 revenue</p>
-                    </div>
-                    <div class="course-stats">
-                        <span class="completion-rate">92% completion</span>
-                        <span class="rating">4.9 ⭐</span>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Student Engagement Over Time</h3>
+                    <div class="chart-controls">
+                        <select id="engagementTimeRange">
+                            <option value="7">Last 7 days</option>
+                            <option value="30" selected>Last 30 days</option>
+                            <option value="90">Last 3 months</option>
+                        </select>
                     </div>
                 </div>
-                
-                <div class="course-item">
-                    <div class="course-rank">2</div>
-                    <div class="course-info">
-                        <h4>Data Science Fundamentals</h4>
-                        <p>124 students • $6,230 revenue</p>
-                    </div>
-                    <div class="course-stats">
-                        <span class="completion-rate">88% completion</span>
-                        <span class="rating">4.7 ⭐</span>
+                <div class="chart-container">
+                    <div class="chart-placeholder">
+                        <span class="material-symbols-outlined">analytics</span>
+                        <h4>Engagement Chart</h4>
+                        <p>Interactive chart showing student engagement trends</p>
                     </div>
                 </div>
-                
-                <div class="course-item">
-                    <div class="course-rank">3</div>
-                    <div class="course-info">
-                        <h4>Digital Marketing Strategy</h4>
-                        <p>98 students • $5,890 revenue</p>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Course Performance Comparison</h3>
+                    <div class="chart-controls">
+                        <select id="performanceMetric">
+                            <option value="views">Views</option>
+                            <option value="completion" selected>Completion Rate</option>
+                            <option value="revenue">Revenue</option>
+                        </select>
                     </div>
-                    <div class="course-stats">
-                        <span class="completion-rate">85% completion</span>
-                        <span class="rating">4.8 ⭐</span>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-placeholder">
+                        <span class="material-symbols-outlined">bar_chart</span>
+                        <h4>Performance Chart</h4>
+                        <p>Bar chart comparing course performance metrics</p>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="details-section">
-            <h3>Geographic Distribution</h3>
-            <div class="geo-stats">
-                <div class="geo-item">
-                    <span class="country">United States</span>
-                    <span class="percentage">45%</span>
-                    <div class="geo-bar">
-                        <div class="geo-fill" style="width: 45%"></div>
+
+        <!-- Course Insights -->
+        <div class="insights-section">
+            <h3>Course Insights</h3>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-header">
+                        <h4>React Fundamentals</h4>
+                        <span class="insight-badge positive">Top Performer</span>
+                    </div>
+                    <div class="insight-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Completion Rate</span>
+                            <span class="stat-value">85.2%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Avg. Rating</span>
+                            <span class="stat-value">4.9/5</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Drop-off Point</span>
+                            <span class="stat-value">Lesson 8</span>
+                        </div>
+                    </div>
+                    <div class="insight-actions">
+                        <button class="secondary-btn">View Details</button>
                     </div>
                 </div>
-                
-                <div class="geo-item">
-                    <span class="country">United Kingdom</span>
-                    <span class="percentage">18%</span>
-                    <div class="geo-bar">
-                        <div class="geo-fill" style="width: 18%"></div>
+
+                <div class="insight-card">
+                    <div class="insight-header">
+                        <h4>Python for Beginners</h4>
+                        <span class="insight-badge neutral">Stable</span>
+                    </div>
+                    <div class="insight-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Completion Rate</span>
+                            <span class="stat-value">72.8%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Avg. Rating</span>
+                            <span class="stat-value">4.7/5</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Drop-off Point</span>
+                            <span class="stat-value">Lesson 12</span>
+                        </div>
+                    </div>
+                    <div class="insight-actions">
+                        <button class="secondary-btn">View Details</button>
                     </div>
                 </div>
-                
-                <div class="geo-item">
-                    <span class="country">Canada</span>
-                    <span class="percentage">12%</span>
-                    <div class="geo-bar">
-                        <div class="geo-fill" style="width: 12%"></div>
+
+                <div class="insight-card">
+                    <div class="insight-header">
+                        <h4>Advanced JavaScript</h4>
+                        <span class="insight-badge negative">Needs Attention</span>
                     </div>
-                </div>
-                
-                <div class="geo-item">
-                    <span class="country">Australia</span>
-                    <span class="percentage">8%</span>
-                    <div class="geo-bar">
-                        <div class="geo-fill" style="width: 8%"></div>
+                    <div class="insight-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Completion Rate</span>
+                            <span class="stat-value">58.4%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Avg. Rating</span>
+                            <span class="stat-value">4.3/5</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Drop-off Point</span>
+                            <span class="stat-value">Lesson 5</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="geo-item">
-                    <span class="country">Other</span>
-                    <span class="percentage">17%</span>
-                    <div class="geo-bar">
-                        <div class="geo-fill" style="width: 17%"></div>
+                    <div class="insight-actions">
+                        <button class="secondary-btn">View Details</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="analytics-actions">
-        <button class="btn-primary">
-            <span class="material-symbols-outlined">download</span>
-            Export Report
-        </button>
-        <button class="btn-secondary">
-            <span class="material-symbols-outlined">schedule</span>
-            Schedule Reports
-        </button>
-        <button class="btn-secondary">
-            <span class="material-symbols-outlined">settings</span>
-            Analytics Settings
-        </button>
+
+        <!-- Student Behavior Analysis -->
+        <div class="behavior-section">
+            <h3>Student Behavior Analysis</h3>
+            <div class="behavior-grid">
+                <div class="behavior-card">
+                    <h4>Most Active Hours</h4>
+                    <div class="behavior-chart">
+                        <div class="chart-placeholder small">
+                            <span class="material-symbols-outlined">schedule</span>
+                            <p>Peak activity: 7-9 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="behavior-card">
+                    <h4>Device Usage</h4>
+                    <div class="behavior-chart">
+                        <div class="chart-placeholder small">
+                            <span class="material-symbols-outlined">devices</span>
+                            <p>Desktop: 65% | Mobile: 35%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="behavior-card">
+                    <h4>Geographic Distribution</h4>
+                    <div class="behavior-chart">
+                        <div class="chart-placeholder small">
+                            <span class="material-symbols-outlined">public</span>
+                            <p>Top: US, UK, Canada</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 @section Scripts {
+    <script src="~/js/instructor-dashboard.js"></script>
     <script src="~/js/analytics.js"></script>
 }

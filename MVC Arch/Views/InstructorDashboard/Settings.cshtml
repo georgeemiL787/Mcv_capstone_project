@@ -1,0 +1,259 @@
+@{
+    ViewData["Title"] = "Settings - Instructor Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/settings.css" />
+}
+
+<div class="instructor-layout">
+    <!-- Left Sidebar -->
+    <div class="instructor-sidebar">
+        <div class="sidebar-header">
+            <div class="instructor-avatar">
+                <div class="avatar-placeholder">JD</div>
+            </div>
+            <h3>John Doe</h3>
+            <p>Instructor</p>
+            <a href="#" class="view-profile-link">View Profile</a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">dashboard</span>
+                Dashboard
+            </a>
+            <a href="@Url.Action("Courses", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">school</span>
+                My Courses
+            </a>
+            <a href="@Url.Action("Enrollments", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">people</span>
+                Enrollments
+            </a>
+            <a href="@Url.Action("Revenue", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">trending_up</span>
+                Revenue
+            </a>
+            <a href="@Url.Action("Discussions", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">forum</span>
+                Q&A/Discussions
+            </a>
+            <a href="@Url.Action("Analytics", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">analytics</span>
+                Analytics
+            </a>
+            <a href="@Url.Action("Quizzes", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">quiz</span>
+                Quizzes
+            </a>
+            <a href="@Url.Action("Settings", "InstructorDashboard")" class="nav-item active">
+                <span class="material-symbols-outlined nav-icon">settings</span>
+                Settings
+            </a>
+        </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="instructor-content">
+        <div class="content-header">
+            <h1>Settings</h1>
+            <p>Manage your account preferences and instructor settings</p>
+        </div>
+
+        <!-- Settings Navigation -->
+        <div class="settings-nav">
+            <button class="settings-tab active" data-tab="profile">Profile</button>
+            <button class="settings-tab" data-tab="notifications">Notifications</button>
+            <button class="settings-tab" data-tab="privacy">Privacy</button>
+            <button class="settings-tab" data-tab="billing">Billing</button>
+            <button class="settings-tab" data-tab="security">Security</button>
+        </div>
+
+        <!-- Settings Content -->
+        <div class="settings-content">
+            <!-- Profile Settings -->
+            <div class="settings-panel active" id="profile">
+                <h3>Profile Information</h3>
+                <form class="settings-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" value="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" value="Doe" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="john.doe@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" name="bio" rows="4" placeholder="Tell students about yourself...">Experienced software developer and instructor with over 10 years of experience in web development and programming education.</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialization">Specialization</label>
+                        <input type="text" id="specialization" name="specialization" value="Web Development, JavaScript, React" placeholder="Your areas of expertise">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="primary-btn">Save Changes</button>
+                        <button type="button" class="secondary-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Notifications Settings -->
+            <div class="settings-panel" id="notifications">
+                <h3>Notification Preferences</h3>
+                <div class="notification-settings">
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>New Student Enrollments</h4>
+                            <p>Get notified when new students enroll in your courses</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Course Reviews</h4>
+                            <p>Receive notifications for new course reviews and ratings</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Revenue Updates</h4>
+                            <p>Get daily/weekly revenue reports and updates</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Platform Updates</h4>
+                            <p>Important updates about the learning platform</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy Settings -->
+            <div class="settings-panel" id="privacy">
+                <h3>Privacy & Visibility</h3>
+                <div class="privacy-settings">
+                    <div class="privacy-item">
+                        <div class="privacy-info">
+                            <h4>Profile Visibility</h4>
+                            <p>Make your instructor profile visible to students</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="privacy-item">
+                        <div class="privacy-info">
+                            <h4>Contact Information</h4>
+                            <p>Allow students to contact you directly</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="privacy-item">
+                        <div class="privacy-info">
+                            <h4>Analytics Sharing</h4>
+                            <p>Share your course performance with other instructors</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing Settings -->
+            <div class="settings-panel" id="billing">
+                <h3>Billing & Payments</h3>
+                <div class="billing-info">
+                    <div class="billing-card">
+                        <h4>Payment Method</h4>
+                        <p>Visa ending in ****1234</p>
+                        <button class="secondary-btn">Update</button>
+                    </div>
+                    <div class="billing-card">
+                        <h4>Payout Schedule</h4>
+                        <p>Monthly (1st of each month)</p>
+                        <button class="secondary-btn">Change</button>
+                    </div>
+                    <div class="billing-card">
+                        <h4>Tax Information</h4>
+                        <p>W-9 form submitted</p>
+                        <button class="secondary-btn">Update</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Settings -->
+            <div class="settings-panel" id="security">
+                <h3>Security Settings</h3>
+                <div class="security-settings">
+                    <div class="security-item">
+                        <div class="security-info">
+                            <h4>Two-Factor Authentication</h4>
+                            <p>Add an extra layer of security to your account</p>
+                        </div>
+                        <button class="primary-btn">Enable</button>
+                    </div>
+
+                    <div class="security-item">
+                        <div class="security-info">
+                            <h4>Change Password</h4>
+                            <p>Update your account password</p>
+                        </div>
+                        <button class="secondary-btn">Change</button>
+                    </div>
+
+                    <div class="security-item">
+                        <div class="security-info">
+                            <h4>Login History</h4>
+                            <p>View recent login activity</p>
+                        </div>
+                        <button class="secondary-btn">View</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/settings.js"></script>
+}

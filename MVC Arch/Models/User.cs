@@ -9,24 +9,24 @@ namespace MCV_Capstone.Models
     {
         [Required]
         [MaxLength(255)]
-        public override string Email { get; set; }
+        public override string? Email { get; set; }
 
         [MaxLength(100)]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         [MaxLength(100)]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [MaxLength(255)]
-        public string Headline { get; set; }
+        public string? Headline { get; set; }
 
         public string? Biography { get; set; }
 
         [MaxLength(50)]
-        public string Language { get; set; }
+        public string? Language { get; set; }= "English";
 
         [MaxLength(100)]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [MaxLength(50)]
         public string AccountStatus { get; set; } = "Active";
@@ -36,8 +36,8 @@ namespace MCV_Capstone.Models
         public DateTime? LastLogin { get; set; }
 
         // Store as Base64 string or byte[] (I'll explain in a moment)
-        public string ProfilePhoto { get; set; }
+        public string? ProfilePhoto { get; set; }
 
-        public string Preferences { get; set; }
+        public string? Preferences { get; set; }
     }
 }

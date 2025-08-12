@@ -21,6 +21,7 @@
                 <div class="avatar-placeholder">GE</div>
             </div>
             <h3>George Emil</h3>
+            <a href="#" class="view-profile-link">View Public Profile</a>
         </div>
         
         <nav class="sidebar-nav">
@@ -58,7 +59,7 @@
     <!-- Right Content Area -->
     <div class="profile-content">
         <!-- Profile Section -->
-        <div id="profile" class="content-section active">
+        <div class="content-section">
             <div class="content-header">
                 <h1>Profile Settings</h1>
                 <p>Manage your personal information and account settings.</p>
@@ -66,7 +67,7 @@
 
             <div class="profile-form">
                 <div class="form-section">
-                    <h2>Personal Information</h2>
+                    <h3>Personal Information</h3>
                     <form method="post" action="@Url.Action("Index", "Profile")">
                         <div class="form-row">
                             <div class="form-group">
@@ -104,12 +105,14 @@
                             <input type="url" id="website" name="website" value="https://georgeemil.dev">
                         </div>
 
-                        <button type="submit" class="save-btn">Save Changes</button>
+                        <div class="form-actions">
+                            <button type="submit" class="save-btn">Save Changes</button>
+                        </div>
                     </form>
                 </div>
 
                 <div class="form-section">
-                    <h2>Account Information</h2>
+                    <h3>Account Information</h3>
                     <div class="account-info">
                         <div class="info-item">
                             <label>Account Type</label>

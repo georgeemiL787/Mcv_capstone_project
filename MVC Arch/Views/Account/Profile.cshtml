@@ -1,0 +1,22 @@
+@model MCV_Capstone.Models.User
+@{
+    ViewData["Title"] = "Profile - Full Courses Platform";
+}
+
+<div class="profile-container">
+    <h1>Profile</h1>
+    <p>Welcome, @Model.FirstName @Model.LastName!</p>
+    <p>Email: @Model.Email</p>
+    <p>Account Status: @Model.AccountStatus</p>
+    <p>Registration Date: @Model.RegistrationDate.ToString("MMMM dd, yyyy")</p>
+    
+    @if (Model.LastLogin.HasValue)
+    {
+        <p>Last Login: @Model.LastLogin.Value.ToString("MMMM dd, yyyy 'at' h:mm tt")</p>
+    }
+    
+    <div class="profile-actions">
+        <a href="@Url.Action("ChangePassword", "Account")" class="btn btn-primary">Change Password</a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Go to Home</a>
+    </div>
+</div>

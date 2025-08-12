@@ -1,123 +1,223 @@
 @{
     ViewData["Title"] = "Revenue - Instructor Dashboard";
+    Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString()?.ToLower();
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/instructor-dashboard.css" />
-    <link rel="stylesheet" href="~/css/revenue.css" />
+    <link rel="stylesheet" href="~/css/instructor-dashboard.css">
+    <link rel="stylesheet" href="~/css/revenue.css">
 }
 
-<div class="revenue-container">
-    <div class="revenue-header">
-        <h1>Revenue Analytics</h1>
-        <p>Track your earnings and financial performance</p>
+<div class="instructor-layout">
+    <!-- Left Sidebar -->
+    <div class="instructor-sidebar">
+        <div class="sidebar-header">
+            <div class="instructor-avatar">
+                <div class="avatar-placeholder">JD</div>
+            </div>
+            <h3>John Doe</h3>
+            <p>Instructor</p>
+            <a href="#" class="view-profile-link">View Profile</a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "InstructorDashboard")" class="nav-item @(currentAction == "index" ? "active" : "")" data-page="dashboard">
+                <span class="material-symbols-outlined nav-icon">dashboard</span>
+                Dashboard
+            </a>
+            <a href="@Url.Action("Courses", "InstructorDashboard")" class="nav-item @(currentAction == "courses" ? "active" : "")" data-page="courses">
+                <span class="material-symbols-outlined nav-icon">school</span>
+                My Courses
+            </a>
+            <a href="@Url.Action("Enrollments", "InstructorDashboard")" class="nav-item @(currentAction == "enrollments" ? "active" : "")" data-page="enrollments">
+                <span class="material-symbols-outlined nav-icon">people</span>
+                Enrollments
+            </a>
+            <a href="@Url.Action("Revenue", "InstructorDashboard")" class="nav-item @(currentAction == "revenue" ? "active" : "")" data-page="revenue">
+                <span class="material-symbols-outlined nav-icon">trending_up</span>
+                Revenue
+            </a>
+            <a href="@Url.Action("Discussions", "InstructorDashboard")" class="nav-item @(currentAction == "discussions" ? "active" : "")" data-page="discussions">
+                <span class="material-symbols-outlined nav-icon">forum</span>
+                Q&A/Discussions
+            </a>
+            <a href="@Url.Action("Analytics", "InstructorDashboard")" class="nav-item @(currentAction == "analytics" ? "active" : "")" data-page="analytics">
+                <span class="material-symbols-outlined nav-icon">analytics</span>
+                Analytics
+            </a>
+            <a href="#" class="nav-item" data-page="quizzes">
+                <span class="material-symbols-outlined nav-icon">quiz</span>
+                Quizzes
+            </a>
+            <a href="#" class="nav-item" data-page="settings">
+                <span class="material-symbols-outlined nav-icon">settings</span>
+                Settings
+            </a>
+        </nav>
     </div>
-    
-    <div class="revenue-stats">
-        <div class="stat-card">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">trending_up</span>
+
+    <!-- Main Content Area -->
+    <div class="instructor-content">
+        <div class="content-header">
+            <h1>Revenue & Earnings</h1>
+            <p>Track your course earnings and financial performance.</p>
+        </div>
+
+        <!-- Revenue Stats -->
+        <div class="revenue-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">account_balance_wallet</span>
+                </div>
+                <div class="stat-content">
+                    <h3>$24,580</h3>
+                    <p>Total Revenue</p>
+                    <span class="stat-change positive">+12.5% from last month</span>
+                </div>
             </div>
-            <div class="stat-content">
-                <h3>Total Revenue</h3>
-                <p class="stat-value">$24,580</p>
-                <span class="stat-change positive">+12.5%</span>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">trending_up</span>
+                </div>
+                <div class="stat-content">
+                    <h3>$8,420</h3>
+                    <p>This Month</p>
+                    <span class="stat-change positive">+8.3% from last month</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                </div>
+                <div class="stat-content">
+                    <h3>247</h3>
+                    <p>Total Sales</p>
+                    <span class="stat-change positive">+15.2% from last month</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">account_balance_wallet</span>
+                </div>
+                <div class="stat-content">
+                    <h3>$99.50</h3>
+                    <p>Average Order</p>
+                    <span class="stat-change negative">-2.1% from last month</span>
+                </div>
             </div>
         </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">school</span>
+
+        <!-- Revenue Chart -->
+        <div class="revenue-chart-section">
+            <div class="chart-header">
+                <h3>Revenue Trend</h3>
+                <div class="chart-controls">
+                    <select id="timeRange">
+                        <option value="7">Last 7 days</option>
+                        <option value="30" selected>Last 30 days</option>
+                        <option value="90">Last 3 months</option>
+                        <option value="365">Last year</option>
+                    </select>
+                </div>
             </div>
-            <div class="stat-content">
-                <h3>Active Students</h3>
-                <p class="stat-value">1,247</p>
-                <span class="stat-change positive">+8.2%</span>
-            </div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">course</span>
-            </div>
-            <div class="stat-content">
-                <h3>Courses Sold</h3>
-                <p class="stat-value">89</p>
-                <span class="stat-change positive">+15.3%</span>
-            </div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">calendar_today</span>
-            </div>
-            <div class="stat-content">
-                <h3>This Month</h3>
-                <p class="stat-value">$3,420</p>
-                <span class="stat-change positive">+22.1%</span>
+            <div class="chart-container">
+                <div class="chart-placeholder">
+                    <span class="material-symbols-outlined">analytics</span>
+                    <h4>Revenue Chart</h4>
+                    <p>Interactive chart showing revenue trends over time</p>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class="revenue-charts">
-        <div class="chart-container">
-            <h3>Revenue Trend</h3>
-            <div class="chart-placeholder">
-                <canvas id="revenueChart"></canvas>
-            </div>
-        </div>
-        
-        <div class="chart-container">
+
+        <!-- Top Performing Courses -->
+        <div class="top-courses-section">
             <h3>Top Performing Courses</h3>
-            <div class="course-performance">
+            <div class="courses-list">
                 <div class="course-item">
                     <div class="course-info">
-                        <h4>Web Development Masterclass</h4>
-                        <p>Advanced programming course</p>
+                        <h4>React Fundamentals</h4>
+                        <p>342 students enrolled</p>
                     </div>
                     <div class="course-revenue">
-                        <span class="revenue-amount">$8,450</span>
-                        <span class="student-count">156 students</span>
+                        <span class="revenue-amount">$16,758</span>
+                        <span class="revenue-percentage">68.2%</span>
                     </div>
                 </div>
-                
                 <div class="course-item">
                     <div class="course-info">
-                        <h4>Data Science Fundamentals</h4>
-                        <p>Introduction to data analysis</p>
+                        <h4>Python for Beginners</h4>
+                        <p>567 students enrolled</p>
                     </div>
                     <div class="course-revenue">
-                        <span class="revenue-amount">$6,230</span>
-                        <span class="student-count">124 students</span>
+                        <span class="revenue-amount">$22,113</span>
+                        <span class="revenue-percentage">90.0%</span>
                     </div>
                 </div>
-                
                 <div class="course-item">
                     <div class="course-info">
-                        <h4>Digital Marketing Strategy</h4>
-                        <p>Complete marketing guide</p>
+                        <h4>Advanced JavaScript</h4>
+                        <p>234 students enrolled</p>
                     </div>
                     <div class="course-revenue">
-                        <span class="revenue-amount">$5,890</span>
-                        <span class="student-count">98 students</span>
+                        <span class="revenue-amount">$13,806</span>
+                        <span class="revenue-percentage">56.2%</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="revenue-actions">
-        <button class="btn-primary">
-            <span class="material-symbols-outlined">download</span>
-            Export Report
-        </button>
-        <button class="btn-secondary">
-            <span class="material-symbols-outlined">settings</span>
-            Revenue Settings
-        </button>
+
+        <!-- Recent Transactions -->
+        <div class="transactions-section">
+            <h3>Recent Transactions</h3>
+            <div class="transactions-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Course</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sarah Miller</td>
+                            <td>React Fundamentals</td>
+                            <td>$49.00</td>
+                            <td>Dec 15, 2024</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mike Johnson</td>
+                            <td>Python for Beginners</td>
+                            <td>$39.00</td>
+                            <td>Dec 14, 2024</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Anna Lee</td>
+                            <td>Advanced JavaScript</td>
+                            <td>$59.00</td>
+                            <td>Dec 13, 2024</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>David Chen</td>
+                            <td>React Fundamentals</td>
+                            <td>$49.00</td>
+                            <td>Dec 12, 2024</td>
+                            <td><span class="status-badge pending">Pending</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
 @section Scripts {
+    <script src="~/js/instructor-dashboard.js"></script>
     <script src="~/js/revenue.js"></script>
 }

@@ -1,225 +1,227 @@
 @{
-    ViewData["Title"] = "Discussions - Instructor Dashboard";
+    ViewData["Title"] = "Q&A/Discussions - Instructor Dashboard";
+    Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString()?.ToLower();
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/instructor-dashboard.css" />
-    <link rel="stylesheet" href="~/css/discussions.css" />
+    <link rel="stylesheet" href="~/css/instructor-dashboard.css">
+    <link rel="stylesheet" href="~/css/discussions.css">
 }
 
-<div class="discussions-container">
-    <div class="discussions-header">
-        <h1>Course Discussions</h1>
-        <p>Monitor and participate in student discussions across your courses</p>
+<div class="instructor-layout">
+    <!-- Left Sidebar -->
+    <div class="instructor-sidebar">
+        <div class="sidebar-header">
+            <div class="instructor-avatar">
+                <div class="avatar-placeholder">JD</div>
+            </div>
+            <h3>John Doe</h3>
+            <p>Instructor</p>
+            <a href="#" class="view-profile-link">View Profile</a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "InstructorDashboard")" class="nav-item @(currentAction == "index" ? "active" : "")" data-page="dashboard">
+                <span class="material-symbols-outlined nav-icon">dashboard</span>
+                Dashboard
+            </a>
+            <a href="@Url.Action("Courses", "InstructorDashboard")" class="nav-item @(currentAction == "courses" ? "active" : "")" data-page="courses">
+                <span class="material-symbols-outlined nav-icon">school</span>
+                My Courses
+            </a>
+            <a href="@Url.Action("Enrollments", "InstructorDashboard")" class="nav-item @(currentAction == "enrollments" ? "active" : "")" data-page="enrollments">
+                <span class="material-symbols-outlined nav-icon">people</span>
+                Enrollments
+            </a>
+            <a href="@Url.Action("Revenue", "InstructorDashboard")" class="nav-item @(currentAction == "revenue" ? "active" : "")" data-page="revenue">
+                <span class="material-symbols-outlined nav-icon">trending_up</span>
+                Revenue
+            </a>
+            <a href="@Url.Action("Discussions", "InstructorDashboard")" class="nav-item @(currentAction == "discussions" ? "active" : "")" data-page="discussions">
+                <span class="material-symbols-outlined nav-icon">forum</span>
+                Q&A/Discussions
+            </a>
+            <a href="@Url.Action("Analytics", "InstructorDashboard")" class="nav-item @(currentAction == "analytics" ? "active" : "")" data-page="analytics">
+                <span class="material-symbols-outlined nav-icon">analytics</span>
+                Analytics
+            </a>
+            <a href="#" class="nav-item" data-page="quizzes">
+                <span class="material-symbols-outlined nav-icon">quiz</span>
+                Quizzes
+            </a>
+            <a href="#" class="nav-item" data-page="settings">
+                <span class="material-symbols-outlined nav-icon">settings</span>
+                Settings
+            </a>
+        </nav>
     </div>
-    
-    <div class="discussions-stats">
-        <div class="stat-card">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">forum</span>
+
+    <!-- Main Content Area -->
+    <div class="instructor-content">
+        <div class="content-header">
+            <h1>Q&A & Discussions</h1>
+            <p>Manage student questions and foster learning through discussions.</p>
+        </div>
+
+        <!-- Discussion Stats -->
+        <div class="discussion-stats">
+            <div class="stat-item">
+                <span class="stat-number">24</span>
+                <span class="stat-label">Total Questions</span>
             </div>
-            <div class="stat-content">
-                <h3>Total Discussions</h3>
-                <p class="stat-value">156</p>
-                <span class="stat-change positive">+23.4%</span>
+            <div class="stat-item">
+                <span class="stat-number">8</span>
+                <span class="stat-label">Unanswered</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">12</span>
+                <span class="stat-label">Answered</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">4</span>
+                <span class="stat-label">Resolved</span>
             </div>
         </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">chat</span>
+
+        <!-- Discussion Filters -->
+        <div class="discussion-filters">
+            <div class="filter-group">
+                <label for="statusFilter">Status:</label>
+                <select id="statusFilter">
+                    <option value="">All Questions</option>
+                    <option value="unanswered">Unanswered</option>
+                    <option value="answered">Answered</option>
+                    <option value="resolved">Resolved</option>
+                </select>
             </div>
-            <div class="stat-content">
-                <h3>Active Threads</h3>
-                <p class="stat-value">89</p>
-                <span class="stat-change positive">+15.7%</span>
-            </div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">group</span>
-            </div>
-            <div class="stat-content">
-                <h3>Participants</h3>
-                <p class="stat-value">1,247</p>
-                <span class="stat-change positive">+12.3%</span>
+            <div class="search-group">
+                <input type="text" id="questionSearch" placeholder="Search questions...">
+                <span class="material-symbols-outlined">search</span>
             </div>
         </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">schedule</span>
-            </div>
-            <div class="stat-content">
-                <h3>Avg Response Time</h3>
-                <p class="stat-value">2.4h</p>
-                <span class="stat-change negative">+0.3h</span>
-            </div>
-        </div>
-    </div>
-    
-    <div class="discussions-filters">
-        <div class="filter-group">
-            <label for="courseFilter">Course:</label>
-            <select id="courseFilter">
-                <option value="">All Courses</option>
-                <option value="web-dev">Web Development</option>
-                <option value="data-science">Data Science</option>
-                <option value="marketing">Digital Marketing</option>
-            </select>
-        </div>
-        
-        <div class="filter-group">
-            <label for="statusFilter">Status:</label>
-            <select id="statusFilter">
-                <option value="">All Status</option>
-                <option value="active">Active</option>
-                <option value="resolved">Resolved</option>
-                <option value="needs-attention">Needs Attention</option>
-            </select>
-        </div>
-        
-        <div class="filter-group">
-            <label for="typeFilter">Type:</label>
-            <select id="typeFilter">
-                <option value="">All Types</option>
-                <option value="question">Question</option>
-                <option value="discussion">Discussion</option>
-                <option value="help">Help Request</option>
-            </select>
-        </div>
-        
-        <button class="btn-primary">Apply Filters</button>
-    </div>
-    
-    <div class="discussions-list">
-        <div class="list-header">
-            <h3>Recent Discussions</h3>
-            <div class="header-actions">
-                <button class="btn-secondary">
-                    <span class="material-symbols-outlined">add</span>
-                    New Discussion
-                </button>
-                <button class="btn-secondary">
-                    <span class="material-symbols-outlined">notifications</span>
-                    Notifications
-                </button>
-            </div>
-        </div>
-        
-        <div class="discussion-items">
-            <div class="discussion-item">
-                <div class="discussion-status urgent">
-                    <span class="material-symbols-outlined">priority_high</span>
+
+        <!-- Discussion Threads -->
+        <div class="discussions-list">
+            <div class="discussion-item unanswered">
+                <div class="discussion-header">
+                    <div class="discussion-meta">
+                        <span class="status-badge unanswered">Unanswered</span>
+                        <span class="course-tag">React Fundamentals</span>
+                        <span class="time-ago">2 hours ago</span>
+                    </div>
+                    <div class="discussion-actions">
+                        <button class="action-btn" title="Mark as Answered">
+                            <span class="material-symbols-outlined">check_circle</span>
+                        </button>
+                        <button class="action-btn" title="Reply">
+                            <span class="material-symbols-outlined">reply</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="discussion-content">
-                    <div class="discussion-header">
-                        <h4>JavaScript Error in Module 3</h4>
-                        <span class="discussion-meta">
-                            <span class="course-tag">Web Development</span>
-                            <span class="time-ago">2 hours ago</span>
-                        </span>
-                    </div>
-                    <p class="discussion-excerpt">
-                        I'm getting a "Cannot read property 'map' of undefined" error when trying to complete the array exercises...
-                    </p>
-                    <div class="discussion-footer">
-                        <div class="participants">
-                            <span class="material-symbols-outlined">person</span>
-                            <span>John Doe</span>
-                        </div>
-                        <div class="replies">
-                            <span class="material-symbols-outlined">chat_bubble</span>
-                            <span>3 replies</span>
-                        </div>
-                        <div class="views">
-                            <span class="material-symbols-outlined">visibility</span>
-                            <span>24 views</span>
+                    <div class="student-info">
+                        <div class="student-avatar">SM</div>
+                        <div>
+                            <h4>Sarah Miller</h4>
+                            <p>Student</p>
                         </div>
                     </div>
-                </div>
-                <div class="discussion-actions">
-                    <button class="btn-primary">Respond</button>
-                    <button class="btn-icon" title="Mark as Resolved">
-                        <span class="material-symbols-outlined">check_circle</span>
-                    </button>
+                    <div class="question-content">
+                        <h3>How do I handle state in functional components?</h3>
+                        <p>I'm working on the React Fundamentals course and I'm confused about how to manage state in functional components. Can you explain the difference between useState and useEffect hooks?</p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="discussion-item">
-                <div class="discussion-status active">
-                    <span class="material-symbols-outlined">forum</span>
+
+            <div class="discussion-item answered">
+                <div class="discussion-header">
+                    <div class="discussion-meta">
+                        <span class="status-badge answered">Answered</span>
+                        <span class="course-tag">Python for Beginners</span>
+                        <span class="time-ago">1 day ago</span>
+                    </div>
+                    <div class="discussion-actions">
+                        <button class="action-btn" title="View Reply">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                        <button class="action-btn" title="Reply">
+                            <span class="material-symbols-outlined">reply</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="discussion-content">
-                    <div class="discussion-header">
-                        <h4>Best Practices for Data Visualization</h4>
-                        <span class="discussion-meta">
-                            <span class="course-tag">Data Science</span>
-                            <span class="time-ago">5 hours ago</span>
-                        </span>
-                    </div>
-                    <p class="discussion-excerpt">
-                        What are some recommended tools and libraries for creating interactive charts and graphs? Looking for...
-                    </p>
-                    <div class="discussion-footer">
-                        <div class="participants">
-                            <span class="material-symbols-outlined">person</span>
-                            <span>Jane Smith</span>
-                        </div>
-                        <div class="replies">
-                            <span class="material-symbols-outlined">chat_bubble</span>
-                            <span>7 replies</span>
-                        </div>
-                        <div class="views">
-                            <span class="material-symbols-outlined">visibility</span>
-                            <span>67 views</span>
+                    <div class="student-info">
+                        <div class="student-avatar">MJ</div>
+                        <div>
+                            <h4>Mike Johnson</h4>
+                            <p>Student</p>
                         </div>
                     </div>
-                </div>
-                <div class="discussion-actions">
-                    <button class="btn-primary">Respond</button>
-                    <button class="btn-icon" title="Pin Discussion">
-                        <span class="material-symbols-outlined">push_pin</span>
-                    </button>
+                    <div class="question-content">
+                        <h3>Understanding Python loops and iterations</h3>
+                        <p>I'm having trouble understanding the difference between for loops and while loops in Python. Could you provide some practical examples?</p>
+                    </div>
+                    <div class="instructor-reply">
+                        <div class="reply-header">
+                            <div class="instructor-avatar">JD</div>
+                            <div>
+                                <h4>John Doe (Instructor)</h4>
+                                <span class="reply-time">1 day ago</span>
+                            </div>
+                        </div>
+                        <div class="reply-content">
+                            <p>Great question! Let me explain the key differences:</p>
+                            <ul>
+                                <li><strong>For loops:</strong> Used when you know the number of iterations in advance</li>
+                                <li><strong>While loops:</strong> Used when you don't know the number of iterations</li>
+                            </ul>
+                            <p>Here's a practical example...</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="discussion-item">
-                <div class="discussion-status resolved">
-                    <span class="material-symbols-outlined">check_circle</span>
+
+            <div class="discussion-item resolved">
+                <div class="discussion-header">
+                    <div class="discussion-meta">
+                        <span class="status-badge resolved">Resolved</span>
+                        <span class="course-tag">Advanced JavaScript</span>
+                        <span class="time-ago">3 days ago</span>
+                    </div>
+                    <div class="discussion-actions">
+                        <button class="action-btn" title="View Thread">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="discussion-content">
-                    <div class="discussion-header">
-                        <h4>SEO Strategy Implementation</h4>
-                        <span class="discussion-meta">
-                            <span class="course-tag">Digital Marketing</span>
-                            <span class="time-ago">1 day ago</span>
-                        </span>
-                    </div>
-                    <p class="discussion-excerpt">
-                        Successfully implemented the keyword research strategy from the course. My website traffic increased by...
-                    </p>
-                    <div class="discussion-footer">
-                        <div class="participants">
-                            <span class="material-symbols-outlined">person</span>
-                            <span>Mike Johnson</span>
-                        </div>
-                        <div class="replies">
-                            <span class="material-symbols-outlined">chat_bubble</span>
-                            <span>12 replies</span>
-                        </div>
-                        <div class="views">
-                            <span class="material-symbols-outlined">visibility</span>
-                            <span>156 views</span>
+                    <div class="student-info">
+                        <div class="student-avatar">AL</div>
+                        <div>
+                            <h4>Anna Lee</h4>
+                            <p>Student</p>
                         </div>
                     </div>
-                </div>
-                <div class="discussion-actions">
-                    <button class="btn-secondary">View</button>
-                    <button class="btn-icon" title="Archive">
-                        <span class="material-symbols-outlined">archive</span>
-                    </button>
+                    <div class="question-content">
+                        <h3>Closure concepts in JavaScript</h3>
+                        <p>I'm struggling to understand closures in JavaScript. Can you explain with a simple example?</p>
+                    </div>
+                    <div class="instructor-reply">
+                        <div class="reply-header">
+                            <div class="instructor-avatar">JD</div>
+                            <div>
+                                <h4>John Doe (Instructor)</h4>
+                                <span class="reply-time">3 days ago</span>
+                            </div>
+                        </div>
+                        <div class="reply-content">
+                            <p>A closure is a function that has access to variables in its outer scope. Here's a simple example...</p>
+                        </div>
+                    </div>
+                    <div class="student-feedback">
+                        <span class="feedback-text">"Thank you! This explanation really helped me understand closures better."</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -227,5 +229,6 @@
 </div>
 
 @section Scripts {
+    <script src="~/js/instructor-dashboard.js"></script>
     <script src="~/js/discussions.js"></script>
 }

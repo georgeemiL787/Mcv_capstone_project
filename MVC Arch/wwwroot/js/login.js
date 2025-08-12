@@ -3,14 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.querySelector('.login-form');
     const instructorBtn = document.querySelector('.instructor-btn');
     
-    // Form validation
+    // Form validation - REMOVED preventDefault to allow form submission
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (validateLoginForm()) {
-                // Submit form
-                this.submit();
+            // Only validate, don't prevent submission
+            if (!validateLoginForm()) {
+                e.preventDefault(); // Only prevent if validation fails
             }
         });
     }
@@ -46,9 +44,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function validateLoginForm() {
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
-    const rememberMe = document.querySelector('input[name="remember"]').checked;
+    // Fix: Use correct field selectors that match the actual form
+    const email = document.querySelector('input[asp-for="Email"]').value.trim();
+    const password = document.querySelector('input[asp-for="Password"]').value;
+    const rememberMe = document.querySelector('input[asp-for="RememberMe"]').checked;
     
     let isValid = true;
     
@@ -57,33 +56,17 @@ function validateLoginForm() {
     
     // Validate email
     if (!email) {
-        showLoginError('email', 'Email is required');
+        showLoginError('Email', 'Email is required');
         isValid = false;
     } else if (!isValidEmail(email)) {
-        showLoginError('email', 'Please enter a valid email address');
+        showLoginError('Email', 'Please enter a valid email address');
         isValid = false;
     }
     
     // Validate password
     if (!password) {
-        showLoginError('password', 'Password is required');
+        showLoginError('Password', 'Password is required');
         isValid = false;
-    }
-    
-    if (isValid) {
-        // Show loading state
-        showLoginLoading();
-        
-        // Simulate login process
-        setTimeout(() => {
-            hideLoginLoading();
-            showNotification('Login successful!', 'success');
-            
-            // Redirect to dashboard
-            setTimeout(() => {
-                window.location.href = '/Dashboard';
-            }, 1000);
-        }, 2000);
     }
     
     return isValid;
@@ -247,8 +230,8 @@ function showNotification(message, type = 'info') {
 
 function initializeLoginForm() {
     // Add real-time validation
-    const emailField = document.getElementById('email');
-    const passwordField = document.getElementById('password');
+    const emailField = document.querySelector('input[asp-for="Email"]');
+    const passwordField = document.querySelector('input[asp-for="Password"]');
     
     if (emailField) {
         emailField.addEventListener('blur', function() {
@@ -299,7 +282,7 @@ function validateLoginField(field) {
     
     // Validate based on field type
     switch (fieldId) {
-        case 'email':
+        case 'Email':
             if (!value) {
                 showLoginError(fieldId, 'Email is required');
             } else if (!isValidEmail(value)) {
@@ -308,7 +291,7 @@ function validateLoginField(field) {
                 field.style.borderColor = '#8f7efc';
             }
             break;
-        case 'password':
+        case 'Password':
             if (!value) {
                 showLoginError(fieldId, 'Password is required');
             } else {

@@ -138,12 +138,27 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Signup page loaded');
+            
             // Form submission handling - disable button to prevent double submission
             const form = document.querySelector('.signup-form');
             const submitBtn = document.getElementById('submitBtn');
             
+            console.log('Form found:', form);
+            console.log('Submit button found:', submitBtn);
+            
             if (form && submitBtn) {
                 form.addEventListener('submit', function(e) {
+                    console.log('Form submission started');
+                    
+                    // Check if form is valid
+                    if (!form.checkValidity()) {
+                        console.log('Form validation failed');
+                        e.preventDefault();
+                        return;
+                    }
+                    
+                    console.log('Form is valid, proceeding with submission');
                     submitBtn.disabled = true;
                     submitBtn.textContent = 'Creating Account...';
                 });
@@ -153,6 +168,7 @@
             const roleRadios = document.querySelectorAll('.role-radio');
             roleRadios.forEach(radio => {
                 radio.addEventListener('change', function() {
+                    console.log('Role selected:', this.value);
                     // Remove selected class from all cards
                     document.querySelectorAll('.user-type-card').forEach(card => {
                         card.classList.remove('selected');
@@ -160,6 +176,13 @@
                     // Add selected class to current card
                     this.closest('.user-type-option').querySelector('.user-type-card').classList.add('selected');
                 });
+            });
+            
+            // Debug form data
+            form.addEventListener('input', function(e) {
+                if (e.target.name) {
+                    console.log('Input changed:', e.target.name, '=', e.target.value);
+                }
             });
         });
     </script>

@@ -1,14 +1,15 @@
-/* Photo Profile Sub-view Styles - Home Page Color Palette */
+/* Photo Profile Sub-view Styles - Consistent with Main Profile Page */
 
 .photo-container {
-  max-width: none; /* Remove max-width constraint */
-  margin: 0; /* Remove auto margin */
-  padding: 0; /* Remove padding since it's handled by profile-content */
-  background: transparent; /* Remove background since it's handled by profile-layout */
-  min-height: auto; /* Remove min-height constraint */
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  min-height: auto;
 }
 
-/* Header Section */
+/* Header Section - Full width like main profile */
 .photo-header {
   text-align: center;
   margin-bottom: 25px;
@@ -18,6 +19,8 @@
   color: #333446;
   box-shadow: 0 8px 32px rgba(143, 126, 252, 0.1);
   border: 1px solid rgba(143, 126, 252, 0.2);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .photo-header h1 {
@@ -35,12 +38,13 @@
   font-family: 'Source Sans 3', sans-serif;
 }
 
-/* Photo Upload Section - Compact Grid Layout */
+/* Photo Upload Section - Full width grid layout */
 .photo-upload-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 25px;
   margin-bottom: 25px;
+  width: 100%;
 }
 
 .current-photo {
@@ -52,6 +56,8 @@
   box-shadow: 0 8px 32px rgba(143, 126, 252, 0.1);
   border: 1px solid rgba(143, 126, 252, 0.2);
   height: fit-content;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .photo-preview {
@@ -127,6 +133,8 @@
   box-shadow: 0 8px 32px rgba(143, 126, 252, 0.1);
   border: 1px solid rgba(143, 126, 252, 0.2);
   height: fit-content;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .upload-box {
@@ -191,6 +199,8 @@
   margin-bottom: 25px;
   box-shadow: 0 8px 32px rgba(143, 126, 252, 0.1);
   border: 1px solid rgba(143, 126, 252, 0.2);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .photo-requirements h3 {
@@ -206,6 +216,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
+  width: 100%;
 }
 
 .requirement-item {
@@ -247,6 +258,8 @@
   margin-bottom: 25px;
   box-shadow: 0 8px 32px rgba(143, 126, 252, 0.1);
   border: 1px solid rgba(143, 126, 252, 0.2);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .photo-editor h3 {
@@ -263,6 +276,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 25px;
   align-items: start;
+  width: 100%;
 }
 
 .editor-preview {
@@ -349,6 +363,7 @@
   gap: 12px;
   justify-content: center;
   margin-bottom: 25px;
+  width: 100%;
 }
 
 .photo-tips {
@@ -358,6 +373,8 @@
   padding: 25px;
   box-shadow: 0 8px 32px rgba(143, 126, 252, 0.1);
   border: 1px solid rgba(143, 126, 252, 0.2);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .photo-tips h4 {
@@ -373,6 +390,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 15px;
+  width: 100%;
 }
 
 .tip-item {
@@ -456,7 +474,7 @@
   transform: translateY(-2px);
 }
 
-/* Responsive Design */
+/* Responsive Design - Maintain consistent sizing */
 @media (max-width: 768px) {
   .photo-upload-section {
     grid-template-columns: 1fr;

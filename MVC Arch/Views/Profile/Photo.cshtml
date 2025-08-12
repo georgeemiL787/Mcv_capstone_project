@@ -22,6 +22,7 @@
                 <div class="avatar-placeholder">GE</div>
             </div>
             <h3>George Emil</h3>
+            <a href="#" class="view-profile-link">View Public Profile</a>
         </div>
         
         <nav class="sidebar-nav">
@@ -99,7 +100,7 @@
                 <div class="requirements-list">
                     <div class="requirement-item">
                         <span class="material-symbols-outlined check">check_circle</span>
-                        <span>Square format recommended (1:1 aspect ratio)</span>
+                        <span>Square format recommended (1:1 ratio)</span>
                     </div>
                     <div class="requirement-item">
                         <span class="material-symbols-outlined check">check_circle</span>
@@ -110,82 +111,64 @@
                         <span>Maximum file size: 5MB</span>
                     </div>
                     <div class="requirement-item">
-                        <span class="material-symbols-outlined check">check_circle</span>
-                        <span>Supported formats: JPG, PNG, GIF</span>
-                    </div>
-                    <div class="requirement-item">
                         <span class="material-symbols-outlined warning">warning</span>
-                        <span>Keep it professional and appropriate</span>
+                        <span>Professional appearance recommended</span>
                     </div>
                 </div>
             </div>
             
-            <div class="photo-editor" id="photoEditor" style="display: none;">
-                <h3>Edit Photo</h3>
+            <div class="photo-editor">
+                <h3>Photo Editor</h3>
                 <div class="editor-container">
                     <div class="editor-preview">
-                        <canvas id="photoCanvas" width="400" height="400"></canvas>
+                        <img src="~/assets/images/default-avatar.jpg" alt="Editor Preview" id="editorPreview">
                     </div>
                     <div class="editor-controls">
                         <div class="control-group">
-                            <label for="zoomSlider">Zoom:</label>
-                            <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1">
-                            <span id="zoomValue">100%</span>
+                            <label for="brightness">Brightness</label>
+                            <input type="range" id="brightness" min="0" max="200" value="100">
+                            <span>100%</span>
                         </div>
-                        
                         <div class="control-group">
-                            <label for="rotationSlider">Rotation:</label>
-                            <input type="range" id="rotationSlider" min="-180" max="180" step="1" value="0">
-                            <span id="rotationValue">0°</span>
+                            <label for="contrast">Contrast</label>
+                            <input type="range" id="contrast" min="0" max="200" value="100">
+                            <span>100%</span>
                         </div>
-                        
                         <div class="control-group">
-                            <label for="brightnessSlider">Brightness:</label>
-                            <input type="range" id="brightnessSlider" min="0.5" max="1.5" step="0.1" value="1">
-                            <span id="brightnessValue">100%</span>
+                            <label for="saturation">Saturation</label>
+                            <input type="range" id="saturation" min="0" max="200" value="100">
+                            <span>100%</span>
                         </div>
-                        
-                        <div class="control-group">
-                            <label for="contrastSlider">Contrast:</label>
-                            <input type="range" id="contrastSlider" min="0.5" max="1.5" step="0.1" value="1">
-                            <span id="contrastValue">100%</span>
-                        </div>
-                        
-                        <div class="editor-actions">
-                            <button class="btn-secondary" id="resetEditor">Reset</button>
-                            <button class="btn-primary" id="applyChanges">Apply Changes</button>
-                        </div>
+                    </div>
+                    <div class="editor-actions">
+                        <button class="btn-secondary" id="resetEditor">Reset</button>
+                        <button class="btn-primary" id="applyChanges">Apply Changes</button>
                     </div>
                 </div>
             </div>
             
-            <div class="photo-actions">
-                <button class="btn-primary" id="savePhoto" style="display: none;">Save Photo</button>
-                <button class="btn-secondary" id="cancelChanges" style="display: none;">Cancel</button>
-            </div>
-            
             <div class="photo-tips">
-                <h4>Tips for a Great Profile Photo</h4>
+                <h4>Photo Tips</h4>
                 <div class="tips-grid">
                     <div class="tip-item">
                         <span class="material-symbols-outlined">lightbulb</span>
                         <h5>Good Lighting</h5>
-                        <p>Use natural light or well-lit environments for better quality</p>
+                        <p>Use natural light or soft lighting for the best results</p>
                     </div>
                     <div class="tip-item">
                         <span class="material-symbols-outlined">face</span>
                         <h5>Clear Face</h5>
-                        <p>Make sure your face is clearly visible and well-lit</p>
+                        <p>Ensure your face is clearly visible and well-lit</p>
                     </div>
                     <div class="tip-item">
                         <span class="material-symbols-outlined">style</span>
                         <h5>Professional Look</h5>
-                        <p>Choose attire and background that reflect your professional image</p>
+                        <p>Choose a photo that represents you professionally</p>
                     </div>
                     <div class="tip-item">
                         <span class="material-symbols-outlined">crop</span>
-                        <h5>Proper Framing</h5>
-                        <p>Center your face and avoid cutting off important features</p>
+                        <h5>Proper Cropping</h5>
+                        <p>Crop to focus on your face and shoulders</p>
                     </div>
                 </div>
             </div>
@@ -194,5 +177,5 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/photo.js"></script>
+    <script src="~/js/profile.js"></script>
 }

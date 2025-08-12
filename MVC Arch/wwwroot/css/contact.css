@@ -182,7 +182,7 @@
   text-align: center;
 }
 
-.contact-form {
+.contact-form-card {
   background: white;
   border-radius: 15px;
   padding: 40px;
@@ -193,7 +193,7 @@
   margin: 0 auto;
 }
 
-.contact-form::before {
+.contact-form-card::before {
   content: '';
   position: absolute;
   top: -2px;
@@ -204,6 +204,11 @@
   border-radius: 17px;
   z-index: -1;
   opacity: 0.3;
+}
+
+.contact-form {
+  position: relative;
+  z-index: 1;
 }
 
 .form-row {
@@ -264,6 +269,10 @@
   min-height: 120px;
 }
 
+.form-actions {
+  margin-top: 30px;
+}
+
 .submit-btn {
   width: 100%;
   background: linear-gradient(45deg, #8f7efc, #6b5ce7);
@@ -304,7 +313,7 @@
   gap: 30px;
 }
 
-.contact-info-item {
+.contact-info-card {
   background: white;
   border-radius: 15px;
   padding: 30px;
@@ -314,7 +323,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.contact-info-item::before {
+.contact-info-card::before {
   content: '';
   position: absolute;
   top: -2px;
@@ -327,9 +336,25 @@
   opacity: 0.3;
 }
 
-.contact-info-item:hover {
+.contact-info-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 40px rgba(139, 126, 252, 0.15);
+}
+
+.contact-info-card h3 {
+  color: #333446;
+  font-size: 1.3rem;
+  margin: 0 0 10px 0;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 600;
+}
+
+.contact-info-card p {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0 0 15px 0;
+  font-family: "Source Sans 3", sans-serif;
+  line-height: 1.5;
 }
 
 .info-icon {
@@ -348,20 +373,19 @@
   color: white;
 }
 
-.info-content h3 {
-  color: #333446;
-  font-size: 1.3rem;
-  margin: 0 0 10px 0;
-  font-family: "Josefin Sans", sans-serif;
-  font-weight: 600;
+.info-link {
+  display: inline-block;
+  color: #8f7efc;
+  text-decoration: none;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
-.info-content p {
-  color: #666;
-  font-size: 0.95rem;
-  margin: 0 0 5px 0;
-  font-family: "Source Sans 3", sans-serif;
-  line-height: 1.5;
+.info-link:hover {
+  color: #6b5ce7;
+  text-decoration: underline;
 }
 
 /* Responsive Design */
@@ -382,7 +406,7 @@
     padding: 25px;
   }
   
-  .contact-form {
+  .contact-form-card {
     padding: 30px;
   }
   
@@ -395,7 +419,7 @@
     grid-template-columns: 1fr;
   }
   
-  .contact-info-item {
+  .contact-info-card {
     padding: 25px;
   }
 }
@@ -419,7 +443,7 @@
     font-size: 1.3rem;
   }
   
-  .contact-form {
+  .contact-form-card {
     padding: 20px;
   }
 } 

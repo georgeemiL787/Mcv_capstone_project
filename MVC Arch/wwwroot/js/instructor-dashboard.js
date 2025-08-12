@@ -12,37 +12,19 @@ function initializeInstructorDashboard() {
 
 // Navigation Setup
 function setupNavigation() {
+    // The navigation is handled by MVC routing, so we just need to ensure
+    // the active state is properly set based on the current page
+    const currentPage = window.location.pathname.split('/').pop().toLowerCase();
     const navItems = document.querySelectorAll('.nav-item');
     
     navItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Remove active class from all nav items
-            navItems.forEach(nav => nav.classList.remove('active'));
-            
-            // Add active class to clicked item
-            this.classList.add('active');
-            
-            // Show corresponding section
-            const sectionId = this.getAttribute('data-section');
-            showSection(sectionId);
-        });
+        const href = item.getAttribute('href');
+        if (href && href.includes(currentPage)) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
     });
-}
-
-function showSection(sectionId) {
-    // Hide all sections
-    const sections = document.querySelectorAll('.content-section');
-    sections.forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    // Show selected section
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add('active');
-    }
 }
 
 // Event Listeners Setup
@@ -97,8 +79,8 @@ function setupCourseActions() {
                 showNotification(`Opening editor for: ${courseTitle}`, 'info');
             } else if (action === 'View Analytics') {
                 showNotification(`Loading analytics for: ${courseTitle}`, 'info');
-                // Switch to analytics section
-                document.querySelector('[data-section="analytics"]').click();
+                // Navigate to analytics page
+                window.location.href = '/InstructorDashboard/Analytics';
             }
         });
     });
@@ -106,43 +88,31 @@ function setupCourseActions() {
 
 // Enrollment Management
 function setupEnrollmentFilters() {
-    const courseFilter = document.querySelector('.enrollments-filters select:first-child');
-    const statusFilter = document.querySelector('.enrollments-filters select:last-child');
-    const searchInput = document.querySelector('.enrollments-filters .search-input');
+    const courseFilter = document.getElementById('courseFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    const searchInput = document.getElementById('studentSearch');
     
     if (courseFilter) {
         courseFilter.addEventListener('change', filterEnrollments);
     }
-    
     if (statusFilter) {
         statusFilter.addEventListener('change', filterEnrollments);
     }
-    
     if (searchInput) {
         searchInput.addEventListener('input', filterEnrollments);
     }
-    
-    // Action buttons in enrollment table
-    const actionButtons = document.querySelectorAll('.enrollments-table .action-btn');
-    actionButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const action = this.querySelector('.material-symbols-outlined').textContent;
-            const row = this.closest('tr');
-            const studentName = row.querySelector('.student-info h4').textContent;
-            
-            if (action === 'visibility') {
-                showNotification(`Viewing profile for: ${studentName}`, 'info');
-            } else if (action === 'message') {
-                showNotification(`Opening chat with: ${studentName}`, 'info');
-            }
-        });
-    });
 }
 
 function filterEnrollments() {
-    const courseFilter = document.querySelector('.enrollments-filters select:first-child').value;
-    const statusFilter = document.querySelector('.enrollments-filters select:last-child').value;
-    const searchTerm = document.querySelector('.enrollments-filters .search-input').value.toLowerCase();
+    const courseFilter = document.getElementById('courseFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    const searchInput = document.getElementById('studentSearch');
+    
+    if (!courseFilter || !statusFilter || !searchInput) return;
+    
+    const selectedCourse = courseFilter.value;
+    const selectedStatus = statusFilter.value;
+    const searchTerm = searchInput.value.toLowerCase();
     
     const rows = document.querySelectorAll('.enrollments-table tbody tr');
     
@@ -152,9 +122,9 @@ function filterEnrollments() {
         const studentName = row.querySelector('.student-info h4').textContent.toLowerCase();
         const studentEmail = row.querySelector('.student-info p').textContent.toLowerCase();
         
-        const courseMatch = courseFilter === 'All Courses' || course === courseFilter;
-        const statusMatch = statusFilter === 'All Students' || status === statusFilter;
-        const searchMatch = studentName.includes(searchTerm) || studentEmail.includes(searchTerm);
+        const courseMatch = !selectedCourse || course === selectedCourse;
+        const statusMatch = !selectedStatus || status === selectedStatus;
+        const searchMatch = !searchTerm || studentName.includes(searchTerm) || studentEmail.includes(searchTerm);
         
         if (courseMatch && statusMatch && searchMatch) {
             row.style.display = '';
@@ -166,53 +136,34 @@ function filterEnrollments() {
 
 // Discussion Management
 function setupDiscussionFilters() {
-    const filterButtons = document.querySelectorAll('.discussions-filters .filter-btn');
+    const statusFilter = document.getElementById('statusFilter');
+    const searchInput = document.getElementById('questionSearch');
     
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Remove active class from all buttons
-            filterButtons.forEach(b => b.classList.remove('active'));
-            
-            // Add active class to clicked button
-            this.classList.add('active');
-            
-            // Filter discussions
-            filterDiscussions(this.textContent.trim());
+    if (statusFilter) {
+        statusFilter.addEventListener('change', function() {
+            filterDiscussions(this.value);
         });
-    });
+    }
     
-    // Discussion action buttons
-    const discussionButtons = document.querySelectorAll('.discussion-actions .primary-btn, .discussion-actions .secondary-btn');
-    discussionButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const action = this.textContent.trim();
-            const discussionItem = this.closest('.discussion-item');
-            const questionTitle = discussionItem.querySelector('h4').textContent;
-            
-            if (action === 'Answer') {
-                showNotification(`Opening answer form for: ${questionTitle}`, 'info');
-            } else if (action === 'View Answer') {
-                showNotification(`Loading answer for: ${questionTitle}`, 'info');
-            } else if (action === 'Add Comment') {
-                showNotification(`Opening comment form for: ${questionTitle}`, 'info');
-            } else if (action === 'View Course') {
-                showNotification(`Navigating to course for: ${questionTitle}`, 'info');
-            }
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            filterDiscussions('', this.value);
         });
-    });
+    }
 }
 
-function filterDiscussions(filterType) {
+function filterDiscussions(filterType, searchTerm = '') {
     const discussionItems = document.querySelectorAll('.discussion-item');
     
     discussionItems.forEach(item => {
-        const status = item.querySelector('.discussion-status').textContent;
+        const status = item.querySelector('.status-badge').textContent.toLowerCase();
+        const question = item.querySelector('.question-content h3').textContent.toLowerCase();
+        const content = item.querySelector('.question-content p').textContent.toLowerCase();
         
-        if (filterType === 'All Questions') {
-            item.style.display = '';
-        } else if (filterType === 'Unanswered' && status === 'Unanswered') {
-            item.style.display = '';
-        } else if (filterType === 'My Responses' && status === 'Answered') {
+        const statusMatch = !filterType || status === filterType.toLowerCase();
+        const searchMatch = !searchTerm || question.includes(searchTerm.toLowerCase()) || content.includes(searchTerm.toLowerCase());
+        
+        if (statusMatch && searchMatch) {
             item.style.display = '';
         } else {
             item.style.display = 'none';
@@ -222,25 +173,25 @@ function filterDiscussions(filterType) {
 
 // Quiz Management
 function setupQuizActions() {
-    const quizButtons = document.querySelectorAll('.quiz-actions .primary-btn, .quiz-actions .secondary-btn');
+    const quizCards = document.querySelectorAll('.quiz-card');
     
-    quizButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const action = this.textContent.trim();
-            const quizCard = this.closest('.quiz-card');
-            const quizTitle = quizCard.querySelector('h3').textContent;
-            
-            if (action === 'Edit Quiz') {
-                showNotification(`Opening quiz editor for: ${quizTitle}`, 'info');
-            } else if (action === 'View Results') {
-                showNotification(`Loading results for: ${quizTitle}`, 'info');
-            } else if (action === 'Enable AI Auto-Quiz') {
-                showNotification(`Enabling AI auto-quiz for: ${quizTitle}`, 'success');
-                this.textContent = 'AI Auto-Quiz Enabled';
-                this.style.background = '#4CAF50';
-                this.style.borderColor = '#4CAF50';
-            }
-        });
+    quizCards.forEach(card => {
+        const viewBtn = card.querySelector('.view-btn');
+        const editBtn = card.querySelector('.edit-btn');
+        
+        if (viewBtn) {
+            viewBtn.addEventListener('click', function() {
+                const quizTitle = card.querySelector('h3').textContent;
+                showNotification(`Viewing quiz: ${quizTitle}`, 'info');
+            });
+        }
+        
+        if (editBtn) {
+            editBtn.addEventListener('click', function() {
+                const quizTitle = card.querySelector('h3').textContent;
+                showNotification(`Editing quiz: ${quizTitle}`, 'info');
+            });
+        }
     });
 }
 
@@ -250,17 +201,7 @@ function setupSettingsForm() {
     if (settingsForm) {
         settingsForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const formData = new FormData(this);
-            const settingsData = {
-                displayName: formData.get('displayName') || this.querySelector('input[type="text"]').value,
-                bio: formData.get('bio') || this.querySelector('textarea').value,
-                email: formData.get('email') || this.querySelector('input[type="email"]').value
-            };
-            
-            // Simulate saving settings
             showNotification('Settings saved successfully!', 'success');
-            console.log('Settings Data:', settingsData);
         });
     }
     
@@ -268,44 +209,44 @@ function setupSettingsForm() {
     const toggleSwitches = document.querySelectorAll('.toggle-switch input');
     toggleSwitches.forEach(toggle => {
         toggle.addEventListener('change', function() {
-            const settingName = this.closest('.setting-item').querySelector('h4').textContent;
+            const settingName = this.getAttribute('data-setting');
             const isEnabled = this.checked;
-            
             showNotification(`${settingName} ${isEnabled ? 'enabled' : 'disabled'}`, 'info');
         });
     });
 }
 
-// Data Loading
+// Dashboard Data Loading
 function loadDashboardData() {
     // Simulate loading dashboard data
-    updateStats();
-    updateRecentActivity();
+    setTimeout(() => {
+        updateStats();
+        updateRecentActivity();
+    }, 500);
 }
 
 function updateStats() {
-    // Animate stats on load
-    const statNumbers = document.querySelectorAll('.stat-content h3');
-    
+    // Animate stat numbers
+    const statNumbers = document.querySelectorAll('.stat-content h3, .stat-number');
     statNumbers.forEach(stat => {
         const finalValue = stat.textContent;
-        const numericValue = parseInt(finalValue.replace(/[^0-9]/g, ''));
-        
         if (finalValue.includes('$')) {
-            animateCurrency(stat, numericValue);
-        } else {
-            animateNumber(stat, numericValue);
+            animateCurrency(stat, finalValue);
+        } else if (finalValue.includes(',')) {
+            animateNumber(stat, finalValue);
         }
     });
 }
 
 function animateNumber(element, finalValue) {
+    const numericValue = parseInt(finalValue.replace(/,/g, ''));
     let currentValue = 0;
-    const increment = finalValue / 50;
+    const increment = numericValue / 50;
+    
     const timer = setInterval(() => {
         currentValue += increment;
-        if (currentValue >= finalValue) {
-            currentValue = finalValue;
+        if (currentValue >= numericValue) {
+            currentValue = numericValue;
             clearInterval(timer);
         }
         element.textContent = Math.floor(currentValue).toLocaleString();
@@ -313,122 +254,148 @@ function animateNumber(element, finalValue) {
 }
 
 function animateCurrency(element, finalValue) {
+    const numericValue = parseFloat(finalValue.replace(/[$,]/g, ''));
     let currentValue = 0;
-    const increment = finalValue / 50;
+    const increment = numericValue / 50;
+    
     const timer = setInterval(() => {
         currentValue += increment;
-        if (currentValue >= finalValue) {
-            currentValue = finalValue;
+        if (currentValue >= numericValue) {
+            currentValue = numericValue;
             clearInterval(timer);
         }
-        element.textContent = `$${Math.floor(currentValue).toLocaleString()}`;
+        element.textContent = `$${currentValue.toFixed(2)}`;
     }, 20);
 }
 
 function updateRecentActivity() {
-    // Simulate real-time updates
-    setInterval(() => {
-        const enrollmentItems = document.querySelectorAll('.enrollment-item');
-        if (enrollmentItems.length > 0) {
-            const randomItem = enrollmentItems[Math.floor(Math.random() * enrollmentItems.length)];
-            randomItem.style.background = 'rgba(143, 126, 252, 0.1)';
+    // Update recent enrollments
+    const enrollmentItems = document.querySelectorAll('.enrollment-item');
+    enrollmentItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-20px)';
+            item.style.transition = 'all 0.3s ease';
+            
             setTimeout(() => {
-                randomItem.style.background = 'rgba(143, 126, 252, 0.05)';
-            }, 1000);
-        }
-    }, 5000);
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+            }, 100);
+        }, index * 100);
+    });
+    
+    // Update recent reviews
+    const reviewItems = document.querySelectorAll('.review-item');
+    reviewItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(20px)';
+            item.style.transition = 'all 0.3s ease';
+            
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+            }, 100);
+        }, index * 100);
+    });
 }
 
 // Charts Setup
 function setupCharts() {
-    // Revenue Chart (placeholder)
-    const revenueChart = document.getElementById('revenueChart');
-    if (revenueChart) {
-        // Placeholder for chart library integration
-        revenueChart.style.background = 'rgba(143, 126, 252, 0.05)';
-        revenueChart.innerHTML = '<p>Revenue Chart - Chart.js integration required</p>';
-    }
+    // Initialize chart placeholders
+    const chartPlaceholders = document.querySelectorAll('.chart-placeholder');
+    chartPlaceholders.forEach(placeholder => {
+        if (placeholder.classList.contains('small')) {
+            placeholder.style.height = '150px';
+        } else {
+            placeholder.style.height = '300px';
+        }
+    });
     
-    // Dropoff Chart (placeholder)
-    const dropoffChart = document.getElementById('dropoffChart');
-    if (dropoffChart) {
-        // Placeholder for chart library integration
-        dropoffChart.style.background = 'rgba(143, 126, 252, 0.05)';
-        dropoffChart.innerHTML = '<p>Dropoff Analysis Chart - Chart.js integration required</p>';
-    }
+    // Chart controls
+    const timeRangeSelects = document.querySelectorAll('#timeRange, #engagementTimeRange');
+    timeRangeSelects.forEach(select => {
+        if (select) {
+            select.addEventListener('change', function() {
+                showNotification(`Chart updated for ${this.options[this.selectedIndex].text}`, 'info');
+            });
+        }
+    });
+    
+    const performanceSelects = document.querySelectorAll('#performanceMetric');
+    performanceSelects.forEach(select => {
+        if (select) {
+            select.addEventListener('change', function() {
+                showNotification(`Performance metric changed to ${this.options[this.selectedIndex].text}`, 'info');
+            });
+        }
+    });
 }
 
 // Notification System
 function showNotification(message, type = 'info') {
-    // Create notification container if it doesn't exist
-    let container = document.getElementById('notification-container');
-    if (!container) {
-        container = document.createElement('div');
-        container.id = 'notification-container';
-        container.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        `;
-        document.body.appendChild(container);
-    }
+    // Remove existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
     
+    // Create notification element
     const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
+    notification.className = `notification notification-${type}`;
     
-    let icon = 'info';
-    let title = 'Information';
-    
-    switch (type) {
-        case 'success':
-            icon = 'check_circle';
-            title = 'Success';
-            break;
-        case 'error':
-            icon = 'error';
-            title = 'Error';
-            break;
-        case 'info':
-            icon = 'info';
-            title = 'Information';
-            break;
-    }
-    
+    // Set notification content
     notification.innerHTML = `
-        <span class="material-symbols-outlined">${icon}</span>
         <div class="notification-content">
-            <h4>${title}</h4>
-            <p>${message}</p>
+            <span class="notification-icon">
+                ${getNotificationIcon(type)}
+            </span>
+            <span class="notification-message">${message}</span>
+            <button class="notification-close" onclick="this.parentElement.parentElement.remove()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
         </div>
-        <button class="notification-close" onclick="this.parentElement.remove()">
-            <span class="material-symbols-outlined">close</span>
-        </button>
     `;
     
-    // Add notification styles
+    // Add styles
     notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
         background: white;
         border-radius: 8px;
-        padding: 16px 20px;
-        margin-bottom: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        border-left: 4px solid ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        min-width: 300px;
-        animation: slideIn 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        border: 1px solid #e4defe;
+        z-index: 1000;
+        max-width: 400px;
+        animation: slideInRight 0.3s ease;
     `;
     
-    container.appendChild(notification);
+    // Add to page
+    document.body.appendChild(notification);
     
-    // Auto remove after 5 seconds
+    // Auto-remove after 5 seconds
     setTimeout(() => {
-        if (notification.parentNode) {
-            notification.remove();
+        if (notification.parentElement) {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 300);
         }
     }, 5000);
+}
+
+function getNotificationIcon(type) {
+    switch (type) {
+        case 'success':
+            return '<span class="material-symbols-outlined" style="color: #4caf50;">check_circle</span>';
+        case 'error':
+            return '<span class="material-symbols-outlined" style="color: #f44336;">error</span>';
+        case 'warning':
+            return '<span class="material-symbols-outlined" style="color: #ff9800;">warning</span>';
+        default:
+            return '<span class="material-symbols-outlined" style="color: #8f7efc;">info</span>';
+    }
 }
 
 // Utility Functions
@@ -446,7 +413,7 @@ function formatNumber(num) {
 // Add CSS animations
 const style = document.createElement('style');
 style.textContent = `
-    @keyframes slideIn {
+    @keyframes slideInRight {
         from {
             transform: translateX(100%);
             opacity: 0;
@@ -457,6 +424,17 @@ style.textContent = `
         }
     }
     
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
     @keyframes fadeOut {
         from {
             opacity: 1;
@@ -464,8 +442,27 @@ style.textContent = `
         }
         to {
             opacity: 0;
-            transform: scale(0.95);
+            transform: scale(0.8);
         }
+    }
+    
+    .notification-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+    }
+    
+    .notification-icon {
+        display: flex;
+        align-items: center;
+    }
+    
+    .notification-message {
+        flex: 1;
+        color: #333446;
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 0.95rem;
     }
     
     .notification-close {
@@ -479,25 +476,12 @@ style.textContent = `
     }
     
     .notification-close:hover {
-        background: rgba(0, 0, 0, 0.1);
-        color: #333;
+        background: #f8f7ff;
+        color: #8f7efc;
     }
     
-    .notification-content {
-        flex: 1;
-    }
-    
-    .notification-content h4 {
-        margin: 0 0 4px 0;
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: #333446;
-    }
-    
-    .notification-content p {
-        margin: 0;
-        font-size: 0.85rem;
-        color: #666;
+    .notification-close .material-symbols-outlined {
+        font-size: 18px;
     }
 `;
 document.head.appendChild(style); 

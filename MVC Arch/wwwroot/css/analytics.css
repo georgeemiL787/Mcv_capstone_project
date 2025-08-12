@@ -1,0 +1,367 @@
+/* Analytics Overview */
+.analytics-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.overview-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(143, 126, 252, 0.1);
+  border: 1px solid #e4defe;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.2s ease;
+}
+
+.overview-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(143, 126, 252, 0.15);
+}
+
+.overview-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8f7efc, #a594fd);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.overview-icon .material-symbols-outlined {
+  font-size: 28px;
+  color: white;
+}
+
+.overview-content {
+  flex: 1;
+}
+
+.overview-content h3 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333446;
+  margin: 0 0 5px 0;
+}
+
+.overview-content p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 8px 0;
+}
+
+.trend {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.trend.positive {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.trend.negative {
+  background: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+/* Charts Section */
+.charts-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(143, 126, 252, 0.1);
+  border: 1px solid #e4defe;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.chart-header h3 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333446;
+  margin: 0;
+}
+
+.chart-controls select {
+  padding: 8px 12px;
+  border: 1px solid #e4defe;
+  border-radius: 6px;
+  background: white;
+  color: #333446;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.chart-container {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-placeholder {
+  text-align: center;
+  color: #666;
+}
+
+.chart-placeholder .material-symbols-outlined {
+  font-size: 48px;
+  color: #8f7efc;
+  margin-bottom: 15px;
+}
+
+.chart-placeholder h4 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333446;
+  margin: 0 0 10px 0;
+}
+
+.chart-placeholder p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Course Insights */
+.insights-section {
+  margin-bottom: 40px;
+}
+
+.insights-section h3 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333446;
+  margin: 0 0 25px 0;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+}
+
+.insight-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(143, 126, 252, 0.1);
+  border: 1px solid #e4defe;
+  transition: all 0.2s ease;
+}
+
+.insight-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(143, 126, 252, 0.15);
+}
+
+.insight-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.insight-header h4 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333446;
+  margin: 0;
+}
+
+.insight-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.insight-badge.positive {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.insight-badge.neutral {
+  background: rgba(255, 193, 7, 0.1);
+  color: #FFC107;
+}
+
+.insight-badge.negative {
+  background: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+.insight-stats {
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.stat-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333446;
+}
+
+.insight-actions {
+  text-align: center;
+}
+
+/* Student Behavior Analysis */
+.behavior-section {
+  margin-bottom: 40px;
+}
+
+.behavior-section h3 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333446;
+  margin: 0 0 25px 0;
+}
+
+.behavior-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.behavior-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(143, 126, 252, 0.1);
+  border: 1px solid #e4defe;
+  transition: all 0.2s ease;
+}
+
+.behavior-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(143, 126, 252, 0.15);
+}
+
+.behavior-card h4 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333446;
+  margin: 0 0 20px 0;
+}
+
+.behavior-chart {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-placeholder.small {
+  text-align: center;
+  color: #666;
+}
+
+.chart-placeholder.small .material-symbols-outlined {
+  font-size: 32px;
+  color: #8f7efc;
+  margin-bottom: 10px;
+}
+
+.chart-placeholder.small p {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .analytics-overview {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .insights-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .analytics-overview {
+    grid-template-columns: 1fr;
+  }
+  
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .behavior-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .overview-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .chart-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .overview-card,
+  .chart-card,
+  .insight-card,
+  .behavior-card {
+    margin: 0 10px;
+  }
+  
+  .overview-content h3 {
+    font-size: 1.5rem;
+  }
+}

@@ -1,3 +1,4 @@
+@model MCV_Capstone.ViewModels.LoginViewModel
 @{
     ViewData["Title"] = "Login - Full Courses Platform";
 }
@@ -19,20 +20,25 @@
             <p>Sign in to continue your learning journey</p>
         </div>
         
-        <form class="login-form">
+        <form class="login-form" asp-action="Login" asp-controller="Account" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" type="email" placeholder="Enter your email" required>
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" placeholder="Enter your password" required>
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             
             <div class="form-options">
                 <label class="checkbox-container">
-                    <input type="checkbox" name="remember">
+                    <input asp-for="RememberMe" type="checkbox">
                     <span class="checkmark"></span>
                     Remember me
                 </label>
@@ -74,5 +80,6 @@
 </div>
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
     <script src="~/js/login.js"></script>
 }

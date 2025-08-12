@@ -22,6 +22,7 @@
                 <div class="avatar-placeholder">GE</div>
             </div>
             <h3>George Emil</h3>
+            <a href="#" class="view-profile-link">View Public Profile</a>
         </div>
         
         <nav class="sidebar-nav">
@@ -60,112 +61,90 @@
     <div class="profile-content">
         <div class="subscriptions-container">
             <div class="subscriptions-header">
-                <h1>Subscription Management</h1>
-                <p>Manage your learning platform subscriptions and billing</p>
+                <h1>Subscriptions</h1>
+                <p>Manage your subscription plans and billing information</p>
             </div>
-            
+
             <div class="current-subscription">
                 <div class="subscription-card active">
                     <div class="subscription-header">
-                        <h3>Premium Learning Plan</h3>
+                        <h3>Premium Student Plan</h3>
                         <span class="subscription-status active">Active</span>
                     </div>
                     <div class="subscription-details">
                         <div class="plan-features">
-                            <h4>Plan Features:</h4>
+                            <h4>Plan Features</h4>
                             <ul>
-                                <li>Unlimited course access</li>
+                                <li>Access to all premium courses</li>
+                                <li>Unlimited course downloads</li>
                                 <li>Priority support</li>
-                                <li>Certificate downloads</li>
-                                <li>Advanced analytics</li>
+                                <li>Certificate of completion</li>
                                 <li>Mobile app access</li>
                             </ul>
                         </div>
                         <div class="plan-pricing">
-                            <div class="price">
-                                <span class="currency">$</span>
-                                <span class="amount">29</span>
-                                <span class="period">/month</span>
-                            </div>
-                            <p class="billing-cycle">Billed monthly</p>
-                            <p class="next-billing">Next billing: April 15, 2024</p>
+                            <div class="price">$19<span class="currency">.99</span></div>
+                            <div class="period">per month</div>
+                            <div class="billing-cycle">Billed monthly</div>
+                            <div class="next-billing">Next billing: December 15, 2024</div>
                         </div>
                     </div>
                     <div class="subscription-actions">
                         <button class="btn-secondary">Change Plan</button>
-                        <button class="btn-primary">Manage Billing</button>
+                        <button class="btn-secondary">Cancel</button>
                     </div>
                 </div>
             </div>
-            
+
             <div class="available-plans">
                 <h3>Available Plans</h3>
                 <div class="plans-grid">
                     <div class="plan-card">
                         <div class="plan-header">
                             <h4>Basic Plan</h4>
-                            <div class="plan-price">
-                                <span class="currency">$</span>
-                                <span class="amount">9</span>
-                                <span class="period">/month</span>
-                            </div>
+                            <div class="plan-price">$9.99<span class="period">/month</span></div>
                         </div>
-                        <div class="plan-features">
-                            <ul>
-                                <li>Access to 5 courses</li>
-                                <li>Basic support</li>
-                                <li>Standard certificates</li>
-                                <li>Web access only</li>
-                            </ul>
-                        </div>
+                        <ul class="plan-features">
+                            <li>Access to basic courses</li>
+                            <li>Limited downloads</li>
+                            <li>Standard support</li>
+                        </ul>
                         <button class="btn-secondary">Switch to Basic</button>
                     </div>
                     
                     <div class="plan-card featured">
                         <div class="plan-badge">Most Popular</div>
                         <div class="plan-header">
-                            <h4>Premium Plan</h4>
-                            <div class="plan-price">
-                                <span class="currency">$</span>
-                                <span class="amount">29</span>
-                                <span class="period">/month</span>
-                            </div>
+                            <h4>Premium Student</h4>
+                            <div class="plan-price">$19.99<span class="period">/month</span></div>
                         </div>
-                        <div class="plan-features">
-                            <ul>
-                                <li>Unlimited course access</li>
-                                <li>Priority support</li>
-                                <li>Certificate downloads</li>
-                                <li>Advanced analytics</li>
-                                <li>Mobile app access</li>
-                            </ul>
-                        </div>
+                        <ul class="plan-features">
+                            <li>Access to all premium courses</li>
+                            <li>Unlimited downloads</li>
+                            <li>Priority support</li>
+                            <li>Certificate of completion</li>
+                            <li>Mobile app access</li>
+                        </ul>
                         <button class="btn-primary">Current Plan</button>
                     </div>
                     
                     <div class="plan-card">
                         <div class="plan-header">
-                            <h4>Enterprise Plan</h4>
-                            <div class="plan-price">
-                                <span class="currency">$</span>
-                                <span class="amount">99</span>
-                                <span class="period">/month</span>
-                            </div>
+                            <h4>Professional</h4>
+                            <div class="plan-price">$39.99<span class="period">/month</span></div>
                         </div>
-                        <div class="plan-features">
-                            <ul>
-                                <li>Everything in Premium</li>
-                                <li>Team management</li>
-                                <li>Custom branding</li>
-                                <li>API access</li>
-                                <li>Dedicated support</li>
-                            </ul>
-                        </div>
-                        <button class="btn-secondary">Contact Sales</button>
+                        <ul class="plan-features">
+                            <li>Everything in Premium</li>
+                            <li>1-on-1 mentoring</li>
+                            <li>Custom learning paths</li>
+                            <li>Advanced analytics</li>
+                            <li>Team collaboration tools</li>
+                        </ul>
+                        <button class="btn-secondary">Upgrade to Pro</button>
                     </div>
                 </div>
             </div>
-            
+
             <div class="billing-history">
                 <h3>Billing History</h3>
                 <div class="billing-table">
@@ -176,56 +155,40 @@
                                 <th>Description</th>
                                 <th>Amount</th>
                                 <th>Status</th>
-                                <th>Invoice</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Mar 15, 2024</td>
-                                <td>Premium Learning Plan - Monthly</td>
-                                <td>$29.00</td>
-                                <td><span class="status paid">Paid</span></td>
-                                <td>
-                                    <button class="btn-link">Download</button>
-                                </td>
+                                <td>Nov 15, 2024</td>
+                                <td>Premium Student Plan - Monthly</td>
+                                <td>$19.99</td>
+                                <td><span class="status-badge paid">Paid</span></td>
                             </tr>
                             <tr>
-                                <td>Feb 15, 2024</td>
-                                <td>Premium Learning Plan - Monthly</td>
-                                <td>$29.00</td>
-                                <td><span class="status paid">Paid</span></td>
-                                <td>
-                                    <button class="btn-link">Download</button>
-                                </td>
+                                <td>Oct 15, 2024</td>
+                                <td>Premium Student Plan - Monthly</td>
+                                <td>$19.99</td>
+                                <td><span class="status-badge paid">Paid</span></td>
                             </tr>
                             <tr>
-                                <td>Jan 15, 2024</td>
-                                <td>Premium Learning Plan - Monthly</td>
-                                <td>$29.00</td>
-                                <td><span class="status paid">Paid</span></td>
-                                <td>
-                                    <button class="btn-link">Download</button>
-                                </td>
+                                <td>Sep 15, 2024</td>
+                                <td>Premium Student Plan - Monthly</td>
+                                <td>$19.99</td>
+                                <td><span class="status-badge paid">Paid</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            
+
             <div class="subscription-actions-footer">
-                <button class="btn-secondary">
-                    <span class="material-symbols-outlined">cancel</span>
-                    Cancel Subscription
-                </button>
-                <button class="btn-primary">
-                    <span class="material-symbols-outlined">support_agent</span>
-                    Contact Support
-                </button>
+                <button class="btn-primary">Download Invoice</button>
+                <button class="btn-secondary">Contact Support</button>
             </div>
         </div>
     </div>
 </div>
 
 @section Scripts {
-    <script src="~/js/subscriptions.js"></script>
+    <script src="~/js/profile.js"></script>
 }

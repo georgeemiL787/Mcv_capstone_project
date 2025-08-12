@@ -1,13 +1,11 @@
 @{
     ViewData["Title"] = "Instructor Dashboard - LuIZ Learning";
+    Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString()?.ToLower();
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/home.css">
     <link rel="stylesheet" href="~/css/instructor-dashboard.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
 }
 
 <div class="instructor-layout">
@@ -19,48 +17,182 @@
             </div>
             <h3>John Doe</h3>
             <p>Instructor</p>
-            <a href="@Url.Action("Index", "Profile")" class="view-profile-link">View Profile</a>
+            <a href="#" class="view-profile-link">View Profile</a>
         </div>
         
         <nav class="sidebar-nav">
-            <a href="@Url.Action("Index", "InstructorDashboard")" class="nav-item active" data-page="dashboard">
+            <a href="@Url.Action("Index", "InstructorDashboard")" class="nav-item @(currentAction == "index" ? "active" : "")" data-page="dashboard">
                 <span class="material-symbols-outlined nav-icon">dashboard</span>
                 Dashboard
             </a>
-            <a href="@Url.Action("Courses", "InstructorDashboard")" class="nav-item" data-page="courses">
+            <a href="@Url.Action("Courses", "InstructorDashboard")" class="nav-item @(currentAction == "courses" ? "active" : "")" data-page="courses">
                 <span class="material-symbols-outlined nav-icon">school</span>
                 My Courses
             </a>
-            <a href="@Url.Action("Enrollments", "InstructorDashboard")" class="nav-item" data-page="enrollments">
+            <a href="@Url.Action("Enrollments", "InstructorDashboard")" class="nav-item @(currentAction == "enrollments" ? "active" : "")" data-page="enrollments">
                 <span class="material-symbols-outlined nav-icon">people</span>
                 Enrollments
             </a>
-            <a href="@Url.Action("Revenue", "InstructorDashboard")" class="nav-item" data-page="revenue">
+            <a href="@Url.Action("Revenue", "InstructorDashboard")" class="nav-item @(currentAction == "revenue" ? "active" : "")" data-page="revenue">
                 <span class="material-symbols-outlined nav-icon">trending_up</span>
                 Revenue
             </a>
-            <a href="@Url.Action("Discussions", "InstructorDashboard")" class="nav-item" data-page="discussions">
+            <a href="@Url.Action("Discussions", "InstructorDashboard")" class="nav-item @(currentAction == "discussions" ? "active" : "")" data-page="discussions">
                 <span class="material-symbols-outlined nav-icon">forum</span>
                 Q&A/Discussions
             </a>
-            <a href="@Url.Action("Analytics", "InstructorDashboard")" class="nav-item" data-page="analytics">
+            <a href="@Url.Action("Analytics", "InstructorDashboard")" class="nav-item @(currentAction == "analytics" ? "active" : "")" data-page="analytics">
                 <span class="material-symbols-outlined nav-icon">analytics</span>
                 Analytics
             </a>
-            <a href="@Url.Action("Quizzes", "InstructorDashboard")" class="nav-item" data-page="quizzes">
+            <a href="#" class="nav-item" data-page="quizzes">
                 <span class="material-symbols-outlined nav-icon">quiz</span>
                 Quizzes
             </a>
-            <a href="@Url.Action("Settings", "InstructorDashboard")" class="nav-item" data-page="settings">
+            <a href="#" class="nav-item" data-page="settings">
                 <span class="material-symbols-outlined nav-icon">settings</span>
                 Settings
             </a>
         </nav>
     </div>
 
-    <!-- Right Content Area -->
-    <div class="instructor-content" id="main-content">
-        <!-- Content will be loaded here -->
+    <!-- Main Content Area -->
+    <div class="instructor-content">
+        <div class="content-header">
+            <h1>Instructor Dashboard</h1>
+            <p>Welcome back! Here's an overview of your teaching activities.</p>
+        </div>
+
+        <!-- Quick Navigation Cards -->
+        <div class="quick-nav-grid">
+            <a href="@Url.Action("Courses", "InstructorDashboard")" class="quick-nav-card">
+                <div class="card-icon">
+                    <span class="material-symbols-outlined">school</span>
+                </div>
+                <h3>My Courses</h3>
+                <p>Manage your courses and content</p>
+            </a>
+            
+            <a href="@Url.Action("Enrollments", "InstructorDashboard")" class="quick-nav-card">
+                <div class="card-icon">
+                    <span class="material-symbols-outlined">people</span>
+                </div>
+                <h3>Enrollments</h3>
+                <p>View student enrollments</p>
+            </a>
+            
+            <a href="@Url.Action("Revenue", "InstructorDashboard")" class="quick-nav-card">
+                <div class="card-icon">
+                    <span class="material-symbols-outlined">trending_up</span>
+                </div>
+                <h3>Revenue</h3>
+                <p>Track your earnings</p>
+            </a>
+            
+            <a href="@Url.Action("Discussions", "InstructorDashboard")" class="quick-nav-card">
+                <div class="card-icon">
+                    <span class="material-symbols-outlined">forum</span>
+                </div>
+                <h3>Q&A/Discussions</h3>
+                <p>Manage student questions</p>
+            </a>
+            
+            <a href="@Url.Action("Analytics", "InstructorDashboard")" class="quick-nav-card">
+                <div class="card-icon">
+                    <span class="material-symbols-outlined">analytics</span>
+                </div>
+                <h3>Analytics</h3>
+                <p>View detailed insights</p>
+            </a>
+            
+            <a href="#" class="quick-nav-card">
+                <div class="card-icon">
+                    <span class="material-symbols-outlined">quiz</span>
+                </div>
+                <h3>Quizzes</h3>
+                <p>Create and manage assessments</p>
+            </a>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-section">
+            <h2>Overview Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">school</span>
+                    </div>
+                    <div class="stat-content">
+                        <h3>12</h3>
+                        <p>Active Courses</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">people</span>
+                    </div>
+                    <div class="stat-content">
+                        <h3>1,247</h3>
+                        <p>Total Students</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">trending_up</span>
+                    </div>
+                    <div class="stat-content">
+                        <h3>$8,420</h3>
+                        <p>This Month's Revenue</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-symbols-outlined">star</span>
+                    </div>
+                    <div class="stat-content">
+                        <h3>4.8</h3>
+                        <p>Average Rating</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity-section">
+            <h2>Recent Activity</h2>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <span class="material-symbols-outlined">person_add</span>
+                    </div>
+                    <div class="activity-content">
+                        <h4>New Student Enrollment</h4>
+                        <p>Sarah Johnson enrolled in "Advanced Web Development"</p>
+                        <span class="activity-time">2 hours ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <span class="material-symbols-outlined">star</span>
+                    </div>
+                    <div class="activity-content">
+                        <h4>New Review</h4>
+                        <p>5-star review for "Python for Beginners"</p>
+                        <span class="activity-time">5 hours ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <span class="material-symbols-outlined">forum</span>
+                    </div>
+                    <div class="activity-content">
+                        <h4>New Question</h4>
+                        <p>Question posted in "Data Science Fundamentals"</p>
+                        <span class="activity-time">1 day ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -1,0 +1,184 @@
+@{
+    ViewData["Title"] = "Quizzes - Instructor Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/quizzes.css" />
+}
+
+<div class="instructor-layout">
+    <!-- Left Sidebar -->
+    <div class="instructor-sidebar">
+        <div class="sidebar-header">
+            <div class="instructor-avatar">
+                <div class="avatar-placeholder">JD</div>
+            </div>
+            <h3>John Doe</h3>
+            <p>Instructor</p>
+            <a href="#" class="view-profile-link">View Profile</a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">dashboard</span>
+                Dashboard
+            </a>
+            <a href="@Url.Action("Courses", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">school</span>
+                My Courses
+            </a>
+            <a href="@Url.Action("Enrollments", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">people</span>
+                Enrollments
+            </a>
+            <a href="@Url.Action("Revenue", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">trending_up</span>
+                Revenue
+            </a>
+            <a href="@Url.Action("Discussions", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">forum</span>
+                Q&A/Discussions
+            </a>
+            <a href="@Url.Action("Analytics", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">analytics</span>
+                Analytics
+            </a>
+            <a href="@Url.Action("Quizzes", "InstructorDashboard")" class="nav-item active">
+                <span class="material-symbols-outlined nav-icon">quiz</span>
+                Quizzes
+            </a>
+            <a href="@Url.Action("Settings", "InstructorDashboard")" class="nav-item">
+                <span class="material-symbols-outlined nav-icon">settings</span>
+                Settings
+            </a>
+        </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="instructor-content">
+        <div class="content-header">
+            <h1>Quiz Management</h1>
+            <p>Create, edit, and manage quizzes for your courses</p>
+        </div>
+
+        <!-- Quiz Actions -->
+        <div class="quiz-actions">
+            <button class="primary-btn">
+                <span class="material-symbols-outlined">add</span>
+                Create New Quiz
+            </button>
+            <button class="secondary-btn">
+                <span class="material-symbols-outlined">upload</span>
+                Import Quiz
+            </button>
+        </div>
+
+        <!-- Quiz Statistics -->
+        <div class="quiz-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">quiz</span>
+                </div>
+                <div class="stat-content">
+                    <h3>24</h3>
+                    <p>Total Quizzes</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">people</span>
+                </div>
+                <div class="stat-content">
+                    <h3>1,156</h3>
+                    <p>Quiz Attempts</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">trending_up</span>
+                </div>
+                <div class="stat-content">
+                    <h3>87%</h3>
+                    <p>Average Score</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">schedule</span>
+                </div>
+                <div class="stat-content">
+                    <h3>12</h3>
+                    <p>Active Quizzes</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz List -->
+        <div class="quiz-list">
+            <h3>Recent Quizzes</h3>
+            <div class="quiz-grid">
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <h4>JavaScript Fundamentals Quiz</h4>
+                        <span class="quiz-status active">Active</span>
+                    </div>
+                    <p>Basic JavaScript concepts and syntax</p>
+                    <div class="quiz-meta">
+                        <span class="material-symbols-outlined">schedule</span>
+                        <span>30 min</span>
+                        <span class="material-symbols-outlined">question_mark</span>
+                        <span>25 questions</span>
+                    </div>
+                    <div class="quiz-actions-card">
+                        <button class="secondary-btn">Edit</button>
+                        <button class="secondary-btn">View Results</button>
+                        <button class="secondary-btn">Duplicate</button>
+                    </div>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <h4>React Hooks Quiz</h4>
+                        <span class="quiz-status draft">Draft</span>
+                    </div>
+                    <p>Advanced React Hooks concepts</p>
+                    <div class="quiz-meta">
+                        <span class="material-symbols-outlined">schedule</span>
+                        <span>45 min</span>
+                        <span class="material-symbols-outlined">question_mark</span>
+                        <span>30 questions</span>
+                    </div>
+                    <div class="quiz-actions-card">
+                        <button class="secondary-btn">Edit</button>
+                        <button class="secondary-btn">Preview</button>
+                        <button class="secondary-btn">Publish</button>
+                    </div>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <h4>Python Basics Quiz</h4>
+                        <span class="quiz-status active">Active</span>
+                    </div>
+                    <p>Introduction to Python programming</p>
+                    <div class="quiz-meta">
+                        <span class="material-symbols-outlined">schedule</span>
+                        <span>25 min</span>
+                        <span class="material-symbols-outlined">question_mark</span>
+                        <span>20 questions</span>
+                    </div>
+                    <div class="quiz-actions-card">
+                        <button class="secondary-btn">Edit</button>
+                        <button class="secondary-btn">View Results</button>
+                        <button class="secondary-btn">Duplicate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/quizzes.js"></script>
+}

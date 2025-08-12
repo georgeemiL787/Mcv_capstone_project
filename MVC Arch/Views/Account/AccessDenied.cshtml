@@ -1,0 +1,100 @@
+@{
+    ViewData["Title"] = "Access Denied - Full Courses Platform";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" />
+    <style>
+        .access-denied-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            padding: 2rem;
+        }
+        
+        .access-denied-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .access-denied-icon {
+            font-size: 4rem;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+        
+        .access-denied-title {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .access-denied-message {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .access-denied-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: #8f7efc;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #7a6cf8;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+        
+        .btn-secondary:hover {
+            background: #d5dbdb;
+            transform: translateY(-2px);
+        }
+    </style>
+}
+
+<div class="access-denied-container">
+    <div class="access-denied-card">
+        <div class="access-denied-icon">🚫</div>
+        <h1 class="access-denied-title">Access Denied</h1>
+        <p class="access-denied-message">
+            Sorry, you don't have permission to access this resource. 
+            This could be because you're not logged in, or your account doesn't have the required permissions.
+        </p>
+        
+        <div class="access-denied-actions">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Go to Home</a>
+            <a href="@Url.Action("Login", "Account")" class="btn btn-secondary">Sign In</a>
+        </div>
+    </div>
+</div>
