@@ -4,149 +4,478 @@
     ViewData["Title"] = "Edit Course";
 }
 
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            <div class="card shadow">
-                <div class="card-header bg-warning text-dark">
-                    <h3 class="mb-0">
-                        <i class="fas fa-edit me-2"></i>Edit Course: @Model.Title
-                    </h3>
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <style>
+        /* Course Creation Form Styles - Matching Home Page Design */
+        .course-creation-container {
+            background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 50%, #e8e4ff 100%);
+            min-height: 100vh;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-creation-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(143, 126, 252, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(205, 193, 255, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .form-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .form-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            color: #333446;
+            line-height: 1.2;
+        }
+
+        .form-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin: 0;
+            font-family: "Source Sans 3", sans-serif;
+            font-weight: 400;
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(143, 126, 252, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 
+                0 20px 60px rgba(143, 126, 252, 0.1),
+                0 8px 32px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8f7efc, #7a6af8, #8f7efc);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+            color: #333446;
+            margin-bottom: 8px;
+            font-family: "Source Sans 3", sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-label.required::after {
+            content: ' *';
+            color: #e74c3c;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(143, 126, 252, 0.2);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: "Source Sans 3", sans-serif;
+            color: #333446;
+            background: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #8f7efc;
+            background: white;
+            box-shadow: 
+                0 0 0 4px rgba(143, 126, 252, 0.1),
+                0 8px 25px rgba(143, 126, 252, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .form-input::placeholder {
+            color: #999;
+            opacity: 0.7;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(143, 126, 252, 0.2);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: "Source Sans 3", sans-serif;
+            color: #333446;
+            background: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 48px;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #8f7efc;
+            background: white;
+            box-shadow: 
+                0 0 0 4px rgba(143, 126, 252, 0.1),
+                0 8px 25px rgba(143, 126, 252, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(143, 126, 252, 0.2);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: "Source Sans 3", sans-serif;
+            color: #333446;
+            background: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            resize: vertical;
+            min-height: 120px;
+            box-sizing: border-box;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #8f7efc;
+            background: white;
+            box-shadow: 
+                0 0 0 4px rgba(143, 126, 252, 0.1),
+                0 8px 25px rgba(143, 126, 252, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .form-textarea::placeholder {
+            color: #999;
+            opacity: 0.7;
+        }
+
+        .form-help {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+            font-family: "Source Sans 3", sans-serif;
+        }
+
+        .validation-error {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            font-family: "Source Sans 3", sans-serif;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(143, 126, 252, 0.2);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: "Source Sans 3", sans-serif;
+            border: none;
+            text-decoration: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8f7efc 0%, #7a6af8 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(143, 126, 252, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(143, 126, 252, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333446;
+            border: 2px solid rgba(143, 126, 252, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 1);
+            border-color: #8f7efc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(143, 126, 252, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Design */
+        @@media (max-width: 768px) {
+            .form-container {
+                padding: 0 15px;
+            }
+            
+            .form-title {
+                font-size: 2.5rem;
+            }
+            
+            .form-card {
+                padding: 30px 25px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                gap: 20px;
+                align-items: stretch;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Animation for form appearance */
+        .form-card {
+            animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @@keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating elements for visual appeal */
+        .floating-element {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(143, 126, 252, 0.1), rgba(122, 107, 248, 0.1));
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+
+        @@keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+}
+
+<div class="course-creation-container">
+    <!-- Floating background elements -->
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    
+    <div class="form-container">
+        <div class="form-header">
+            <h1 class="form-title">Edit Your Course</h1>
+            <p class="form-subtitle">Update your course information and continue sharing knowledge with students</p>
+        </div>
+        
+        <div class="form-card">
+            <form asp-action="Edit" method="post" id="editCourseForm">
+                <input type="hidden" asp-for="Id" />
+                <div asp-validation-summary="ModelOnly" class="validation-error" role="alert"></div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="Title" class="form-label required">Course Title</label>
+                        <input asp-for="Title" class="form-input" placeholder="Enter an engaging course title" required />
+                        <span asp-validation-for="Title" class="validation-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Category" class="form-label required">Category</label>
+                        <select asp-for="Category" class="form-select" required>
+                            <option value="">Select Category</option>
+                            <option value="Programming">Programming</option>
+                            <option value="Design">Design</option>
+                            <option value="Business">Business</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Health">Health & Fitness</option>
+                            <option value="Language">Language Learning</option>
+                            <option value="Music">Music</option>
+                            <option value="Photography">Photography</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span asp-validation-for="Category" class="validation-error"></span>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form asp-action="Edit" method="post">
-                        <input type="hidden" asp-for="Id" />
-                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
-                        
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="mb-3">
-                                    <label asp-for="Title" class="form-label fw-bold">Course Title *</label>
-                                    <input asp-for="Title" class="form-control" placeholder="Enter course title" />
-                                    <span asp-validation-for="Title" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label asp-for="Category" class="form-label fw-bold">Category *</label>
-                                    <select asp-for="Category" class="form-select">
-                                        <option value="">Select Category</option>
-                                        <option value="Programming">Programming</option>
-                                        <option value="Design">Design</option>
-                                        <option value="Business">Business</option>
-                                        <option value="Marketing">Marketing</option>
-                                        <option value="Finance">Finance</option>
-                                        <option value="Health">Health & Fitness</option>
-                                        <option value="Language">Language Learning</option>
-                                        <option value="Music">Music</option>
-                                        <option value="Photography">Photography</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <span asp-validation-for="Category" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="mb-3">
-                            <label asp-for="ShortDescription" class="form-label fw-bold">Short Description</label>
-                            <textarea asp-for="ShortDescription" class="form-control" rows="2" placeholder="Brief description (max 1000 characters)"></textarea>
-                            <span asp-validation-for="ShortDescription" class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Description" class="form-label fw-bold">Full Description *</label>
-                            <textarea asp-for="Description" class="form-control" rows="5" placeholder="Detailed course description"></textarea>
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label asp-for="Price" class="form-label fw-bold">Price ($) *</label>
-                                    <input asp-for="Price" class="form-control" type="number" step="0.01" min="0" placeholder="0.00" />
-                                    <span asp-validation-for="Price" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label asp-for="DiscountedPrice" class="form-label fw-bold">Discounted Price ($)</label>
-                                    <input asp-for="DiscountedPrice" class="form-control" type="number" step="0.01" min="0" placeholder="0.00" />
-                                    <span asp-validation-for="DiscountedPrice" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label asp-for="Duration" class="form-label fw-bold">Duration (minutes) *</label>
-                                    <input asp-for="Duration" class="form-control" type="number" min="1" placeholder="120" />
-                                    <span asp-validation-for="Duration" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label asp-for="Difficulty" class="form-label fw-bold">Difficulty Level *</label>
-                                    <select asp-for="Difficulty" class="form-select">
-                                        <option value="Beginner">Beginner</option>
-                                        <option value="Intermediate">Intermediate</option>
-                                        <option value="Advanced">Advanced</option>
-                                    </select>
-                                    <span asp-validation-for="Difficulty" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label asp-for="Tags" class="form-label fw-bold">Tags</label>
-                                    <input asp-for="Tags" class="form-control" placeholder="e.g., JavaScript, Web Development, Frontend" />
-                                    <small class="form-text text-muted">Separate tags with commas</small>
-                                    <span asp-validation-for="Tags" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label asp-for="ThumbnailUrl" class="form-label fw-bold">Thumbnail URL</label>
-                                    <input asp-for="ThumbnailUrl" class="form-control" placeholder="https://example.com/image.jpg" />
-                                    <small class="form-text text-muted">URL to course thumbnail image</small>
-                                    <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label asp-for="VideoUrl" class="form-label fw-bold">Preview Video URL</label>
-                                    <input asp-for="VideoUrl" class="form-control" placeholder="https://youtube.com/watch?v=..." />
-                                    <small class="form-text text-muted">URL to course preview video</small>
-                                    <span asp-validation-for="VideoUrl" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input asp-for="IsPublished" class="form-check-input" type="checkbox" />
-                                <label asp-for="IsPublished" class="form-check-label fw-bold">
-                                    Publish this course
-                                </label>
-                                <small class="form-text text-muted d-block">
-                                    Published courses are visible to students. Unpublished courses are only visible to you.
-                                </small>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <a asp-action="Index" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left me-2"></i>Back to Courses
-                            </a>
-                            <button type="submit" class="btn btn-warning">
-                                <i class="fas fa-save me-2"></i>Update Course
-                            </button>
-                        </div>
-                    </form>
+                <div class="form-group full-width">
+                    <label asp-for="ShortDescription" class="form-label">Short Description</label>
+                    <textarea asp-for="ShortDescription" class="form-textarea" rows="2" placeholder="Brief description that will appear in course previews (max 1000 characters)" maxlength="1000"></textarea>
+                    <span asp-validation-for="ShortDescription" class="validation-error"></span>
                 </div>
-            </div>
+
+                <div class="form-group full-width">
+                    <label asp-for="Description" class="form-label required">Full Description</label>
+                    <textarea asp-for="Description" class="form-textarea" rows="5" placeholder="Detailed course description that explains what students will learn" required></textarea>
+                    <span asp-validation-for="Description" class="validation-error"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="Price" class="form-label required">Price ($)</label>
+                        <input asp-for="Price" class="form-input" type="number" step="0.01" min="0.01" placeholder="0.00" required />
+                        <span asp-validation-for="Price" class="validation-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="DiscountedPrice" class="form-label">Discounted Price ($)</label>
+                        <input asp-for="DiscountedPrice" class="form-input" type="number" step="0.01" min="0.01" placeholder="0.00" />
+                        <span asp-validation-for="DiscountedPrice" class="validation-error"></span>
+                        <div class="form-help">Optional: Set a discounted price to attract more students</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="Duration" class="form-label required">Duration (minutes)</label>
+                        <input asp-for="Duration" class="form-input" type="number" min="1" placeholder="120" required />
+                        <span asp-validation-for="Duration" class="validation-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Difficulty" class="form-label required">Difficulty Level</label>
+                        <select asp-for="Difficulty" class="form-select" required>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
+                        <span asp-validation-for="Difficulty" class="validation-error"></span>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label asp-for="Tags" class="form-label">Tags</label>
+                    <input asp-for="Tags" class="form-input" placeholder="e.g., JavaScript, Web Development, Frontend" />
+                    <div class="form-help">Separate tags with commas to help students find your course</div>
+                    <span asp-validation-for="Tags" class="validation-error"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="ThumbnailUrl" class="form-label">Thumbnail URL</label>
+                        <input asp-for="ThumbnailUrl" class="form-input" placeholder="https://example.com/image.jpg" />
+                        <div class="form-help">URL to an attractive course thumbnail image</div>
+                        <span asp-validation-for="ThumbnailUrl" class="validation-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="VideoUrl" class="form-label">Preview Video URL</label>
+                        <input asp-for="VideoUrl" class="form-input" placeholder="https://youtube.com/watch?v=..." />
+                        <div class="form-help">URL to a course preview video (YouTube, Vimeo, etc.)</div>
+                        <span asp-validation-for="VideoUrl" class="validation-error"></span>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <span class="material-symbols-outlined btn-icon">arrow_back</span>
+                        Back to Courses
+                    </a>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span class="material-symbols-outlined btn-icon">save</span>
+                        Update Course
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -155,6 +484,18 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     
     <script>
+        // Form submission handling
+        document.getElementById('editCourseForm').addEventListener('submit', function(e) {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="material-symbols-outlined btn-icon">hourglass_empty</span>Updating Course...';
+            
+            // Show loading notification if available
+            if (typeof showNotification === 'function') {
+                showNotification('Updating your course...', 'info');
+            }
+        });
+
         // Auto-calculate discounted price validation
         document.getElementById('Price').addEventListener('input', function() {
             const price = parseFloat(this.value) || 0;
@@ -178,5 +519,25 @@
                 this.setCustomValidity('');
             }
         });
+
+        // Enhanced form validation feedback
+        const formInputs = document.querySelectorAll('.form-input, .form-select, .form-textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.checkValidity()) {
+                    this.style.borderColor = '#8f7efc';
+                } else {
+                    this.style.borderColor = '#e74c3c';
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.checkValidity()) {
+                    this.style.borderColor = 'rgba(143, 126, 252, 0.2)';
+                }
+            });
+        });
+
+        console.log('Beautiful Course Edit form loaded successfully!');
     </script>
 }
