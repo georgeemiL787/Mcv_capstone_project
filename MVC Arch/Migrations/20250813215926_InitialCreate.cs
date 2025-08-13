@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MCV_Capstone.Migrations
 {
     /// <inheritdoc />
-    public partial class migrate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -201,13 +201,14 @@ namespace MCV_Capstone.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    BannedUserId = table.Column<int>(type: "int", nullable: false),
                     Reason = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     BannedByAdminId = table.Column<int>(type: "int", nullable: false),
                     BannedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UnbannedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UnbannedByAdminId = table.Column<int>(type: "int", nullable: true),
-                    UnbanReason = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
+                    UnbanReason = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -215,6 +216,12 @@ namespace MCV_Capstone.Migrations
                     table.ForeignKey(
                         name: "FK_BannedAccounts_AspNetUsers_BannedByAdminId",
                         column: x => x.BannedByAdminId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BannedAccounts_AspNetUsers_BannedUserId",
+                        column: x => x.BannedUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -228,8 +235,7 @@ namespace MCV_Capstone.Migrations
                         name: "FK_BannedAccounts_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -550,6 +556,11 @@ namespace MCV_Capstone.Migrations
                 name: "IX_BannedAccounts_BannedByAdminId",
                 table: "BannedAccounts",
                 column: "BannedByAdminId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BannedAccounts_BannedUserId",
+                table: "BannedAccounts",
+                column: "BannedUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BannedAccounts_UnbannedByAdminId",

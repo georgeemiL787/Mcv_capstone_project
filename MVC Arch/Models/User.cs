@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace MCV_Capstone.Models
 {
@@ -39,5 +40,8 @@ namespace MCV_Capstone.Models
         public string? ProfilePhoto { get; set; }
 
         public string? Preferences { get; set; }
+
+        // Navigation Properties for Banned Accounts
+        public List<BannedAccount> BannedAccounts { get; set; } = new();
     }
 }

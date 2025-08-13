@@ -24,6 +24,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/George/OneDrive/Documents/GitHub/New folder/Mcv_capstone_project/Mcv_capstone_project/MVC Arch/Views/Account/Banned.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxCYW5uZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/George/OneDrive/Documents/GitHub/New folder/Mcv_capstone_project/Mcv_capstone_project/MVC Arch/Views/Account/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -40,8 +44,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxTaWdudXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/George/OneDrive/Documents/GitHub/New folder/Mcv_capstone_project/Mcv_capstone_project/MVC Arch/Views/AdminPanel/Courses.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxDb3Vyc2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/George/OneDrive/Documents/GitHub/New folder/Mcv_capstone_project/Mcv_capstone_project/MVC Arch/Views/AdminPanel/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/OneDrive/Documents/GitHub/New folder/Mcv_capstone_project/Mcv_capstone_project/MVC Arch/Views/AdminPanel/Users.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxVc2Vycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/George/OneDrive/Documents/GitHub/New folder/Mcv_capstone_project/Mcv_capstone_project/MVC Arch/Views/CareerSimulator/Index.cshtml]
@@ -142,6 +154,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/George/OneDrive/Documents/GitHub/New folder/Mcv_capstone_project/Mcv_capstone_project/MVC Arch/Views/Profile/AccountSecurity.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxBY2NvdW50U2VjdXJpdHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/OneDrive/Documents/GitHub/New folder/Mcv_capstone_project/Mcv_capstone_project/MVC Arch/Views/Profile/DeleteAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxEZWxldGVBY2NvdW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/George/OneDrive/Documents/GitHub/New folder/Mcv_capstone_project/Mcv_capstone_project/MVC Arch/Views/Profile/Index.cshtml]

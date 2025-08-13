@@ -125,23 +125,25 @@ namespace MCV_Capstone.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             // BannedAccount relationships
-            builder.Entity<BannedAccount>()
-                .HasOne(b => b.User)
-                .WithMany()
-                .HasForeignKey(b => b.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<BannedAccount>(entity =>
+            {
+                entity.ToTable("BannedAccounts");
+                
+                entity.HasOne(b => b.BannedUser)
+                    .WithMany()
+                    .HasForeignKey(b => b.BannedUserId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<BannedAccount>()
-                .HasOne(b => b.BannedByAdmin)
-                .WithMany()
-                .HasForeignKey(b => b.BannedByAdminId)
-                .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(b => b.BannedByAdmin)
+                    .WithMany()
+                    .HasForeignKey(b => b.BannedByAdminId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<BannedAccount>()
-                .HasOne(b => b.UnbannedByAdmin)
-                .WithMany()
-                .HasForeignKey(b => b.UnbannedByAdminId)
-                .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(b => b.UnbannedByAdmin)
+                    .WithMany()
+                    .HasForeignKey(b => b.UnbannedByAdminId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
 
             // AdminActionLog relationships
             builder.Entity<AdminActionLog>()

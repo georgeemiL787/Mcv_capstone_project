@@ -41,6 +41,16 @@ document.addEventListener('DOMContentLoaded', function() {
     item.addEventListener('click', function(e) {
       e.preventDefault();
       const sectionId = this.getAttribute('data-section');
+      
+      console.log('Navigation item clicked:', sectionId);
+      
+      // Handle special navigation for Users section
+      if (sectionId === 'users') {
+        console.log('Redirecting to Users view...');
+        window.location.href = '/AdminPanel/Users';
+        return;
+      }
+      
       showSection(sectionId);
     });
   });
@@ -48,10 +58,19 @@ document.addEventListener('DOMContentLoaded', function() {
   // Handle initial load based on URL hash
   function handleInitialLoad() {
     const hash = window.location.hash.substring(1);
+    console.log('Initial load - hash:', hash);
+    
     if (hash && document.getElementById(hash)) {
+      // Don't show users section if it's in the hash, redirect to Users view
+      if (hash === 'users') {
+        console.log('Hash is users, redirecting to Users view...');
+        window.location.href = '/AdminPanel/Users';
+        return;
+      }
       showSection(hash);
     } else {
       // Default to dashboard if no hash or invalid hash
+      console.log('No valid hash, showing dashboard...');
       showSection('dashboard');
     }
   }
@@ -59,7 +78,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // Handle browser back/forward buttons
   window.addEventListener('hashchange', function() {
     const hash = window.location.hash.substring(1);
+    console.log('Hash changed to:', hash);
+    
     if (hash && document.getElementById(hash)) {
+      // Don't show users section if it's in the hash, redirect to Users view
+      if (hash === 'users') {
+        console.log('Hash changed to users, redirecting to Users view...');
+        window.location.href = '/AdminPanel/Users';
+        return;
+      }
       showSection(hash);
     }
   });
@@ -72,9 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
     switch (sectionId) {
       case 'dashboard':
         loadDashboardData();
-        break;
-      case 'users':
-        loadUsers();
         break;
       case 'courses':
         loadCourses();
@@ -111,52 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('total-courses').textContent = data.totalCourses.toLocaleString();
     document.getElementById('total-revenue').textContent = `$${data.totalRevenue.toLocaleString()}`;
     document.getElementById('pending-courses').textContent = data.pendingCourses.toLocaleString();
-  }
-
-  // Load users
-  async function loadUsers() {
-    try {
-      const searchTerm = document.getElementById('user-search').value;
-      const roleFilter = document.getElementById('role-filter').value;
-      const statusFilter = document.getElementById('status-filter').value;
-
-      const response = await fetch(`/AdminPanel/GetUsers?searchTerm=${encodeURIComponent(searchTerm)}&roleFilter=${encodeURIComponent(roleFilter)}&statusFilter=${encodeURIComponent(statusFilter)}`);
-      const result = await response.json();
-      
-      if (result.success) {
-        displayUsers(result.data);
-      }
-    } catch (error) {
-      console.error('Error loading users:', error);
-    }
-  }
-
-  // Display users in the table
-  function displayUsers(users) {
-    const tbody = document.getElementById('users-table-body');
-    tbody.innerHTML = '';
-
-    users.forEach(user => {
-      const row = document.createElement('div');
-      row.className = 'table-row';
-      row.innerHTML = `
-        <div class="user-info">
-          <div class="user-avatar">${user.firstName.charAt(0)}${user.lastName.charAt(0)}</div>
-          <div>
-            <h4>${user.firstName} ${user.lastName}</h4>
-            <span>Joined ${getTimeAgo(new Date(user.registrationDate))}</span>
-          </div>
-        </div>
-        <span>${user.email}</span>
-        <span class="role-badge ${user.roles[0]?.toLowerCase() || 'student'}">${user.roles[0] || 'Student'}</span>
-        <span class="status-badge ${user.accountStatus.toLowerCase()}">${user.accountStatus}</span>
-        <div class="action-buttons">
-          <button class="btn-small" onclick="viewUser(${user.id})">View</button>
-          <button class="btn-small warning" onclick="banUser(${user.id})">Ban</button>
-        </div>
-      `;
-      tbody.appendChild(row);
-    });
   }
 
   // Load courses
@@ -359,14 +337,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Event listeners for refresh buttons
-  document.getElementById('refresh-users').addEventListener('click', loadUsers);
   document.getElementById('refresh-courses').addEventListener('click', () => loadCourses());
   document.getElementById('refresh-content').addEventListener('click', loadContent);
-
-  // Event listeners for filters
-  document.getElementById('user-search').addEventListener('input', debounce(loadUsers, 300));
-  document.getElementById('role-filter').addEventListener('change', loadUsers);
-  document.getElementById('status-filter').addEventListener('change', loadUsers);
 
   // Course filter tabs
   document.querySelectorAll('[data-filter]').forEach(tab => {
@@ -528,37 +500,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-
-// User management functions
-async function banUser(userId) {
-  if (!confirm('Are you sure you want to ban this user?')) return;
-  
-  try {
-    const response = await fetch('/AdminPanel/BanUser', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: `userId=${userId}`
-    });
-
-    const result = await response.json();
-    if (result.success) {
-      showNotification('User banned successfully!', 'success');
-      loadUsers(); // Refresh the users list
-    } else {
-      showNotification('Error banning user: ' + result.message, 'error');
-    }
-  } catch (error) {
-    console.error('Error banning user:', error);
-    showNotification('Error banning user', 'error');
-  }
-}
-
-function viewUser(userId) {
-  // Implement user view functionality
-  showNotification('User view functionality coming soon!', 'info');
-}
 
 function viewCourse(courseId) {
   // Implement course view functionality

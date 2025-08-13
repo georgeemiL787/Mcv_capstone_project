@@ -25,7 +25,7 @@ namespace MCV_Capstone.Middleware
                 {
                     // Check if user is banned
                     var bannedAccount = await dbContext.BannedAccounts
-                        .FirstOrDefaultAsync(b => b.UserId == userId && b.UnbannedAt == null);
+                        .FirstOrDefaultAsync(b => b.BannedUserId == userId && b.UnbannedAt == null);
 
                     if (bannedAccount != null)
                     {

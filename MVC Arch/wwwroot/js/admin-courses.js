@@ -98,12 +98,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function loadCourses() {
+        console.log('Loading courses with filters:', currentFilters, 'page:', currentPage);
+        
         const coursesGrid = document.getElementById('courses-grid');
         const loadingIndicator = document.getElementById('loading-indicator');
         const noCoursesMessage = document.getElementById('no-courses-message');
         const paginationContainer = document.getElementById('pagination-container');
 
-        if (!coursesGrid) return;
+        if (!coursesGrid) {
+            console.error('Courses grid not found');
+            return;
+        }
 
         // Show loading
         coursesGrid.innerHTML = '';
@@ -122,12 +127,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const response = await fetch(`/AdminPanel/GetCourses?${params}`);
             const data = await response.json();
+            
+            console.log('Courses data received:', data);
 
             if (data.success) {
+                console.log('Displaying courses:', data.data.length, 'courses');
                 displayCourses(data.data);
                 updatePagination(data);
                 paginationContainer.style.display = 'block';
             } else {
+                console.error('Failed to load courses:', data.message);
                 showError('Failed to load courses: ' + data.message);
                 noCoursesMessage.style.display = 'block';
             }
@@ -141,10 +150,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayCourses(courses) {
+        console.log('Displaying courses function called with:', courses.length, 'courses');
+        
         const coursesGrid = document.getElementById('courses-grid');
-        if (!coursesGrid) return;
+        if (!coursesGrid) {
+            console.error('Courses grid not found in displayCourses');
+            return;
+        }
 
         if (courses.length === 0) {
+            console.log('No courses to display, showing empty message');
             coursesGrid.innerHTML = `
                 <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
                     <p style="color: var(--text-secondary); margin: 0;">No courses found matching your criteria.</p>
@@ -154,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         coursesGrid.innerHTML = courses.map(course => `
-            <div class="course-card">
+            <div class="course-card" data-course-id="${course.id}">
                 <div class="course-header">
                     <h3>${course.title}</h3>
                     <span class="status-badge ${course.approvalStatus.toLowerCase()}">${course.approvalStatus}</span>
@@ -183,19 +198,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 ` : ''}
                 
-                <div class="course-actions">
-                    ${!course.isApproved && !course.isRejected ? `
-                        <button class="btn btn-success" onclick="approveCourse(${course.id})">
-                            <i class="fas fa-check"></i> Approve
-                        </button>
-                        <button class="btn btn-danger" onclick="rejectCourse(${course.id})">
-                            <i class="fas fa-times"></i> Reject
-                        </button>
-                    ` : ''}
-                    <button class="btn btn-primary" onclick="viewCourseDetails(${course.id})">
-                        <i class="fas fa-eye"></i> Details
-                    </button>
-                </div>
+                                 <div class="course-actions">
+                     ${!course.isApproved && !course.isRejected ? `
+                         <button class="btn btn-approve" onclick="approveCourse(${course.id})">
+                             <i class="fas fa-check"></i> Approve
+                         </button>
+                         <button class="btn btn-reject" onclick="rejectCourse(${course.id})">
+                             <i class="fas fa-times"></i> Reject
+                         </button>
+                     ` : ''}
+                     <button class="btn btn-primary" onclick="viewCourseDetails(${course.id})">
+                         <i class="fas fa-eye"></i> Details
+                     </button>
+                 </div>
             </div>
         `).join('');
     }
@@ -235,6 +250,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!confirm('Are you sure you want to approve this course?')) return;
 
         try {
+            console.log('Approving course:', courseId);
+            
+            // Find the course card and show loading state
+            const courseCard = document.querySelector(`[data-course-id="${courseId}"]`);
+            if (courseCard) {
+                courseCard.style.opacity = '0.5';
+                courseCard.style.pointerEvents = 'none';
+            }
+            
             const response = await fetch('/AdminPanel/ApproveCourse', {
                 method: 'POST',
                 headers: {
@@ -244,35 +268,102 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             const result = await response.json();
+            console.log('Approve response:', result);
+            
             if (result.success) {
                 showSuccess('Course approved successfully');
-                loadCourses();
+                
+                // Immediately update the UI to show the course is approved
+                if (courseCard) {
+                    // Update the status badge
+                    const statusBadge = courseCard.querySelector('.status-badge');
+                    if (statusBadge) {
+                        statusBadge.textContent = 'Approved';
+                        statusBadge.className = 'status-badge approved';
+                    }
+                    
+                    // Remove approve/reject buttons and show only details button
+                    const courseActions = courseCard.querySelector('.course-actions');
+                    if (courseActions) {
+                        courseActions.innerHTML = `
+                            <button class="btn btn-primary" onclick="viewCourseDetails(${courseId})">
+                                <i class="fas fa-eye"></i> Details
+                            </button>
+                        `;
+                    }
+                    
+                    // Restore the card appearance
+                    courseCard.style.opacity = '1';
+                    courseCard.style.pointerEvents = 'auto';
+                }
+                
+                // Force a fresh reload of courses data to update counts and ensure consistency
+                currentPage = 1; // Reset to first page
+                await loadCourses(); // Wait for the load to complete
+                
+                // Auto-refresh after 3 seconds to ensure everything is up to date
+                showSuccess('Course approved successfully! Auto-refreshing in 3 seconds...');
+                
+                let countdown = 3;
+                const countdownInterval = setInterval(() => {
+                    countdown--;
+                    if (countdown > 0) {
+                        showSuccess(`Course approved successfully! Auto-refreshing in ${countdown} seconds...`);
+                    } else {
+                        clearInterval(countdownInterval);
+                        console.log('Auto-refreshing courses after 3 seconds...');
+                        loadCourses();
+                    }
+                }, 1000);
             } else {
                 showError('Failed to approve course: ' + result.message);
+                
+                // Restore the card appearance on error
+                if (courseCard) {
+                    courseCard.style.opacity = '1';
+                    courseCard.style.pointerEvents = 'auto';
+                }
             }
         } catch (error) {
             console.error('Error approving course:', error);
             showError('An error occurred while approving the course');
+            
+            // Restore the card appearance on error
+            const courseCard = document.querySelector(`[data-course-id="${courseId}"]`);
+            if (courseCard) {
+                courseCard.style.opacity = '1';
+                courseCard.style.pointerEvents = 'auto';
+            }
         }
     };
 
     window.rejectCourse = function(courseId) {
+        console.log('rejectCourse called with courseId:', courseId);
+        
         const modal = document.getElementById('reject-course-modal');
         const reasonInput = document.getElementById('reject-reason');
         const confirmBtn = document.getElementById('confirm-reject');
 
-        if (modal) {
+        console.log('Modal elements found:', { 
+            modal: !!modal, 
+            reasonInput: !!reasonInput, 
+            confirmBtn: !!confirmBtn 
+        });
+
+        if (modal && reasonInput && confirmBtn) {
+            // Show the modal
             modal.style.display = 'block';
+            console.log('Modal displayed');
+            
+            // Clear previous reason
             reasonInput.value = '';
             
             // Store the courseId for the confirm button
             confirmBtn.dataset.courseId = courseId;
             
-            // Remove any existing event listeners
-            const newConfirmBtn = confirmBtn.cloneNode(true);
-            confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
-            
-            newConfirmBtn.onclick = async function() {
+            // Set up the confirm button click event
+            confirmBtn.onclick = async function() {
+                console.log('Confirm reject button clicked');
                 const reason = reasonInput.value.trim();
                 if (!reason) {
                     showError('Please provide a reason for rejecting this course');
@@ -280,6 +371,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 try {
+                    console.log('Sending reject request for course:', courseId, 'with reason:', reason);
                     const response = await fetch('/AdminPanel/RejectCourse', {
                         method: 'POST',
                         headers: {
@@ -289,10 +381,51 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
 
                     const result = await response.json();
+                    console.log('Reject response:', result);
+                    
                     if (result.success) {
                         showSuccess('Course rejected successfully');
                         closeModal('reject-course-modal');
-                        loadCourses();
+                        
+                        // Immediately update the UI to show the course is rejected
+                        const courseCard = document.querySelector(`[data-course-id="${courseId}"]`);
+                        if (courseCard) {
+                            // Update the status badge
+                            const statusBadge = courseCard.querySelector('.status-badge');
+                            if (statusBadge) {
+                                statusBadge.textContent = 'Rejected';
+                                statusBadge.className = 'status-badge rejected';
+                            }
+                            
+                            // Remove approve/reject buttons and show only details button
+                            const courseActions = courseCard.querySelector('.course-actions');
+                            if (courseActions) {
+                                courseActions.innerHTML = `
+                                    <button class="btn btn-primary" onclick="viewCourseDetails(${courseId})">
+                                        <i class="fas fa-eye"></i> Details
+                                    </button>
+                                `;
+                            }
+                        }
+                        
+                        // Force a fresh reload of courses data to update counts and ensure consistency
+                        currentPage = 1; // Reset to first page
+                        await loadCourses(); // Wait for the load to complete
+                        
+                        // Auto-refresh after 3 seconds to ensure everything is up to date
+                        showSuccess('Course rejected successfully! Auto-refreshing in 3 seconds...');
+                        
+                        let countdown = 3;
+                        const countdownInterval = setInterval(() => {
+                            countdown--;
+                            if (countdown > 0) {
+                                showSuccess(`Course rejected successfully! Auto-refreshing in ${countdown} seconds...`);
+                            } else {
+                                clearInterval(countdownInterval);
+                                console.log('Auto-refreshing courses after 3 seconds...');
+                                loadCourses();
+                            }
+                        }, 1000);
                     } else {
                         showError('Failed to reject course: ' + result.message);
                     }
@@ -301,6 +434,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     showError('An error occurred while rejecting the course');
                 }
             };
+            
+            console.log('Reject course modal setup complete');
+        } else {
+            console.error('Modal elements not found:', { modal, reasonInput, confirmBtn });
+            showError('Modal elements not found. Please refresh the page.');
         }
     };
 
@@ -393,7 +531,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showNotification(message, 'error');
     }
 
-    function showNotification(message, type = 'info') {
+    function showNotification(message, type = 'info', duration = 5000) {
         // Remove existing notifications
         const existingNotifications = document.querySelectorAll('.notification');
         existingNotifications.forEach(notification => notification.remove());
@@ -401,7 +539,40 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create new notification
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
-        notification.textContent = message;
+        
+        // Create message container
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'notification-message';
+        messageContainer.textContent = message;
+        
+        // Create progress bar for countdown notifications
+        if (message.includes('Auto-refreshing in')) {
+            const progressBar = document.createElement('div');
+            progressBar.className = 'notification-progress';
+            progressBar.style.width = '100%';
+            progressBar.style.height = '3px';
+            progressBar.style.background = 'rgba(255, 255, 255, 0.3)';
+            progressBar.style.borderRadius = '2px';
+            progressBar.style.overflow = 'hidden';
+            
+            const progressFill = document.createElement('div');
+            progressFill.style.width = '100%';
+            progressFill.style.height = '100%';
+            progressFill.style.background = 'white';
+            progressFill.style.transition = 'width 1s linear';
+            progressFill.style.transform = 'translateX(-100%)';
+            
+            progressBar.appendChild(progressFill);
+            notification.appendChild(messageContainer);
+            notification.appendChild(progressBar);
+            
+            // Animate progress bar
+            setTimeout(() => {
+                progressFill.style.transform = 'translateX(0)';
+            }, 100);
+        } else {
+            notification.appendChild(messageContainer);
+        }
         
         // Add to body
         document.body.appendChild(notification);
@@ -411,7 +582,7 @@ document.addEventListener('DOMContentLoaded', function() {
             notification.classList.add('show');
         }, 100);
         
-        // Auto-hide after 5 seconds
+        // Auto-hide after specified duration
         setTimeout(() => {
             notification.classList.remove('show');
             setTimeout(() => {
@@ -419,7 +590,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     notification.parentNode.removeChild(notification);
                 }
             }, 300);
-        }, 5000);
+        }, duration);
     }
 
     // Modal functions
@@ -427,6 +598,30 @@ document.addEventListener('DOMContentLoaded', function() {
         const modal = document.getElementById(modalId);
         if (modal) {
             modal.style.display = 'none';
+            console.log(`Modal ${modalId} closed`);
+        } else {
+            console.error(`Modal ${modalId} not found`);
         }
     };
+
+    // Initialize modals when page loads
+    function initializeModals() {
+        const rejectModal = document.getElementById('reject-course-modal');
+        const courseDetailsModal = document.getElementById('course-details-modal');
+        
+        if (rejectModal) {
+            console.log('Reject course modal found and initialized');
+        } else {
+            console.error('Reject course modal not found');
+        }
+        
+        if (courseDetailsModal) {
+            console.log('Course details modal found and initialized');
+        } else {
+            console.error('Course details modal not found');
+        }
+    }
+
+    // Call initializeModals when the page loads
+    initializeModals();
 });

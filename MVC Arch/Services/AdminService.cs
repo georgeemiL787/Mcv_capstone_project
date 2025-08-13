@@ -9,7 +9,7 @@ namespace MCV_Capstone.Services
     public interface IAdminService
     {
         Task<AdminDashboardStats> GetDashboardStatsAsync();
-        Task<List<AdminUserInfo>> GetUsersAsync(string searchTerm, string roleFilter, string statusFilter);
+        Task<List<AdminUserInfo>> GetUsersAsync(string searchTerm, string roleFilter, string statusFilter, int page = 1, int pageSize = 20);
         Task<bool> UpdateUserStatusAsync(int userId, string newStatus);
         Task<bool> BanUserAsync(int userId, int adminId, string reason);
         Task<bool> UnbanUserAsync(int userId, int adminId, string? reason);
@@ -22,6 +22,7 @@ namespace MCV_Capstone.Services
         Task<CourseDetailsViewModel> GetCourseDetailsAsync(int courseId);
         Task<int> GetTotalUsersCountAsync(string searchTerm, string roleFilter, string statusFilter);
         Task<int> GetTotalCoursesCountAsync(string filter, string searchTerm, string categoryFilter);
+        Task<bool> FixExistingApprovedCoursesAsync();
     }
 
     public class AdminService : IAdminService
@@ -60,82 +61,139 @@ namespace MCV_Capstone.Services
             };
         }
 
-        public async Task<List<AdminUserInfo>> GetUsersAsync(string searchTerm, string roleFilter, string statusFilter)
+        public async Task<List<AdminUserInfo>> GetUsersAsync(string searchTerm, string roleFilter, string statusFilter, int page = 1, int pageSize = 20)
         {
-            var query = _context.Users.AsQueryable();
-
-            // Apply search filter
-            if (!string.IsNullOrEmpty(searchTerm))
+            try
             {
-                query = query.Where(u => 
-                    (u.FirstName != null && u.FirstName.Contains(searchTerm)) || 
-                    (u.LastName != null && u.LastName.Contains(searchTerm)) || 
-                    (u.Email != null && u.Email.Contains(searchTerm)));
-            }
+                // Log the method call for debugging
+                Console.WriteLine($"GetUsersAsync called with: searchTerm='{searchTerm}', roleFilter='{roleFilter}', statusFilter='{statusFilter}', page={page}, pageSize={pageSize}");
+                
+                var query = _context.Users.AsQueryable();
+                
+                // Log the initial user count
+                var totalUsers = await query.CountAsync();
+                Console.WriteLine($"Total users in database: {totalUsers}");
 
-            // Apply role filter
-            if (!string.IsNullOrEmpty(roleFilter))
-            {
-                var usersInRole = await _userManager.GetUsersInRoleAsync(roleFilter);
-                var userIds = usersInRole.Select(u => u.Id);
-                query = query.Where(u => userIds.Contains(u.Id));
-            }
-
-            // Apply status filter
-            if (!string.IsNullOrEmpty(statusFilter))
-            {
-                query = query.Where(u => u.AccountStatus == statusFilter);
-            }
-
-            var users = await query
-                .Select(u => new AdminUserInfo
+                // Apply search filter
+                if (!string.IsNullOrEmpty(searchTerm))
                 {
-                    Id = u.Id,
-                    FirstName = u.FirstName ?? string.Empty,
-                    LastName = u.LastName ?? string.Empty,
-                    Email = u.Email ?? string.Empty,
-                    AccountStatus = u.AccountStatus ?? string.Empty,
-                    RegistrationDate = u.RegistrationDate,
-                    LastLogin = u.LastLogin
-                })
-                .ToListAsync();
-
-            // Get roles and ban information for each user
-            foreach (var user in users)
-            {
-                var userEntity = await _userManager.FindByIdAsync(user.Id.ToString());
-                if (userEntity != null)
-                {
-                    user.Roles = (await _userManager.GetRolesAsync(userEntity)).ToList();
-                }
-                else
-                {
-                    user.Roles = new List<string>();
+                    query = query.Where(u => 
+                        (u.FirstName != null && u.FirstName.Contains(searchTerm)) || 
+                        (u.LastName != null && u.LastName.Contains(searchTerm)) || 
+                        (u.Email != null && u.Email.Contains(searchTerm)));
+                    var afterSearchFilter = await query.CountAsync();
+                    Console.WriteLine($"Users after search filter '{searchTerm}': {afterSearchFilter}");
                 }
 
-                // Get ban information with proper navigation property loading
-                var banInfo = await _context.BannedAccounts
-                    .Include(b => b.BannedByAdmin)
-                    .Where(b => b.UserId == user.Id && b.UnbannedAt == null)
-                    .Select(b => new { 
-                        b.Reason, 
-                        b.BannedAt, 
-                        AdminName = b.BannedByAdmin != null ? 
-                            (b.BannedByAdmin.FirstName + " " + b.BannedByAdmin.LastName).Trim() : 
-                            "Unknown Admin"
+                // Apply role filter - only if a specific role is selected
+                if (!string.IsNullOrEmpty(roleFilter) && roleFilter != "All Roles")
+                {
+                    try
+                    {
+                        var usersInRole = await _userManager.GetUsersInRoleAsync(roleFilter);
+                        var userIds = usersInRole.Select(u => u.Id);
+                        query = query.Where(u => userIds.Contains(u.Id));
+                        var afterRoleFilter = await query.CountAsync();
+                        Console.WriteLine($"Users after role filter '{roleFilter}': {afterRoleFilter}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error applying role filter '{roleFilter}': {ex.Message}");
+                        // If role filtering fails, continue without it
+                    }
+                }
+
+                // Apply status filter - only if a specific status is selected
+                if (!string.IsNullOrEmpty(statusFilter) && statusFilter != "All Status")
+                {
+                    query = query.Where(u => u.AccountStatus == statusFilter);
+                    var afterStatusFilter = await query.CountAsync();
+                    Console.WriteLine($"Users after status filter '{statusFilter}': {afterStatusFilter}");
+                }
+
+                // Apply pagination at database level for better performance
+                var users = await query
+                    .OrderBy(u => u.RegistrationDate) // Add ordering for consistent pagination
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .Select(u => new AdminUserInfo
+                    {
+                        Id = u.Id,
+                        FirstName = u.FirstName ?? string.Empty,
+                        LastName = u.LastName ?? string.Empty,
+                        Email = u.Email ?? string.Empty,
+                        AccountStatus = u.AccountStatus ?? "Active", // Default to Active if null
+                        RegistrationDate = u.RegistrationDate,
+                        LastLogin = u.LastLogin
                     })
-                    .FirstOrDefaultAsync();
+                    .ToListAsync();
 
-                if (banInfo != null)
+                // Log the final result
+                Console.WriteLine($"Final users returned: {users.Count}");
+                
+                // Get roles and ban information for each user
+                foreach (var user in users)
                 {
-                    user.IsBanned = true;
-                    user.BanReason = banInfo.Reason;
-                    user.BannedAt = banInfo.BannedAt;
-                    user.BannedByAdmin = banInfo.AdminName;
-                }
-            }
+                    try
+                    {
+                        var userEntity = await _userManager.FindByIdAsync(user.Id.ToString());
+                        if (userEntity != null)
+                        {
+                            var roles = await _userManager.GetRolesAsync(userEntity);
+                            user.Roles = roles.ToList();
+                            Console.WriteLine($"User {user.Id} ({user.Email}) has roles: {string.Join(", ", user.Roles)}");
+                        }
+                        else
+                        {
+                            user.Roles = new List<string>();
+                            Console.WriteLine($"User {user.Id} not found in UserManager");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error getting roles for user {user.Id}: {ex.Message}");
+                        user.Roles = new List<string>();
+                    }
 
-            return users;
+                    // Get ban information with proper navigation property loading
+                    try
+                    {
+                        var banInfo = await _context.BannedAccounts
+                            .Include(b => b.BannedByAdmin)
+                            .Where(b => b.BannedUserId == user.Id && b.UnbannedAt == null)
+                            .Select(b => new { 
+                                b.Reason, 
+                                b.BannedAt, 
+                                AdminName = b.BannedByAdmin != null ? 
+                                    (b.BannedByAdmin.FirstName + " " + b.BannedByAdmin.LastName).Trim() : 
+                                    "Unknown Admin"
+                            })
+                            .FirstOrDefaultAsync();
+
+                        if (banInfo != null)
+                        {
+                            user.IsBanned = true;
+                            user.BanReason = banInfo.Reason;
+                            user.BannedAt = banInfo.BannedAt;
+                            user.BannedByAdmin = banInfo.AdminName;
+                            Console.WriteLine($"User {user.Id} is banned: {banInfo.Reason}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error getting ban info for user {user.Id}: {ex.Message}");
+                        user.IsBanned = false;
+                    }
+                }
+
+                return users;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetUsersAsync: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
+                throw;
+            }
         }
 
         public async Task<bool> UpdateUserStatusAsync(int userId, string newStatus)
@@ -155,7 +213,7 @@ namespace MCV_Capstone.Services
 
             // Check if user is already banned
             var existingBan = await _context.BannedAccounts
-                .FirstOrDefaultAsync(b => b.UserId == userId && b.UnbannedAt == null);
+                .FirstOrDefaultAsync(b => b.BannedUserId == userId && b.UnbannedAt == null);
             
             if (existingBan != null) return false; // Already banned
 
@@ -167,7 +225,7 @@ namespace MCV_Capstone.Services
             // Create banned account record
             var bannedAccount = new BannedAccount
             {
-                UserId = userId,
+                BannedUserId = userId,
                 Reason = reason,
                 BannedByAdminId = adminId,
                 BannedAt = DateTime.UtcNow
@@ -189,7 +247,7 @@ namespace MCV_Capstone.Services
 
             // Find the active ban
             var activeBan = await _context.BannedAccounts
-                .FirstOrDefaultAsync(b => b.UserId == userId && b.UnbannedAt == null);
+                .FirstOrDefaultAsync(b => b.BannedUserId == userId && b.UnbannedAt == null);
             
             if (activeBan == null) return false; // Not banned
 
@@ -226,7 +284,7 @@ namespace MCV_Capstone.Services
                 query = query.Where(c => 
                     c.Title.Contains(searchTerm) || 
                     c.Description.Contains(searchTerm) ||
-                    (c.Instructor.FirstName + " " + c.Instructor.LastName).Contains(searchTerm));
+                    (c.Instructor != null && (c.Instructor.FirstName + " " + c.Instructor.LastName).Contains(searchTerm)));
             }
 
             // Apply category filter
@@ -270,8 +328,8 @@ namespace MCV_Capstone.Services
                     ApprovedAt = c.ApprovedAt,
                     RejectedAt = c.RejectedAt,
                     RejectionReason = c.RejectionReason,
-                    InstructorName = $"{c.Instructor.FirstName ?? "Unknown"} {c.Instructor.LastName ?? "Instructor"}",
-                    InstructorEmail = c.Instructor.Email ?? "unknown@example.com",
+                    InstructorName = c.Instructor != null ? $"{c.Instructor.FirstName ?? "Unknown"} {c.Instructor.LastName ?? "Instructor"}" : "Unknown Instructor",
+                    InstructorEmail = c.Instructor != null ? c.Instructor.Email ?? "unknown@example.com" : "unknown@example.com",
                     Duration = c.Duration,
                     StudentCount = c.Enrollments.Count(e => e.Status == "Active"),
                     AverageRating = c.Reviews.Any() ? c.Reviews.Average(r => r.Rating) : 0,
@@ -293,6 +351,10 @@ namespace MCV_Capstone.Services
             course.ApprovedBy = adminId;
             course.IsRejected = false;
             course.RejectionReason = null;
+            
+            // Automatically publish approved courses so they appear on the public OurCourses page
+            course.IsPublished = true;
+            course.PublishedAt = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
             
@@ -312,6 +374,10 @@ namespace MCV_Capstone.Services
             course.RejectedAt = DateTime.UtcNow;
             course.RejectedBy = adminId;
             course.RejectionReason = reason;
+            
+            // Unpublish rejected courses so they don't appear on the public OurCourses page
+            course.IsPublished = false;
+            course.PublishedAt = null;
 
             await _context.SaveChangesAsync();
             
@@ -395,12 +461,13 @@ namespace MCV_Capstone.Services
 
             // Recent course submissions
             var recentCourses = await _context.Courses
+                .Include(c => c.Instructor)
                 .OrderByDescending(c => c.CreatedAt)
                 .Take(3)
                 .Select(c => new ActivityItem
                 {
                     Type = "Course Submission",
-                    Description = $"\"{c.Title}\" submitted by {c.Instructor.FirstName} {c.Instructor.LastName}",
+                    Description = $"\"{c.Title}\" submitted by {(c.Instructor != null ? c.Instructor.FirstName ?? "Unknown" : "Unknown")} {(c.Instructor != null ? c.Instructor.LastName ?? "Instructor" : "Instructor")}",
                     Timestamp = c.CreatedAt,
                     Icon = "course"
                 })
@@ -528,6 +595,36 @@ namespace MCV_Capstone.Services
             }
 
             return await query.CountAsync();
+        }
+
+        // Method to fix existing approved courses that aren't published
+        public async Task<bool> FixExistingApprovedCoursesAsync()
+        {
+            try
+            {
+                // Find all approved courses that aren't published
+                var approvedUnpublishedCourses = await _context.Courses
+                    .Where(c => c.IsApproved && !c.IsPublished)
+                    .ToListAsync();
+
+                if (approvedUnpublishedCourses.Any())
+                {
+                    foreach (var course in approvedUnpublishedCourses)
+                    {
+                        course.IsPublished = true;
+                        course.PublishedAt = course.ApprovedAt ?? DateTime.UtcNow;
+                    }
+
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+
+                return true; // No courses to fix
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 

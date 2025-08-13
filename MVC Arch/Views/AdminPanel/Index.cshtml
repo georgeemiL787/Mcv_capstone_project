@@ -5,8 +5,12 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/admin.css">
+    <link rel="stylesheet" href="~/css/admin-users.css">
+    <link rel="stylesheet" href="~/css/admin-courses.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search,menu" />
 }
 
@@ -38,7 +42,7 @@
                 <img src="~/assets/images/AdminPanel_assets/dashboard.png" alt="Dashboard" class="nav-icon">
                 Dashboard
             </a>
-            <a href="#users" class="nav-item" data-section="users">
+            <a href="/AdminPanel/Users" class="nav-item" data-section="users">
                 <img src="~/assets/images/AdminPanel_assets/management.png" alt="Manage Users" class="nav-icon">
                 Manage Users
             </a>
@@ -64,7 +68,7 @@
             </a>
             <a href="#settings" class="nav-item" data-section="settings">
                 <img src="~/assets/images/AdminPanel_assets/user.png" alt="Admin Settings" class="nav-icon">
-                Settings
+                Admin Settings
             </a>
         </nav>
     </div>
@@ -94,7 +98,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Active Courses</h3>
                         <div class="card-icon courses">
-                            <img src="~/assets/images/AdminPanel_assets/computer.png" alt="Courses" style="width: 20px; height: 20px;">
+                            <img src="~/assets/images/AdminPanel_assets/Course Management.png" alt="Courses" style="width: 20px; height: 20px;">
                         </div>
                     </div>
                     <div class="card-value" id="total-courses">@Model.TotalCourses.ToString("N0")</div>
@@ -132,7 +136,7 @@
                     {
                         <div class="activity-item">
                             <div class="activity-icon @(activity.Icon == "user" ? "user" : "course")">
-                                <img src="~/assets/images/AdminPanel_assets/@(activity.Icon == "user" ? "management.png" : "computer.png")" alt="@activity.Type" style="width: 16px; height: 16px;">
+                                <img src="~/assets/images/AdminPanel_assets/@(activity.Icon == "user" ? "management.png" : "Course Management.png")" alt="@activity.Type" style="width: 16px; height: 16px;">
                             </div>
                             <div class="activity-content">
                                 <div class="activity-description">@activity.Description</div>
@@ -141,59 +145,6 @@
                         </div>
                     }
                 </div>
-            </div>
-        </div>
-
-        <!-- Users Section -->
-        <div id="users" class="content-section">
-            <div class="admin-header">
-                <h1 class="admin-title">Manage Users</h1>
-                <p class="admin-subtitle">View and manage user accounts, permissions, and status.</p>
-            </div>
-
-            <div class="filters-section">
-                <div class="search-box">
-                    <input type="text" id="user-search" placeholder="Search users...">
-                    <button type="button" id="search-btn">
-                        <span class="material-symbols-outlined">search</span>
-                    </button>
-                </div>
-                <div class="filter-controls">
-                    <select id="role-filter">
-                        <option value="">All Roles</option>
-                        <option value="Student">Student</option>
-                        <option value="Instructor">Instructor</option>
-                        <option value="Company">Company</option>
-                        <option value="Admin">Admin</option>
-                    </select>
-                    <select id="status-filter">
-                        <option value="">All Status</option>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                        <option value="Banned">Banned</option>
-                    </select>
-                    <button class="btn btn-secondary" id="refresh-users">
-                        <span class="material-symbols-outlined">refresh</span>
-                        Refresh
-                    </button>
-                </div>
-            </div>
-
-            <div class="users-table-container">
-                <table class="users-table">
-                    <thead>
-                        <tr>
-                            <th>User</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="users-table-body">
-                        <!-- Users will be loaded here dynamically -->
-                    </tbody>
-                </table>
             </div>
         </div>
 

@@ -14,25 +14,28 @@ namespace MCV_Capstone.Controllers
     [RequireRole("Admin")]
     public class AdminPanelController : Controller
     {
-            private readonly IAdminService _adminService;
-    private readonly UserManager<User> _userManager;
+        private readonly IAdminService _adminService;
+        private readonly UserManager<User> _userManager;
+        private readonly luiz_trialContext _context;
 
-    public AdminPanelController(
-        IAdminService adminService,
-        UserManager<User> userManager)
-    {
-        _adminService = adminService;
-        _userManager = userManager;
-    }
+        public AdminPanelController(
+            IAdminService adminService,
+            UserManager<User> userManager,
+            luiz_trialContext context)
+        {
+            _adminService = adminService;
+            _userManager = userManager;
+            _context = context;
+        }
 
-    private async Task<User?> GetCurrentUserAsync()
-    {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int userIdInt))
-            return null;
+        private async Task<User?> GetCurrentUserAsync()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int userIdInt))
+                return null;
 
-        return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userIdInt);
-    }
+            return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userIdInt);
+        }
 
         public async Task<IActionResult> Index()
         {
@@ -40,6 +43,34 @@ namespace MCV_Capstone.Controllers
             var currentUser = await GetCurrentUserAsync();
             ViewBag.User = currentUser;
             return View(dashboardData);
+        }
+
+        // Users Management View
+        public async Task<IActionResult> Users()
+        {
+            try
+            {
+                Console.WriteLine("Users action called in AdminPanelController");
+                var currentUser = await GetCurrentUserAsync();
+                ViewBag.User = currentUser;
+                
+                var viewModel = new AdminUserManagementViewModel
+                {
+                    SearchTerm = "",
+                    RoleFilter = "",
+                    StatusFilter = "",
+                    CurrentPage = 1,
+                    PageSize = 20
+                };
+                
+                Console.WriteLine("Returning Users view");
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in Users action: {ex.Message}");
+                throw;
+            }
         }
 
         // Dashboard data API endpoint
@@ -80,21 +111,118 @@ namespace MCV_Capstone.Controllers
             }
         }
 
+        // Fix existing approved courses that aren't published
+        [HttpPost]
+        public async Task<IActionResult> FixApprovedCourses()
+        {
+            try
+            {
+                var result = await _adminService.FixExistingApprovedCoursesAsync();
+                if (result)
+                {
+                    return Json(new { 
+                        success = true, 
+                        message = "Successfully fixed existing approved courses. They should now appear on the OurCourses page." 
+                    });
+                }
+                else
+                {
+                    return Json(new { 
+                        success = false, 
+                        message = "Failed to fix existing approved courses." 
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { 
+                    success = false, 
+                    message = ex.Message 
+                });
+            }
+        }
+
+        // Debug endpoint to check course statuses
+        [HttpGet]
+        public async Task<IActionResult> DebugCourseStatuses()
+        {
+            try
+            {
+                var courses = await _context.Courses
+                    .Select(c => new { 
+                        c.Id, 
+                        c.Title, 
+                        c.IsApproved, 
+                        c.IsPublished, 
+                        c.IsRejected,
+                        c.ApprovedAt,
+                        c.PublishedAt
+                    })
+                    .ToListAsync();
+
+                return Json(new { 
+                    success = true, 
+                    data = courses,
+                    message = $"Found {courses.Count} courses in database"
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { 
+                    success = false, 
+                    message = ex.Message 
+                });
+            }
+        }
+
+        // Debug endpoint to check users directly
+        [HttpGet]
+        public async Task<IActionResult> DebugUsers()
+        {
+            try
+            {
+                var totalUsers = await _context.Users.CountAsync();
+                var sampleUsers = await _context.Users
+                    .Take(5)
+                    .Select(u => new { 
+                        u.Id, 
+                        u.FirstName, 
+                        u.LastName, 
+                        u.Email, 
+                        u.AccountStatus,
+                        u.RegistrationDate
+                    })
+                    .ToListAsync();
+
+                return Json(new { 
+                    success = true, 
+                    totalUsers = totalUsers,
+                    sampleUsers = sampleUsers,
+                    message = $"Found {totalUsers} users in database"
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { 
+                    success = false, 
+                    message = ex.Message,
+                    stackTrace = ex.StackTrace
+                });
+            }
+        }
+
         // User Management
         [HttpGet]
         public async Task<IActionResult> GetUsers(string searchTerm = "", string roleFilter = "", string statusFilter = "", int page = 1, int pageSize = 20)
         {
             try
             {
-                var users = await _adminService.GetUsersAsync(searchTerm, roleFilter, statusFilter);
+                var users = await _adminService.GetUsersAsync(searchTerm, roleFilter, statusFilter, page, pageSize);
                 var totalCount = await _adminService.GetTotalUsersCountAsync(searchTerm, roleFilter, statusFilter);
-                
-                // Apply pagination
-                var pagedUsers = users.Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 
                 return Json(new { 
                     success = true, 
-                    data = pagedUsers,
+                    data = users,
                     totalCount = totalCount,
                     currentPage = page,
                     pageSize = pageSize,
@@ -312,19 +440,5 @@ namespace MCV_Capstone.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
-
-        // Test action for admin access
-        // [HttpGet] // This line is removed as per the edit hint
-        // public IActionResult Test() // This line is removed as per the edit hint
-        // { // This line is removed as per the edit hint
-        //     return Json(new {  // This line is removed as per the edit hint
-        //         success = true,  // This line is removed as per the edit hint
-        //         message = "Admin access confirmed!",  // This line is removed as per the edit hint
-        //         user = User.Identity?.Name, // This line is removed as per the edit hint
-        //         roles = User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).Select(c => c.Value).ToList() // This line is removed as per the edit hint
-        //     }); // This line is removed as per the edit hint
-        // } // This line is removed as per the edit hint
     }
-
-
 }

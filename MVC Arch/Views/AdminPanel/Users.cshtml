@@ -6,12 +6,30 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/admin.css">
     <link rel="stylesheet" href="~/css/admin-users.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&display=swap">
 }
 
 <div class="admin-users-container">
     <div class="page-header">
-        <h1>User Management</h1>
-        <p>Manage user accounts, permissions, and status</p>
+        <div class="header-content">
+            <h1>User Management</h1>
+            <p>Manage user accounts, roles, and status</p>
+        </div>
+        <div class="header-actions">
+            <a href="/AdminPanel" class="btn-secondary" style="margin-right: 10px;">
+                <i class="fas fa-arrow-left"></i> Back to Admin Panel
+            </a>
+            <button id="refresh-btn" class="btn-primary">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <!-- Temporary test button -->
+            <button onclick="testBanFunction()" class="btn-danger" style="margin-left: 10px;">
+                Test Ban
+            </button>
+        </div>
     </div>
 
     <!-- Search and Filters -->

@@ -82,6 +82,9 @@ namespace MCV_Capstone.Migrations
                     b.Property<int>("BannedByAdminId")
                         .HasColumnType("int");
 
+                    b.Property<int>("BannedUserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Reason")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -97,18 +100,20 @@ namespace MCV_Capstone.Migrations
                     b.Property<int?>("UnbannedByAdminId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BannedByAdminId");
 
+                    b.HasIndex("BannedUserId");
+
                     b.HasIndex("UnbannedByAdminId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BannedAccounts");
+                    b.ToTable("BannedAccounts", (string)null);
                 });
 
             modelBuilder.Entity("MCV_Capstone.Models.ContentProgress", b =>
@@ -803,22 +808,26 @@ namespace MCV_Capstone.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("MCV_Capstone.Models.User", "BannedUser")
+                        .WithMany()
+                        .HasForeignKey("BannedUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("MCV_Capstone.Models.User", "UnbannedByAdmin")
                         .WithMany()
                         .HasForeignKey("UnbannedByAdminId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("MCV_Capstone.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("MCV_Capstone.Models.User", null)
+                        .WithMany("BannedAccounts")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("BannedByAdmin");
 
-                    b.Navigation("UnbannedByAdmin");
+                    b.Navigation("BannedUser");
 
-                    b.Navigation("User");
+                    b.Navigation("UnbannedByAdmin");
                 });
 
             modelBuilder.Entity("MCV_Capstone.Models.ContentProgress", b =>
@@ -1044,6 +1053,11 @@ namespace MCV_Capstone.Migrations
             modelBuilder.Entity("MCV_Capstone.Models.ModuleContent", b =>
                 {
                     b.Navigation("StudentProgress");
+                });
+
+            modelBuilder.Entity("MCV_Capstone.Models.User", b =>
+                {
+                    b.Navigation("BannedAccounts");
                 });
 #pragma warning restore 612, 618
         }
