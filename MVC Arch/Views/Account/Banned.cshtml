@@ -1,0 +1,92 @@
+@{
+    ViewData["Title"] = "Account Banned";
+}
+
+<div class="banned-account-container">
+    <div class="banned-message">
+        <div class="banned-icon">
+            <i class="fas fa-ban"></i>
+        </div>
+        <h1>Account Banned</h1>
+        <p>Your account has been suspended by an administrator.</p>
+        <p>If you believe this is an error, please contact support.</p>
+        <div class="banned-actions">
+            <a href="/" class="btn btn-secondary">Return to Home</a>
+            <a href="/Contact" class="btn btn-primary">Contact Support</a>
+        </div>
+    </div>
+</div>
+
+<style>
+.banned-account-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 2rem;
+}
+
+.banned-message {
+    text-align: center;
+    max-width: 500px;
+    padding: 3rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.banned-icon {
+    font-size: 4rem;
+    color: #e74c3c;
+    margin-bottom: 1rem;
+}
+
+.banned-message h1 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.banned-message p {
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.banned-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+}
+
+.btn-secondary {
+    background: #95a5a6;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #7f8c8d;
+}
+</style>

@@ -1,5 +1,6 @@
 using MCV_Capstone.Data;
 using MCV_Capstone.Models;
+using MCV_Capstone.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
@@ -10,12 +11,17 @@ namespace MCV_Capstone.Services
         Task<AdminDashboardStats> GetDashboardStatsAsync();
         Task<List<AdminUserInfo>> GetUsersAsync(string searchTerm, string roleFilter, string statusFilter);
         Task<bool> UpdateUserStatusAsync(int userId, string newStatus);
-        Task<bool> BanUserAsync(int userId);
-        Task<List<AdminCourseInfo>> GetCoursesAsync(string filter);
+        Task<bool> BanUserAsync(int userId, int adminId, string reason);
+        Task<bool> UnbanUserAsync(int userId, int adminId, string? reason);
+        Task<List<AdminCourseInfo>> GetCoursesAsync(string filter, string searchTerm = "", string categoryFilter = "");
         Task<bool> ApproveCourseAsync(int courseId, int adminId);
         Task<bool> RejectCourseAsync(int courseId, int adminId, string reason);
         Task<AdminAnalytics> GetAnalyticsAsync();
         Task<AdminRevenueStats> GetRevenueStatsAsync();
+        Task LogAdminActionAsync(int adminId, string action, string entityType, int? entityId, string? details, string? ipAddress, string? userAgent);
+        Task<CourseDetailsViewModel> GetCourseDetailsAsync(int courseId);
+        Task<int> GetTotalUsersCountAsync(string searchTerm, string roleFilter, string statusFilter);
+        Task<int> GetTotalCoursesCountAsync(string filter, string searchTerm, string categoryFilter);
     }
 
     public class AdminService : IAdminService
@@ -37,9 +43,9 @@ namespace MCV_Capstone.Services
             var totalEnrollments = await _context.Enrollments.CountAsync(e => e.Status == "Active");
 
             // Calculate revenue (this would integrate with your payment system)
-            var totalRevenue = await _context.Courses
-                .Where(c => c.IsPublished)
-                .SumAsync(c => c.Price * c.Enrollments.Count(e => e.Status == "Active"));
+            var totalRevenue = await _context.Enrollments
+                .Where(e => e.Status == "Active" && e.Course.IsPublished)
+                .SumAsync(e => e.Course.Price);
 
             var recentActivity = await GetRecentActivityAsync();
 
@@ -94,7 +100,7 @@ namespace MCV_Capstone.Services
                 })
                 .ToListAsync();
 
-            // Get roles for each user
+            // Get roles and ban information for each user
             foreach (var user in users)
             {
                 var userEntity = await _userManager.FindByIdAsync(user.Id.ToString());
@@ -105,6 +111,27 @@ namespace MCV_Capstone.Services
                 else
                 {
                     user.Roles = new List<string>();
+                }
+
+                // Get ban information with proper navigation property loading
+                var banInfo = await _context.BannedAccounts
+                    .Include(b => b.BannedByAdmin)
+                    .Where(b => b.UserId == user.Id && b.UnbannedAt == null)
+                    .Select(b => new { 
+                        b.Reason, 
+                        b.BannedAt, 
+                        AdminName = b.BannedByAdmin != null ? 
+                            (b.BannedByAdmin.FirstName + " " + b.BannedByAdmin.LastName).Trim() : 
+                            "Unknown Admin"
+                    })
+                    .FirstOrDefaultAsync();
+
+                if (banInfo != null)
+                {
+                    user.IsBanned = true;
+                    user.BanReason = banInfo.Reason;
+                    user.BannedAt = banInfo.BannedAt;
+                    user.BannedByAdmin = banInfo.AdminName;
                 }
             }
 
@@ -121,17 +148,70 @@ namespace MCV_Capstone.Services
             return result.Succeeded;
         }
 
-        public async Task<bool> BanUserAsync(int userId)
+        public async Task<bool> BanUserAsync(int userId, int adminId, string reason)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
             if (user == null) return false;
 
+            // Check if user is already banned
+            var existingBan = await _context.BannedAccounts
+                .FirstOrDefaultAsync(b => b.UserId == userId && b.UnbannedAt == null);
+            
+            if (existingBan != null) return false; // Already banned
+
+            // Update user status
             user.AccountStatus = "Banned";
-            var result = await _userManager.UpdateAsync(user);
-            return result.Succeeded;
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded) return false;
+
+            // Create banned account record
+            var bannedAccount = new BannedAccount
+            {
+                UserId = userId,
+                Reason = reason,
+                BannedByAdminId = adminId,
+                BannedAt = DateTime.UtcNow
+            };
+
+            _context.BannedAccounts.Add(bannedAccount);
+            await _context.SaveChangesAsync();
+
+            // Log the action
+            await LogAdminActionAsync(adminId, "BanUser", "User", userId, $"User banned. Reason: {reason}", null, null);
+
+            return true;
         }
 
-        public async Task<List<AdminCourseInfo>> GetCoursesAsync(string filter)
+        public async Task<bool> UnbanUserAsync(int userId, int adminId, string? reason)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null) return false;
+
+            // Find the active ban
+            var activeBan = await _context.BannedAccounts
+                .FirstOrDefaultAsync(b => b.UserId == userId && b.UnbannedAt == null);
+            
+            if (activeBan == null) return false; // Not banned
+
+            // Update user status
+            user.AccountStatus = "Active";
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded) return false;
+
+            // Update ban record
+            activeBan.UnbannedAt = DateTime.UtcNow;
+            activeBan.UnbannedByAdminId = adminId;
+            activeBan.UnbanReason = reason;
+
+            await _context.SaveChangesAsync();
+
+            // Log the action
+            await LogAdminActionAsync(adminId, "UnbanUser", "User", userId, $"User unbanned. Reason: {reason}", null, null);
+
+            return true;
+        }
+
+        public async Task<List<AdminCourseInfo>> GetCoursesAsync(string filter, string searchTerm = "", string categoryFilter = "")
         {
             var query = _context.Courses
                 .Include(c => c.Instructor)
@@ -140,6 +220,22 @@ namespace MCV_Capstone.Services
                 .Include(c => c.Reviews)
                 .AsQueryable();
 
+            // Apply search filter
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(c => 
+                    c.Title.Contains(searchTerm) || 
+                    c.Description.Contains(searchTerm) ||
+                    (c.Instructor.FirstName + " " + c.Instructor.LastName).Contains(searchTerm));
+            }
+
+            // Apply category filter
+            if (!string.IsNullOrEmpty(categoryFilter))
+            {
+                query = query.Where(c => c.Category == categoryFilter);
+            }
+
+            // Apply status filter
             switch (filter.ToLower())
             {
                 case "pending":
@@ -159,14 +255,18 @@ namespace MCV_Capstone.Services
                     Id = c.Id,
                     Title = c.Title,
                     Description = c.Description,
+                    ShortDescription = c.ShortDescription ?? string.Empty,
                     Price = c.Price,
                     Difficulty = c.Difficulty,
                     Category = c.Category,
+                    Tags = c.Tags,
                     IsPublished = c.IsPublished,
+                    IsFeatured = c.IsFeatured,
                     IsApproved = c.IsApproved,
                     IsRejected = c.IsRejected,
                     CreatedAt = c.CreatedAt,
                     UpdatedAt = c.UpdatedAt,
+                    PublishedAt = c.PublishedAt,
                     ApprovedAt = c.ApprovedAt,
                     RejectedAt = c.RejectedAt,
                     RejectionReason = c.RejectionReason,
@@ -175,7 +275,8 @@ namespace MCV_Capstone.Services
                     Duration = c.Duration,
                     StudentCount = c.Enrollments.Count(e => e.Status == "Active"),
                     AverageRating = c.Reviews.Any() ? c.Reviews.Average(r => r.Rating) : 0,
-                    ModuleCount = c.Modules.Count
+                    ModuleCount = c.Modules.Count,
+                    ReviewCount = c.Reviews.Count
                 })
                 .ToListAsync();
 
@@ -194,6 +295,10 @@ namespace MCV_Capstone.Services
             course.RejectionReason = null;
 
             await _context.SaveChangesAsync();
+            
+            // Log the action
+            await LogAdminActionAsync(adminId, "ApproveCourse", "Course", courseId, "Course approved", null, null);
+            
             return true;
         }
 
@@ -209,6 +314,10 @@ namespace MCV_Capstone.Services
             course.RejectionReason = reason;
 
             await _context.SaveChangesAsync();
+            
+            // Log the action
+            await LogAdminActionAsync(adminId, "RejectCourse", "Course", courseId, $"Course rejected. Reason: {reason}", null, null);
+            
             return true;
         }
 
@@ -243,13 +352,13 @@ namespace MCV_Capstone.Services
 
         public async Task<AdminRevenueStats> GetRevenueStatsAsync()
         {
-            var monthlyRevenue = await _context.Courses
-                .Where(c => c.IsPublished && c.PublishedAt.HasValue)
-                .GroupBy(c => new { Month = c.PublishedAt!.Value.Month, Year = c.PublishedAt!.Value.Year })
+            var monthlyRevenue = await _context.Enrollments
+                .Where(e => e.Status == "Active" && e.Course.IsPublished && e.Course.PublishedAt.HasValue)
+                .GroupBy(e => new { Month = e.Course.PublishedAt!.Value.Month, Year = e.Course.PublishedAt!.Value.Year })
                 .Select(g => new MonthlyRevenueData
                 {
                     Period = $"{g.Key.Month}/{g.Key.Year}",
-                    Revenue = g.Sum(c => c.Price * c.Enrollments.Count(e => e.Status == "Active"))
+                    Revenue = g.Sum(e => e.Course.Price)
                 })
                 .OrderBy(x => x.Period)
                 .ToListAsync();
@@ -301,6 +410,125 @@ namespace MCV_Capstone.Services
 
             return activities.OrderByDescending(a => a.Timestamp).Take(5).ToList();
         }
+
+        public async Task LogAdminActionAsync(int adminId, string action, string entityType, int? entityId, string? details, string? ipAddress, string? userAgent)
+        {
+            var logEntry = new AdminActionLog
+            {
+                AdminId = adminId,
+                Action = action,
+                EntityType = entityType,
+                EntityId = entityId,
+                Details = details,
+                IpAddress = ipAddress,
+                UserAgent = userAgent,
+                Timestamp = DateTime.UtcNow
+            };
+
+            _context.AdminActionLogs.Add(logEntry);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<CourseDetailsViewModel> GetCourseDetailsAsync(int courseId)
+        {
+            var course = await _context.Courses
+                .Include(c => c.Instructor)
+                .Include(c => c.Modules)
+                .Include(c => c.Reviews)
+                .Include(c => c.Enrollments)
+                .FirstOrDefaultAsync(c => c.Id == courseId);
+
+            if (course == null) return new CourseDetailsViewModel();
+
+            var courseInfo = new AdminCourseInfo
+            {
+                Id = course.Id,
+                Title = course.Title,
+                Description = course.Description,
+                ShortDescription = course.ShortDescription ?? string.Empty,
+                Price = course.Price,
+                Difficulty = course.Difficulty,
+                Category = course.Category,
+                Tags = course.Tags,
+                IsPublished = course.IsPublished,
+                IsFeatured = course.IsFeatured,
+                IsApproved = course.IsApproved,
+                IsRejected = course.IsRejected,
+                CreatedAt = course.CreatedAt,
+                UpdatedAt = course.UpdatedAt,
+                PublishedAt = course.PublishedAt,
+                ApprovedAt = course.ApprovedAt,
+                RejectedAt = course.RejectedAt,
+                RejectionReason = course.RejectionReason,
+                InstructorName = $"{course.Instructor?.FirstName ?? "Unknown"} {course.Instructor?.LastName ?? "Instructor"}",
+                InstructorEmail = course.Instructor?.Email ?? "unknown@example.com",
+                Duration = course.Duration,
+                StudentCount = course.Enrollments?.Count(e => e.Status == "Active") ?? 0,
+                AverageRating = course.Reviews?.Any() == true ? course.Reviews.Average(r => r.Rating) : 0,
+                ModuleCount = course.Modules?.Count ?? 0,
+                ReviewCount = course.Reviews?.Count ?? 0
+            };
+
+            return new CourseDetailsViewModel
+            {
+                Course = courseInfo,
+                Modules = course.Modules ?? new List<CourseModule>(),
+                Reviews = course.Reviews ?? new List<CourseReview>(),
+                Enrollments = course.Enrollments ?? new List<Enrollment>()
+            };
+        }
+
+        public async Task<int> GetTotalUsersCountAsync(string searchTerm, string roleFilter, string statusFilter)
+        {
+            var query = _context.Users.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(u => 
+                    (u.FirstName != null && u.FirstName.Contains(searchTerm)) || 
+                    (u.LastName != null && u.LastName.Contains(searchTerm)) || 
+                    (u.Email != null && u.Email.Contains(searchTerm)));
+            }
+
+            if (!string.IsNullOrEmpty(statusFilter))
+            {
+                query = query.Where(u => u.AccountStatus == statusFilter);
+            }
+
+            return await query.CountAsync();
+        }
+
+        public async Task<int> GetTotalCoursesCountAsync(string filter, string searchTerm, string categoryFilter)
+        {
+            var query = _context.Courses.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(c => 
+                    c.Title.Contains(searchTerm) || 
+                    c.Description.Contains(searchTerm));
+            }
+
+            if (!string.IsNullOrEmpty(categoryFilter))
+            {
+                query = query.Where(c => c.Category == categoryFilter);
+            }
+
+            switch (filter.ToLower())
+            {
+                case "pending":
+                    query = query.Where(c => !c.IsApproved && !c.IsRejected);
+                    break;
+                case "approved":
+                    query = query.Where(c => c.IsApproved);
+                    break;
+                case "rejected":
+                    query = query.Where(c => c.IsRejected);
+                    break;
+            }
+
+            return await query.CountAsync();
+        }
     }
 
     // Data Transfer Objects
@@ -312,42 +540,6 @@ namespace MCV_Capstone.Services
         public int TotalEnrollments { get; set; }
         public decimal TotalRevenue { get; set; }
         public List<ActivityItem> RecentActivity { get; set; } = new();
-    }
-
-    public class AdminUserInfo
-    {
-        public int Id { get; set; }
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string AccountStatus { get; set; } = string.Empty;
-        public DateTime RegistrationDate { get; set; }
-        public DateTime? LastLogin { get; set; }
-        public List<string> Roles { get; set; } = new();
-    }
-
-    public class AdminCourseInfo
-    {
-        public int Id { get; set; }
-        public string Title { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public decimal Price { get; set; }
-        public string Difficulty { get; set; } = string.Empty;
-        public string Category { get; set; } = string.Empty;
-        public bool IsPublished { get; set; }
-        public bool IsApproved { get; set; }
-        public bool IsRejected { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public DateTime? ApprovedAt { get; set; }
-        public DateTime? RejectedAt { get; set; }
-        public string? RejectionReason { get; set; }
-        public string InstructorName { get; set; } = string.Empty;
-        public string InstructorEmail { get; set; } = string.Empty;
-        public int Duration { get; set; }
-        public int StudentCount { get; set; }
-        public double AverageRating { get; set; }
-        public int ModuleCount { get; set; }
     }
 
     public class AdminAnalytics

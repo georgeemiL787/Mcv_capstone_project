@@ -133,6 +133,14 @@
       "PackagePath": "staticwebassets\\css\\account-security.css"
     },
     {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\admin-courses.css",
+      "PackagePath": "staticwebassets\\css\\admin-courses.css"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\admin-users.css",
+      "PackagePath": "staticwebassets\\css\\admin-users.css"
+    },
+    {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\admin.css",
       "PackagePath": "staticwebassets\\css\\admin.css"
     },
@@ -167,6 +175,10 @@
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\dashboard.css",
       "PackagePath": "staticwebassets\\css\\dashboard.css"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\delete-account.css",
+      "PackagePath": "staticwebassets\\css\\delete-account.css"
     },
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\discussions.css",
@@ -267,6 +279,14 @@
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\admin-courses.js",
+      "PackagePath": "staticwebassets\\js\\admin-courses.js"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\admin-users.js",
+      "PackagePath": "staticwebassets\\js\\admin-users.js"
     },
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\admin.js",

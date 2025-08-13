@@ -169,6 +169,9 @@ app.UseSession();
 // Use custom session validation middleware
 app.UseMiddleware<MCV_Capstone.Middleware.SessionValidationMiddleware>();
 
+// Use custom banned user middleware
+app.UseMiddleware<MCV_Capstone.Middleware.BannedUserMiddleware>();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

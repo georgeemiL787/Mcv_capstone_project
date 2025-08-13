@@ -22,6 +22,95 @@ namespace MCV_Capstone.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("MCV_Capstone.Models.AdminActionLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("AdminId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Details")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int?>("EntityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EntityType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("IpAddress")
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserAgent")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdminId");
+
+                    b.ToTable("AdminActionLogs");
+                });
+
+            modelBuilder.Entity("MCV_Capstone.Models.BannedAccount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("BannedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("BannedByAdminId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("UnbanReason")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("UnbannedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UnbannedByAdminId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BannedByAdminId");
+
+                    b.HasIndex("UnbannedByAdminId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BannedAccounts");
+                });
+
             modelBuilder.Entity("MCV_Capstone.Models.ContentProgress", b =>
                 {
                     b.Property<int>("Id")
@@ -119,7 +208,7 @@ namespace MCV_Capstone.Migrations
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
-                    b.Property<int>("InstructorId")
+                    b.Property<int?>("InstructorId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsApproved")
@@ -695,6 +784,43 @@ namespace MCV_Capstone.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MCV_Capstone.Models.AdminActionLog", b =>
+                {
+                    b.HasOne("MCV_Capstone.Models.User", "Admin")
+                        .WithMany()
+                        .HasForeignKey("AdminId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Admin");
+                });
+
+            modelBuilder.Entity("MCV_Capstone.Models.BannedAccount", b =>
+                {
+                    b.HasOne("MCV_Capstone.Models.User", "BannedByAdmin")
+                        .WithMany()
+                        .HasForeignKey("BannedByAdminId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MCV_Capstone.Models.User", "UnbannedByAdmin")
+                        .WithMany()
+                        .HasForeignKey("UnbannedByAdminId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("MCV_Capstone.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("BannedByAdmin");
+
+                    b.Navigation("UnbannedByAdmin");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MCV_Capstone.Models.ContentProgress", b =>
                 {
                     b.HasOne("MCV_Capstone.Models.ModuleContent", "Content")
@@ -732,8 +858,7 @@ namespace MCV_Capstone.Migrations
                     b.HasOne("MCV_Capstone.Models.User", "Instructor")
                         .WithMany()
                         .HasForeignKey("InstructorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("MCV_Capstone.Models.User", "Rejector")
                         .WithMany()
