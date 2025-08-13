@@ -5,6 +5,26 @@
       "PackagePath": "staticwebassets\\MCV_Capstone.bundle.scp.css"
     },
     {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\assets\\CVs\\Fady_John_Fayek_Resume.pdf",
+      "PackagePath": "staticwebassets\\assets\\CVs\\Fady_John_Fayek_Resume.pdf"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\assets\\CVs\\George Emil cv.pdf",
+      "PackagePath": "staticwebassets\\assets\\CVs\\George Emil cv.pdf"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\assets\\CVs\\KARIM METRY.pdf",
+      "PackagePath": "staticwebassets\\assets\\CVs\\KARIM METRY.pdf"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\assets\\CVs\\abdelrahman's CV.pdf",
+      "PackagePath": "staticwebassets\\assets\\CVs\\abdelrahman's CV.pdf"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\assets\\CVs\\robin's cv.pdf",
+      "PackagePath": "staticwebassets\\assets\\CVs\\robin's cv.pdf"
+    },
+    {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\assets\\README.md",
       "PackagePath": "staticwebassets\\assets\\README.md"
     },
@@ -117,24 +137,48 @@
       "PackagePath": "staticwebassets\\css\\admin.css"
     },
     {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\analytics.css",
+      "PackagePath": "staticwebassets\\css\\analytics.css"
+    },
+    {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\career-simulator.css",
       "PackagePath": "staticwebassets\\css\\career-simulator.css"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\change-password.css",
+      "PackagePath": "staticwebassets\\css\\change-password.css"
     },
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\contact.css",
       "PackagePath": "staticwebassets\\css\\contact.css"
     },
     {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\course-management.css",
+      "PackagePath": "staticwebassets\\css\\course-management.css"
+    },
+    {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\course-preview.css",
       "PackagePath": "staticwebassets\\css\\course-preview.css"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\courses.css",
+      "PackagePath": "staticwebassets\\css\\courses.css"
     },
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\dashboard.css",
       "PackagePath": "staticwebassets\\css\\dashboard.css"
     },
     {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\discussions.css",
+      "PackagePath": "staticwebassets\\css\\discussions.css"
+    },
+    {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\enroll.css",
       "PackagePath": "staticwebassets\\css\\enroll.css"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\enrollments.css",
+      "PackagePath": "staticwebassets\\css\\enrollments.css"
     },
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\home.css",
@@ -165,6 +209,10 @@
       "PackagePath": "staticwebassets\\css\\notification-preferences.css"
     },
     {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\ourcourses.css",
+      "PackagePath": "staticwebassets\\css\\ourcourses.css"
+    },
+    {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\payment-methods.css",
       "PackagePath": "staticwebassets\\css\\payment-methods.css"
     },
@@ -189,6 +237,18 @@
       "PackagePath": "staticwebassets\\css\\quiz-center.css"
     },
     {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\quizzes.css",
+      "PackagePath": "staticwebassets\\css\\quizzes.css"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\revenue.css",
+      "PackagePath": "staticwebassets\\css\\revenue.css"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\settings.css",
+      "PackagePath": "staticwebassets\\css\\settings.css"
+    },
+    {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\signup.css",
       "PackagePath": "staticwebassets\\css\\signup.css"
     },
@@ -201,12 +261,20 @@
       "PackagePath": "staticwebassets\\css\\subscriptions.css"
     },
     {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\css\\userdashboard.css",
+      "PackagePath": "staticwebassets\\css\\userdashboard.css"
+    },
+    {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\admin.js",
       "PackagePath": "staticwebassets\\js\\admin.js"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\analytics.js",
+      "PackagePath": "staticwebassets\\js\\analytics.js"
     },
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\career-simulator.js",
@@ -217,16 +285,32 @@
       "PackagePath": "staticwebassets\\js\\contact.js"
     },
     {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\course-management.js",
+      "PackagePath": "staticwebassets\\js\\course-management.js"
+    },
+    {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\course-preview.js",
       "PackagePath": "staticwebassets\\js\\course-preview.js"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\courses.js",
+      "PackagePath": "staticwebassets\\js\\courses.js"
     },
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\dashboard.js",
       "PackagePath": "staticwebassets\\js\\dashboard.js"
     },
     {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\discussions.js",
+      "PackagePath": "staticwebassets\\js\\discussions.js"
+    },
+    {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\enroll.js",
       "PackagePath": "staticwebassets\\js\\enroll.js"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\enrollments.js",
+      "PackagePath": "staticwebassets\\js\\enrollments.js"
     },
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\home.js",
@@ -261,12 +345,28 @@
       "PackagePath": "staticwebassets\\js\\quiz-center.js"
     },
     {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\quizzes.js",
+      "PackagePath": "staticwebassets\\js\\quizzes.js"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\revenue.js",
+      "PackagePath": "staticwebassets\\js\\revenue.js"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\settings.js",
+      "PackagePath": "staticwebassets\\js\\settings.js"
+    },
+    {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\signup.js",
       "PackagePath": "staticwebassets\\js\\signup.js"
     },
     {
       "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "E:\\FCI\\MCV\\Mcv_capstone_project\\MVC Arch\\wwwroot\\js\\userdashboard.js",
+      "PackagePath": "staticwebassets\\js\\userdashboard.js"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MCV_Capstone.Microsoft.AspNetCore.StaticWebAssets.props",

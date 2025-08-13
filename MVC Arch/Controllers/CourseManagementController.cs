@@ -7,10 +7,11 @@ using System.Security.Claims;
 using MCV_Capstone.Services; // Added for ICourseImportService
 using Microsoft.Extensions.DependencyInjection; // Added for HttpContext.RequestServices
 using MCV_Capstone.Models.ViewModels; // Added for CourseImportViewModel and BulkCourseImportViewModel
+using MCV_Capstone.Attributes;
 
 namespace MCV_Capstone.Controllers
 {
-    [Authorize(Roles = "Instructor,Admin")]
+    [RequireRole("Instructor", "Admin")]
     public class CourseManagementController : Controller
     {
         private readonly luiz_trialContext _context;

@@ -20,7 +20,8 @@ namespace MCV_Capstone.Attributes
             
             if (sessionHelper == null || !sessionHelper.IsAuthenticated())
             {
-                context.Result = new RedirectToActionResult("Login", "Account", new { returnUrl = context.HttpContext.Request.Path });
+                // Redirect unauthenticated users to signup page
+                context.Result = new RedirectToActionResult("Signup", "Account", new { returnUrl = context.HttpContext.Request.Path });
                 return;
             }
 

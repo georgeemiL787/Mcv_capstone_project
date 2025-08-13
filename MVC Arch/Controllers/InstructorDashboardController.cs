@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using MCV_Capstone.Data;
 using MCV_Capstone.Models;
 using System.Security.Claims;
+using MCV_Capstone.Attributes;
 
 namespace MCV_Capstone.Controllers
 {
+    [RequireRole("Instructor", "Admin")]
     public class InstructorDashboardController : Controller
     {
         private readonly luiz_trialContext _context;

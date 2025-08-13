@@ -6,10 +6,11 @@ using MCV_Capstone.Data;
 using MCV_Capstone.Models;
 using MCV_Capstone.Services;
 using System.Security.Claims;
+using MCV_Capstone.Attributes;
 
 namespace MCV_Capstone.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [RequireRole("Admin")]
     public class AdminPanelController : Controller
     {
             private readonly IAdminService _adminService;

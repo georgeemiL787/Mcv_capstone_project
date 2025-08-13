@@ -23,10 +23,34 @@
         
         <div class="nav-center">
             <ul class="nav-menu">
-                <li><a href="@Url.Action("Index", "OurCourses")" class="nav-link">Our Courses</a></li>
-                <li><a href="@Url.Action("Index", "CareerSimulator")" class="nav-link">Career Simulator</a></li>
-                <li><a href="@Url.Action("Index", "QuizCenter")" class="nav-link">Quiz Center</a></li>
-                <li><a href="@Url.Action("Index", "Leaderboard")" class="nav-link">Leaderboard</a></li>
+                <li><a href="@Url.Action("Index", "OurCourses")" class="nav-link">Courses</a></li>
+                
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a href="@Url.Action("Index", "AdminPanel")" class="nav-link">Admin Panel</a></li>
+                    }
+                    else if (User.IsInRole("Instructor"))
+                    {
+                        <li><a href="@Url.Action("Index", "InstructorDashboard")" class="nav-link">Instructor Dashboard</a></li>
+                    }
+                    else
+                    {
+                        <!-- Student/Company role navigation -->
+                        <li><a href="@Url.Action("Index", "CareerSimulator")" class="nav-link">Career Simulator</a></li>
+                        <li><a href="@Url.Action("Index", "QuizCenter")" class="nav-link">Quiz Center</a></li>
+                        <li><a href="@Url.Action("Index", "Leaderboard")" class="nav-link">Leaderboard</a></li>
+                    }
+                }
+                else
+                {
+                    <!-- Guest user navigation -->
+                    <li><a href="@Url.Action("Index", "CareerSimulator")" class="nav-link">Career Simulator</a></li>
+                    <li><a href="@Url.Action("Index", "QuizCenter")" class="nav-link">Quiz Center</a></li>
+                    <li><a href="@Url.Action("Index", "Leaderboard")" class="nav-link">Leaderboard</a></li>
+                }
+                
                 <li><a href="@Url.Action("Index", "Contact")" class="nav-link">Contact</a></li>
             </ul>
         </div>
@@ -55,7 +79,7 @@
                                 <div class="avatar-placeholder">@(User.Identity?.Name?.Length > 0 ? User.Identity.Name.Substring(0, 1).ToUpper() : "U")</div>
                                 <div>
                                     <h4>@(User.Identity?.Name ?? "User")</h4>
-                                    <p>Student</p>
+                                    <p>@(User.IsInRole("Admin") ? "Admin" : User.IsInRole("Instructor") ? "Instructor" : "Student")</p>
                                 </div>
                             </div>
                         </div>
@@ -64,18 +88,21 @@
                                 <span class="material-symbols-outlined">person</span>
                                 Profile
                             </a>
-                            <a href="@Url.Action("Index", "UserDashboard")" class="dropdown-link">
-                                <span class="material-symbols-outlined">dashboard</span>
-                                Dashboard
-                            </a>
-                            <a href="@Url.Action("Index", "MyCourses")" class="dropdown-link">
-                                <span class="material-symbols-outlined">school</span>
-                                My Courses
-                            </a>
-                            <a href="@Url.Action("Index", "Enroll")" class="dropdown-link">
-                                <span class="material-symbols-outlined">add_circle</span>
-                                Enroll
-                            </a>
+                            @if (!User.IsInRole("Admin") && !User.IsInRole("Instructor"))
+                            {
+                                <a href="@Url.Action("Index", "UserDashboard")" class="dropdown-link">
+                                    <span class="material-symbols-outlined">dashboard</span>
+                                    Dashboard
+                                </a>
+                                <a href="@Url.Action("Index", "MyCourses")" class="dropdown-link">
+                                    <span class="material-symbols-outlined">school</span>
+                                    My Courses
+                                </a>
+                                <a href="@Url.Action("Index", "Enroll")" class="dropdown-link">
+                                    <span class="material-symbols-outlined">add_circle</span>
+                                    Enroll
+                                </a>
+                            }
                             <div class="dropdown-divider"></div>
                             <form asp-action="Logout" asp-controller="Account" method="post" style="display: inline;">
                                 @Html.AntiForgeryToken()
@@ -113,10 +140,34 @@
             </button>
         </div>
         <ul class="mobile-nav-links">
-            <li><a href="@Url.Action("Index", "OurCourses")" class="mobile-nav-link">Our Courses</a></li>
-            <li><a href="@Url.Action("Index", "CareerSimulator")" class="mobile-nav-link">Career Simulator</a></li>
-            <li><a href="@Url.Action("Index", "QuizCenter")" class="mobile-nav-link">Quiz Center</a></li>
-            <li><a href="@Url.Action("Index", "Leaderboard")" class="mobile-nav-link">Leaderboard</a></li>
+            <li><a href="@Url.Action("Index", "OurCourses")" class="mobile-nav-link">Courses</a></li>
+            
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                @if (User.IsInRole("Admin"))
+                {
+                    <li><a href="@Url.Action("Index", "AdminPanel")" class="mobile-nav-link">Admin Panel</a></li>
+                }
+                else if (User.IsInRole("Instructor"))
+                {
+                    <li><a href="@Url.Action("Index", "InstructorDashboard")" class="mobile-nav-link">Instructor Dashboard</a></li>
+                }
+                else
+                {
+                    <!-- Student/Company role navigation -->
+                    <li><a href="@Url.Action("Index", "CareerSimulator")" class="mobile-nav-link">Career Simulator</a></li>
+                    <li><a href="@Url.Action("Index", "QuizCenter")" class="mobile-nav-link">Quiz Center</a></li>
+                    <li><a href="@Url.Action("Index", "Leaderboard")" class="mobile-nav-link">Leaderboard</a></li>
+                }
+            }
+            else
+            {
+                <!-- Guest user navigation -->
+                <li><a href="@Url.Action("Index", "CareerSimulator")" class="mobile-nav-link">Career Simulator</a></li>
+                <li><a href="@Url.Action("Index", "QuizCenter")" class="mobile-nav-link">Quiz Center</a></li>
+                <li><a href="@Url.Action("Index", "Leaderboard")" class="mobile-nav-link">Leaderboard</a></li>
+            }
+            
             <li><a href="@Url.Action("Index", "Contact")" class="mobile-nav-link">Contact</a></li>
         </ul>
         
@@ -135,8 +186,11 @@
         {
             <div class="mobile-nav-actions">
                 <a href="@Url.Action("Index", "Profile")" class="mobile-nav-link">Profile</a>
-                <a href="@Url.Action("Index", "UserDashboard")" class="mobile-nav-link">Dashboard</a>
-                <a href="@Url.Action("Index", "MyCourses")" class="mobile-nav-link">My Courses</a>
+                @if (!User.IsInRole("Admin") && !User.IsInRole("Instructor"))
+                {
+                    <a href="@Url.Action("Index", "UserDashboard")" class="mobile-nav-link">Dashboard</a>
+                    <a href="@Url.Action("Index", "MyCourses")" class="mobile-nav-link">My Courses</a>
+                }
                 <form asp-action="Logout" asp-controller="Account" method="post" style="display: inline;">
                     @Html.AntiForgeryToken()
                     <button type="submit" class="mobile-nav-link logout-btn">Logout</button>
