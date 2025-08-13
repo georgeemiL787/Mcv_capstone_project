@@ -4,7 +4,6 @@
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/home.css">
     <link rel="stylesheet" href="~/css/admin.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,79 +70,73 @@
     </div>
 
     <!-- Right Content Area -->
-    <div class="admin-content">
+    <div class="admin-main">
         <!-- Dashboard Section -->
         <div id="dashboard" class="content-section active">
-            <div class="content-header">
-                <div class="header-with-image">
-                    <img src="~/assets/images/AdminPanel_assets/dashboard.png" alt="Dashboard" class="header-image">
-                    <div>
-                        <h1>Dashboard</h1>
-                        <p>Overview of platform performance and key metrics.</p>
-                    </div>
-                </div>
+            <div class="admin-header">
+                <h1 class="admin-title">Dashboard</h1>
+                <p class="admin-subtitle">Overview of platform performance and key metrics.</p>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <img src="~/assets/images/AdminPanel_assets/management.png" alt="Users" class="stat-image">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Total Users</h3>
+                        <div class="card-icon users">
+                            <img src="~/assets/images/AdminPanel_assets/management.png" alt="Users" style="width: 20px; height: 20px;">
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <h3>Total Users</h3>
-                        <p class="stat-number" id="total-users">@Model.TotalUsers.ToString("N0")</p>
-                        <span class="stat-change positive">+12% this month</span>
-                    </div>
+                    <div class="card-value" id="total-users">@Model.TotalUsers.ToString("N0")</div>
+                    <div class="card-change positive">+12% this month</div>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <img src="~/assets/images/AdminPanel_assets/computer.png" alt="Courses" class="stat-image">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Active Courses</h3>
+                        <div class="card-icon courses">
+                            <img src="~/assets/images/AdminPanel_assets/computer.png" alt="Courses" style="width: 20px; height: 20px;">
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <h3>Active Courses</h3>
-                        <p class="stat-number" id="total-courses">@Model.TotalCourses.ToString("N0")</p>
-                        <span class="stat-change positive">+8% this month</span>
-                    </div>
+                    <div class="card-value" id="total-courses">@Model.TotalCourses.ToString("N0")</div>
+                    <div class="card-change positive">+8% this month</div>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <img src="~/assets/images/AdminPanel_assets/revenue.png" alt="Revenue" class="stat-image">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Revenue</h3>
+                        <div class="card-icon revenue">
+                            <img src="~/assets/images/AdminPanel_assets/revenue.png" alt="Revenue" style="width: 20px; height: 20px;">
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <h3>Revenue</h3>
-                        <p class="stat-number" id="total-revenue">$@Model.TotalRevenue.ToString("N0")</p>
-                        <span class="stat-change positive">+15% this month</span>
-                    </div>
+                    <div class="card-value" id="total-revenue">$@Model.TotalRevenue.ToString("N0")</div>
+                    <div class="card-change positive">+15% this month</div>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <img src="~/assets/images/AdminPanel_assets/moderator.png" alt="Reviews" class="stat-image">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Pending Reviews</h3>
+                        <div class="card-icon pending">
+                            <img src="~/assets/images/AdminPanel_assets/moderator.png" alt="Reviews" style="width: 20px; height: 20px;">
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <h3>Pending Reviews</h3>
-                        <p class="stat-number" id="pending-courses">@Model.PendingCourses.ToString("N0")</p>
-                        <span class="stat-change negative">+5 today</span>
-                    </div>
+                    <div class="card-value" id="pending-courses">@Model.PendingCourses.ToString("N0")</div>
+                    <div class="card-change negative">+5 today</div>
                 </div>
             </div>
 
             <!-- Recent Activity -->
-            <div class="recent-activity">
-                <h2>Recent Activity</h2>
-                <div class="activity-list" id="recent-activity-list">
+            <div class="activity-feed">
+                <h3>Recent Activity</h3>
+                <div id="recent-activity-list">
                     @foreach (var activity in Model.RecentActivity.Take(5))
                     {
                         <div class="activity-item">
-                            <div class="activity-icon">
-                                <img src="~/assets/images/AdminPanel_assets/@(activity.Icon == "user" ? "management.png" : "computer.png")" alt="@activity.Type" class="activity-image">
+                            <div class="activity-icon @(activity.Icon == "user" ? "user" : "course")">
+                                <img src="~/assets/images/AdminPanel_assets/@(activity.Icon == "user" ? "management.png" : "computer.png")" alt="@activity.Type" style="width: 16px; height: 16px;">
                             </div>
                             <div class="activity-content">
-                                <h4>@activity.Type</h4>
-                                <p>@activity.Description</p>
-                                <span class="activity-time">@GetTimeAgo(activity.Timestamp)</span>
+                                <div class="activity-description">@activity.Description</div>
+                                <div class="activity-time">@GetTimeAgo(activity.Timestamp)</div>
                             </div>
                         </div>
                     }
@@ -153,20 +146,17 @@
 
         <!-- Users Section -->
         <div id="users" class="content-section">
-            <div class="content-header">
-                <div class="header-with-image">
-                    <img src="~/assets/images/AdminPanel_assets/management.png" alt="Manage Users" class="header-image">
-                    <div>
-                        <h1>Manage Users</h1>
-                        <p>View and manage user accounts, permissions, and status.</p>
-                    </div>
-                </div>
+            <div class="admin-header">
+                <h1 class="admin-title">Manage Users</h1>
+                <p class="admin-subtitle">View and manage user accounts, permissions, and status.</p>
             </div>
 
-            <div class="section-actions">
+            <div class="filters-section">
                 <div class="search-box">
-                    <span class="material-symbols-outlined">search</span>
                     <input type="text" id="user-search" placeholder="Search users...">
+                    <button type="button" id="search-btn">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
                 </div>
                 <div class="filter-controls">
                     <select id="role-filter">
@@ -182,50 +172,58 @@
                         <option value="Inactive">Inactive</option>
                         <option value="Banned">Banned</option>
                     </select>
+                    <button class="btn btn-secondary" id="refresh-users">
+                        <span class="material-symbols-outlined">refresh</span>
+                        Refresh
+                    </button>
                 </div>
-                <button class="action-btn" id="refresh-users">
-                    <img src="~/assets/images/AdminPanel_assets/refresh.png" alt="Refresh" class="action-icon">
-                    Refresh
-                </button>
             </div>
 
-            <div class="users-table" id="users-table">
-                <div class="table-header">
-                    <span>User</span>
-                    <span>Email</span>
-                    <span>Role</span>
-                    <span>Status</span>
-                    <span>Actions</span>
-                </div>
-                <div id="users-table-body">
-                    <!-- Users will be loaded here dynamically -->
-                </div>
+            <div class="users-table-container">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <!-- Users will be loaded here dynamically -->
+                    </tbody>
+                </table>
             </div>
         </div>
 
         <!-- Courses Section -->
         <div id="courses" class="content-section">
-            <div class="content-header">
-                <div class="header-with-image">
-                    <img src="~/assets/images/AdminPanel_assets/Course Management.png" alt="Course Management" class="header-image">
-                    <div>
-                        <h1>Course Management</h1>
-                        <p>Approve, reject, and manage course submissions.</p>
-                    </div>
-                </div>
+            <div class="admin-header">
+                <h1 class="admin-title">Course Management</h1>
+                <p class="admin-subtitle">Review, approve, and manage course submissions.</p>
             </div>
 
-            <div class="section-actions">
-                <div class="filter-tabs">
-                    <button class="filter-tab active" data-filter="all">All Courses</button>
-                    <button class="filter-tab" data-filter="pending">Pending Review</button>
-                    <button class="filter-tab" data-filter="approved">Approved</button>
-                    <button class="filter-tab" data-filter="rejected">Rejected</button>
+            <div class="filters-section">
+                <div class="search-box">
+                    <input type="text" id="course-search" placeholder="Search courses...">
+                    <button type="button" id="search-btn">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
                 </div>
-                <button class="action-btn" id="refresh-courses">
-                    <img src="~/assets/images/AdminPanel_assets/refresh.png" alt="Refresh" class="action-icon">
-                    Refresh
-                </button>
+                <div class="filter-controls">
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="Programming">Programming</option>
+                        <option value="Design">Design</option>
+                        <option value="Business">Business</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                    <button class="btn btn-secondary" id="refresh-courses">
+                        <span class="material-symbols-outlined">refresh</span>
+                        Refresh
+                    </button>
+                </div>
             </div>
 
             <div class="courses-grid" id="courses-grid">
@@ -235,25 +233,20 @@
 
         <!-- Content Moderation Section -->
         <div id="content" class="content-section">
-            <div class="content-header">
-                <div class="header-with-image">
-                    <img src="~/assets/images/AdminPanel_assets/moderator.png" alt="Content Moderation" class="header-image">
-                    <div>
-                        <h1>Content Moderation</h1>
-                        <p>Review and moderate platform content for quality and safety.</p>
-                    </div>
-                </div>
+            <div class="admin-header">
+                <h1 class="admin-title">Content Moderation</h1>
+                <p class="admin-subtitle">Review and moderate platform content for quality and safety.</p>
             </div>
 
-            <div class="section-actions">
-                <div class="filter-tabs">
-                    <button class="filter-tab active">All Content</button>
-                    <button class="filter-tab">Flagged</button>
-                    <button class="filter-tab">Under Review</button>
-                    <button class="filter-tab">Approved</button>
+            <div class="filters-section">
+                <div class="status-tabs">
+                    <button class="status-tab active">All Content</button>
+                    <button class="status-tab">Flagged</button>
+                    <button class="status-tab">Under Review</button>
+                    <button class="status-tab">Approved</button>
                 </div>
-                <button class="action-btn" id="refresh-content">
-                    <img src="~/assets/images/AdminPanel_assets/refresh.png" alt="Refresh" class="action-icon">
+                <button class="btn btn-secondary" id="refresh-content">
+                    <span class="material-symbols-outlined">refresh</span>
                     Refresh
                 </button>
             </div>
@@ -265,14 +258,9 @@
 
         <!-- Analytics Section -->
         <div id="analytics" class="content-section">
-            <div class="content-header">
-                <div class="header-with-image">
-                    <img src="~/assets/images/AdminPanel_assets/analytics.png" alt="Analytics" class="header-image">
-                    <div>
-                        <h1>Analytics</h1>
-                        <p>Platform performance metrics and user behavior insights.</p>
-                    </div>
-                </div>
+            <div class="admin-header">
+                <h1 class="admin-title">Analytics</h1>
+                <p class="admin-subtitle">Platform performance metrics and user behavior insights.</p>
             </div>
 
             <div class="analytics-grid" id="analytics-grid">
@@ -282,14 +270,9 @@
 
         <!-- AI Tools Section -->
         <div id="ai-tools" class="content-section">
-            <div class="content-header">
-                <div class="header-with-image">
-                    <img src="~/assets/images/AdminPanel_assets/management(1).png" alt="AI Tools" class="header-image">
-                    <div>
-                        <h1>AI Tools</h1>
-                        <p>AI-powered platform tools and automation features.</p>
-                    </div>
-                </div>
+            <div class="admin-header">
+                <h1 class="admin-title">AI Tools</h1>
+                <p class="admin-subtitle">AI-powered platform tools and automation features.</p>
             </div>
 
             <div class="ai-tools-grid">
@@ -298,7 +281,7 @@
                     <p>Automated content filtering and moderation</p>
                     <div class="tool-status">
                         <span class="status-badge active">Active</span>
-                        <button class="btn-secondary">Configure</button>
+                        <button class="btn btn-secondary">Configure</button>
                     </div>
                 </div>
                 <div class="ai-tool-card">
@@ -306,7 +289,7 @@
                     <p>AI-powered course recommendations</p>
                     <div class="tool-status">
                         <span class="status-badge active">Active</span>
-                        <button class="btn-secondary">Configure</button>
+                        <button class="btn btn-secondary">Configure</button>
                     </div>
                 </div>
             </div>
@@ -314,14 +297,9 @@
 
         <!-- Revenue Section -->
         <div id="revenue" class="content-section">
-            <div class="content-header">
-                <div class="header-with-image">
-                    <img src="~/assets/images/AdminPanel_assets/revenue.png" alt="Revenue Reports" class="header-image">
-                    <div>
-                        <h1>Revenue Reports</h1>
-                        <p>Financial reports and revenue analytics.</p>
-                    </div>
-                </div>
+            <div class="admin-header">
+                <h1 class="admin-title">Revenue Reports</h1>
+                <p class="admin-subtitle">Financial reports and revenue analytics.</p>
             </div>
 
             <div class="revenue-summary" id="revenue-summary">
@@ -331,36 +309,31 @@
 
         <!-- Settings Section -->
         <div id="settings" class="content-section">
-            <div class="content-header">
-                <div class="header-with-image">
-                    <img src="~/assets/images/AdminPanel_assets/user.png" alt="Admin Settings" class="header-image">
-                    <div>
-                        <h1>Admin Settings</h1>
-                        <p>Platform configuration and administrative settings.</p>
-                    </div>
-                </div>
+            <div class="admin-header">
+                <h1 class="admin-title">Admin Settings</h1>
+                <p class="admin-subtitle">Platform configuration and administrative settings.</p>
             </div>
 
             <div class="settings-form">
-                <div class="setting-group">
+                <div class="form-group">
                     <label>Platform Name</label>
                     <input type="text" value="LuIZ Learning Platform" class="setting-input" id="platform-name">
                 </div>
-                <div class="setting-group">
+                <div class="form-group">
                     <label>Maintenance Mode</label>
                     <div class="toggle-switch">
                         <input type="checkbox" id="maintenance-mode">
                         <label for="maintenance-mode"></label>
                     </div>
                 </div>
-                <div class="setting-group">
+                <div class="form-group">
                     <label>Email Notifications</label>
                     <div class="toggle-switch">
                         <input type="checkbox" id="email-notifications" checked>
                         <label for="email-notifications"></label>
                     </div>
                 </div>
-                <button class="btn-primary" id="save-settings">Save Settings</button>
+                <button class="btn btn-primary" id="save-settings">Save Settings</button>
             </div>
         </div>
     </div>
@@ -369,12 +342,17 @@
 <!-- Modals -->
 <div id="reject-course-modal" class="modal">
     <div class="modal-content">
-        <h3>Reject Course</h3>
-        <p>Please provide a reason for rejecting this course:</p>
-        <textarea id="rejection-reason" placeholder="Enter rejection reason..."></textarea>
-        <div class="modal-actions">
-            <button class="btn-secondary" onclick="closeModal('reject-course-modal')">Cancel</button>
-            <button class="btn-danger" id="confirm-reject">Reject Course</button>
+        <div class="modal-header">
+            <h3>Reject Course</h3>
+            <span class="close-btn" onclick="closeModal('reject-course-modal')">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>Please provide a reason for rejecting this course:</p>
+            <textarea id="rejection-reason" placeholder="Enter rejection reason..."></textarea>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('reject-course-modal')">Cancel</button>
+            <button class="btn btn-danger" id="confirm-reject">Reject Course</button>
         </div>
     </div>
 </div>
@@ -388,15 +366,19 @@
     {
         var timeSpan = DateTime.UtcNow - timestamp;
         
-        if (timeSpan.TotalMinutes < 1)
-            return "Just now";
-        if (timeSpan.TotalMinutes < 60)
-            return $"{(int)timeSpan.TotalMinutes} minutes ago";
-        if (timeSpan.TotalHours < 24)
-            return $"{(int)timeSpan.TotalHours} hours ago";
-        if (timeSpan.TotalDays < 7)
+        if (timeSpan.TotalDays > 1)
             return $"{(int)timeSpan.TotalDays} days ago";
-        
-        return timestamp.ToString("MMM dd, yyyy");
+        else if (timeSpan.TotalDays == 1)
+            return "1 day ago";
+        else if (timeSpan.TotalHours > 1)
+            return $"{(int)timeSpan.TotalHours} hours ago";
+        else if (timeSpan.TotalHours == 1)
+            return "1 hour ago";
+        else if (timeSpan.TotalMinutes > 1)
+            return $"{(int)timeSpan.TotalMinutes} minutes ago";
+        else if (timeSpan.TotalMinutes == 1)
+            return "1 minute ago";
+        else
+            return "Just now";
     }
 } 

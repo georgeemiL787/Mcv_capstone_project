@@ -80,11 +80,6 @@ E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.RazorAsse
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.sourcelink.json
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets.build.json
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets.development.json
-E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets\msbuild.MCV_Capstone.Microsoft.AspNetCore.StaticWebAssets.props
-E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets\msbuild.build.MCV_Capstone.props
-E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.MCV_Capstone.props
-E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.MCV_Capstone.props
-E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets.pack.json
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\scopedcss\bundle\MCV_Capstone.styles.css
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\scopedcss\projectbundle\MCV_Capstone.bundle.scp.css
@@ -139,7 +134,6 @@ E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\System.Composition.Run
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\System.Composition.TypedParts.dll
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\System.Drawing.Common.dll
-E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\System.Formats.Asn1.dll
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\System.Memory.Data.dll
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\System.Runtime.Caching.dll
@@ -204,14 +198,10 @@ E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\win-arm\nativ
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
-E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
-E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.csproj.AssemblyReference.cache
-E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.csproj.CopyComplete
 C:\Users\George\OneDrive\Documents\GitHub\MVC Arch\obj\Debug\net8.0\MCV_Capstone.csproj.AssemblyReference.cache
 C:\Users\George\OneDrive\Documents\GitHub\MVC Arch\obj\Debug\net8.0\rpswa.dswa.cache.json
 C:\Users\George\OneDrive\Documents\GitHub\MVC Arch\obj\Debug\net8.0\MCV_Capstone.GeneratedMSBuildEditorConfig.editorconfig
@@ -511,3 +501,11 @@ C:\Users\George\OneDrive\Documents\GitHub\New folder\Mcv_capstone_project\Mcv_ca
 C:\Users\George\OneDrive\Documents\GitHub\New folder\Mcv_capstone_project\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.genruntimeconfig.cache
 C:\Users\George\OneDrive\Documents\GitHub\New folder\Mcv_capstone_project\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\ref\MCV_Capstone.dll
 C:\Users\George\OneDrive\Documents\GitHub\New folder\Mcv_capstone_project\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
+E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
+E:\FCI\MCV\Mcv_capstone_project\MVC Arch\bin\Debug\net8.0\System.Formats.Asn1.dll
+E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets\msbuild.MCV_Capstone.Microsoft.AspNetCore.StaticWebAssets.props
+E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets\msbuild.build.MCV_Capstone.props
+E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.MCV_Capstone.props
+E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.MCV_Capstone.props
+E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\staticwebassets.pack.json
+E:\FCI\MCV\Mcv_capstone_project\MVC Arch\obj\Debug\net8.0\MCV_Capstone.csproj.CopyComplete

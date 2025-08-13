@@ -81,6 +81,14 @@ namespace MCV_Capstone.Controllers
                     return View(model);
                 }
 
+                // Check if account is banned
+                if (user.AccountStatus == "Banned")
+                {
+                    ModelState.AddModelError(string.Empty, "Your account has been banned. Please contact support for assistance.");
+                    logger.LogWarning("Login attempt failed for banned account: {Email}", model.Email);
+                    return View(model);
+                }
+
                 // Attempt to sign in
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
                 
@@ -185,6 +193,12 @@ namespace MCV_Capstone.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public IActionResult Banned()
+        {
+            return View();
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -201,6 +215,13 @@ namespace MCV_Capstone.Controllers
                 var existingUser = await userManager.FindByEmailAsync(model.Email);
                 if (existingUser != null)
                 {
+                    // Check if the existing user is banned
+                    if (existingUser.AccountStatus == "Banned")
+                    {
+                        ModelState.AddModelError(string.Empty, "This email address is associated with a banned account. Please contact support for assistance.");
+                        return View("Signup", model);
+                    }
+                    
                     ModelState.AddModelError(string.Empty, "A user with this email already exists.");
                     return View("Signup", model);
                 }

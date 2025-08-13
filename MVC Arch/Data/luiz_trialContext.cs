@@ -18,6 +18,10 @@ namespace MCV_Capstone.Data
         public DbSet<ContentProgress> ContentProgress { get; set; }
         public DbSet<CourseReview> CourseReviews { get; set; }
 
+        // Admin-related DbSets
+        public DbSet<BannedAccount> BannedAccounts { get; set; }
+        public DbSet<AdminActionLog> AdminActionLogs { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -118,6 +122,32 @@ namespace MCV_Capstone.Data
                 .HasOne(c => c.Rejector)
                 .WithMany()
                 .HasForeignKey(c => c.RejectedBy)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // BannedAccount relationships
+            builder.Entity<BannedAccount>()
+                .HasOne(b => b.User)
+                .WithMany()
+                .HasForeignKey(b => b.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<BannedAccount>()
+                .HasOne(b => b.BannedByAdmin)
+                .WithMany()
+                .HasForeignKey(b => b.BannedByAdminId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<BannedAccount>()
+                .HasOne(b => b.UnbannedByAdmin)
+                .WithMany()
+                .HasForeignKey(b => b.UnbannedByAdminId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // AdminActionLog relationships
+            builder.Entity<AdminActionLog>()
+                .HasOne(a => a.Admin)
+                .WithMany()
+                .HasForeignKey(a => a.AdminId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Configure indexes for better performance

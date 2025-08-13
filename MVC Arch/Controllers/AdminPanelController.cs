@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MCV_Capstone.Data;
 using MCV_Capstone.Models;
 using MCV_Capstone.Services;
+using MCV_Capstone.ViewModels;
 using System.Security.Claims;
 using MCV_Capstone.Attributes;
 
@@ -24,7 +25,7 @@ namespace MCV_Capstone.Controllers
         _userManager = userManager;
     }
 
-    private async Task<User> GetCurrentUserAsync()
+    private async Task<User?> GetCurrentUserAsync()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int userIdInt))
@@ -56,14 +57,49 @@ namespace MCV_Capstone.Controllers
             }
         }
 
+        // Test endpoint for debugging
+        [HttpGet]
+        public async Task<IActionResult> Test()
+        {
+            try
+            {
+                var userCount = await _adminService.GetTotalUsersCountAsync("", "", "");
+                return Json(new { 
+                    success = true, 
+                    message = "Admin service is working", 
+                    userCount = userCount 
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { 
+                    success = false, 
+                    message = ex.Message, 
+                    stackTrace = ex.StackTrace 
+                });
+            }
+        }
+
         // User Management
         [HttpGet]
-        public async Task<IActionResult> GetUsers(string searchTerm = "", string roleFilter = "", string statusFilter = "")
+        public async Task<IActionResult> GetUsers(string searchTerm = "", string roleFilter = "", string statusFilter = "", int page = 1, int pageSize = 20)
         {
             try
             {
                 var users = await _adminService.GetUsersAsync(searchTerm, roleFilter, statusFilter);
-                return Json(new { success = true, data = users });
+                var totalCount = await _adminService.GetTotalUsersCountAsync(searchTerm, roleFilter, statusFilter);
+                
+                // Apply pagination
+                var pagedUsers = users.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                
+                return Json(new { 
+                    success = true, 
+                    data = pagedUsers,
+                    totalCount = totalCount,
+                    currentPage = page,
+                    pageSize = pageSize,
+                    totalPages = (int)Math.Ceiling((double)totalCount / pageSize)
+                });
             }
             catch (Exception ex)
             {
@@ -90,16 +126,36 @@ namespace MCV_Capstone.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BanUser(int userId)
+        public async Task<IActionResult> BanUser([FromBody] BanUserViewModel model)
         {
             try
             {
-                var success = await _adminService.BanUserAsync(userId);
+                var adminId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+                var success = await _adminService.BanUserAsync(model.UserId, adminId, model.Reason);
                 if (success)
                 {
                     return Json(new { success = true, message = "User banned successfully" });
                 }
-                return Json(new { success = false, message = "User not found" });
+                return Json(new { success = false, message = "User not found or already banned" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UnbanUser([FromBody] UnbanUserViewModel model)
+        {
+            try
+            {
+                var adminId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+                var success = await _adminService.UnbanUserAsync(model.UserId, adminId, model.Reason);
+                if (success)
+                {
+                    return Json(new { success = true, message = "User unbanned successfully" });
+                }
+                return Json(new { success = false, message = "User not found or not banned" });
             }
             catch (Exception ex)
             {
@@ -109,12 +165,42 @@ namespace MCV_Capstone.Controllers
 
         // Course Management
         [HttpGet]
-        public async Task<IActionResult> GetCourses(string filter = "all")
+        public async Task<IActionResult> GetCourses(string filter = "all", string searchTerm = "", string categoryFilter = "", int page = 1, int pageSize = 20)
         {
             try
             {
-                var courses = await _adminService.GetCoursesAsync(filter);
-                return Json(new { success = true, data = courses });
+                var courses = await _adminService.GetCoursesAsync(filter, searchTerm, categoryFilter);
+                var totalCount = await _adminService.GetTotalCoursesCountAsync(filter, searchTerm, categoryFilter);
+                
+                // Apply pagination
+                var pagedCourses = courses.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                
+                return Json(new { 
+                    success = true, 
+                    data = pagedCourses,
+                    totalCount = totalCount,
+                    currentPage = page,
+                    pageSize = pageSize,
+                    totalPages = (int)Math.Ceiling((double)totalCount / pageSize)
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCourseDetails(int courseId)
+        {
+            try
+            {
+                var courseDetails = await _adminService.GetCourseDetailsAsync(courseId);
+                if (courseDetails.Course.Id == 0)
+                {
+                    return Json(new { success = false, message = "Course not found" });
+                }
+                return Json(new { success = true, data = courseDetails });
             }
             catch (Exception ex)
             {
@@ -228,23 +314,17 @@ namespace MCV_Capstone.Controllers
         }
 
         // Test action for admin access
-        [HttpGet]
-        public IActionResult Test()
-        {
-            return Json(new { 
-                success = true, 
-                message = "Admin access confirmed!", 
-                user = User.Identity?.Name,
-                roles = User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).Select(c => c.Value).ToList()
-            });
-        }
+        // [HttpGet] // This line is removed as per the edit hint
+        // public IActionResult Test() // This line is removed as per the edit hint
+        // { // This line is removed as per the edit hint
+        //     return Json(new {  // This line is removed as per the edit hint
+        //         success = true,  // This line is removed as per the edit hint
+        //         message = "Admin access confirmed!",  // This line is removed as per the edit hint
+        //         user = User.Identity?.Name, // This line is removed as per the edit hint
+        //         roles = User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).Select(c => c.Value).ToList() // This line is removed as per the edit hint
+        //     }); // This line is removed as per the edit hint
+        // } // This line is removed as per the edit hint
     }
 
-    // View Models
-    public class AdminSettingsViewModel
-    {
-        public string PlatformName { get; set; } = string.Empty;
-        public bool MaintenanceMode { get; set; }
-        public bool EmailNotifications { get; set; }
-    }
+
 }
