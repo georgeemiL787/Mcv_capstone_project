@@ -1,9 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Models\\ViewModels",
-    "\\Views\\Account"
+    ""
   ],
-  "SelectedNode": "\\wwwroot",
+  "SelectedNode": "\\appsettings.json",
   "PreviewInSolutionExplorer": false
 }
