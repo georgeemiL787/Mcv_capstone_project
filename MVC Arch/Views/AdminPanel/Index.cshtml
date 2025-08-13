@@ -16,7 +16,17 @@
     <div class="admin-sidebar">
         <div class="sidebar-header">
             <div class="sidebar-avatar">
-                <div class="avatar-placeholder">AD</div>
+                @if (!string.IsNullOrEmpty(ViewBag.User?.ProfilePhoto))
+            {
+                <img src="data:image/jpeg;base64,@ViewBag.User.ProfilePhoto" alt="Profile Photo" class="avatar-image">
+            }
+            else
+            {
+                <div class="avatar-placeholder">
+                    @(ViewBag.User?.FirstName?.Length > 0 ? ViewBag.User.FirstName[0].ToString().ToUpper() : "A")
+                    @(ViewBag.User?.LastName?.Length > 0 ? ViewBag.User.LastName[0].ToString().ToUpper() : "D")
+                </div>
+            }
             </div>
             <h3>Admin Dashboard</h3>
             <button class="mobile-menu-btn" id="mobile-menu-btn">

@@ -17,7 +17,17 @@
     <div class="profile-sidebar">
         <div class="sidebar-header">
             <div class="sidebar-avatar">
-                <div class="avatar-placeholder">GE</div>
+                @if (!string.IsNullOrEmpty(ViewBag.User?.ProfilePhoto))
+            {
+                <img src="data:image/jpeg;base64,@ViewBag.User.ProfilePhoto" alt="Profile Photo" class="avatar-image">
+            }
+            else
+            {
+                <div class="avatar-placeholder">
+                    @(ViewBag.User?.FirstName?.Length > 0 ? ViewBag.User.FirstName[0].ToString().ToUpper() : "U")
+                    @(ViewBag.User?.LastName?.Length > 0 ? ViewBag.User.LastName[0].ToString().ToUpper() : "")
+                </div>
+            }
             </div>
             <h3>George Emil</h3>
         </div>

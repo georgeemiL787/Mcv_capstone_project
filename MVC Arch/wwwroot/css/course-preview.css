@@ -433,6 +433,20 @@
   font-family: 'Josefin Sans', sans-serif;
 }
 
+.avatar-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(143, 126, 252, 0.3);
+  transition: all 0.3s ease;
+}
+
+.avatar-image:hover {
+  border-color: rgba(143, 126, 252, 0.8);
+  transform: scale(1.05);
+}
+
 .instructor-info h2 {
   color: #333446;
   font-size: 1.8rem;

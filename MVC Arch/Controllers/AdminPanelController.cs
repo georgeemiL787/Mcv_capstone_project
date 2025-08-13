@@ -24,9 +24,20 @@ namespace MCV_Capstone.Controllers
         _userManager = userManager;
     }
 
+    private async Task<User> GetCurrentUserAsync()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int userIdInt))
+            return null;
+
+        return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userIdInt);
+    }
+
         public async Task<IActionResult> Index()
         {
             var dashboardData = await _adminService.GetDashboardStatsAsync();
+            var currentUser = await GetCurrentUserAsync();
+            ViewBag.User = currentUser;
             return View(dashboardData);
         }
 

@@ -15,6 +15,10 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<MCV_Capstone.Services.ISessionHelper, MCV_Capstone.Services.SessionHelper>();
 builder.Services.AddScoped<MCV_Capstone.Services.IAdminService, MCV_Capstone.Services.AdminService>();
 builder.Services.AddScoped<MCV_Capstone.Services.ICourseImportService, MCV_Capstone.Services.CourseImportService>();
+builder.Services.AddScoped<MCV_Capstone.Services.IProfileService, MCV_Capstone.Services.ProfileService>();
+builder.Services.AddScoped<MCV_Capstone.Services.IPhotoService, MCV_Capstone.Services.PhotoService>();
+builder.Services.AddScoped<MCV_Capstone.Services.IUserAvatarService, MCV_Capstone.Services.UserAvatarService>();
+builder.Services.AddScoped<MCV_Capstone.Services.IAccountDeletionService, MCV_Capstone.Services.AccountDeletionService>();
 
 // Register CORS services (required before using CORS middleware)
 builder.Services.AddCors();

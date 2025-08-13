@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using MCV_Capstone.Services
+@inject ISessionHelper SessionHelper
+@inject IUserAvatarService UserAvatarService
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -70,13 +73,32 @@
                 <!-- User Profile Section (when logged in) -->
                 <div class="user-profile-section" id="user-profile-section">
                     <div class="user-avatar" onclick="toggleProfileDropdown()">
-                        <div class="avatar-placeholder">@(User.Identity?.Name?.Length > 0 ? User.Identity.Name.Substring(0, 1).ToUpper() : "U")</div>
+                        @{
+                            var userAvatar = await UserAvatarService.GetCurrentUserAvatarAsync();
+                            var userInitials = SessionHelper.IsAuthenticated() ? 
+                                (SessionHelper.GetUserFirstName()?.Length > 0 ? SessionHelper.GetUserFirstName()[0].ToString().ToUpper() : "U") : "U";
+                        }
+                        @if (!string.IsNullOrEmpty(userAvatar))
+                        {
+                            <img src="@userAvatar" alt="User Avatar" class="avatar-image">
+                        }
+                        else
+                        {
+                            <div class="avatar-placeholder">@userInitials</div>
+                        }
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
                     <div class="profile-dropdown" id="profile-dropdown">
                         <div class="dropdown-header">
                             <div class="user-info">
-                                <div class="avatar-placeholder">@(User.Identity?.Name?.Length > 0 ? User.Identity.Name.Substring(0, 1).ToUpper() : "U")</div>
+                                @if (!string.IsNullOrEmpty(userAvatar))
+                                {
+                                    <img src="@userAvatar" alt="User Avatar" class="avatar-image">
+                                }
+                                else
+                                {
+                                    <div class="avatar-placeholder">@userInitials</div>
+                                }
                                 <div>
                                     <h4>@(User.Identity?.Name ?? "User")</h4>
                                     <p>@(User.IsInRole("Admin") ? "Admin" : User.IsInRole("Instructor") ? "Instructor" : "Student")</p>

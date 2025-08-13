@@ -1,0 +1,49 @@
+{
+	"folders": [
+		{
+			"path": "../../../../MVC Arch/.vs"
+		},
+		{
+			"path": "../../../../MVC Arch/Attributes"
+		},
+		{
+			"path": "../../../../MVC Arch/bin"
+		},
+		{
+			"path": "../../../../MVC Arch/Controllers"
+		},
+		{
+			"path": "../../../../MVC Arch/Data"
+		},
+		{
+			"path": "../../../../MVC Arch/Middleware"
+		},
+		{
+			"path": "../../../../MVC Arch/Migrations"
+		},
+		{
+			"path": "../../../../MVC Arch/Models"
+		},
+		{
+			"path": "../../../../MVC Arch/obj"
+		},
+		{
+			"path": "../../../../MVC Arch/pages"
+		},
+		{
+			"path": "../../../../MVC Arch/Properties"
+		},
+		{
+			"path": "../../../../MVC Arch/Services"
+		},
+		{
+			"path": "../../../../MVC Arch/ViewModels"
+		},
+		{
+			"path": "../../../../MVC Arch/Views"
+		},
+		{
+			"path": "../../../../MVC Arch/wwwroot"
+		}
+	]
+}

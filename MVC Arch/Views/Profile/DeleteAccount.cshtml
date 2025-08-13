@@ -1,0 +1,151 @@
+@{
+    ViewData["Title"] = "Delete Account - Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString()?.ToLower();
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/profile.css">
+    <link rel="stylesheet" href="~/css/profile-shared.css">
+    <link rel="stylesheet" href="~/css/privacy.css" />
+    <link rel="stylesheet" href="~/css/delete-account.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
+}
+
+<div class="profile-layout">
+    <!-- Left Sidebar -->
+    <div class="profile-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-avatar">
+                @if (!string.IsNullOrEmpty(Model?.User?.ProfilePhoto))
+            {
+                <img src="data:image/jpeg;base64,@Model.User.ProfilePhoto" alt="Profile Photo" class="avatar-image">
+            }
+            else
+            {
+                <div class="avatar-placeholder">
+                    @(Model?.User?.FirstName?.Length > 0 ? Model.User.FirstName[0].ToString().ToUpper() : "U")
+                    @(Model?.User?.LastName?.Length > 0 ? Model.User.LastName[0].ToString().ToUpper() : "")
+                </div>
+            }
+            </div>
+            <h3>@(Model?.User?.FirstName ?? "User") @(Model?.User?.LastName ?? "")</h3>
+            <a href="#" class="view-profile-link">View Public Profile</a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "Profile")" class="nav-item @(currentAction == "index" ? "active" : "")" data-page="profile">
+                <span class="material-symbols-outlined nav-icon">person</span>
+                Profile
+            </a>
+            <a href="@Url.Action("Photo", "Profile")" class="nav-item @(currentAction == "photo" ? "active" : "")" data-page="photo">
+                <span class="material-symbols-outlined nav-icon">photo_camera</span>
+                Photo
+            </a>
+            <a href="@Url.Action("AccountSecurity", "Profile")" class="nav-item @(currentAction == "accountsecurity" ? "active" : "")" data-page="account-security">
+                <span class="material-symbols-outlined nav-icon">security</span>
+                Account Security
+            </a>
+            <a href="@Url.Action("Subscriptions", "Profile")" class="nav-item @(currentAction == "subscriptions" ? "active" : "")" data-page="subscriptions">
+                <span class="material-symbols-outlined nav-icon">subscriptions</span>
+                Subscriptions
+            </a>
+            <a href="@Url.Action("PaymentMethods", "Profile")" class="nav-item @(currentAction == "paymentmethods" ? "active" : "")" data-page="payment-methods">
+                <span class="material-symbols-outlined nav-icon">account_balance_wallet</span>
+                Payment Methods
+            </a>
+            <a href="@Url.Action("Privacy", "Profile")" class="nav-item @(currentAction == "privacy" ? "active" : "")" data-page="privacy">
+                <span class="material-symbols-outlined nav-icon">lock</span>
+                Privacy
+            </a>
+            <a href="@Url.Action("NotificationPreferences", "Profile")" class="nav-item @(currentAction == "notificationpreferences" ? "active" : "")" data-page="notification-preferences">
+                <span class="material-symbols-outlined nav-icon">notifications</span>
+                Notification Preferences
+            </a>
+        </nav>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="profile-content">
+        <div class="delete-account-container">
+            <div class="delete-account-header">
+                <div class="warning-icon">
+                    <span class="material-symbols-outlined">warning</span>
+                </div>
+                <h1>Delete Account</h1>
+                <p class="warning-text">This action cannot be undone. Please read carefully before proceeding.</p>
+            </div>
+
+            <div class="delete-account-warning">
+                <h3>What will be deleted:</h3>
+                <ul>
+                    <li>Your personal profile information</li>
+                    <li>All course enrollments and progress</li>
+                    <li>Course reviews and ratings</li>
+                    <li>Profile photo and preferences</li>
+                    <li>Account settings and preferences</li>
+                    <li>All associated data and history</li>
+                </ul>
+            </div>
+
+            <div class="delete-account-notice">
+                <h3>Important Notice:</h3>
+                <p>If you are an instructor with published courses, those courses will remain available to students but will be marked as "Instructor Unavailable".</p>
+                <p>If you have active subscriptions, they will be cancelled immediately.</p>
+            </div>
+
+            <form asp-action="DeleteAccountConfirmed" method="post" id="deleteAccountForm">
+                <div class="confirmation-section">
+                    <h3>Final Confirmation</h3>
+                    <p>To confirm account deletion, please type <strong>DELETE</strong> in the field below:</p>
+                    <div class="confirmation-input">
+                        <input type="text" id="confirmationText" name="confirmationText" placeholder="Type DELETE to confirm" required>
+                        <span class="error-message" id="confirmationError" style="display: none;">Please type DELETE exactly as shown</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="@Url.Action("Privacy", "Profile")" class="cancel-btn">Cancel</a>
+                    <button type="submit" class="delete-account-btn" id="deleteBtn" disabled>Delete Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const confirmationInput = document.getElementById('confirmationText');
+            const deleteBtn = document.getElementById('deleteBtn');
+            const confirmationError = document.getElementById('confirmationError');
+            const form = document.getElementById('deleteAccountForm');
+
+            confirmationInput.addEventListener('input', function() {
+                if (this.value === 'DELETE') {
+                    deleteBtn.disabled = false;
+                    confirmationError.style.display = 'none';
+                } else {
+                    deleteBtn.disabled = true;
+                    confirmationError.style.display = 'block';
+                }
+            });
+
+            form.addEventListener('submit', function(e) {
+                if (confirmationInput.value !== 'DELETE') {
+                    e.preventDefault();
+                    confirmationError.style.display = 'block';
+                    return false;
+                }
+
+                if (!confirm('Are you absolutely sure you want to delete your account? This action cannot be undone.')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+}

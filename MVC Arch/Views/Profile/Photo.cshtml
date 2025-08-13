@@ -1,3 +1,4 @@
+@model MCV_Capstone.Models.PhotoViewModel
 @{
     ViewData["Title"] = "Profile Photo - Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,9 +20,22 @@
     <div class="profile-sidebar">
         <div class="sidebar-header">
             <div class="sidebar-avatar">
-                <div class="avatar-placeholder">GE</div>
+                @if (!string.IsNullOrEmpty(Model?.User?.ProfilePhoto))
+                {
+                    <img src="data:image/jpeg;base64,@Model.User.ProfilePhoto" alt="Profile Photo" class="avatar-image">
+                }
+                else
+                {
+                    <div class="avatar-placeholder">
+                        @(string.IsNullOrEmpty(Model?.User?.FirstName) || string.IsNullOrEmpty(Model?.User?.LastName) 
+                            ? "U" 
+                            : $"{Model.User.FirstName[0]}{Model.User.LastName[0]}".ToUpper())
+                    </div>
+                }
             </div>
-            <h3>George Emil</h3>
+            <h3>@(string.IsNullOrEmpty(Model?.User?.FirstName) || string.IsNullOrEmpty(Model?.User?.LastName) 
+                ? "User" 
+                : $"{Model.User.FirstName} {Model.User.LastName}")</h3>
             <a href="#" class="view-profile-link">View Public Profile</a>
         </div>
         
@@ -59,6 +73,14 @@
 
     <!-- Right Content Area -->
     <div class="profile-content">
+        <!-- Success/Error Messages -->
+        <div id="messageContainer" style="display: none;">
+            <div class="alert" id="messageAlert">
+                <span id="messageText"></span>
+                <button class="alert-close" onclick="hideMessage()">&times;</button>
+            </div>
+        </div>
+
         <div class="photo-container">
             <div class="photo-header">
                 <h1>Profile Photo</h1>
@@ -67,8 +89,15 @@
             
             <div class="photo-upload-section">
                 <div class="current-photo">
-                    <div class="photo-preview">
-                        <img src="~/assets/images/default-avatar.jpg" alt="Current Profile Photo" id="currentPhoto">
+                    <div class="photo-preview" onclick="document.getElementById('photoInput').click();">
+                        @if (Model?.HasPhoto == true && !string.IsNullOrEmpty(Model.User?.ProfilePhoto))
+                        {
+                            <img src="data:image/jpeg;base64,@Model.User.ProfilePhoto" alt="Current Profile Photo" id="currentPhoto">
+                        }
+                        else
+                        {
+                            <img src="~/assets/images/profile_assets/user.png" alt="Current Profile Photo" id="currentPhoto">
+                        }
                         <div class="photo-overlay">
                             <span class="material-symbols-outlined">photo_camera</span>
                             <p>Click to change</p>
@@ -77,20 +106,23 @@
                     <div class="photo-info">
                         <h3>Current Photo</h3>
                         <p>Your profile picture is visible to other users based on your privacy settings</p>
-                        <button class="btn-secondary" id="removePhoto">Remove Photo</button>
+                        @if (Model?.HasPhoto == true)
+                        {
+                            <button class="btn-secondary" id="removePhoto" onclick="removePhoto()">Remove Photo</button>
+                        }
                     </div>
                 </div>
                 
                 <div class="upload-area">
-                    <div class="upload-box" id="uploadBox">
+                    <div class="upload-box" id="uploadBox" onclick="document.getElementById('photoInput').click();">
                         <div class="upload-icon">
                             <span class="material-symbols-outlined">cloud_upload</span>
                         </div>
                         <h3>Upload New Photo</h3>
                         <p>Drag and drop an image here, or click to browse</p>
                         <p class="upload-hint">Supported formats: JPG, PNG, GIF (Max size: 5MB)</p>
-                        <input type="file" id="photoInput" accept="image/*" style="display: none;">
-                        <button class="btn-primary" id="browseButton">Browse Files</button>
+                        <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="handlePhotoUpload(this.files[0])">
+                        <button class="btn-primary" id="browseButton" onclick="event.stopPropagation(); document.getElementById('photoInput').click();">Browse Files</button>
                     </div>
                 </div>
             </div>
@@ -117,32 +149,51 @@
                 </div>
             </div>
             
-            <div class="photo-editor">
+            <div class="photo-editor" id="photoEditor" style="display: @(Model?.HasPhoto == true ? "block" : "none");">
                 <h3>Photo Editor</h3>
                 <div class="editor-container">
                     <div class="editor-preview">
-                        <img src="~/assets/images/default-avatar.jpg" alt="Editor Preview" id="editorPreview">
+                        @if (Model?.HasPhoto == true && !string.IsNullOrEmpty(Model.User?.ProfilePhoto))
+                        {
+                            <img src="data:image/jpeg;base64,@Model.User.ProfilePhoto" alt="Editor Preview" id="editorPreview">
+                        }
+                        else
+                        {
+                            <img src="~/assets/images/profile_assets/user.png" alt="Editor Preview" id="editorPreview">
+                        }
                     </div>
                     <div class="editor-controls">
                         <div class="control-group">
                             <label for="brightness">Brightness</label>
-                            <input type="range" id="brightness" min="0" max="200" value="100">
-                            <span>100%</span>
+                            <input type="range" id="brightness" min="0" max="200" value="100" onchange="updatePhotoEditor()">
+                            <span id="brightnessValue">100%</span>
                         </div>
                         <div class="control-group">
                             <label for="contrast">Contrast</label>
-                            <input type="range" id="contrast" min="0" max="200" value="100">
-                            <span>100%</span>
+                            <input type="range" id="contrast" min="0" max="200" value="100" onchange="updatePhotoEditor()">
+                            <span id="contrastValue">100%</span>
                         </div>
                         <div class="control-group">
                             <label for="saturation">Saturation</label>
-                            <input type="range" id="saturation" min="0" max="200" value="100">
-                            <span>100%</span>
+                            <input type="range" id="saturation" min="0" max="200" value="100" onchange="updatePhotoEditor()">
+                            <span id="saturationValue">100%</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="rotation">Rotation</label>
+                            <input type="range" id="rotation" min="-180" max="180" value="0" onchange="updatePhotoEditor()">
+                            <span id="rotationValue">0°</span>
                         </div>
                     </div>
                     <div class="editor-actions">
-                        <button class="btn-secondary" id="resetEditor">Reset</button>
-                        <button class="btn-primary" id="applyChanges">Apply Changes</button>
+                        <button class="btn-secondary" id="resetEditor" onclick="resetPhotoEditor()">Reset</button>
+                        <button class="btn-primary" id="applyChanges" onclick="applyPhotoChanges()">Apply Changes</button>
+                        <button class="btn-secondary" id="refreshNow" onclick="refreshPageNow()" style="display: none;">Refresh Now</button>
+                    </div>
+                    <div id="refreshCountdown" style="display: none; text-align: center; margin-top: 10px;">
+                        <div class="countdown-text">Page will refresh in <span id="countdownValue">1</span> second</div>
+                        <div class="countdown-bar">
+                            <div class="countdown-progress" id="countdownProgress"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -178,4 +229,289 @@
 
 @section Scripts {
     <script src="~/js/profile.js"></script>
+    <script>
+        // Photo management functionality
+        let currentPhotoData = '@(Model?.HasPhoto == true && !string.IsNullOrEmpty(Model.User?.ProfilePhoto) ? $"data:image/jpeg;base64,{Model.User.ProfilePhoto}" : "")';
+        let isUploading = false;
+
+        // Handle photo file upload
+        async function handlePhotoUpload(file) {
+            if (!file) return;
+            
+            if (isUploading) return;
+            isUploading = true;
+            
+            // Show loading state
+            showMessage('Uploading photo...', 'info');
+            
+            const formData = new FormData();
+            formData.append('photoFile', file);
+            
+            try {
+                const response = await fetch('@Url.Action("UploadPhoto", "Profile")', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage(result.message, 'success');
+                    
+                    // Update the UI with new photo
+                    if (result.photoUrl) {
+                        document.getElementById('currentPhoto').src = result.photoUrl;
+                        document.getElementById('editorPreview').src = result.photoUrl;
+                        document.getElementById('photoEditor').style.display = 'block';
+                        document.getElementById('removePhoto').style.display = 'block';
+                    }
+                    
+                    // Store current photo data for editing
+                    currentPhotoData = result.photoUrl;
+                    
+                    // Show countdown and refresh the page
+                    showCountdown();
+                    setTimeout(() => {
+                        // Show refresh indicator
+                        showMessage('Refreshing page to show updates...', 'info');
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    showMessage(result.message, 'error');
+                }
+            } catch (error) {
+                showMessage('An error occurred while uploading the photo. Please try again.', 'error');
+            } finally {
+                isUploading = false;
+            }
+        }
+
+        // Remove photo
+        async function removePhoto() {
+            if (!confirm('Are you sure you want to remove your profile photo?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('@Url.Action("RemovePhoto", "Profile")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage(result.message, 'success');
+                    
+                    // Reset to default avatar
+                    document.getElementById('currentPhoto').src = '/assets/images/profile_assets/user.png';
+                    document.getElementById('editorPreview').src = '/assets/images/profile_assets/user.png';
+                    document.getElementById('photoEditor').style.display = 'none';
+                    document.getElementById('removePhoto').style.display = 'none';
+                    
+                    // Clear current photo data
+                    currentPhotoData = '';
+                    
+                    // Show countdown and refresh the page
+                    showCountdown();
+                    setTimeout(() => {
+                        // Show refresh indicator
+                        showMessage('Refreshing page to show updates...', 'info');
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    showMessage(result.message, 'error');
+                }
+            } catch (error) {
+                showMessage('An error occurred while removing the photo. Please try again.', 'error');
+            }
+        }
+
+        // Update photo editor preview
+        function updatePhotoEditor() {
+            const brightness = document.getElementById('brightness').value;
+            const contrast = document.getElementById('contrast').value;
+            const saturation = document.getElementById('saturation').value;
+            const rotation = document.getElementById('rotation').value;
+            
+            // Update display values
+            document.getElementById('brightnessValue').textContent = brightness + '%';
+            document.getElementById('contrastValue').textContent = contrast + '%';
+            document.getElementById('saturationValue').textContent = saturation + '%';
+            document.getElementById('rotationValue').textContent = rotation + '°';
+            
+            // Apply filters to preview
+            const editorPreview = document.getElementById('editorPreview');
+            editorPreview.style.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%)`;
+            editorPreview.style.transform = `rotate(${rotation}deg)`;
+        }
+
+        // Reset photo editor
+        function resetPhotoEditor() {
+            document.getElementById('brightness').value = 100;
+            document.getElementById('contrast').value = 100;
+            document.getElementById('saturation').value = 100;
+            document.getElementById('rotation').value = 0;
+            
+            updatePhotoEditor();
+        }
+
+        // Apply photo changes
+        async function applyPhotoChanges() {
+            if (!currentPhotoData || currentPhotoData === '') {
+                showMessage('No photo to edit. Please upload a photo first.', 'error');
+                return;
+            }
+            
+            const brightness = parseFloat(document.getElementById('brightness').value);
+            const contrast = parseFloat(document.getElementById('contrast').value);
+            const saturation = parseFloat(document.getElementById('saturation').value);
+            const rotation = parseFloat(document.getElementById('rotation').value);
+            
+            const editModel = {
+                photoBase64: currentPhotoData.replace('data:image/jpeg;base64,', ''),
+                brightness: brightness,
+                contrast: contrast,
+                saturation: saturation,
+                rotation: rotation,
+                flipHorizontal: false,
+                flipVertical: false
+            };
+            
+            try {
+                // Show loading state
+                const applyButton = document.getElementById('applyChanges');
+                const originalText = applyButton.textContent;
+                applyButton.textContent = 'Applying...';
+                applyButton.disabled = true;
+                
+                // Hide refresh button if it was previously shown
+                document.getElementById('refreshNow').style.display = 'none';
+                
+                const response = await fetch('@Url.Action("UpdatePhoto", "Profile")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(editModel)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Update the UI with edited photo
+                    if (result.photoUrl) {
+                        document.getElementById('currentPhoto').src = result.photoUrl;
+                        document.getElementById('editorPreview').src = result.photoUrl;
+                        currentPhotoData = result.photoUrl;
+                    }
+                    
+                    // Show success message and refresh indicator
+                    showMessage('Photo updated successfully! Page will refresh in 1 second to show all updates.', 'success');
+                    
+                    // Show refresh now button for immediate refresh option
+                    document.getElementById('refreshNow').style.display = 'inline-block';
+                    
+                    // Show and animate countdown
+                    showCountdown();
+                    
+                    // Refresh the page automatically after 1 second
+                    setTimeout(() => {
+                        // Show refresh indicator
+                        showMessage('Refreshing page to show updates...', 'info');
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    showMessage(result.message, 'error');
+                }
+            } catch (error) {
+                showMessage('An error occurred while updating the photo. Please try again.', 'error');
+            } finally {
+                // Restore button state
+                const applyButton = document.getElementById('applyChanges');
+                applyButton.textContent = originalText;
+                applyButton.disabled = false;
+            }
+        }
+
+        // Show message
+        function showMessage(message, type) {
+            const container = document.getElementById('messageContainer');
+            const alert = document.getElementById('messageAlert');
+            const text = document.getElementById('messageText');
+            
+            text.textContent = message;
+            alert.className = `alert alert-${type}`;
+            container.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                hideMessage();
+            }, 5000);
+        }
+
+        // Hide message
+        function hideMessage() {
+            document.getElementById('messageContainer').style.display = 'none';
+        }
+        
+        // Refresh page immediately
+        function refreshPageNow() {
+            // Hide countdown before refreshing
+            document.getElementById('refreshCountdown').style.display = 'none';
+            window.location.reload();
+        }
+        
+        // Show countdown animation
+        function showCountdown() {
+            const countdownContainer = document.getElementById('refreshCountdown');
+            const countdownValue = document.getElementById('countdownValue');
+            const countdownProgress = document.getElementById('countdownProgress');
+            
+            countdownContainer.style.display = 'block';
+            
+            let timeLeft = 1;
+            const totalTime = 1;
+            
+            const countdownInterval = setInterval(() => {
+                timeLeft -= 0.1;
+                const progress = (timeLeft / totalTime) * 100;
+                
+                countdownValue.textContent = timeLeft.toFixed(1);
+                countdownProgress.style.width = progress + '%';
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownContainer.style.display = 'none';
+                }
+            }, 100);
+        }
+
+        // Drag and drop functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadBox = document.getElementById('uploadBox');
+            
+            uploadBox.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                uploadBox.classList.add('drag-over');
+            });
+            
+            uploadBox.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                uploadBox.classList.remove('drag-over');
+            });
+            
+            uploadBox.addEventListener('drop', function(e) {
+                e.preventDefault();
+                uploadBox.classList.remove('drag-over');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handlePhotoUpload(files[0]);
+                }
+            });
+        });
+    </script>
 }

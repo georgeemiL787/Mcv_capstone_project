@@ -1,3 +1,4 @@
+@model MCV_Capstone.Models.ProfileViewModel
 @{
     ViewData["Title"] = "Profile - Full Courses Platform";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,9 +19,22 @@
     <div class="profile-sidebar">
         <div class="sidebar-header">
             <div class="sidebar-avatar">
-                <div class="avatar-placeholder">GE</div>
+                @if (!string.IsNullOrEmpty(Model?.User?.ProfilePhoto))
+                {
+                    <img src="data:image/jpeg;base64,@Model.User.ProfilePhoto" alt="Profile Photo" class="avatar-image">
+                }
+                else
+                {
+                    <div class="avatar-placeholder">
+                        @(string.IsNullOrEmpty(Model?.User?.FirstName) || string.IsNullOrEmpty(Model?.User?.LastName) 
+                            ? "U" 
+                            : $"{Model.User.FirstName[0]}{Model.User.LastName[0]}".ToUpper())
+                    </div>
+                }
             </div>
-            <h3>George Emil</h3>
+            <h3>@(string.IsNullOrEmpty(Model?.User?.FirstName) || string.IsNullOrEmpty(Model?.User?.LastName) 
+                ? "User" 
+                : $"{Model.User.FirstName} {Model.User.LastName}")</h3>
             <a href="#" class="view-profile-link">View Public Profile</a>
         </div>
         
@@ -58,6 +72,20 @@
 
     <!-- Right Content Area -->
     <div class="profile-content">
+        <!-- Success/Error Messages -->
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+
         <!-- Profile Section -->
         <div class="content-section">
             <div class="content-header">
@@ -68,45 +96,60 @@
             <div class="profile-form">
                 <div class="form-section">
                     <h3>Personal Information</h3>
-                    <form method="post" action="@Url.Action("Index", "Profile")">
+                    <form method="post" action="@Url.Action("Index", "Profile")" id="profileForm">
+                        @Html.AntiForgeryToken()
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="firstName">First Name</label>
-                                <input type="text" id="firstName" name="firstName" value="George" required>
+                                <label for="FirstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="FirstName" name="FirstName" value="@(Model?.User?.FirstName ?? "")" required maxlength="100" placeholder="Enter your first name">
+                                <span asp-validation-for="User.FirstName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">Last Name</label>
-                                <input type="text" id="lastName" name="lastName" value="Emil" required>
+                                <label for="LastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="LastName" name="LastName" value="@(Model?.User?.LastName ?? "")" required maxlength="100" placeholder="Enter your last name">
+                                <span asp-validation-for="User.LastName" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" value="george.emil@example.com" required>
+                            <label for="Email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="Email" name="Email" value="@(Model?.User?.Email ?? "")" required maxlength="255" placeholder="Enter your email address">
+                            <span asp-validation-for="User.Email" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" value="+1 (555) 123-4567">
+                            <label for="Phone">Phone Number</label>
+                            <input type="tel" id="Phone" name="Phone" value="@(Model?.User?.PhoneNumber ?? "")" maxlength="20" placeholder="Enter your phone number">
+                            <span class="text-danger" id="phoneError"></span>
                         </div>
 
                         <div class="form-group">
-                            <label for="bio">Bio</label>
-                            <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself...">Passionate software developer with expertise in React, Node.js, and modern web technologies. Always eager to learn and share knowledge with the community.</textarea>
+                            <label for="Bio">Bio</label>
+                            <textarea id="Bio" name="Bio" rows="4" maxlength="1000" placeholder="Tell us about yourself...">@(Model?.User?.Biography ?? "")</textarea>
+                            <small class="form-help">Maximum 1000 characters</small>
+                            <span asp-validation-for="User.Biography" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label for="location">Location</label>
-                            <input type="text" id="location" name="location" value="New York, NY">
+                            <label for="Location">Location</label>
+                            <input type="text" id="Location" name="Location" value="@(Model?.User?.Location ?? "")" maxlength="100" placeholder="e.g., New York, NY">
+                            <span asp-validation-for="User.Location" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label for="website">Website</label>
-                            <input type="url" id="website" name="website" value="https://georgeemil.dev">
+                            <label for="Headline">Professional Headline</label>
+                            <input type="text" id="Headline" name="Headline" value="@(Model?.User?.Headline ?? "")" maxlength="255" placeholder="e.g., Senior Software Developer">
+                            <span asp-validation-for="User.Headline" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Language">Preferred Language</label>
+                            <input type="text" id="Language" name="Language" value="@(Model?.User?.Language ?? "English")" maxlength="50" placeholder="e.g., English">
+                            <span asp-validation-for="User.Language" class="text-danger"></span>
                         </div>
 
                         <div class="form-actions">
-                            <button type="submit" class="save-btn">Save Changes</button>
+                            <button type="submit" class="save-btn" id="saveBtn">Save Changes</button>
                         </div>
                     </form>
                 </div>
@@ -116,19 +159,19 @@
                     <div class="account-info">
                         <div class="info-item">
                             <label>Account Type</label>
-                            <span>Premium Student</span>
+                            <span>@(Model?.User?.AccountStatus ?? "Active")</span>
                         </div>
                         <div class="info-item">
                             <label>Member Since</label>
-                            <span>January 2023</span>
+                            <span>@(Model?.MemberSince ?? "Unknown")</span>
                         </div>
                         <div class="info-item">
                             <label>Last Login</label>
-                            <span>Today at 2:30 PM</span>
+                            <span>@(Model?.LastLogin ?? "Never")</span>
                         </div>
                         <div class="info-item">
                             <label>Courses Completed</label>
-                            <span>12</span>
+                            <span>@(Model?.CoursesCompleted ?? 0)</span>
                         </div>
                     </div>
                 </div>

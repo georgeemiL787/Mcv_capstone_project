@@ -11,7 +11,14 @@
     <div class="profile-header">
         <h1>Profile</h1>
         <div class="profile-avatar">
-            <div class="avatar-placeholder">@(Model.FirstName?.Length > 0 ? Model.FirstName.Substring(0, 1).ToUpper() : "U")</div>
+            @if (!string.IsNullOrEmpty(Model.ProfilePhoto))
+            {
+                <img src="data:image/jpeg;base64,@Model.ProfilePhoto" alt="Profile Photo" class="avatar-image">
+            }
+            else
+            {
+                <div class="avatar-placeholder">@(Model.FirstName?.Length > 0 ? Model.FirstName.Substring(0, 1).ToUpper() : "U")</div>
+            }
         </div>
     </div>
     

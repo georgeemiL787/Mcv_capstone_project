@@ -73,8 +73,7 @@ namespace MCV_Capstone.Models
         public User? Rejector { get; set; }
 
         // Foreign Keys
-        [Required]
-        public int InstructorId { get; set; }
+        public int? InstructorId { get; set; }
         public User? Instructor { get; set; }
 
         // Navigation Properties

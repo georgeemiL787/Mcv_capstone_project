@@ -1,0 +1,253 @@
+.delete-account-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.delete-account-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+    border-radius: 12px;
+    border: 2px solid #feb2b2;
+}
+
+.warning-icon .material-symbols-outlined {
+    font-size: 4rem;
+    color: #e53e3e;
+}
+
+.delete-account-header h1 {
+    color: #c53030;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.warning-text {
+    color: #742a2a;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.delete-account-warning {
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.delete-account-warning h3 {
+    color: #c53030;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.delete-account-warning ul {
+    list-style: none;
+    padding: 0;
+}
+
+.delete-account-warning li {
+    color: #742a2a;
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.delete-account-warning li:before {
+    content: "⚠️";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+.delete-account-notice {
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.delete-account-notice h3 {
+    color: #22543d;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.delete-account-notice p {
+    color: #2f855a;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.confirmation-section {
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.confirmation-section h3 {
+    color: #2d3748;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.confirmation-section p {
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.confirmation-input {
+    margin-bottom: 1rem;
+}
+
+.confirmation-input input {
+    width: 100%;
+    max-width: 300px;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: border-color 0.3s ease;
+}
+
+.confirmation-input input:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.confirmation-input input.error {
+    border-color: #e53e3e;
+}
+
+.error-message {
+    color: #e53e3e;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cancel-btn {
+    padding: 1rem 2rem;
+    background: #718096;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background: #4a5568;
+    color: white;
+    text-decoration: none;
+}
+
+.delete-account-btn {
+    padding: 1rem 2rem;
+    background: #e53e3e;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-account-btn:hover {
+    background: #c53030;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
+}
+
+.delete-account-btn:disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.delete-account-btn:disabled:hover {
+    background: #cbd5e0;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .delete-account-container {
+        padding: 1rem;
+    }
+    
+    .delete-account-header {
+        padding: 1.5rem;
+    }
+    
+    .delete-account-header h1 {
+        font-size: 2rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cancel-btn,
+    .delete-account-btn {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .delete-account-container {
+        padding: 1rem;
+    }
+    
+    .delete-account-header {
+        padding: 1.5rem;
+    }
+    
+    .delete-account-header h1 {
+        font-size: 2rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cancel-btn,
+    .delete-account-btn {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+}

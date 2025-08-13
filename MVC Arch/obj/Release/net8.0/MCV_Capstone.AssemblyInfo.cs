@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MCV_Capstone")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+87e16c6392fa3b7f3ce734e3952ad17607f8b207")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1fda7fd6d5a94ec7d9457779f4f2490b9b291f71")]
 [assembly: System.Reflection.AssemblyProductAttribute("MCV_Capstone")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MCV_Capstone")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

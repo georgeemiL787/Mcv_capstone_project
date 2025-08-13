@@ -22,6 +22,24 @@ namespace MCV_Capstone.Data
         {
             base.OnModelCreating(builder);
 
+            // Configure User entity
+            builder.Entity<User>(entity =>
+            {
+                entity.ToTable("AspNetUsers");
+                
+                // Ensure custom properties are properly mapped
+                entity.Property(u => u.FirstName).HasMaxLength(100).IsRequired();
+                entity.Property(u => u.LastName).HasMaxLength(100).IsRequired();
+                entity.Property(u => u.Headline).HasMaxLength(255);
+                entity.Property(u => u.Biography).HasColumnType("nvarchar(max)");
+                entity.Property(u => u.Language).HasMaxLength(50);
+                entity.Property(u => u.Location).HasMaxLength(100);
+                entity.Property(u => u.AccountStatus).HasMaxLength(50).IsRequired();
+                entity.Property(u => u.RegistrationDate).IsRequired();
+                entity.Property(u => u.ProfilePhoto).HasColumnType("nvarchar(max)");
+                entity.Property(u => u.Preferences).HasColumnType("nvarchar(max)");
+            });
+
             // Configure relationships
             builder.Entity<Course>()
                 .HasOne(c => c.Instructor)

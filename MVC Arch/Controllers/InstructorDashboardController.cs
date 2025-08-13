@@ -17,13 +17,26 @@ namespace MCV_Capstone.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        private async Task<User> GetCurrentUserAsync()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int userIdInt))
+                return null;
+
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userIdInt);
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var currentUser = await GetCurrentUserAsync();
+            ViewBag.User = currentUser;
             return View();
         }
 
-        public IActionResult Analytics()
+        public async Task<IActionResult> Analytics()
         {
+            var currentUser = await GetCurrentUserAsync();
+            ViewBag.User = currentUser;
             return View();
         }
 
@@ -37,6 +50,9 @@ namespace MCV_Capstone.Controllers
                 // If not logged in, redirect to login
                 return RedirectToAction("Login", "Account");
             }
+
+            var currentUser = await GetCurrentUserAsync();
+            ViewBag.User = currentUser;
 
             // Fetch courses for the current instructor
             var instructorCourses = await _context.Courses
@@ -62,18 +78,24 @@ namespace MCV_Capstone.Controllers
             return View(instructorCourses);
         }
 
-        public IActionResult Discussions()
+        public async Task<IActionResult> Discussions()
         {
+            var currentUser = await GetCurrentUserAsync();
+            ViewBag.User = currentUser;
             return View();
         }
 
-        public IActionResult Enrollments()
+        public async Task<IActionResult> Enrollments()
         {
+            var currentUser = await GetCurrentUserAsync();
+            ViewBag.User = currentUser;
             return View();
         }
 
-        public IActionResult Revenue()
+        public async Task<IActionResult> Revenue()
         {
+            var currentUser = await GetCurrentUserAsync();
+            ViewBag.User = currentUser;
             return View();
         }
     }

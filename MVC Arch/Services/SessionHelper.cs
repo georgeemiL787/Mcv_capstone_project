@@ -7,6 +7,7 @@ namespace MCV_Capstone.Services
         string? GetUserId();
         string? GetUserEmail();
         string? GetUserName();
+        string? GetUserFirstName();
         string[] GetUserRoles();
         bool IsAuthenticated();
         bool HasRole(string role);
@@ -36,6 +37,17 @@ namespace MCV_Capstone.Services
         public string? GetUserName()
         {
             return _httpContextAccessor.HttpContext?.Session.GetString("UserName");
+        }
+
+        public string? GetUserFirstName()
+        {
+            var userName = GetUserName();
+            if (string.IsNullOrEmpty(userName))
+                return null;
+            
+            // Extract first name from full name (assuming format: "FirstName LastName")
+            var nameParts = userName.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            return nameParts.Length > 0 ? nameParts[0] : userName;
         }
 
         public string[] GetUserRoles()

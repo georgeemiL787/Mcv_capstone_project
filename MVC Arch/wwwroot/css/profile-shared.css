@@ -53,6 +53,22 @@
   box-shadow: 0 4px 20px rgba(143, 126, 252, 0.3);
 }
 
+.avatar-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(143, 126, 252, 0.3);
+  box-shadow: 0 4px 20px rgba(143, 126, 252, 0.3);
+  transition: all 0.3s ease;
+}
+
+.avatar-image:hover {
+  border-color: rgba(143, 126, 252, 0.8);
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(143, 126, 252, 0.4);
+}
+
 .sidebar-header h3 {
   color: #333446;
   font-size: 1.3rem;
@@ -130,6 +146,10 @@
   /* Ensure no other scrollbars appear */
   overflow-x: hidden;
   min-width: 0; /* Allow content to shrink */
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10;
 }
 
 .content-header {
@@ -168,6 +188,9 @@
   border: 1px solid rgba(143, 126, 252, 0.2);
   width: 100%;
   box-sizing: border-box;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .form-section h3 {
