@@ -23,11 +23,11 @@ namespace MCV_Capstone.Middleware
                 var userIdClaim = context.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
                 if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
                 {
-                    // Check if user is banned
-                    var bannedAccount = await dbContext.BannedAccounts
-                        .FirstOrDefaultAsync(b => b.BannedUserId == userId && b.UnbannedAt == null);
+                    // Check if user is banned by checking AccountStatus instead of BannedAccounts table
+                    var user = await dbContext.Users
+                        .FirstOrDefaultAsync(u => u.Id == userId);
 
-                    if (bannedAccount != null)
+                    if (user != null && user.AccountStatus == "Banned")
                     {
                         // User is banned, sign them out and redirect to banned page
                         await context.SignOutAsync("Cookies");

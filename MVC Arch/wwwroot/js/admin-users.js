@@ -619,10 +619,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Test function for debugging
-    window.testBanFunction = function() {
-        console.log('Test ban function called');
-        console.log('Testing banUser function...');
-        banUser(1); // Test with user ID 1
-    };
+    
 });

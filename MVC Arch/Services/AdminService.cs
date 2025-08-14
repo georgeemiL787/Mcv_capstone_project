@@ -155,28 +155,46 @@ namespace MCV_Capstone.Services
                         user.Roles = new List<string>();
                     }
 
-                    // Get ban information with proper navigation property loading
+                    // Get ban information by checking AccountStatus instead of BannedAccounts table
                     try
                     {
-                        var banInfo = await _context.BannedAccounts
-                            .Include(b => b.BannedByAdmin)
-                            .Where(b => b.BannedUserId == user.Id && b.UnbannedAt == null)
-                            .Select(b => new { 
-                                b.Reason, 
-                                b.BannedAt, 
-                                AdminName = b.BannedByAdmin != null ? 
-                                    (b.BannedByAdmin.FirstName + " " + b.BannedByAdmin.LastName).Trim() : 
-                                    "Unknown Admin"
-                            })
-                            .FirstOrDefaultAsync();
-
-                        if (banInfo != null)
+                        if (user.AccountStatus == "Banned")
                         {
-                            user.IsBanned = true;
-                            user.BanReason = banInfo.Reason;
-                            user.BannedAt = banInfo.BannedAt;
-                            user.BannedByAdmin = banInfo.AdminName;
-                            Console.WriteLine($"User {user.Id} is banned: {banInfo.Reason}");
+                            // Get the most recent ban record for additional details
+                            var banInfo = await _context.BannedAccounts
+                                .Include(b => b.BannedByAdmin)
+                                .Where(b => b.BannedUserId == user.Id)
+                                .OrderByDescending(b => b.BannedAt)
+                                .Select(b => new { 
+                                    b.Reason, 
+                                    b.BannedAt, 
+                                    AdminName = b.BannedByAdmin != null ? 
+                                        (b.BannedByAdmin.FirstName + " " + b.BannedByAdmin.LastName).Trim() : 
+                                        "Unknown Admin"
+                                })
+                                .FirstOrDefaultAsync();
+
+                            if (banInfo != null)
+                            {
+                                user.IsBanned = true;
+                                user.BanReason = banInfo.Reason;
+                                user.BannedAt = banInfo.BannedAt;
+                                user.BannedByAdmin = banInfo.AdminName;
+                                Console.WriteLine($"User {user.Id} is banned: {banInfo.Reason}");
+                            }
+                            else
+                            {
+                                // Fallback if no ban record found but status is Banned
+                                user.IsBanned = true;
+                                user.BanReason = "Account banned";
+                                user.BannedAt = null;
+                                user.BannedByAdmin = "Unknown";
+                                Console.WriteLine($"User {user.Id} has banned status but no ban record");
+                            }
+                        }
+                        else
+                        {
+                            user.IsBanned = false;
                         }
                     }
                     catch (Exception ex)
@@ -211,11 +229,8 @@ namespace MCV_Capstone.Services
             var user = await _userManager.FindByIdAsync(userId.ToString());
             if (user == null) return false;
 
-            // Check if user is already banned
-            var existingBan = await _context.BannedAccounts
-                .FirstOrDefaultAsync(b => b.BannedUserId == userId && b.UnbannedAt == null);
-            
-            if (existingBan != null) return false; // Already banned
+            // Check if user is already banned by checking AccountStatus
+            if (user.AccountStatus == "Banned") return false; // Already banned
 
             // Update user status
             user.AccountStatus = "Banned";
@@ -245,21 +260,27 @@ namespace MCV_Capstone.Services
             var user = await _userManager.FindByIdAsync(userId.ToString());
             if (user == null) return false;
 
-            // Find the active ban
-            var activeBan = await _context.BannedAccounts
-                .FirstOrDefaultAsync(b => b.BannedUserId == userId && b.UnbannedAt == null);
-            
-            if (activeBan == null) return false; // Not banned
+            // Check if user is banned by checking AccountStatus
+            if (user.AccountStatus != "Banned") return false; // Not banned
 
             // Update user status
             user.AccountStatus = "Active";
             var updateResult = await _userManager.UpdateAsync(user);
             if (!updateResult.Succeeded) return false;
 
-            // Update ban record
-            activeBan.UnbannedAt = DateTime.UtcNow;
-            activeBan.UnbannedByAdminId = adminId;
-            activeBan.UnbanReason = reason;
+            // Find and update the most recent ban record
+            var activeBan = await _context.BannedAccounts
+                .Where(b => b.BannedUserId == userId)
+                .OrderByDescending(b => b.BannedAt)
+                .FirstOrDefaultAsync();
+            
+            if (activeBan != null)
+            {
+                // Update ban record
+                activeBan.UnbannedAt = DateTime.UtcNow;
+                activeBan.UnbannedByAdminId = adminId;
+                activeBan.UnbanReason = reason;
+            }
 
             await _context.SaveChangesAsync();
 

@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check user authentication status (you can modify this based on your auth system)
     checkUserAuthStatus();
+    
+    // Initialize chatbot functionality
+    initChatbot();
 });
 
 function initializeNavbar() {
@@ -286,4 +289,183 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Chatbot functionality
+function initChatbot() {
+    const chatbotButton = document.getElementById('chatbot-button');
+    const chatInterface = document.getElementById('chat-interface');
+    const closeChat = document.getElementById('close-chat');
+    const chatInput = document.getElementById('chat-input');
+    const sendButton = document.getElementById('send-button');
+    const chatMessages = document.getElementById('chat-messages');
+    
+    // Check if we're on login or signup pages - hide chatbot if so
+    const currentPath = window.location.pathname.toLowerCase();
+    if (currentPath.includes('/login') || currentPath.includes('/signup') || currentPath.includes('/account/login')) {
+        if (chatbotButton) {
+            chatbotButton.style.display = 'none';
+        }
+        return;
+    }
+    
+    // Show chatbot for other pages
+    if (chatbotButton) {
+        chatbotButton.style.display = 'flex';
+    }
+    
+    let isChatOpen = false;
+    
+    // Toggle chat interface
+    chatbotButton.addEventListener('click', function() {
+        if (!isChatOpen) {
+            openChat();
+        } else {
+            closeChatInterface();
+        }
+    });
+
+    // Close chat with close button
+    closeChat.addEventListener('click', closeChatInterface);
+
+    // Send message with send button
+    sendButton.addEventListener('click', sendMessage);
+
+    // Send message with Enter key
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    // Close chat when clicking outside
+    document.addEventListener('click', function(e) {
+        if (isChatOpen &&
+            !chatInterface.contains(e.target) &&
+            !chatbotButton.contains(e.target)) {
+            closeChatInterface();
+        }
+    });
+
+    function openChat() {
+        isChatOpen = true;
+        chatInterface.classList.add('active');
+        chatInput.focus();
+
+        // Add entrance animation
+        chatbotButton.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+            chatbotButton.style.transform = 'scale(1)';
+        }, 200);
+    }
+
+    function closeChatInterface() {
+        isChatOpen = false;
+        chatInterface.classList.remove('active');
+        chatInput.value = '';
+
+        // Add exit animation
+        chatbotButton.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            chatbotButton.style.transform = 'scale(1)';
+        }, 200);
+    }
+
+    async function sendMessage() {
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        // Add user message
+        addMessage(message, 'user');
+        chatInput.value = '';
+
+        // Show typing indicator
+        addTypingIndicator();
+
+        try {
+            // Get AI response from backend
+            const botResponse = await getAIResponse(message);
+            removeTypingIndicator();
+            addMessage(botResponse, 'bot');
+        } catch (error) {
+            removeTypingIndicator();
+            addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+            console.error('Chat error:', error);
+        }
+    }
+
+    function addMessage(message, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}-message`;
+        
+        const avatar = document.createElement('div');
+        avatar.className = 'message-avatar';
+        avatar.textContent = sender === 'user' ? 'U' : 'AI';
+        
+        const content = document.createElement('div');
+        content.className = 'message-content';
+        
+        const text = document.createElement('p');
+        text.textContent = message;
+        
+        content.appendChild(text);
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(content);
+        
+        chatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'typing-indicator';
+        typingDiv.id = 'typing-indicator';
+        
+        for (let i = 0; i < 3; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'typing-dot';
+            typingDiv.appendChild(dot);
+        }
+        
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+        const typingIndicator = document.getElementById('typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+
+    async function getAIResponse(message) {
+        try {
+            const response = await fetch('http://localhost:5000/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            if (data.status === 'success') {
+                return data.response;
+            } else {
+                throw new Error(data.error || 'Unknown error');
+            }
+        } catch (error) {
+            console.error('Error fetching AI response:', error);
+            // Fallback response if API is not available
+            return 'I apologize, but I\'m currently unable to process your request. Please try again later or contact our support team.';
+        }
+    }
+}
 

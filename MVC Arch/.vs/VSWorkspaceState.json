@@ -2,10 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\Middleware",
+    "\\ViewModels",
     "\\Views",
     "\\wwwroot",
     "\\wwwroot\\assets"
   ],
-  "SelectedNode": "\\appsettings.json",
+  "SelectedNode": "\\ViewModels\\LoginViewModel.cs",
   "PreviewInSolutionExplorer": false
 }

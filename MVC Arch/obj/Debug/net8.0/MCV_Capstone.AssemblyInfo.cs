@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MCV_Capstone")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39dd65e337aabab7e8c4766f22d9e764859c12c8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e544f47b0bf2f79d87ac09e766bd7e85b24a2643")]
 [assembly: System.Reflection.AssemblyProductAttribute("MCV_Capstone")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MCV_Capstone")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

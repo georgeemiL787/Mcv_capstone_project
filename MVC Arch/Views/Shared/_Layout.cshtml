@@ -237,6 +237,42 @@
     <footer class="border-top footer text-muted">
         <!-- Footer removed as requested -->
     </footer>
+
+    <!-- Chatbot Floating Button -->
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-button" id="chatbot-button">
+            <span class="material-symbols-outlined">chat</span>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="chat-interface" id="chat-interface">
+            <div class="chat-header">
+                <h3>LuIZ Learning Assistant</h3>
+                <button class="close-chat" id="close-chat">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot-message">
+                    <div class="message-avatar">AI</div>
+                    <div class="message-content">
+                        <p>Hello! I'm your learning assistant. How can I help you today?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="chat-input-wrapper">
+                    <input type="text" id="chat-input" placeholder="Type your message..." maxlength="500">
+                    <button class="send-button" id="send-button">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/navbar.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
