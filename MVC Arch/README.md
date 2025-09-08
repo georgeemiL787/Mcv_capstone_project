@@ -37,27 +37,41 @@ Follow the build instructions in those repositories to install CARLA and the ROS
 
 Execute the following in a catkin workspace that contains this repo under `src/`.
 
+1) Initialize catkin workspace
 ```bash
-# 1) Initialize catkin workspace
 catkin init
+```
 
-# 2) Configure to use install space
+2) Configure to use install space
+```bash
 catkin config --install
+```
 
-# 3) Set any build options
+3) Set any build options
+```bash
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSETUPTOOLS_DEB_LAYOUT=OFF
+```
 
-# 4) Install all dependencies (from workspace root)
+4) Install all dependencies (from workspace root)
+```bash
 rosdep update
+```
+```bash
 rosdep install . -q -y --from-paths -i
+```
 
-# 5) Build the workspace into /install
+5) Build the workspace into /install
+```bash
 catkin build
+```
 
-# 6) Source installed environment
+6) Source installed environment
+```bash
 source install/setup.bash
+```
 
-# 7) Run the main launch file
+7) Run the main launch file
+```bash
 roslaunch shell_simulation shell_simulation.launch
 ```
 
@@ -65,7 +79,11 @@ If your setup uses `catkin_make` instead of catkin tools:
 
 ```bash
 catkin_make
+```
+```bash
 source devel/setup.bash
+```
+```bash
 roslaunch shell_simulation shell_simulation.launch
 ```
 
