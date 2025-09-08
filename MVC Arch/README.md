@@ -26,12 +26,15 @@ Data files used by `shell_simulation` are located in `shell_simulation/data/`:
 
 The `shell_simulation/package.xml` declares required ROS dependencies. Python runtime deps are also listed there and resolved via `rosdep`.
 
-### Download CARLA and ROS bridge
+### Download and install prerequisites
 
 - CARLA simulator: [carla-simulator/carla](https://github.com/carla-simulator/carla)
 - CARLA ROS/ROS2 bridge: [carla-simulator/ros-bridge](https://github.com/carla-simulator/ros-bridge)
+- Student Docker environment (required): [swri-robotics/sem-apc-student-docker-environment](https://share.google/g5hPImvbERJ5aB8Qn)
+- SEM APC ROS bridge (required): [swri-robotics/sem-apc-ros-bridge](https://share.google/A656WF5UGPIYDsVxc)
 
-Follow the build instructions in those repositories to install CARLA and the ROS(1/2) bridge on your system. You will need the bridge running and connected to a CARLA server before launching this package. 
+Follow the build/run instructions in each repo to install and start CARLA, the CARLA ROS bridge, the student Docker environment, and the SEM APC ROS bridge. Ensure the bridge is running and connected to a CARLA server before launching this package.
+- `swri-robotics/sem-apc-ros-bridge`: [link](https://share.google/A656WF5UGPIYDsVxc)
 
 ### Build and Run — Catkin Tools
 
@@ -111,6 +114,22 @@ roslaunch shell_simulation shell_simulation.launch path_segment_publisher:="path
 ```
 
 Note: the main launch staggers node startup via `launch-prefix` sleeps; you can remove or adjust those delays if needed.
+
+#### Change the vehicle spawn point (CARLA/ROS bridge)
+
+This package does not spawn the ego vehicle; CARLA and its ROS bridge do. To change where the car appears:
+
+- If you run CARLA’s ROS bridge example ego vehicle, edit the bridge’s configuration to set a different spawn point (index or transform). In `ros-bridge`, this is typically done via a YAML/JSON config used by `carla_spawn_objects` (e.g., an objects JSON) or by a `spawn_point` parameter in the launch file. See the bridge repo for examples and details: [carla-simulator/ros-bridge](https://github.com/carla-simulator/ros-bridge).
+- After changing the spawn configuration in the ROS bridge, restart the CARLA server and the bridge, then run this package’s launch files.
+
+This repository itself has no YAML governing spawn; all nodes subscribe to CARLA topics (`/carla/ego_vehicle/...`).
+
+When building or setting up the bridge, you may get a YAML config that includes a spawn point entry. Update it like this:
+
+```yaml
+# carla bridge config (example)
+spawn_point_ego_vehicle: "280.363739,-133.306351,1,0,0,0"  # x,y,z,roll,pitch,yaw
+# Use "None" for random spawn;
 
 ### Package Overview
 
