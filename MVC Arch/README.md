@@ -131,6 +131,9 @@ When building or setting up the bridge, you may get a YAML config that includes 
 spawn_point_ego_vehicle: "280.363739,-133.306351,1,0,0,0"  # x,y,z,roll,pitch,yaw
 # Use "None" for random spawn;
 
+
+```
+
 ### Package Overview
 
 - `scripts/lidar_node.py`
@@ -187,6 +190,4 @@ They are built automatically when you build the workspace. Make sure both `custo
 ### Troubleshooting
 
 - If topics are missing, ensure CARLA and ROS bridge are running and publishing the expected topics.
-- On Windows, prefer WSL for ROS (Noetic on Ubuntu 20.04) and run the above commands inside WSL.
-
-
+- On Windows, prefer WSL for ROS (Noetic on Ubuntu 20.04) and run the above commands inside WSL
