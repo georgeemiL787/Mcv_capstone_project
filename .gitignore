@@ -1,0 +1,26 @@
+# .NET build output
+**/bin/
+**/obj/
+
+# Visual Studio and user state
+.vs/
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# Local configuration and databases
+**/appsettings.Local.json
+**/*.db
+**/*.db-shm
+**/*.db-wal
+
+# Logs and temporary files
+**/logs/
+**/*.log
+**/temp/
+**/tmp/
+
+# Private uploads and resumes
+**/wwwroot/uploads/
+**/wwwroot/assets/CVs/
